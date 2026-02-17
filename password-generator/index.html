@@ -3,154 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random Password Generator — Free Online Tool | MaxDevTools</title>
-<meta name="description" content="Generate secure random passwords with customizable length, uppercase, lowercase, numbers, and special characters. 100% client-side.">
+<title>Password Generator — Free Secure Random Passwords | MaxDevTools</title>
+<meta name="description" content="Generate strong, random passwords with customizable length, character sets, and real-time entropy display. 100% client-side, no tracking.">
+<meta name="keywords" content="password generator, random password, secure password, entropy, strong password, online tool">
+<meta name="author" content="MaxDevTools">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/password-generator/">
-<meta property="og:title" content="Random Password Generator — Free Online Tool">
-<meta property="og:description" content="Generate secure random passwords instantly. 100% client-side, privacy-friendly.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Password Generator — Free Secure Random Passwords">
+<meta property="og:description" content="Generate strong passwords with customizable length & character sets. Real-time entropy display. 100% client-side.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/password-generator/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://maxmini0214.github.io/password-generator/og-image.png">
+<meta property="og:site_name" content="MaxDevTools">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Password Generator — Free Secure Random Passwords">
+<meta name="twitter:description" content="Generate strong passwords with customizable length & character sets. 100% client-side.">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0d1117;--surface:#161b22;--surface2:#1a2332;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif;--mono:'SF Mono','Fira Code',monospace}
-body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
-body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1a2332;--border:#1e2d3d;--green:#00ff88;--cyan:#00d4ff;--red:#ff4757;--orange:#ffa502;--yellow:#eccc68;--text:#e2e8f0;--text2:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
 a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
-.container{max-width:680px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+
+.trust-banner{background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.08));border:1px solid rgba(0,255,136,.2);border-radius:10px;padding:.75rem 1.25rem;display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--green);margin-bottom:2rem}
+.trust-banner svg{flex-shrink:0}
+
 header{text-align:center;margin-bottom:2.5rem}
 header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
-header p{color:var(--text2);font-size:1rem}
-.output-box{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.25rem;font-family:var(--mono);font-size:1.2rem;color:var(--green);text-align:center;word-break:break-all;min-height:3.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;cursor:pointer;transition:border-color .2s}
-.output-box:hover{border-color:var(--cyan)}
-.copy-hint{text-align:center;font-size:.8rem;color:var(--text2);margin-bottom:1.5rem}
-.controls{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
-.control-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border)}
-.control-row:last-child{border-bottom:none}
-.control-row label{font-size:.95rem}
-.control-row input[type=range]{flex:1;margin:0 1rem;accent-color:var(--cyan)}
-.control-row .val{font-family:var(--mono);color:var(--cyan);min-width:2.5rem;text-align:right}
-.switch{position:relative;width:44px;height:24px;flex-shrink:0}
-.switch input{opacity:0;width:0;height:0}
-.switch .slider{position:absolute;inset:0;background:var(--border);border-radius:12px;cursor:pointer;transition:.2s}
-.switch .slider::before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
-.switch input:checked+.slider{background:var(--green)}
-.switch input:checked+.slider::before{transform:translateX(20px)}
-.gen-btn{display:block;width:100%;padding:1rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-bottom:2rem}
-.gen-btn:hover{opacity:.9}
+header p{color:var(--text2);font-size:1rem;line-height:1.6}
+
+/* Password output */
+.pw-output{position:relative;margin-bottom:1.5rem}
+.pw-display{width:100%;padding:1rem 6rem 1rem 1.25rem;font-size:1.15rem;font-family:var(--mono);background:var(--surface);border:2px solid var(--border);border-radius:12px;color:var(--green);outline:none;word-break:break-all;min-height:3.5rem;display:flex;align-items:center;user-select:all;cursor:text;overflow-wrap:break-word;line-height:1.4}
+.pw-actions{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);display:flex;gap:.4rem}
+.pw-actions button{background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:.4rem .6rem;border-radius:8px;font-size:1rem;transition:border-color .2s,background .2s}
+.pw-actions button:hover{border-color:var(--cyan);background:rgba(0,212,255,.1)}
+.copy-toast{position:absolute;right:.75rem;top:-2rem;background:var(--green);color:var(--bg);padding:.25rem .75rem;border-radius:6px;font-size:.8rem;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}
+.copy-toast.show{opacity:1}
+
+/* Entropy bar */
+.entropy-wrap{margin-bottom:1.5rem}
+.entropy-bar{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-bottom:.5rem}
+.entropy-fill{height:100%;width:0;border-radius:3px;transition:width .4s ease,background .4s ease}
+.entropy-label{display:flex;justify-content:space-between;font-size:.85rem}
+.entropy-label .strength{font-weight:600}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.stat .label{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.stat .value{font-size:1.1rem;font-weight:600;font-family:var(--mono);color:var(--cyan);word-break:break-all}
+
+/* Controls */
+.controls{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.controls h3{font-size:.9rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
+
+.length-control{margin-bottom:1.25rem}
+.length-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.length-header label{font-size:.9rem;color:var(--text)}
+.length-value{font-family:var(--mono);font-size:1rem;color:var(--cyan);font-weight:600;background:var(--surface2);padding:.2rem .6rem;border-radius:6px;min-width:3rem;text-align:center}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;background:var(--surface2);border-radius:3px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--cyan);border-radius:50%;cursor:pointer;border:2px solid var(--bg)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;background:var(--cyan);border-radius:50%;cursor:pointer;border:2px solid var(--bg)}
+
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.toggle-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .85rem;cursor:pointer;transition:border-color .2s;user-select:none}
+.toggle-item:hover{border-color:var(--cyan)}
+.toggle-item.active{border-color:var(--green)}
+.toggle-item .toggle-label{font-size:.85rem}
+.toggle-item .toggle-preview{font-family:var(--mono);font-size:.8rem;color:var(--text2)}
+.toggle-switch{width:36px;height:20px;background:var(--border);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0;margin-left:.5rem}
+.toggle-item.active .toggle-switch{background:var(--green)}
+.toggle-switch::after{content:'';position:absolute;width:16px;height:16px;background:#fff;border-radius:50%;top:2px;left:2px;transition:transform .2s}
+.toggle-item.active .toggle-switch::after{transform:translateX(16px)}
+
+/* Generate button */
+.gen-btn{width:100%;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;padding:.95rem 2rem;font-size:1.1rem;font-weight:700;border-radius:10px;cursor:pointer;transition:opacity .2s,transform .1s;margin-bottom:2rem}
+.gen-btn:hover{opacity:.9}.gen-btn:active{transform:scale(.97)}
+
+/* CTA */
 .cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
-.cta h3{color:var(--cyan);margin-bottom:.5rem}
-.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
-.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
+.cta h3{color:var(--cyan);margin-bottom:.5rem;font-size:1.1rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem;line-height:1.5}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;font-size:.95rem;transition:opacity .2s}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+
+.tools-nav{margin-bottom:2rem}
+.tools-nav h3{font-size:.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.tools-grid a{display:block;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-size:.85rem;color:var(--text);transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);text-decoration:none}
+.tools-grid a span{display:block;font-size:.75rem;color:var(--text2);margin-top:.2rem}
+
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
-@media(max-width:500px){header h1{font-size:1.5rem}}
-</style>
-<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Random Password Generator — Free Online Tool | MaxDevTools",
-  "description": "Generate secure random passwords with customizable length, uppercase, lowercase, numbers, and special characters. 100% client-side.",
-  "url": "https://maxmini0214.github.io/password-generator/",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+
+@media(max-width:500px){
+  .stats{grid-template-columns:1fr}
+  .toggles{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr}
+  header h1{font-size:1.5rem}
+  .pw-display{font-size:1rem;padding-right:5.5rem}
 }
-</script>
+</style>
 </head>
 <body>
+
 <div class="container">
-<header>
-<h1>🔑 Random Password Generator</h1>
-<p>Generate secure passwords instantly — 100% client-side</p>
-</header>
+  <div class="trust-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span><strong>100% Client-Side</strong> — Passwords are generated in your browser. Nothing is sent anywhere. Zero tracking.</span>
+  </div>
 
-<div class="output-box" id="output" title="Click to copy">Click Generate ↓</div>
-<div class="copy-hint" id="copyHint">Click password to copy</div>
+  <header>
+    <h1>🔑 Password Generator</h1>
+    <p>Cryptographically secure random passwords with real-time entropy analysis</p>
+  </header>
 
-<div class="controls">
-<div class="control-row">
-<label>Length</label>
-<input type="range" id="length" min="4" max="64" value="16">
-<span class="val" id="lengthVal">16</span>
-</div>
-<div class="control-row">
-<label>Uppercase (A-Z)</label>
-<label class="switch"><input type="checkbox" id="upper" checked><span class="slider"></span></label>
-</div>
-<div class="control-row">
-<label>Lowercase (a-z)</label>
-<label class="switch"><input type="checkbox" id="lower" checked><span class="slider"></span></label>
-</div>
-<div class="control-row">
-<label>Numbers (0-9)</label>
-<label class="switch"><input type="checkbox" id="digits" checked><span class="slider"></span></label>
-</div>
-<div class="control-row">
-<label>Special (!@#$%…)</label>
-<label class="switch"><input type="checkbox" id="special" checked><span class="slider"></span></label>
-</div>
-</div>
+  <!-- Password Output -->
+  <div class="pw-output">
+    <div class="pw-display" id="pwDisplay">Click generate to create a password</div>
+    <div class="pw-actions">
+      <button id="copyBtn" title="Copy to clipboard">📋</button>
+      <button id="refreshBtn" title="Regenerate">🔄</button>
+    </div>
+    <div class="copy-toast" id="copyToast">Copied!</div>
+  </div>
 
-<button class="gen-btn" id="genBtn">⚡ Generate Password</button>
+  <!-- Entropy Bar -->
+  <div class="entropy-wrap">
+    <div class="entropy-bar"><div class="entropy-fill" id="entropyFill"></div></div>
+    <div class="entropy-label">
+      <span class="strength" id="strengthText" style="color:var(--text2)">—</span>
+      <span id="entropyText" style="color:var(--text2)">0 bits</span>
+    </div>
+  </div>
 
-<div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
-</div>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat"><div class="label">Entropy</div><div class="value" id="statEntropy">—</div></div>
+    <div class="stat"><div class="label">Charset Size</div><div class="value" id="statCharset">—</div></div>
+    <div class="stat"><div class="label">Brute Force</div><div class="value" id="statBrute">—</div></div>
+    <div class="stat"><div class="label">Combinations</div><div class="value" id="statCombos">—</div></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <h3>Settings</h3>
+    <div class="length-control">
+      <div class="length-header">
+        <label>Password Length</label>
+        <span class="length-value" id="lengthValue">16</span>
+      </div>
+      <input type="range" id="lengthSlider" min="8" max="128" value="16">
+    </div>
+    <div class="toggles">
+      <div class="toggle-item active" data-set="upper">
+        <div><div class="toggle-label">Uppercase</div><div class="toggle-preview">A-Z</div></div>
+        <div class="toggle-switch"></div>
+      </div>
+      <div class="toggle-item active" data-set="lower">
+        <div><div class="toggle-label">Lowercase</div><div class="toggle-preview">a-z</div></div>
+        <div class="toggle-switch"></div>
+      </div>
+      <div class="toggle-item active" data-set="digits">
+        <div><div class="toggle-label">Numbers</div><div class="toggle-preview">0-9</div></div>
+        <div class="toggle-switch"></div>
+      </div>
+      <div class="toggle-item active" data-set="symbols">
+        <div><div class="toggle-label">Symbols</div><div class="toggle-preview">!@#$%&*</div></div>
+        <div class="toggle-switch"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate Button -->
+  <button class="gen-btn" id="genBtn">⚡ Generate Password</button>
+
+  <!-- CTA -->
+  <div class="cta" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #e94560;padding:24px;border-radius:12px;margin-bottom:16px;text-align:center">
+    <h3 style="color:#e94560;margin:0 0 8px">🔐 Security Toolkit Pro — Offline Bundle</h3>
+    <p style="color:#ccc;margin:0 0 12px;font-size:14px">All security tools in one offline HTML pack. No internet needed. Use on air-gapped systems, pentests, or offline audits.</p>
+    <a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener" style="background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:bold">Get Offline Bundle — $3</a>
+    <p style="color:#888;margin:8px 0 0;font-size:12px">One-time purchase · No subscription · Instant download</p>
+  </div>
+
+  <div class="cta">
+    <h3>🔍 Test Your Password Strength</h3>
+    <p>Generated a password? Check its entropy score, crack-time estimates, and get smart suggestions with our analyzer.</p>
+    <a class="cta-btn" href="https://maxmini0214.github.io/password-strength-analyzer/">Analyze Password Strength →</a>
+  </div>
+
+  <div class="cta">
+    <h3>⭐ Open Source</h3>
+    <p>100% client-side, privacy-friendly. Star on GitHub if you find it useful!</p>
+    <a class="cta-btn" href="https://github.com/maxmini0214/password-generator" target="_blank" rel="noopener">View on GitHub →</a>
+  </div>
+
+  <nav class="tools-nav">
+    <h3>More Security Tools</h3>
+    <div class="tools-grid">
+      <a href="https://maxmini0214.github.io/password-strength-analyzer/"><strong>Password Strength Analyzer</strong><span>Entropy scoring & crack-time estimates</span></a>
+      <a href="https://maxmini0214.github.io/hash-generator/"><strong>Hash Generator</strong><span>MD5, SHA-1, SHA-256, SHA-512</span></a>
+      <a href="https://maxmini0214.github.io/base64-tool/"><strong>Base64 Encoder</strong><span>Encode &amp; decode Base64</span></a>
+      <a href="https://maxmini0214.github.io/jwt-decoder/"><strong>JWT Decoder</strong><span>Inspect JSON Web Tokens</span></a>
+    </div>
+  </nav>
 </div>
 
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+  Part of <span class="brand">MaxDevTools Security Suite</span> · <a href="https://maxmini0214.github.io/">All Tools</a> · © 2024–2026
 </footer>
 
 <script>
-const $=id=>document.getElementById(id);
-const lenSlider=$('length'),lenVal=$('lengthVal'),output=$('output');
+const CHARSETS = {
+  upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lower: 'abcdefghijklmnopqrstuvwxyz',
+  digits: '0123456789',
+  symbols: '!@#$%^&*()-_=+[]{}|;:,.<>?~`'
+};
 
-lenSlider.addEventListener('input',()=>{lenVal.textContent=lenSlider.value});
+const state = { length: 16, upper: true, lower: true, digits: true, symbols: true };
 
-function generate(){
-  const len=+lenSlider.value;
-  let chars='';
-  if($('upper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  if($('lower').checked)chars+='abcdefghijklmnopqrstuvwxyz';
-  if($('digits').checked)chars+='0123456789';
-  if($('special').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';
-  if(!chars){output.textContent='Select at least one option';return}
-  const arr=new Uint32Array(len);crypto.getRandomValues(arr);
-  let pw='';for(let i=0;i<len;i++)pw+=chars[arr[i]%chars.length];
-  output.textContent=pw;
+const $ = id => document.getElementById(id);
+
+// Toggle handlers
+document.querySelectorAll('.toggle-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const set = el.dataset.set;
+    const activeCount = Object.keys(CHARSETS).filter(k => state[k]).length;
+    if (state[set] && activeCount <= 1) return; // prevent all off
+    state[set] = !state[set];
+    el.classList.toggle('active', state[set]);
+    generate();
+  });
+});
+
+// Length slider
+const slider = $('lengthSlider');
+slider.addEventListener('input', () => {
+  state.length = parseInt(slider.value);
+  $('lengthValue').textContent = state.length;
+  generate();
+});
+
+function getPool() {
+  let pool = '';
+  for (const [k, v] of Object.entries(CHARSETS)) if (state[k]) pool += v;
+  return pool;
 }
 
-$('genBtn').addEventListener('click',generate);
-output.addEventListener('click',()=>{
-  if(output.textContent&&!output.textContent.startsWith('Click')&&!output.textContent.startsWith('Select')){
-    navigator.clipboard.writeText(output.textContent).then(()=>{
-      $('copyHint').textContent='✓ Copied!';
-      setTimeout(()=>$('copyHint').textContent='Click password to copy',1500);
-    });
-  }
+function generate() {
+  const pool = getPool();
+  if (!pool) return;
+  const len = state.length;
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  let pw = '';
+  for (let i = 0; i < len; i++) pw += pool[arr[i] % pool.length];
+
+  // Ensure at least one char from each active set
+  const activeKeys = Object.keys(CHARSETS).filter(k => state[k]);
+  const fixArr = new Uint32Array(activeKeys.length);
+  crypto.getRandomValues(fixArr);
+  const chars = [...pw];
+  activeKeys.forEach((k, i) => {
+    const set = CHARSETS[k];
+    const hasChar = [...set].some(c => pw.includes(c));
+    if (!hasChar) chars[i] = set[fixArr[i] % set.length];
+  });
+  pw = chars.join('');
+
+  $('pwDisplay').textContent = pw;
+  updateStats(pw, pool.length);
+}
+
+function updateStats(pw, charsetSize) {
+  const len = pw.length;
+  const entropy = len * Math.log2(charsetSize);
+  const combos = Math.pow(charsetSize, len);
+
+  // Entropy bar
+  const pct = Math.min(100, entropy / 128 * 100);
+  const si = getStrengthInfo(entropy);
+  $('entropyFill').style.width = pct + '%';
+  $('entropyFill').style.background = si.color;
+  $('strengthText').textContent = si.text;
+  $('strengthText').style.color = si.color;
+  $('entropyText').textContent = entropy.toFixed(1) + ' bits';
+  $('entropyText').style.color = si.color;
+
+  $('statEntropy').textContent = entropy.toFixed(1) + ' bits';
+  $('statCharset').textContent = charsetSize + ' chars';
+  $('statBrute').textContent = formatTime(combos / 1e11);
+  $('statCombos').textContent = formatCombos(combos);
+}
+
+function getStrengthInfo(entropy) {
+  if (entropy >= 100) return { text: 'Very Strong', color: 'var(--green)' };
+  if (entropy >= 70) return { text: 'Strong', color: '#2ecc71' };
+  if (entropy >= 50) return { text: 'Moderate', color: 'var(--yellow)' };
+  if (entropy >= 30) return { text: 'Weak', color: 'var(--orange)' };
+  return { text: 'Very Weak', color: 'var(--red)' };
+}
+
+function formatTime(seconds) {
+  if (!isFinite(seconds) || seconds > 3.15e18) return 'centuries';
+  if (seconds < .001) return 'instant';
+  const u = [['year',3.15e7],['month',2.63e6],['week',604800],['day',86400],['hour',3600],['minute',60],['second',1]];
+  for (const [n, s] of u) if (seconds >= s) { const v = Math.floor(seconds / s); return `${v.toLocaleString()} ${n}${v !== 1 ? 's' : ''}`; }
+  return 'instant';
+}
+
+function formatCombos(n) {
+  if (!isFinite(n)) return '∞';
+  if (n >= 1e100) return n.toExponential(1);
+  if (n >= 1e15) return n.toExponential(1);
+  return n.toLocaleString();
+}
+
+// Copy
+$('copyBtn').addEventListener('click', () => {
+  const pw = $('pwDisplay').textContent;
+  if (!pw || pw.startsWith('Click')) return;
+  navigator.clipboard.writeText(pw).then(() => {
+    const toast = $('copyToast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1500);
+  });
 });
+
+// Refresh
+$('refreshBtn').addEventListener('click', generate);
+
+// Generate button
+$('genBtn').addEventListener('click', generate);
+
+// Generate on load
 generate();
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
+<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/password-generator&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true" alt="Hits" /></a></div>
 </body>
 </html>
