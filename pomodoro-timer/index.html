@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pomodoro Timer — Free Online Focus Tool | MaxDevTools</title>
+<meta name="description" content="Simple Pomodoro timer with 25-min work and 5-min break intervals. Browser notifications and audio alerts. 100% client-side.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/pomodoro-timer/">
+<meta property="og:title" content="Pomodoro Timer — Free Online Focus Tool">
+<meta property="og:description" content="Stay focused with the Pomodoro technique. 25-min work, 5-min break. Free online timer.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/pomodoro-timer/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--red:#ff4757;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif;--mono:'SF Mono','Fira Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:520px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1;text-align:center}
+header{margin-bottom:2rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2)}
+.mode-tabs{display:flex;gap:.5rem;justify-content:center;margin-bottom:2rem}
+.mode-tabs button{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:.6rem 1.25rem;border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .2s}
+.mode-tabs button.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.1)}
+.timer-display{font-family:var(--mono);font-size:6rem;font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:.05em}
+.session-label{color:var(--text2);font-size:1rem;margin-bottom:2rem;text-transform:uppercase;letter-spacing:.1em}
+.controls{display:flex;gap:1rem;justify-content:center;margin-bottom:1rem}
+.controls button{padding:.85rem 2rem;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+.btn-start{background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg)}
+.btn-pause{background:var(--red);color:#fff}
+.btn-reset{background:var(--surface);border:1px solid var(--border);color:var(--text2)}
+.btn-reset:hover{border-color:var(--cyan);color:var(--text)}
+.sessions{color:var(--text2);font-size:.9rem;margin-bottom:2rem}
+.sessions span{color:var(--green);font-weight:600}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){.timer-display{font-size:4rem}header h1{font-size:1.5rem}}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🍅 Pomodoro Timer</h1>
+<p>Stay focused with the Pomodoro technique</p>
+</header>
+
+<div class="mode-tabs">
+<button class="active" data-time="25">Work 25m</button>
+<button data-time="5">Break 5m</button>
+<button data-time="15">Long Break 15m</button>
+</div>
+
+<div class="timer-display" id="timer">25:00</div>
+<div class="session-label" id="label">Work Session</div>
+
+<div class="controls">
+<button class="btn-start" id="startBtn">▶ Start</button>
+<button class="btn-reset" id="resetBtn">↺ Reset</button>
+</div>
+
+<div class="sessions">Sessions completed: <span id="count">0</span></div>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+<script>
+let timeLeft=25*60,running=false,interval=null,sessions=0,currentMode=25;
+const display=document.getElementById('timer'),label=document.getElementById('label'),startBtn=document.getElementById('startBtn'),countEl=document.getElementById('count');
+const tabs=document.querySelectorAll('.mode-tabs button');
+
+function fmt(s){const m=Math.floor(s/60),sec=s%60;return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')}
+function updateDisplay(){display.textContent=fmt(timeLeft);document.title=fmt(timeLeft)+' — Pomodoro Timer'}
+
+function beep(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();o.type='sine';o.frequency.value=880;o.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.3);setTimeout(()=>{const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=880;o2.connect(ctx.destination);o2.start();o2.stop(ctx.currentTime+.3)},400)}catch(e){}}
+
+function notify(msg){
+  beep();
+  if(Notification.permission==='granted')new Notification('Pomodoro Timer',{body:msg,icon:'🍅'});
+  else if(Notification.permission!=='denied')Notification.requestPermission();
+}
+
+function tick(){
+  if(timeLeft<=0){
+    clearInterval(interval);running=false;
+    startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
+    if(currentMode===25){sessions++;countEl.textContent=sessions;notify('Work session done! Take a break.');}
+    else notify('Break over! Time to focus.');
+    return;
+  }
+  timeLeft--;updateDisplay();
+}
+
+startBtn.addEventListener('click',()=>{
+  if(running){clearInterval(interval);running=false;startBtn.textContent='▶ Resume';startBtn.className='controls btn-start';}
+  else{if(Notification.permission==='default')Notification.requestPermission();interval=setInterval(tick,1000);running=true;startBtn.textContent='⏸ Pause';startBtn.className='controls btn-pause';}
+});
+
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  clearInterval(interval);running=false;timeLeft=currentMode*60;updateDisplay();
+  startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
+});
+
+tabs.forEach(btn=>btn.addEventListener('click',()=>{
+  tabs.forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  currentMode=+btn.dataset.time;clearInterval(interval);running=false;
+  timeLeft=currentMode*60;updateDisplay();
+  label.textContent=currentMode===25?'Work Session':currentMode===5?'Short Break':'Long Break';
+  startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
+}));
+</script>
+</body>
+</html>

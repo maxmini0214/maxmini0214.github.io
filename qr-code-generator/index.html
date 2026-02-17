@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator — Free Online Tool | MaxDevTools</title>
+<meta name="description" content="Generate QR codes from any text or URL instantly. Download as image. 100% client-side, free.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/qr-code-generator/">
+<meta property="og:title" content="QR Code Generator — Free Online Tool">
+<meta property="og:description" content="Generate QR codes from text or URLs instantly. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/qr-code-generator/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:680px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2)}
+textarea{width:100%;padding:1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:12px;color:var(--text);resize:vertical;min-height:80px;font-family:inherit;outline:none;margin-bottom:1rem}
+textarea:focus{border-color:var(--cyan)}
+.gen-btn{display:block;width:100%;padding:1rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-bottom:1.5rem}
+.gen-btn:hover{opacity:.9}
+.qr-wrap{text-align:center;margin-bottom:1.5rem}
+#qrCanvas{background:#fff;border-radius:12px;padding:16px;display:inline-block}
+.dl-btn{display:inline-block;margin-top:1rem;background:var(--surface);border:1px solid var(--border);color:var(--cyan);padding:.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;text-decoration:none}
+.dl-btn:hover{border-color:var(--cyan)}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){header h1{font-size:1.5rem}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>📱 QR Code Generator</h1>
+<p>Enter text or a URL to generate a QR code</p>
+</header>
+
+<textarea id="input" placeholder="Enter text or URL here…">https://maxmini0214.github.io</textarea>
+<button class="gen-btn" id="genBtn">Generate QR Code</button>
+
+<div class="qr-wrap">
+<div id="qrCanvas"></div><br>
+<a class="dl-btn" id="dlBtn" style="display:none" download="qrcode.png">⬇ Download PNG</a>
+</div>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+<script>
+function generate(){
+  const text=document.getElementById('input').value.trim();
+  if(!text)return;
+  const wrap=document.getElementById('qrCanvas');
+  wrap.innerHTML='';
+  const canvas=document.createElement('canvas');
+  wrap.appendChild(canvas);
+  QRCode.toCanvas(canvas,text,{width:256,margin:2,color:{dark:'#000',light:'#fff'}},function(err){
+    if(err)console.error(err);
+    const dl=document.getElementById('dlBtn');
+    dl.href=canvas.toDataURL('image/png');
+    dl.style.display='inline-block';
+  });
+}
+document.getElementById('genBtn').addEventListener('click',generate);
+generate();
+</script>
+</body>
+</html>

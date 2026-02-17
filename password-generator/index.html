@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Password Generator — Free Online Tool | MaxDevTools</title>
+<meta name="description" content="Generate secure random passwords with customizable length, uppercase, lowercase, numbers, and special characters. 100% client-side.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/password-generator/">
+<meta property="og:title" content="Random Password Generator — Free Online Tool">
+<meta property="og:description" content="Generate secure random passwords instantly. 100% client-side, privacy-friendly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/password-generator/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1a2332;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif;--mono:'SF Mono','Fira Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:680px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2.5rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2);font-size:1rem}
+.output-box{background:var(--surface);border:2px solid var(--border);border-radius:12px;padding:1.25rem;font-family:var(--mono);font-size:1.2rem;color:var(--green);text-align:center;word-break:break-all;min-height:3.5rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;cursor:pointer;transition:border-color .2s}
+.output-box:hover{border-color:var(--cyan)}
+.copy-hint{text-align:center;font-size:.8rem;color:var(--text2);margin-bottom:1.5rem}
+.controls{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.control-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.control-row:last-child{border-bottom:none}
+.control-row label{font-size:.95rem}
+.control-row input[type=range]{flex:1;margin:0 1rem;accent-color:var(--cyan)}
+.control-row .val{font-family:var(--mono);color:var(--cyan);min-width:2.5rem;text-align:right}
+.switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch .slider{position:absolute;inset:0;background:var(--border);border-radius:12px;cursor:pointer;transition:.2s}
+.switch .slider::before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked+.slider{background:var(--green)}
+.switch input:checked+.slider::before{transform:translateX(20px)}
+.gen-btn{display:block;width:100%;padding:1rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-bottom:2rem}
+.gen-btn:hover{opacity:.9}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){header h1{font-size:1.5rem}}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🔑 Random Password Generator</h1>
+<p>Generate secure passwords instantly — 100% client-side</p>
+</header>
+
+<div class="output-box" id="output" title="Click to copy">Click Generate ↓</div>
+<div class="copy-hint" id="copyHint">Click password to copy</div>
+
+<div class="controls">
+<div class="control-row">
+<label>Length</label>
+<input type="range" id="length" min="4" max="64" value="16">
+<span class="val" id="lengthVal">16</span>
+</div>
+<div class="control-row">
+<label>Uppercase (A-Z)</label>
+<label class="switch"><input type="checkbox" id="upper" checked><span class="slider"></span></label>
+</div>
+<div class="control-row">
+<label>Lowercase (a-z)</label>
+<label class="switch"><input type="checkbox" id="lower" checked><span class="slider"></span></label>
+</div>
+<div class="control-row">
+<label>Numbers (0-9)</label>
+<label class="switch"><input type="checkbox" id="digits" checked><span class="slider"></span></label>
+</div>
+<div class="control-row">
+<label>Special (!@#$%…)</label>
+<label class="switch"><input type="checkbox" id="special" checked><span class="slider"></span></label>
+</div>
+</div>
+
+<button class="gen-btn" id="genBtn">⚡ Generate Password</button>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const lenSlider=$('length'),lenVal=$('lengthVal'),output=$('output');
+
+lenSlider.addEventListener('input',()=>{lenVal.textContent=lenSlider.value});
+
+function generate(){
+  const len=+lenSlider.value;
+  let chars='';
+  if($('upper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if($('lower').checked)chars+='abcdefghijklmnopqrstuvwxyz';
+  if($('digits').checked)chars+='0123456789';
+  if($('special').checked)chars+='!@#$%^&*()-_=+[]{}|;:,.<>?';
+  if(!chars){output.textContent='Select at least one option';return}
+  const arr=new Uint32Array(len);crypto.getRandomValues(arr);
+  let pw='';for(let i=0;i<len;i++)pw+=chars[arr[i]%chars.length];
+  output.textContent=pw;
+}
+
+$('genBtn').addEventListener('click',generate);
+output.addEventListener('click',()=>{
+  if(output.textContent&&!output.textContent.startsWith('Click')&&!output.textContent.startsWith('Select')){
+    navigator.clipboard.writeText(output.textContent).then(()=>{
+      $('copyHint').textContent='✓ Copied!';
+      setTimeout(()=>$('copyHint').textContent='Click password to copy',1500);
+    });
+  }
+});
+generate();
+</script>
+</body>
+</html>

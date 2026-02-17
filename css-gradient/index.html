@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Gradient Generator — Free Online Tool | MaxDevTools</title>
+<meta name="description" content="Create beautiful CSS gradients with 2-3 colors, adjustable direction, and one-click CSS code copy. Free online gradient maker.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/css-gradient/">
+<meta property="og:title" content="CSS Gradient Generator — Free Online Tool">
+<meta property="og:description" content="Create beautiful CSS gradients visually and copy the code. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/css-gradient/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif;--mono:'SF Mono','Fira Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2)}
+.preview{width:100%;height:200px;border-radius:12px;border:2px solid var(--border);margin-bottom:1.5rem;transition:background .3s}
+.controls{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.control-row{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.control-row:last-child{margin-bottom:0}
+.control-row label{font-size:.9rem;min-width:80px}
+.control-row input[type=color]{width:50px;height:36px;border:none;border-radius:6px;cursor:pointer;background:none}
+.control-row select{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:.5rem .75rem;border-radius:8px;font-size:.9rem}
+.switch-row{display:flex;align-items:center;gap:.75rem}
+.switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch .slider{position:absolute;inset:0;background:var(--border);border-radius:12px;cursor:pointer;transition:.2s}
+.switch .slider::before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked+.slider{background:var(--green)}
+.switch input:checked+.slider::before{transform:translateX(20px)}
+.code-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;font-family:var(--mono);font-size:.9rem;color:var(--green);cursor:pointer;word-break:break-all;margin-bottom:.5rem;transition:border-color .2s}
+.code-box:hover{border-color:var(--cyan)}
+.copy-hint{font-size:.8rem;color:var(--text2);text-align:center;margin-bottom:2rem}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){header h1{font-size:1.5rem}.preview{height:150px}}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🎨 CSS Gradient Generator</h1>
+<p>Pick colors, choose direction, copy the CSS</p>
+</header>
+
+<div class="preview" id="preview"></div>
+
+<div class="controls">
+<div class="control-row">
+<label>Color 1</label>
+<input type="color" id="c1" value="#00ff88">
+</div>
+<div class="control-row">
+<label>Color 2</label>
+<input type="color" id="c2" value="#00d4ff">
+</div>
+<div class="control-row switch-row">
+<label>Color 3</label>
+<label class="switch"><input type="checkbox" id="useC3"><span class="slider"></span></label>
+<input type="color" id="c3" value="#8b5cf6" style="opacity:.4">
+</div>
+<div class="control-row">
+<label>Direction</label>
+<select id="dir">
+<option value="to right">→ to right</option>
+<option value="to left">← to left</option>
+<option value="to bottom">↓ to bottom</option>
+<option value="to top">↑ to top</option>
+<option value="135deg" selected>↘ 135°</option>
+<option value="45deg">↗ 45°</option>
+<option value="circle" >⊙ radial</option>
+</select>
+</div>
+</div>
+
+<div class="code-box" id="codeBox"></div>
+<div class="copy-hint" id="copyHint">Click CSS to copy</div>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+<script>
+const $=id=>document.getElementById(id);
+function update(){
+  const colors=[$('c1').value,$('c2').value];
+  if($('useC3').checked)colors.push($('c3').value);
+  const dir=$('dir').value;
+  const isRadial=dir==='circle';
+  const grad=isRadial?`radial-gradient(circle, ${colors.join(', ')})`:`linear-gradient(${dir}, ${colors.join(', ')})`;
+  $('preview').style.background=grad;
+  $('codeBox').textContent=`background: ${grad};`;
+}
+['c1','c2','c3','dir'].forEach(id=>$(id).addEventListener('input',update));
+$('useC3').addEventListener('change',()=>{$('c3').style.opacity=$('useC3').checked?'1':'.4';update()});
+$('codeBox').addEventListener('click',()=>{
+  navigator.clipboard.writeText($('codeBox').textContent).then(()=>{
+    $('copyHint').textContent='✓ Copied!';setTimeout(()=>$('copyHint').textContent='Click CSS to copy',1500);
+  });
+});
+update();
+</script>
+</body>
+</html>

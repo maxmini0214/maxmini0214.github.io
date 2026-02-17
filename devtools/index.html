@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Text Utilities — Free Online DevTools | MaxDevTools</title>
+<meta name="description" content="Text utilities for developers: remove line breaks, trim whitespace, count characters/words/lines, and more. 100% client-side.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/devtools/">
+<meta property="og:title" content="Developer Text Utilities — Free Online DevTools">
+<meta property="og:description" content="Text manipulation tools for developers. Remove line breaks, trim whitespace, count characters, and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/devtools/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif;--mono:'SF Mono','Fira Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:760px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2)}
+textarea{width:100%;padding:1rem;font-size:.95rem;font-family:var(--mono);background:var(--surface);border:2px solid var(--border);border-radius:12px;color:var(--text);resize:vertical;min-height:150px;outline:none;margin-bottom:1rem}
+textarea:focus{border-color:var(--cyan)}
+.stats{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;font-size:.85rem}
+.stat .val{color:var(--cyan);font-weight:700;font-family:var(--mono)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+.actions button{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.6rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.actions button:hover{border-color:var(--cyan);color:var(--cyan)}
+.output-label{font-size:.8rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.copy-btn{display:block;width:100%;padding:.8rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:2rem}
+.copy-btn:hover{opacity:.9}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){header h1{font-size:1.5rem}.stats{flex-direction:column}}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🛠 Developer Text Utilities</h1>
+<p>Transform, clean, and analyze text instantly</p>
+</header>
+
+<textarea id="input" placeholder="Paste your text here…"></textarea>
+
+<div class="stats">
+<div class="stat">Characters: <span class="val" id="chars">0</span></div>
+<div class="stat">Words: <span class="val" id="words">0</span></div>
+<div class="stat">Lines: <span class="val" id="lines">0</span></div>
+<div class="stat">Bytes: <span class="val" id="bytes">0</span></div>
+</div>
+
+<div class="actions">
+<button data-fn="removeBreaks">Remove Line Breaks</button>
+<button data-fn="trimLines">Trim Each Line</button>
+<button data-fn="removeEmpty">Remove Empty Lines</button>
+<button data-fn="collapseSpaces">Collapse Spaces</button>
+<button data-fn="toUpper">UPPERCASE</button>
+<button data-fn="toLower">lowercase</button>
+<button data-fn="toTitle">Title Case</button>
+<button data-fn="sortLines">Sort Lines</button>
+<button data-fn="dedupe">Remove Duplicates</button>
+<button data-fn="reverse">Reverse Text</button>
+<button data-fn="escapeHtml">Escape HTML</button>
+<button data-fn="unescapeHtml">Unescape HTML</button>
+<button data-fn="urlEncode">URL Encode</button>
+<button data-fn="urlDecode">URL Decode</button>
+</div>
+
+<div class="output-label">Output</div>
+<textarea id="output" readonly placeholder="Result will appear here…"></textarea>
+<button class="copy-btn" id="copyBtn">📋 Copy Output</button>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+<script>
+const input=document.getElementById('input'),output=document.getElementById('output');
+const fns={
+  removeBreaks:t=>t.replace(/\n/g,' '),
+  trimLines:t=>t.split('\n').map(l=>l.trim()).join('\n'),
+  removeEmpty:t=>t.split('\n').filter(l=>l.trim()).join('\n'),
+  collapseSpaces:t=>t.replace(/ {2,}/g,' '),
+  toUpper:t=>t.toUpperCase(),
+  toLower:t=>t.toLowerCase(),
+  toTitle:t=>t.replace(/\w\S*/g,w=>w[0].toUpperCase()+w.slice(1).toLowerCase()),
+  sortLines:t=>t.split('\n').sort().join('\n'),
+  dedupe:t=>[...new Set(t.split('\n'))].join('\n'),
+  reverse:t=>[...t].reverse().join(''),
+  escapeHtml:t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'),
+  unescapeHtml:t=>t.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"'),
+  urlEncode:t=>encodeURIComponent(t),
+  urlDecode:t=>{try{return decodeURIComponent(t)}catch{return t}},
+};
+
+function updateStats(){
+  const t=input.value;
+  document.getElementById('chars').textContent=t.length;
+  document.getElementById('words').textContent=t.trim()?t.trim().split(/\s+/).length:0;
+  document.getElementById('lines').textContent=t?t.split('\n').length:0;
+  document.getElementById('bytes').textContent=new Blob([t]).size;
+}
+input.addEventListener('input',updateStats);
+
+document.querySelectorAll('.actions button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const fn=fns[btn.dataset.fn];
+    if(fn)output.value=fn(input.value);
+  });
+});
+
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  navigator.clipboard.writeText(output.value).then(()=>{
+    const btn=document.getElementById('copyBtn');btn.textContent='✓ Copied!';
+    setTimeout(()=>btn.textContent='📋 Copy Output',1500);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website SEO Audit Checklist — Free Online Tool | MaxDevTools</title>
+<meta name="description" content="Quick SEO checklist for your website. Check essential SEO factors and get a score. Free, no signup required.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/website-audit/">
+<meta property="og:title" content="Website SEO Audit Checklist — Free Online Tool">
+<meta property="og:description" content="Quick SEO checklist to audit your website. Free and instant.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/website-audit/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--red:#ff4757;--yellow:#eccc68;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2)}
+.score-box{text-align:center;margin-bottom:2rem}
+.score-circle{display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;border:4px solid var(--border);font-size:2.5rem;font-weight:700;margin-bottom:.5rem;transition:border-color .3s,color .3s}
+.score-label{color:var(--text2);font-size:.9rem}
+.checklist{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;margin-bottom:2rem}
+.section-title{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text2);margin:1rem 0 .5rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.section-title:first-child{border-top:none;margin-top:.25rem}
+.check-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;cursor:pointer;user-select:none}
+.check-item input{display:none}
+.check-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:.8rem}
+.check-item input:checked~.check-box{background:var(--green);border-color:var(--green);color:var(--bg)}
+.check-item .text{font-size:.95rem}
+.reset-btn{display:block;margin:0 auto 2rem;background:none;border:1px solid var(--border);color:var(--text2);padding:.5rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.85rem}
+.reset-btn:hover{border-color:var(--cyan);color:var(--text)}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+@media(max-width:500px){header h1{font-size:1.5rem}}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🔍 Website SEO Audit Checklist</h1>
+<p>Check off each item to see your SEO score</p>
+</header>
+
+<div class="score-box">
+<div class="score-circle" id="score">0%</div><br>
+<span class="score-label" id="scoreLabel">Check items below to build your score</span>
+</div>
+
+<div class="checklist" id="checklist"></div>
+<button class="reset-btn" id="resetBtn">Reset All</button>
+
+<div class="cta">
+<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
+<p>All security tools in one offline package. No internet required.</p>
+<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+</div>
+</div>
+<footer>
+<a href="/">← Back to All Tools</a><br><br>
+Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+</footer>
+<script>
+const items=[
+{s:'Meta & Head',items:['Title tag present and under 60 chars','Meta description present and under 160 chars','Canonical URL set','Viewport meta tag set','Language attribute on <html>','Favicon present']},
+{s:'Content',items:['Single H1 tag on page','Logical heading hierarchy (H1→H2→H3)','Images have alt attributes','Content is above 300 words','Internal links present','External links open in new tab']},
+{s:'Technical',items:['SSL/HTTPS enabled','Mobile responsive design','Page loads under 3 seconds','No broken links (404s)','XML sitemap exists','robots.txt configured']},
+{s:'Social & Structured',items:['Open Graph tags present','Twitter Card meta tags','Structured data (JSON-LD)','Social sharing buttons']},
+];
+
+const cl=document.getElementById('checklist');
+let total=0;
+items.forEach(sec=>{
+  const t=document.createElement('div');t.className='section-title';t.textContent=sec.s;cl.appendChild(t);
+  sec.items.forEach(item=>{
+    total++;
+    const label=document.createElement('label');label.className='check-item';
+    label.innerHTML=`<input type="checkbox"><span class="check-box">✓</span><span class="text">${item}</span>`;
+    cl.appendChild(label);
+  });
+});
+
+function updateScore(){
+  const checked=cl.querySelectorAll('input:checked').length;
+  const pct=Math.round(checked/total*100);
+  const sc=document.getElementById('score');
+  sc.textContent=pct+'%';
+  const color=pct>=80?'var(--green)':pct>=50?'var(--yellow)':'var(--red)';
+  sc.style.borderColor=color;sc.style.color=color;
+  document.getElementById('scoreLabel').textContent=`${checked}/${total} checks passed`;
+}
+cl.addEventListener('change',updateScore);
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  cl.querySelectorAll('input').forEach(i=>i.checked=false);updateScore();
+});
+</script>
+</body>
+</html>
