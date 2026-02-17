@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter & Validator Online — Free Tool | JSONForge</title>
+<meta name="description" content="Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser. No data sent to servers.">
+<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json parser, online json tool, free json formatter">
+<meta name="author" content="JSONForge by MaxxMini">
+<meta property="og:title" content="JSON Formatter & Validator Online — Free Tool | JSONForge">
+<meta property="og:description" content="Beautify, validate, and minify JSON instantly. 100% client-side, no data leaves your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/json-formatter/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JSON Formatter & Validator Online — Free Tool | JSONForge">
+<meta name="twitter:description" content="Beautify, validate, and minify JSON instantly. 100% client-side, no data leaves your browser.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/json-formatter/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSONForge","url":"https://maxmini0214.github.io/json-formatter/","description":"Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--accent:#3b82f6;--accent-hover:#2563eb;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--muted);margin-top:.4rem;font-size:.95rem}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem 2rem;flex:1;width:100%}
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}
+.toolbar button{padding:.5rem 1rem;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .15s}
+.toolbar button:hover{border-color:var(--accent);background:#253352}
+.toolbar button.primary{background:var(--accent);border-color:var(--accent);font-weight:600}
+.toolbar button.primary:hover{background:var(--accent-hover)}
+.status{margin-left:auto;font-size:.85rem;padding:.4rem .8rem;border-radius:6px}
+.status.valid{color:var(--green);background:#22c55e18}
+.status.invalid{color:var(--red);background:#ef444418}
+.status.idle{color:var(--muted)}
+.editor-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;min-height:60vh}
+@media(max-width:768px){.editor-wrap{grid-template-columns:1fr;min-height:auto}.pane{min-height:40vh}}
+.pane{display:flex;flex-direction:column}
+.pane label{font-size:.8rem;color:var(--muted);margin-bottom:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+textarea{flex:1;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:.875rem;line-height:1.6;resize:vertical;outline:none;transition:border-color .15s}
+textarea:focus{border-color:var(--accent)}
+textarea::placeholder{color:#475569}
+.stats{display:flex;gap:1.5rem;margin-top:.75rem;font-size:.8rem;color:var(--muted)}
+.cta-bar{text-align:center;margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#253352);border-radius:12px;border:1px solid var(--border)}
+.cta-bar h3{font-size:1.1rem;margin-bottom:.5rem}
+.cta-bar p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+.cta-bar a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
+.cta-bar a:hover{transform:translateY(-1px)}
+footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+footer a{color:var(--accent);text-decoration:none}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
+.feature h4{font-size:.9rem;margin-bottom:.3rem}
+.feature p{font-size:.8rem;color:var(--muted)}
+.error-line{color:var(--red);font-size:.8rem;margin-top:.3rem;min-height:1.2em}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header>
+<h1>API 응답 디버깅할 때 깨진 JSON, 1초만에 정리</h1>
+<p>붙여넣기만 하면 포맷팅 · 검증 · 압축 — 브라우저에서 바로, 서버 전송 없음</p>
+</header>
+<div class="container">
+<div class="toolbar">
+<button class="primary" onclick="formatJSON()">Beautify</button>
+<button onclick="minifyJSON()">Minify</button>
+<button onclick="sortKeys()">Sort Keys</button>
+<button onclick="copyOutput()">📋 Copy</button>
+<button onclick="clearAll()">Clear</button>
+<button onclick="loadSample()">Sample</button>
+<span class="status idle" id="status">Paste JSON to start</span>
+</div>
+<div class="editor-wrap">
+<div class="pane">
+<label>Input</label>
+<textarea id="input" placeholder='Paste your JSON here...\n\n{"name": "example", "value": 42}'></textarea>
+<div class="error-line" id="error"></div>
+</div>
+<div class="pane">
+<label>Output</label>
+<textarea id="output" readonly placeholder="Formatted output will appear here..."></textarea>
+</div>
+</div>
+<div class="stats">
+<span id="charCount">Characters: 0</span>
+<span id="lineCount">Lines: 0</span>
+<span id="sizeInfo">Size: 0 B</span>
+<span id="depth">Depth: 0</span>
+</div>
+
+<div class="features">
+<div class="feature"><h4>🔒 Privacy First</h4><p>Nothing leaves your browser. Zero server calls.</p></div>
+<div class="feature"><h4>⚡ Instant</h4><p>Processes megabytes of JSON in milliseconds.</p></div>
+<div class="feature"><h4>🎯 Error Detection</h4><p>Pinpoints exact line & position of syntax errors.</p></div>
+<div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
+</div>
+
+<!-- Ad placeholder -->
+<!-- <div id="ad-slot" style="text-align:center;margin:1rem 0;min-height:90px;"></div> -->
+
+<div style="margin:20px auto;max-width:500px;background:linear-gradient(135deg,#3b82f6,#a78bfa);border-radius:12px;padding:20px;text-align:center;color:white;">
+<h3 style="margin:0 0 8px">⚡ JSON Power Tools Pro — $3</h3>
+<p style="margin:0 0 12px;opacity:0.9;font-size:14px">Offline desktop app + large file support (100MB+). Includes JSON diff, schema validation & CSV/YAML conversion.</p>
+<a href="https://payhip.com/b/4FosR" target="_blank" style="display:inline-block;background:white;color:#3b82f6;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:bold">Get It Now →</a>
+</div>
+
+<h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
+<div class="tools-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem">
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+</div>
+<footer>
+<p>Built by <a href="https://github.com/maxseats" target="_blank">MaxxMini</a> · Open source · No tracking</p>
+</footer>
+<script>
+const $i=document.getElementById('input'),$o=document.getElementById('output'),$s=document.getElementById('status'),$e=document.getElementById('error');
+$i.addEventListener('input',validate);
+function validate(){
+  const v=$i.value.trim();
+  if(!v){$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('');return null}
+  try{const p=JSON.parse(v);$s.className='status valid';$s.textContent='✓ Valid JSON';$e.textContent='';return p}
+  catch(e){$s.className='status invalid';$s.textContent='✗ Invalid';$e.textContent=e.message;return null}
+}
+function formatJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p,null,2);$o.value=o;updateStats(o)}}
+function minifyJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p);$o.value=o;updateStats(o)}}
+function sortKeys(){const p=validate();if(p!==null){const o=JSON.stringify(sortObj(p),null,2);$o.value=o;updateStats(o)}}
+function sortObj(o){if(Array.isArray(o))return o.map(sortObj);if(o&&typeof o==='object'){const s={};Object.keys(o).sort().forEach(k=>s[k]=sortObj(o[k]));return s}return o}
+function copyOutput(){if($o.value){navigator.clipboard.writeText($o.value);const t=$s.textContent;$s.textContent='📋 Copied!';setTimeout(()=>$s.textContent=t,1500)}}
+function clearAll(){$i.value='';$o.value='';$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('')}
+function loadSample(){$i.value=JSON.stringify({name:"JSONForge",version:"1.0",features:["format","validate","minify","sort"],config:{theme:"dark",indent:2,maxDepth:10},tags:["json","tool","free"],stats:{users:12500,rating:4.8}},null,2);validate();formatJSON()}
+function updateStats(s){
+  document.getElementById('charCount').textContent='Characters: '+s.length;
+  document.getElementById('lineCount').textContent='Lines: '+(s?s.split('\n').length:0);
+  const b=new Blob([s]).size;
+  document.getElementById('sizeInfo').textContent='Size: '+(b>1024?(b/1024).toFixed(1)+' KB':b+' B');
+  try{const d=getDepth(JSON.parse(s));document.getElementById('depth').textContent='Depth: '+d}catch(e){document.getElementById('depth').textContent='Depth: 0'}
+}
+function getDepth(o){if(typeof o!=='object'||o===null)return 0;const vals=Object.values(o);if(!vals.length)return 1;return 1+Math.max(...vals.map(getDepth))}
+</script>
+<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/json-formatter</body>count_bg=%2379C83D</body>title_bg=%23555555</body>icon=</body>icon_color=%23E7E7E7</body>title=visits</body>edge_flat=true" alt="Hits" /></a></div>
+</body>
+</html>

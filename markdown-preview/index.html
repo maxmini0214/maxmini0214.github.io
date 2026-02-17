@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Preview — Free Online Markdown Editor & Previewer</title>
+<meta name="description" content="Write and preview Markdown in real-time. Supports GitHub Flavored Markdown with tables, code blocks, task lists. 100% client-side, no data sent to servers.">
+<meta name="keywords" content="markdown preview, markdown editor, markdown viewer, GFM, GitHub markdown, online markdown, free markdown tool">
+<meta property="og:title" content="Markdown Preview — Free Online Markdown Editor">
+<meta property="og:description" content="Real-time Markdown editor with live preview. GitHub Flavored Markdown support.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://maxmini0214.github.io/markdown-preview/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+h1{font-size:1.4rem;color:#fff}
+.badge{background:rgba(255,255,255,.2);color:#fff;padding:4px 10px;border-radius:12px;font-size:.75rem}
+.toolbar{display:flex;gap:8px;padding:8px 16px;background:#1e293b;border-bottom:1px solid #334155}
+.toolbar button{background:#334155;color:#e2e8f0;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:background .2s}
+.toolbar button:hover{background:#475569}
+.toolbar button.active{background:#6366f1;color:#fff}
+.main{display:flex;flex:1;overflow:hidden}
+.editor-pane,.preview-pane{flex:1;overflow:auto;padding:16px}
+.editor-pane{border-right:1px solid #334155}
+textarea{width:100%;height:100%;background:transparent;color:#e2e8f0;border:none;outline:none;resize:none;font-family:'Fira Code','Cascadia Code','Consolas',monospace;font-size:14px;line-height:1.7;tab-size:2}
+.preview-pane{background:#1e293b;padding:24px}
+.preview-pane h1{font-size:2em;margin:.67em 0;color:#f1f5f9;border-bottom:1px solid #475569;padding-bottom:.3em}
+.preview-pane h2{font-size:1.5em;margin:.75em 0;color:#f1f5f9;border-bottom:1px solid #334155;padding-bottom:.3em}
+.preview-pane h3{font-size:1.25em;margin:.75em 0;color:#f1f5f9}
+.preview-pane h4,.preview-pane h5,.preview-pane h6{margin:.75em 0;color:#cbd5e1}
+.preview-pane p{margin:.8em 0;line-height:1.7}
+.preview-pane a{color:#818cf8;text-decoration:none}
+.preview-pane a:hover{text-decoration:underline}
+.preview-pane code{background:#334155;padding:2px 6px;border-radius:4px;font-family:'Fira Code',monospace;font-size:.9em}
+.preview-pane pre{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:16px;overflow-x:auto;margin:1em 0}
+.preview-pane pre code{background:none;padding:0}
+.preview-pane blockquote{border-left:4px solid #6366f1;padding:8px 16px;margin:1em 0;background:rgba(99,102,241,.1);border-radius:0 8px 8px 0}
+.preview-pane ul,.preview-pane ol{padding-left:2em;margin:.8em 0}
+.preview-pane li{margin:.3em 0;line-height:1.6}
+.preview-pane table{border-collapse:collapse;width:100%;margin:1em 0}
+.preview-pane th,.preview-pane td{border:1px solid #475569;padding:8px 12px;text-align:left}
+.preview-pane th{background:#334155;font-weight:600}
+.preview-pane tr:nth-child(even){background:rgba(51,65,85,.3)}
+.preview-pane hr{border:none;border-top:2px solid #334155;margin:1.5em 0}
+.preview-pane img{max-width:100%;border-radius:8px}
+.preview-pane input[type="checkbox"]{margin-right:6px}
+.stats{padding:8px 16px;background:#1e293b;border-top:1px solid #334155;font-size:.75rem;color:#94a3b8;display:flex;gap:16px}
+.cta{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;text-decoration:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:.85rem;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+@media(max-width:768px){
+  .main{flex-direction:column}
+  .editor-pane{border-right:none;border-bottom:1px solid #334155;height:45vh}
+  .preview-pane{height:auto}
+}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header>
+  <div>
+    <h1>📝 Markdown Preview</h1>
+    <span class="badge">GitHub Flavored</span>
+  </div>
+  <a href="https://payhip.com/b/4FosR" target="_blank" class="cta">⚡ Get Pro Tools →</a>
+</header>
+<div class="toolbar">
+  <button onclick="insert('**','**')" title="Bold"><b>B</b></button>
+  <button onclick="insert('*','*')" title="Italic"><i>I</i></button>
+  <button onclick="insert('~~','~~')" title="Strikethrough"><s>S</s></button>
+  <button onclick="insert('`','`')" title="Inline Code">&lt;/&gt;</button>
+  <button onclick="insert('\n```\n','\n```\n')" title="Code Block">{ }</button>
+  <button onclick="insert('[','](url)')" title="Link">🔗</button>
+  <button onclick="insert('- [ ] ','')" title="Task">☑️</button>
+  <button onclick="insert('| H1 | H2 |\n|---|---|\n| a | b |','')" title="Table">📊</button>
+  <button onclick="copyHtml()" title="Copy HTML">📋 Copy HTML</button>
+  <button onclick="downloadMd()" title="Download .md">💾 Download</button>
+</div>
+<div class="main">
+  <div class="editor-pane">
+    <textarea id="editor" spellcheck="false" placeholder="Type Markdown here..."></textarea>
+  </div>
+  <div class="preview-pane" id="preview"></div>
+</div>
+<div class="stats">
+  <span id="stat-words">0 words</span>
+  <span id="stat-chars">0 characters</span>
+  <span id="stat-lines">0 lines</span>
+  <span id="stat-reading">0 min read</span>
+</div>
+<!-- Ad slot reserved -->
+<div id="ad-slot" style="text-align:center;padding:8px;background:#1e293b;display:none"></div>
+
+<script>
+const editor=document.getElementById('editor');
+const preview=document.getElementById('preview');
+
+const sample=`# Welcome to Markdown Preview! 🎉
+
+A **free**, real-time Markdown editor with GitHub Flavored Markdown support.
+
+## Features
+
+- ✅ **Live preview** as you type
+- ✅ Tables, task lists, code blocks
+- ✅ 100% client-side — your data never leaves the browser
+- ✅ Copy HTML or download .md
+
+## Code Example
+
+\`\`\`javascript
+const greeting = "Hello, World!";
+console.log(greeting);
+\`\`\`
+
+## Table Example
+
+| Feature | Status |
+|---------|--------|
+| Bold / Italic | ✅ |
+| Code Blocks | ✅ |
+| Tables | ✅ |
+| Task Lists | ✅ |
+| Blockquotes | ✅ |
+
+## Task List
+
+- [x] Build the editor
+- [x] Add live preview
+- [ ] Take over the world
+
+> 💡 **Tip:** Use the toolbar above or write raw Markdown!
+
+---
+
+Made with ❤️ by [MaxMini](https://payhip.com/b/4FosR)
+`;
+
+editor.value=sample;
+
+function render(){
+  const md=editor.value;
+  preview.innerHTML=parseMd(md);
+  updateStats(md);
+}
+
+function parseMd(t){
+  // Pre-process: collect code blocks
+  let blocks=[];
+  t=t.replace(/```(\w*)\n([\s\S]*?)```/g,(_,lang,code)=>{
+    blocks.push('<pre><code'+(lang?' class="language-'+esc(lang)+'"':'')+'>'+esc(code.trimEnd())+'</code></pre>');
+    return '\x00BLOCK'+(blocks.length-1)+'\x00';
+  });
+  t=t.replace(/`([^`\n]+)`/g,(_,c)=>{
+    blocks.push('<code>'+esc(c)+'</code>');
+    return '\x00BLOCK'+(blocks.length-1)+'\x00';
+  });
+
+  let lines=t.split('\n'),html=[],inList=0,inOl=0,inTable=false;
+
+  function closeList(){
+    if(inList){html.push('</ul>');inList=0}
+    if(inOl){html.push('</ol>');inOl=0}
+  }
+  function closeTable(){if(inTable){html.push('</tbody></table>');inTable=false}}
+
+  for(let i=0;i<lines.length;i++){
+    let l=lines[i];
+
+    // Table
+    if(/^\|(.+)\|$/.test(l)){
+      if(!inTable){
+        closeList();
+        let cells=l.split('|').filter(c=>c.trim());
+        // check if next line is separator
+        if(i+1<lines.length&&/^\|[\s\-:|]+\|$/.test(lines[i+1])){
+          html.push('<table><thead><tr>'+cells.map(c=>'<th>'+inline(c.trim())+'</th>').join('')+'</tr></thead><tbody>');
+          inTable=true;i++;continue;
+        }
+      }
+      if(inTable){
+        let cells=l.split('|').filter(c=>c.trim());
+        html.push('<tr>'+cells.map(c=>'<td>'+inline(c.trim())+'</td>').join('')+'</tr>');
+        continue;
+      }
+    } else { closeTable(); }
+
+    // Headings
+    let hm=l.match(/^(#{1,6})\s+(.+)/);
+    if(hm){closeList();let lv=hm[1].length;html.push('<h'+lv+'>'+inline(hm[2])+'</h'+lv+'>');continue}
+
+    // HR
+    if(/^(-{3,}|\*{3,}|_{3,})$/.test(l.trim())){closeList();html.push('<hr>');continue}
+
+    // Blockquote
+    if(/^>\s?(.*)/.test(l)){closeList();let q=l.replace(/^>\s?/,'');html.push('<blockquote><p>'+inline(q)+'</p></blockquote>');continue}
+
+    // Task list
+    let tm=l.match(/^[-*]\s+\[([ xX])\]\s+(.*)/);
+    if(tm){if(!inList){html.push('<ul style="list-style:none;padding-left:1em">');inList=1}
+      let ck=tm[1]!=' '?'checked':'';html.push('<li><input type="checkbox" disabled '+ck+'>'+inline(tm[2])+'</li>');continue}
+
+    // UL
+    let um=l.match(/^[-*+]\s+(.*)/);
+    if(um){if(!inList){closeList();html.push('<ul>');inList=1}html.push('<li>'+inline(um[1])+'</li>');continue}
+
+    // OL
+    let om=l.match(/^\d+\.\s+(.*)/);
+    if(om){if(!inOl){closeList();html.push('<ol>');inOl=1}html.push('<li>'+inline(om[1])+'</li>');continue}
+
+    closeList();
+
+    if(l.trim()===''){html.push('');continue}
+    html.push('<p>'+inline(l)+'</p>');
+  }
+  closeList();closeTable();
+
+  let out=html.join('\n');
+  out=out.replace(/\x00BLOCK(\d+)\x00/g,(_,i)=>blocks[+i]);
+  return out;
+}
+
+function inline(s){
+  s=s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1">');
+  s=s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  s=s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  s=s.replace(/~~(.+?)~~/g,'<del>$1</del>');
+  return s;
+}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function updateStats(md){
+  let w=md.trim()?md.trim().split(/\s+/).length:0;
+  document.getElementById('stat-words').textContent=w+' words';
+  document.getElementById('stat-chars').textContent=md.length+' characters';
+  document.getElementById('stat-lines').textContent=md.split('\n').length+' lines';
+  document.getElementById('stat-reading').textContent=Math.max(1,Math.ceil(w/200))+' min read';
+}
+
+function insert(before,after){
+  const s=editor.selectionStart,e=editor.selectionEnd;
+  const sel=editor.value.substring(s,e)||'text';
+  editor.value=editor.value.substring(0,s)+before+sel+after+editor.value.substring(e);
+  editor.focus();
+  editor.selectionStart=s+before.length;
+  editor.selectionEnd=s+before.length+sel.length;
+  render();
+}
+
+function copyHtml(){
+  navigator.clipboard.writeText(preview.innerHTML).then(()=>alert('HTML copied to clipboard!'));
+}
+
+function downloadMd(){
+  const blob=new Blob([editor.value],{type:'text/markdown'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='document.md';a.click();
+}
+
+editor.addEventListener('input',render);
+editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){e.preventDefault();insert('  ','');}
+});
+render();
+</script>
+<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/markdown-preview</body>count_bg=%2379C83D</body>title_bg=%23555555</body>icon=</body>icon_color=%23E7E7E7</body>title=visits</body>edge_flat=true" alt="Hits" /></a></div>
+</body>
+</html>

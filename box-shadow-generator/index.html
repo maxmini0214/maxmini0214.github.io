@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Box Shadow Generator — Free Online Tool</title>
+<meta name="description" content="Generate CSS box-shadow visually with real-time preview. Multiple layers, inset shadows, and one-click copy. 100% free, no signup.">
+<meta name="keywords" content="css box shadow generator, box-shadow, css shadow, shadow generator, css tool, web design">
+<meta property="og:title" content="CSS Box Shadow Generator — Free Online Tool">
+<meta property="og:description" content="Generate beautiful CSS box-shadows visually. Multiple layers, inset, one-click copy.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://maxmini0214.github.io/box-shadow-generator/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:20px}
+h1{text-align:center;font-size:1.8rem;margin:20px 0 8px;background:linear-gradient(135deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{text-align:center;color:#94a3b8;margin-bottom:30px;font-size:.95rem}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:768px){.main{grid-template-columns:1fr}}
+.panel{background:#1e293b;border-radius:12px;padding:20px;border:1px solid #334155}
+.preview-box-wrap{display:flex;align-items:center;justify-content:center;min-height:300px;background:#0f172a;border-radius:8px;padding:20px}
+.preview-box{width:200px;height:200px;background:#3b82f6;border-radius:12px;transition:box-shadow .15s}
+.controls{display:flex;flex-direction:column;gap:14px}
+.control-row{display:flex;align-items:center;gap:10px}
+.control-row label{min-width:80px;font-size:.85rem;color:#94a3b8}
+.control-row input[type=range]{flex:1;accent-color:#60a5fa}
+.control-row .val{min-width:45px;text-align:right;font-size:.85rem;color:#60a5fa;font-family:monospace}
+.control-row input[type=color]{width:36px;height:28px;border:none;background:none;cursor:pointer}
+.layers{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.layer-btn{padding:6px 14px;border-radius:6px;border:1px solid #475569;background:#1e293b;color:#e2e8f0;cursor:pointer;font-size:.8rem}
+.layer-btn.active{background:#3b82f6;border-color:#3b82f6}
+.layer-btn.add{background:#065f46;border-color:#059669}
+.layer-btn.del{background:#7f1d1d;border-color:#dc2626;margin-left:auto}
+.checkbox-row{display:flex;align-items:center;gap:8px}
+.checkbox-row input{accent-color:#60a5fa}
+.output{margin-top:20px}
+.code-box{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:14px;font-family:'Fira Code',monospace;font-size:.85rem;color:#a78bfa;word-break:break-all;position:relative;min-height:50px}
+.copy-btn{position:absolute;top:8px;right:8px;background:#3b82f6;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.copy-btn:hover{background:#2563eb}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.preset{padding:6px 12px;border-radius:6px;border:1px solid #475569;background:#1e293b;color:#e2e8f0;cursor:pointer;font-size:.78rem}
+.preset:hover{border-color:#60a5fa}
+.cta{display:block;text-align:center;margin:30px auto 10px;padding:14px 28px;background:linear-gradient(135deg,#f472b6,#a78bfa);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:1rem;max-width:400px}
+.cta:hover{opacity:.9}
+footer{text-align:center;color:#64748b;font-size:.8rem;margin:30px 0 10px}
+footer a{color:#60a5fa;text-decoration:none}
+.ad-slot{text-align:center;padding:20px;color:#475569;font-size:.75rem;margin:20px 0}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎨 CSS Box Shadow Generator</h1>
+<p class="subtitle">Design beautiful shadows visually — copy CSS with one click</p>
+
+<div class="presets">
+<button class="preset" onclick="applyPreset(0)">Soft</button>
+<button class="preset" onclick="applyPreset(1)">Hard</button>
+<button class="preset" onclick="applyPreset(2)">Neon</button>
+<button class="preset" onclick="applyPreset(3)">Layered</button>
+<button class="preset" onclick="applyPreset(4)">Inset</button>
+<button class="preset" onclick="applyPreset(5)">Material</button>
+</div>
+
+<div class="main">
+<div class="panel">
+<div class="preview-box-wrap">
+<div class="preview-box" id="preview"></div>
+</div>
+</div>
+<div class="panel controls" id="controlsPanel">
+<div class="layers" id="layerBtns"></div>
+<div id="layerControls"></div>
+</div>
+</div>
+
+<div class="output">
+<div class="code-box" id="codeOutput"><button class="copy-btn" onclick="copyCSS()">Copy</button></div>
+</div>
+
+<div class="ad-slot"><!-- Ad Space Reserved --></div>
+
+<a class="cta" href="https://payhip.com/b/4FosR" target="_blank" rel="noopener">⚡ Get 200+ Premium CSS Components — $9</a>
+
+<footer>Built by <a href="https://github.com/maxmini0214">MaxMini</a> · 100% client-side · No data collected</footer>
+</div>
+
+<script>
+const PRESETS = [
+  [{x:0,y:10,blur:30,spread:0,color:'#00000040',inset:false}],
+  [{x:5,y:5,blur:0,spread:0,color:'#00000060',inset:false}],
+  [{x:0,y:0,blur:20,spread:5,color:'#3b82f680',inset:false}],
+  [{x:0,y:4,blur:6,spread:-1,color:'#00000030',inset:false},{x:0,y:10,blur:15,spread:-3,color:'#00000025',inset:false}],
+  [{x:0,y:0,blur:20,spread:5,color:'#00000050',inset:true}],
+  [{x:0,y:2,blur:4,spread:-1,color:'#0000001a',inset:false},{x:0,y:4,blur:6,spread:-1,color:'#0000001a',inset:false},{x:0,y:10,blur:15,spread:-3,color:'#0000001a',inset:false}]
+];
+
+let layers=[{x:0,y:10,blur:30,spread:0,color:'#00000040',inset:false}];
+let activeLayer=0;
+
+function render(){
+  // layer buttons
+  const lb=document.getElementById('layerBtns');
+  lb.innerHTML='';
+  layers.forEach((l,i)=>{
+    const b=document.createElement('button');
+    b.className='layer-btn'+(i===activeLayer?' active':'');
+    b.textContent='Layer '+(i+1);
+    b.onclick=()=>{activeLayer=i;render()};
+    lb.appendChild(b);
+  });
+  if(layers.length<5){const a=document.createElement('button');a.className='layer-btn add';a.textContent='+';a.onclick=()=>{layers.push({x:0,y:4,blur:10,spread:0,color:'#00000030',inset:false});activeLayer=layers.length-1;render()};lb.appendChild(a)}
+  if(layers.length>1){const d=document.createElement('button');d.className='layer-btn del';d.textContent='✕';d.onclick=()=>{layers.splice(activeLayer,1);activeLayer=Math.min(activeLayer,layers.length-1);render()};lb.appendChild(d)}
+
+  // controls
+  const l=layers[activeLayer];
+  const c=document.getElementById('layerControls');
+  c.innerHTML=`
+    ${slider('X Offset','x',l.x,-50,50)}
+    ${slider('Y Offset','y',l.y,-50,50)}
+    ${slider('Blur','blur',l.blur,0,100)}
+    ${slider('Spread','spread',l.spread,-50,50)}
+    <div class="control-row"><label>Color</label><input type="color" value="${l.color.slice(0,7)}" oninput="upd('color',this.value+'40')"><input type="range" min="0" max="100" value="${Math.round(parseInt(l.color.slice(7)||'ff',16)/255*100)}" oninput="upd('opacity',this.value)"><span class="val">${Math.round(parseInt(l.color.slice(7)||'ff',16)/255*100)}%</span></div>
+    <div class="checkbox-row"><input type="checkbox" ${l.inset?'checked':''} onchange="upd('inset',this.checked)"><label>Inset</label></div>
+  `;
+  updatePreview();
+}
+
+function slider(label,prop,val,min,max){
+  return `<div class="control-row"><label>${label}</label><input type="range" min="${min}" max="${max}" value="${val}" oninput="upd('${prop}',+this.value)"><span class="val">${val}px</span></div>`;
+}
+
+function upd(prop,val){
+  const l=layers[activeLayer];
+  if(prop==='opacity'){
+    const hex=l.color.slice(0,7);
+    const a=Math.round(val/100*255).toString(16).padStart(2,'0');
+    l.color=hex+a;
+  }else if(prop==='color'){
+    const oldA=l.color.slice(7)||'ff';
+    l.color=val+oldA;
+  }else{
+    l[prop]=val;
+  }
+  render();
+}
+
+function shadowStr(){
+  return layers.map(l=>`${l.inset?'inset ':''}${l.x}px ${l.y}px ${l.blur}px ${l.spread}px ${l.color}`).join(',\n    ');
+}
+
+function updatePreview(){
+  const s=layers.map(l=>`${l.inset?'inset ':''}${l.x}px ${l.y}px ${l.blur}px ${l.spread}px ${l.color}`).join(', ');
+  document.getElementById('preview').style.boxShadow=s;
+  document.getElementById('codeOutput').innerHTML=`<button class="copy-btn" onclick="copyCSS()">Copy</button>box-shadow:\n    ${shadowStr()};`;
+}
+
+function copyCSS(){
+  const t=`box-shadow: ${shadowStr()};`;
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);
+  });
+}
+
+function applyPreset(i){
+  layers=JSON.parse(JSON.stringify(PRESETS[i]));
+  activeLayer=0;
+  render();
+}
+
+render();
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

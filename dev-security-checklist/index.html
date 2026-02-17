@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Security Checklist — Interactive Security Audit Tool</title>
+<meta name="description" content="Free interactive developer security checklist with 80+ items across 10 categories including AI/LLM Agent Security. Score your app's security posture A-F.">
+<meta name="keywords" content="security checklist, developer security, web security, API security, AI agent security, LLM security, OWASP, security audit">
+<meta name="author" content="MaxDevTools">
+<link rel="canonical" href="https://maxmini0214.github.io/dev-security-checklist/">
+<meta property="og:title" content="Developer Security Checklist — Interactive Security Audit Tool">
+<meta property="og:description" content="80+ security checks across 10 categories. Includes AI/LLM Agent Security — the first checklist to cover agentic AI risks.">
+<meta property="og:url" content="https://maxmini0214.github.io/dev-security-checklist/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://maxmini0214.github.io/dev-security-checklist/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Developer Security Checklist — Interactive Security Audit Tool">
+<meta name="twitter:description" content="80+ security checks including AI/LLM Agent Security. Free, client-side, no signup.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1a2332;--border:#1e2d3d;--text:#e2e8f0;--text2:#94a3b8;--green:#00ff88;--cyan:#06b6d4;--red:#ef4444;--orange:#f59e0b;--yellow:#eab308;--blue:#3b82f6;--purple:#a855f7;--critical:#ef4444;--high:#f59e0b;--medium:#3b82f6;--low:#22c55e}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 0 20px;border-bottom:1px solid var(--border);margin-bottom:30px}
+h1{font-size:2.2em;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+header p{color:var(--text2);font-size:1.05em;max-width:600px;margin:0 auto}
+.badge-new{display:inline-block;background:var(--green);color:#000;font-size:.65em;padding:2px 8px;border-radius:10px;vertical-align:middle;font-weight:700;margin-left:6px}
+
+/* Score Panel */
+.score-panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.grade-circle{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.4em;font-weight:800;flex-shrink:0;border:3px solid var(--green);color:var(--green);transition:all .3s}
+.score-details{flex:1;min-width:200px}
+.progress-bar-bg{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden;margin:8px 0}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:6px;transition:width .4s ease}
+.score-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:.85em;color:var(--text2)}
+.score-stats span{display:flex;align-items:center;gap:4px}
+
+/* Controls */
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.controls button,.controls select{background:var(--surface);color:var(--text);border:1px solid var(--border);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:.85em;transition:border-color .2s}
+.controls button:hover,.controls select:hover{border-color:var(--cyan)}
+.controls select{appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+/* Category */
+.category{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.category-header{padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none;transition:background .2s}
+.category-header:hover{background:var(--surface2)}
+.category-header h2{font-size:1.1em;flex:1}
+.category-header .arrow{transition:transform .3s;color:var(--text2)}
+.category-header .arrow.open{transform:rotate(90deg)}
+.cat-progress{font-size:.8em;color:var(--text2)}
+.category-items{padding:0 20px 16px;display:none}
+.category-items.open{display:block}
+
+/* Checklist Item */
+.item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.item:last-child{border-bottom:none}
+.item input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--green);cursor:pointer;flex-shrink:0}
+.item-content{flex:1}
+.item-title{font-size:.95em;font-weight:500}
+.item-desc{font-size:.8em;color:var(--text2);margin-top:2px}
+.item.checked .item-title{color:var(--text2);text-decoration:line-through}
+.severity{font-size:.7em;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;flex-shrink:0;margin-top:3px}
+.severity-critical{background:rgba(239,68,68,.15);color:var(--critical)}
+.severity-high{background:rgba(245,158,11,.15);color:var(--high)}
+.severity-medium{background:rgba(59,130,246,.15);color:var(--medium)}
+.severity-low{background:rgba(34,197,94,.15);color:var(--low)}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--cyan);border-radius:12px;padding:28px;text-align:center;margin:32px 0}
+.cta h3{color:var(--cyan);margin-bottom:8px;font-size:1.2em}
+.cta p{color:var(--text2);margin-bottom:16px;font-size:.95em}
+.cta a.btn{display:inline-block;background:linear-gradient(135deg,var(--green),var(--cyan));color:#000;padding:12px 28px;border-radius:8px;font-weight:700;font-size:1em;transition:opacity .2s}
+.cta a.btn:hover{opacity:.85;text-decoration:none}
+
+/* Tools */
+.tools-links{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:24px 0}
+.tools-links h3{margin-bottom:12px;font-size:1em;color:var(--cyan)}
+.tools-links ul{list-style:none;display:flex;gap:12px;flex-wrap:wrap}
+.tools-links li a{display:block;padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:.85em;transition:border-color .2s}
+.tools-links li a:hover{border-color:var(--cyan)}
+
+footer{text-align:center;padding:30px 0;border-top:1px solid var(--border);margin-top:40px;color:var(--text2);font-size:.85em}
+
+@media(max-width:600px){
+  h1{font-size:1.6em}
+  .score-panel{flex-direction:column;text-align:center}
+  .controls{flex-direction:column}
+}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🛡️ Developer Security Checklist</h1>
+<p>80+ interactive security checks across 10 categories. Includes <strong>AI/LLM Agent Security</strong><span class="badge-new">NEW</span> — the first checklist to cover agentic AI risks.</p>
+</header>
+
+<div class="score-panel" id="scorePanel">
+<div class="grade-circle" id="grade">F</div>
+<div class="score-details">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><strong id="scoreLabel">Security Score</strong><span id="scorePct" style="font-size:1.3em;font-weight:700;color:var(--green)">0%</span></div>
+<div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+<div class="score-stats">
+<span>✅ <span id="statChecked">0</span> done</span>
+<span>📋 <span id="statTotal">0</span> total</span>
+<span>🔴 <span id="statCritical">0</span> critical remaining</span>
+</div>
+</div>
+</div>
+
+<div class="controls">
+<select id="filterSeverity"><option value="all">All Severities</option><option value="critical">🔴 Critical</option><option value="high">🟠 High</option><option value="medium">🔵 Medium</option><option value="low">🟢 Low</option></select>
+<button onclick="expandAll()">Expand All</button>
+<button onclick="collapseAll()">Collapse All</button>
+<button onclick="exportMarkdown()">📄 Export Markdown</button>
+<button onclick="exportPDF()">📑 Export PDF</button>
+<button onclick="resetAll()">🔄 Reset</button>
+</div>
+
+<div id="checklist"></div>
+
+<div style="margin:20px auto;max-width:500px;background:linear-gradient(135deg,#00ff88,#06b6d4);border-radius:12px;padding:20px;text-align:center;color:#0a0e17;">
+<h3 style="margin:0 0 8px">🛡️ Dev Security Toolkit — $3</h3>
+<p style="margin:0 0 12px;opacity:0.8;font-size:14px">Offline checklist bundle with code fix templates. Works without internet — perfect for air-gapped environments.</p>
+<a href="https://payhip.com/MaxDevTools" target="_blank" style="display:inline-block;background:#0a0e17;color:#00ff88;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:bold">Get It Now →</a>
+</div>
+
+<div class="tools-links">
+<h3>🧰 MaxDevTools Security Suite</h3>
+<ul>
+<li><a href="https://maxmini0214.github.io/password-strength-analyzer/" target="_blank">🔑 Password Strength Analyzer</a></li>
+<li><a href="https://maxmini0214.github.io/dev-security-checklist/" target="_blank">🛡️ Security Checklist</a></li>
+</ul>
+</div>
+
+<footer>
+<p><strong>Part of MaxDevTools Security Suite</strong></p>
+<p style="margin-top:6px">100% client-side • No data leaves your browser • <a href="https://github.com/maxmini0214/dev-security-checklist" target="_blank">Open Source on GitHub</a></p>
+</footer>
+</div>
+
+<script>
+const DATA=[
+{cat:"Authentication & Passwords",icon:"🔐",items:[
+{t:"Use bcrypt/scrypt/argon2 for password hashing",d:"Never use MD5, SHA1, or plain SHA256 for passwords.",s:"critical"},
+{t:"Enforce minimum password length of 12+ characters",d:"NIST recommends at least 8; 12+ is best practice.",s:"high"},
+{t:"Implement multi-factor authentication (MFA)",d:"TOTP, WebAuthn, or hardware keys for all privileged accounts.",s:"critical"},
+{t:"Rate-limit login attempts",d:"Prevent brute-force with exponential backoff or account lockout.",s:"critical"},
+{t:"Use secure session management",d:"HttpOnly, Secure, SameSite cookies. Regenerate session ID on login.",s:"high"},
+{t:"Disable default/admin credentials",d:"Change or remove all default usernames and passwords.",s:"critical"},
+{t:"Implement account lockout policies",d:"Lock accounts after repeated failed attempts with notification.",s:"medium"},
+{t:"Add password breach checking",d:"Check passwords against known breached databases (HaveIBeenPwned API).",s:"medium"},
+{t:"Implement proper logout & session invalidation",d:"Destroy server-side session data on logout.",s:"medium"},
+]},
+{cat:"HTTPS & Transport Security",icon:"🔒",items:[
+{t:"Enforce HTTPS everywhere",d:"Redirect all HTTP to HTTPS. No mixed content.",s:"critical"},
+{t:"Enable HSTS with long max-age",d:"Strict-Transport-Security header with includeSubDomains and preload.",s:"critical"},
+{t:"Use TLS 1.2+ only",d:"Disable TLS 1.0, 1.1, SSL v3, and weak cipher suites.",s:"high"},
+{t:"Configure proper SSL/TLS certificates",d:"Use trusted CA, monitor expiry, automate renewal (Let's Encrypt).",s:"high"},
+{t:"Enable Certificate Transparency monitoring",d:"Monitor CT logs for unauthorized certificates for your domain.",s:"medium"},
+{t:"Set secure HTTP headers",d:"X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy.",s:"high"},
+{t:"Implement Content Security Policy (CSP)",d:"Restrict script sources to prevent XSS attacks.",s:"high"},
+{t:"Pin certificates for mobile apps (if applicable)",d:"Prevent MITM attacks on mobile API communication.",s:"medium"},
+]},
+{cat:"API Security",icon:"🔑",items:[
+{t:"Authenticate all API endpoints",d:"No unauthenticated access to sensitive endpoints.",s:"critical"},
+{t:"Use short-lived tokens (JWT with expiry)",d:"Access tokens < 15 min, refresh tokens with rotation.",s:"high"},
+{t:"Implement rate limiting per user/IP",d:"Prevent abuse, DDoS, and scraping.",s:"critical"},
+{t:"Validate and sanitize all input",d:"Never trust client input. Validate types, lengths, ranges.",s:"critical"},
+{t:"Use API versioning",d:"Allow deprecation without breaking clients.",s:"low"},
+{t:"Implement proper CORS policy",d:"Restrict allowed origins; never use wildcard for authenticated APIs.",s:"high"},
+{t:"Return minimal error information",d:"Don't expose stack traces, DB schemas, or internal paths.",s:"high"},
+{t:"Use parameterized queries / ORM",d:"Prevent SQL injection in all database queries.",s:"critical"},
+{t:"Implement request size limits",d:"Prevent payload-based DoS attacks.",s:"medium"},
+{t:"Add idempotency keys for mutations",d:"Prevent duplicate operations on retry.",s:"low"},
+]},
+{cat:"Data Protection",icon:"💾",items:[
+{t:"Encrypt sensitive data at rest",d:"AES-256 for databases, file storage, and backups.",s:"critical"},
+{t:"Encrypt all backups",d:"Backups are a common attack vector if left unencrypted.",s:"high"},
+{t:"Implement automated backup schedule",d:"Regular backups with tested restore procedures.",s:"high"},
+{t:"Minimize data collection",d:"Only collect what you need. GDPR/CCPA compliance.",s:"medium"},
+{t:"Implement data retention policies",d:"Auto-delete old data. Define retention periods.",s:"medium"},
+{t:"Mask/redact PII in logs",d:"Never log passwords, tokens, credit cards, SSNs.",s:"critical"},
+{t:"Use separate encryption keys per tenant",d:"Isolate multi-tenant data with separate key material.",s:"medium"},
+{t:"Implement right to deletion (GDPR)",d:"Users can request full data deletion.",s:"medium"},
+]},
+{cat:"Server Hardening",icon:"🖥️",items:[
+{t:"Disable root SSH login",d:"Use key-based auth with a non-root user, then sudo.",s:"critical"},
+{t:"Configure firewall (UFW/iptables)",d:"Allow only required ports. Default deny.",s:"critical"},
+{t:"Keep OS and packages updated",d:"Enable unattended security updates.",s:"high"},
+{t:"Disable unnecessary services",d:"Reduce attack surface — if it's not needed, remove it.",s:"high"},
+{t:"Use SSH key authentication only",d:"Disable password-based SSH authentication.",s:"high"},
+{t:"Change default SSH port",d:"Reduces automated scanning noise.",s:"low"},
+{t:"Set up intrusion detection (fail2ban/OSSEC)",d:"Auto-ban IPs with suspicious behavior.",s:"medium"},
+{t:"Implement file integrity monitoring",d:"Detect unauthorized file changes (AIDE, Tripwire).",s:"medium"},
+{t:"Run services as non-root users",d:"Principle of least privilege for all daemons.",s:"high"},
+{t:"Enable SELinux/AppArmor",d:"Mandatory access controls for defense in depth.",s:"medium"},
+]},
+{cat:"AI/LLM Agent Security",icon:"🤖",items:[
+{t:"Sandbox AI agent tool execution",d:"Run agent tools in isolated containers/VMs with no host access.",s:"critical"},
+{t:"Implement action allowlists for agents",d:"Agents should only call explicitly permitted tools/APIs.",s:"critical"},
+{t:"Rate-limit agent actions per session",d:"Prevent runaway agents from executing unlimited operations.",s:"high"},
+{t:"Validate all agent-generated outputs",d:"Never trust LLM output — validate, sanitize, and type-check.",s:"critical"},
+{t:"Log all agent decisions and tool calls",d:"Full audit trail of what agents did and why.",s:"high"},
+{t:"Implement human-in-the-loop for destructive actions",d:"Require human approval for deletes, payments, emails.",s:"critical"},
+{t:"Prevent prompt injection in user inputs",d:"Sanitize user inputs that get embedded in LLM prompts.",s:"critical"},
+{t:"Set token/cost budgets per agent session",d:"Prevent runaway API costs from agent loops.",s:"high"},
+{t:"Isolate agent credentials with minimal scope",d:"Agents get least-privilege tokens, not admin keys.",s:"critical"},
+{t:"Implement agent session timeouts",d:"Kill agent sessions that exceed time or step limits.",s:"medium"},
+{t:"Monitor for data exfiltration via agent outputs",d:"Agents shouldn't be able to leak secrets through responses.",s:"high"},
+{t:"Test agents with adversarial prompts",d:"Red-team your agents with jailbreak and injection attempts.",s:"high"},
+{t:"Version and audit agent system prompts",d:"Track changes to prompts like code — git, reviews, rollbacks.",s:"medium"},
+{t:"Restrict agent network access",d:"Agents shouldn't freely access the internet or internal services.",s:"high"},
+]},
+{cat:"Environment Variables & Secrets",icon:"🗝️",items:[
+{t:"Never commit secrets to version control",d:"Use .env files with .gitignore, or a secret manager.",s:"critical"},
+{t:"Use a secrets manager (Vault, AWS SM, etc.)",d:"Centralized, audited, rotatable secret storage.",s:"high"},
+{t:"Rotate secrets regularly",d:"Automated rotation for API keys, tokens, passwords.",s:"high"},
+{t:"Different secrets per environment",d:"Dev, staging, and production must use separate credentials.",s:"high"},
+{t:"Scan repos for leaked secrets",d:"Use tools like git-secrets, trufflehog, or GitHub secret scanning.",s:"critical"},
+{t:"Encrypt .env files in CI/CD",d:"Never store plaintext secrets in pipeline configs.",s:"high"},
+{t:"Audit secret access logs",d:"Know who accessed which secrets and when.",s:"medium"},
+]},
+{cat:"Logging & Monitoring",icon:"📊",items:[
+{t:"Log all authentication events",d:"Logins, failures, password changes, MFA events.",s:"high"},
+{t:"Set up real-time alerting",d:"Alert on anomalies: unusual logins, spike in errors, etc.",s:"high"},
+{t:"Centralize logs (ELK, Datadog, etc.)",d:"Aggregate logs for correlation and forensics.",s:"medium"},
+{t:"Monitor for suspicious API patterns",d:"Detect scraping, credential stuffing, enumeration.",s:"high"},
+{t:"Implement uptime monitoring",d:"Know when services go down before users do.",s:"medium"},
+{t:"Retain logs for compliance period",d:"Most standards require 90 days to 1 year.",s:"medium"},
+{t:"Protect log integrity",d:"Write-once storage or signed logs to prevent tampering.",s:"medium"},
+{t:"Never log sensitive data",d:"Passwords, tokens, PII must be masked or excluded.",s:"critical"},
+]},
+{cat:"Dependency Security",icon:"📦",items:[
+{t:"Run npm audit / pip audit regularly",d:"Check for known vulnerabilities in dependencies.",s:"high"},
+{t:"Pin dependency versions",d:"Use lockfiles (package-lock.json, poetry.lock).",s:"high"},
+{t:"Enable Dependabot or Renovate",d:"Automated PRs for dependency updates.",s:"medium"},
+{t:"Audit new dependencies before adding",d:"Check maintainers, download counts, recent activity.",s:"medium"},
+{t:"Use SCA tools (Snyk, Socket.dev)",d:"Software Composition Analysis for supply chain risks.",s:"high"},
+{t:"Verify package integrity (checksums)",d:"Ensure packages haven't been tampered with.",s:"medium"},
+{t:"Monitor for typosquatting attacks",d:"Watch for similar-named malicious packages.",s:"medium"},
+{t:"Minimize dependency count",d:"Fewer deps = smaller attack surface.",s:"low"},
+]},
+{cat:"CI/CD Pipeline Security",icon:"⚙️",items:[
+{t:"Require code reviews for all merges",d:"No direct pushes to main/production branches.",s:"high"},
+{t:"Sign commits with GPG/SSH keys",d:"Verify commit authorship and integrity.",s:"medium"},
+{t:"Run SAST in CI pipeline",d:"Static analysis catches vulnerabilities before deploy.",s:"high"},
+{t:"Run DAST against staging",d:"Dynamic testing finds runtime vulnerabilities.",s:"medium"},
+{t:"Scan container images for vulnerabilities",d:"Use Trivy, Grype, or Snyk Container.",s:"high"},
+{t:"Use ephemeral CI runners",d:"Don't reuse CI environments — prevent cross-build contamination.",s:"medium"},
+{t:"Restrict who can modify CI config",d:"Pipeline changes should require approval.",s:"high"},
+{t:"Implement deployment approvals for production",d:"Manual gate before production deployments.",s:"medium"},
+{t:"Verify artifact provenance (SLSA)",d:"Ensure build artifacts haven't been tampered with.",s:"medium"},
+]}
+];
+
+const WEIGHTS={critical:4,high:3,medium:2,low:1};
+const STORAGE_KEY='dev-security-checklist-v1';
+let state=loadState();
+
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch(e){return{}}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
+
+function getItemId(ci,ii){return`c${ci}i${ii}`}
+
+function render(){
+const el=document.getElementById('checklist');
+const filter=document.getElementById('filterSeverity').value;
+el.innerHTML='';
+DATA.forEach((cat,ci)=>{
+const div=document.createElement('div');
+div.className='category';
+const filteredItems=cat.items.map((item,ii)=>({...item,ii})).filter(item=>filter==='all'||item.s===filter);
+if(filteredItems.length===0)return;
+const checkedCount=filteredItems.filter(item=>state[getItemId(ci,item.ii)]).length;
+const isOpen=state[`_open_${ci}`]!==false;
+div.innerHTML=`<div class="category-header" onclick="toggleCat(${ci})">
+<span style="font-size:1.3em">${cat.icon}</span>
+<h2>${cat.cat}${cat.cat.includes('AI/LLM')?'<span class="badge-new">NEW</span>':''}</h2>
+<span class="cat-progress">${checkedCount}/${filteredItems.length}</span>
+<span class="arrow ${isOpen?'open':''}">▶</span>
+</div>
+<div class="category-items ${isOpen?'open':''}">${filteredItems.map(item=>{
+const id=getItemId(ci,item.ii);
+const checked=state[id]?'checked':'';
+return`<div class="item ${checked?'checked':''}">
+<input type="checkbox" ${checked} onchange="toggle('${id}',this.checked)">
+<div class="item-content"><div class="item-title">${item.t}</div><div class="item-desc">${item.d}</div></div>
+<span class="severity severity-${item.s}">${item.s}</span>
+</div>`;
+}).join('')}</div>`;
+el.appendChild(div);
+});
+updateScore();
+}
+
+function toggle(id,checked){state[id]=checked||undefined;if(!checked)delete state[id];saveState();render()}
+function toggleCat(ci){state[`_open_${ci}`]=state[`_open_${ci}`]===false?true:false;saveState();render()}
+function expandAll(){DATA.forEach((_,ci)=>state[`_open_${ci}`]=true);saveState();render()}
+function collapseAll(){DATA.forEach((_,ci)=>state[`_open_${ci}`]=false);saveState();render()}
+
+function updateScore(){
+let totalWeight=0,checkedWeight=0,totalCount=0,checkedCount=0,criticalRemaining=0;
+DATA.forEach((cat,ci)=>cat.items.forEach((item,ii)=>{
+const w=WEIGHTS[item.s];totalWeight+=w;totalCount++;
+if(state[getItemId(ci,ii)]){checkedWeight+=w;checkedCount++}
+else if(item.s==='critical')criticalRemaining++;
+}));
+const pct=totalWeight?Math.round(checkedWeight/totalWeight*100):0;
+const grade=pct>=95?'A+':pct>=90?'A':pct>=80?'B':pct>=65?'C':pct>=50?'D':'F';
+const colors={A:'var(--green)','A+':'var(--green)',B:'var(--cyan)',C:'var(--yellow)',D:'var(--orange)',F:'var(--red)'};
+const c=colors[grade[0]]||colors.F;
+document.getElementById('grade').textContent=grade;
+document.getElementById('grade').style.borderColor=c;
+document.getElementById('grade').style.color=c;
+document.getElementById('scorePct').textContent=pct+'%';
+document.getElementById('progressBar').style.width=pct+'%';
+document.getElementById('statChecked').textContent=checkedCount;
+document.getElementById('statTotal').textContent=totalCount;
+document.getElementById('statCritical').textContent=criticalRemaining;
+}
+
+function exportMarkdown(){
+let md=`# Developer Security Checklist\n\nGenerated: ${new Date().toLocaleDateString()}\n\n`;
+DATA.forEach((cat,ci)=>{
+md+=`## ${cat.icon} ${cat.cat}\n\n`;
+cat.items.forEach((item,ii)=>{
+const checked=state[getItemId(ci,ii)]?'x':' ';
+md+=`- [${checked}] **[${item.s.toUpperCase()}]** ${item.t}\n  ${item.d}\n`;
+});
+md+='\n';
+});
+const blob=new Blob([md],{type:'text/markdown'});
+const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='security-checklist.md';a.click();
+}
+
+function exportPDF(){
+const w=window.open('','_blank');
+let html=`<html><head><title>Security Checklist</title><style>body{font-family:system-ui;max-width:800px;margin:20px auto;font-size:14px}h1{color:#0a0e17}h2{margin-top:20px;border-bottom:1px solid #ddd;padding-bottom:4px}.item{margin:6px 0}.cb{display:inline-block;width:14px;height:14px;border:1.5px solid #333;border-radius:2px;vertical-align:middle;margin-right:6px;text-align:center;font-size:11px;line-height:14px}.cb.checked{background:#00aa55;color:#fff;border-color:#00aa55}.sev{font-size:11px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:6px}.critical{background:#fee;color:#c00}.high{background:#fff3cd;color:#856404}.medium{background:#cce5ff;color:#004085}.low{background:#d4edda;color:#155724}.desc{color:#666;font-size:12px;margin-left:22px}</style><script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head><body>`;
+html+=`<h1>🛡️ Developer Security Checklist</h1><p>Generated: ${new Date().toLocaleDateString()}</p>`;
+DATA.forEach((cat,ci)=>{
+html+=`<h2>${cat.icon} ${cat.cat}</h2>`;
+cat.items.forEach((item,ii)=>{
+const c=state[getItemId(ci,ii)];
+html+=`<div class="item"><span class="cb ${c?'checked':''}">${c?'✓':''}</span>${item.t}<span class="sev ${item.s}">${item.s}</span><div class="desc">${item.d}</div></div>`;
+});
+});
+html+=`<hr><p style="text-align:center;color:#888">maxmini0214.github.io/dev-security-checklist</p><div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/dev-security-checklist</body>count_bg=%2379C83D</body>title_bg=%23555555</body>icon=</body>icon_color=%23E7E7E7</body>title=visits</body>edge_flat=true" alt="Hits" /></a></div>
+</body></html>`;
+w.document.write(html);w.document.close();setTimeout(()=>w.print(),300);
+}
+
+function resetAll(){if(confirm('Reset all checklist progress?')){state={};saveState();render()}}
+
+document.getElementById('filterSeverity').addEventListener('change',render);
+render();
+</script>
+<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/dev-security-checklist</body>count_bg=%2379C83D</body>title_bg=%23555555</body>icon=</body>icon_color=%23E7E7E7</body>title=visits</body>edge_flat=true" alt="Hits" /></a></div>
+</body>
+</html>

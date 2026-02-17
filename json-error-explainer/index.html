@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI JSON Error Explainer — Find & Fix JSON Errors Instantly</title>
+<meta name="description" content="Paste your broken JSON and get instant, human-friendly explanations of what's wrong and how to fix it. Free, 100% client-side, no data sent to servers.">
+<meta name="keywords" content="JSON error, JSON validator, JSON fixer, JSON explainer, JSON debugger, parse error, syntax error">
+<meta property="og:title" content="AI JSON Error Explainer — Find & Fix JSON Errors Instantly">
+<meta property="og:description" content="Paste broken JSON, get plain-English explanations of every error with exact line numbers and fix suggestions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/json-error-explainer/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://maxmini0214.github.io/json-error-explainer/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI JSON Error Explainer",
+  "url": "https://maxmini0214.github.io/json-error-explainer/",
+  "description": "Paste broken JSON and get instant human-friendly error explanations with fix suggestions.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--surface2:#334155;--border:#475569;--text:#e2e8f0;--muted:#94a3b8;--accent:#38bdf8;--green:#4ade80;--red:#f87171;--orange:#fb923c;--yellow:#fbbf24}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:1.5rem}
+header{text-align:center;padding:2rem 0 1rem}
+h1{font-size:2rem;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+header p{color:var(--muted);font-size:1.05rem;max-width:600px;margin:0 auto}
+.badge{display:inline-block;background:var(--surface2);color:var(--accent);padding:.2rem .6rem;border-radius:999px;font-size:.75rem;margin-top:.5rem}
+.editor-wrap{margin-top:1.5rem}
+label{font-weight:600;display:block;margin-bottom:.5rem;font-size:.9rem}
+textarea{width:100%;height:280px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.875rem;resize:vertical;tab-size:2}
+textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+.btn-row{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+button{padding:.6rem 1.4rem;border:none;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--accent);color:#0f172a}.btn-primary:hover{background:#7dd3fc}
+.btn-secondary{background:var(--surface2);color:var(--text)}.btn-secondary:hover{background:var(--border)}
+#results{margin-top:1.5rem;min-height:60px}
+.result-card{background:var(--surface);border-radius:8px;padding:1.25rem;margin-bottom:1rem;border-left:4px solid var(--border)}
+.result-card.error{border-left-color:var(--red)}
+.result-card.warning{border-left-color:var(--orange)}
+.result-card.success{border-left-color:var(--green)}
+.result-card h3{font-size:1rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.result-card .location{font-size:.8rem;color:var(--muted);font-family:monospace}
+.result-card .explain{margin-top:.5rem;color:var(--muted);font-size:.9rem}
+.result-card .fix{margin-top:.5rem;background:var(--bg);border-radius:4px;padding:.5rem .75rem;font-family:monospace;font-size:.85rem;color:var(--green)}
+.line-nums{display:flex;gap:0}
+.line-nums .nums{padding:.75rem .5rem;background:var(--bg);color:var(--muted);font-family:monospace;font-size:.875rem;text-align:right;line-height:1.5;user-select:none;border-radius:8px 0 0 8px;border:1px solid var(--border);border-right:none;min-width:3rem}
+.line-nums textarea{border-radius:0 8px 8px 0;height:280px}
+.samples{margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.samples button{padding:.3rem .7rem;font-size:.8rem;background:var(--surface);border:1px solid var(--border);color:var(--muted);border-radius:4px}
+.samples button:hover{color:var(--text);border-color:var(--accent)}
+.cta-box{margin-top:2rem;background:linear-gradient(135deg,#1e293b,#312e81);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid #4338ca}
+.cta-box h3{color:#c4b5fd;margin-bottom:.5rem}
+.cta-box p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+.cta-box a.cta-btn{display:inline-block;background:#7c3aed;color:#fff;padding:.6rem 1.5rem;border-radius:6px;font-weight:600;transition:background .15s}
+.cta-box a.cta-btn:hover{background:#6d28d9;text-decoration:none}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:1rem}
+.tool-link{display:block;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.75rem;font-size:.85rem;transition:border-color .15s}
+.tool-link:hover{border-color:var(--accent);text-decoration:none}
+.tool-link .tname{font-weight:600;color:var(--text)}
+.tool-link .tdesc{color:var(--muted);font-size:.8rem;margin-top:.25rem}
+footer{margin-top:2rem;padding:1.5rem 0;text-align:center;color:var(--muted);font-size:.8rem;border-top:1px solid var(--surface2)}
+section{margin-top:2rem}
+section h2{font-size:1.3rem;margin-bottom:.75rem}
+@media(max-width:600px){h1{font-size:1.5rem}textarea,.line-nums textarea{height:200px}.tools-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🔍 AI JSON Error Explainer</h1>
+<p>Paste your broken JSON and get instant, human-friendly explanations of what went wrong — with exact locations and fix suggestions.</p>
+<span class="badge">🔒 100% Client-Side · No Data Sent</span>
+</header>
+
+<div class="editor-wrap">
+<label for="json-input">Paste your JSON here:</label>
+<div class="line-nums">
+<div class="nums" id="line-nums">1</div>
+<textarea id="json-input" spellcheck="false" placeholder='{\n  "name": "example",\n  "value": 42\n}'></textarea>
+</div>
+<div class="samples">
+<span style="color:var(--muted);font-size:.8rem">Try:</span>
+<button onclick="loadSample('trailing')">Trailing comma</button>
+<button onclick="loadSample('quotes')">Single quotes</button>
+<button onclick="loadSample('missing')">Missing bracket</button>
+<button onclick="loadSample('unquoted')">Unquoted key</button>
+<button onclick="loadSample('comment')">Comments</button>
+</div>
+<div class="btn-row">
+<button class="btn-primary" onclick="analyze()">🔍 Analyze JSON</button>
+<button class="btn-secondary" onclick="prettify()">✨ Prettify</button>
+<button class="btn-secondary" onclick="minify()">📦 Minify</button>
+<button class="btn-secondary" onclick="clearAll()">🗑 Clear</button>
+</div>
+</div>
+
+<div id="results"></div>
+
+<div class="cta-box">
+<h3>⚡ Want More Power?</h3>
+<p>Get the Pro Developer Toolkit — advanced JSON schema validation, API testing, bulk processing & more.</p>
+<a class="cta-btn" href="https://payhip.com/b/4FosR" target="_blank" rel="noopener">Get Pro Toolkit →</a>
+</div>
+
+<section>
+<h2>🛠 More Free Developer Tools</h2>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxseats.github.io/json-formatter/"><div class="tname">JSON Formatter</div><div class="tdesc">Format, validate & minify JSON</div></a>
+<a class="tool-link" href="https://maxseats.github.io/regex-tester/"><div class="tname">Regex Tester</div><div class="tdesc">Test regex with live highlighting</div></a>
+<a class="tool-link" href="https://maxseats.github.io/base64-tool/"><div class="tname">Base64 Tool</div><div class="tdesc">Encode & decode Base64</div></a>
+<a class="tool-link" href="https://maxmini0214.github.io/jwt-decoder/"><div class="tname">JWT Decoder</div><div class="tdesc">Decode & inspect JWT tokens</div></a>
+<a class="tool-link" href="https://maxmini0214.github.io/diff-checker/"><div class="tname">Diff Checker</div><div class="tdesc">Compare two texts side by side</div></a>
+<a class="tool-link" href="https://maxmini0214.github.io/password-generator/"><div class="tname">Password Generator</div><div class="tdesc">Generate strong passwords</div></a>
+<a class="tool-link" href="https://maxseats.github.io/hash-generator/"><div class="tname">Hash Generator</div><div class="tdesc">MD5, SHA-1, SHA-256, SHA-512</div></a>
+<a class="tool-link" href="https://maxseats.github.io/url-encoder/"><div class="tname">URL Encoder</div><div class="tdesc">Encode & decode URLs</div></a>
+</div>
+</section>
+
+<section>
+<h2>❓ How It Works</h2>
+<p style="color:var(--muted)">This tool uses a custom JavaScript JSON parser that goes beyond <code>JSON.parse()</code> to detect multiple errors in one pass. It identifies common mistakes like trailing commas, single quotes, unquoted keys, comments, and more — then explains each issue in plain English with suggested fixes. Everything runs in your browser; your data never leaves your machine.</p>
+</section>
+
+<footer>
+<p>Built with ❤️ · <a href="https://github.com/maxmini0214/json-error-explainer">GitHub</a> · © 2026</p>
+</footer>
+</div>
+
+<script>
+const input = document.getElementById('json-input');
+const lineNums = document.getElementById('line-nums');
+const results = document.getElementById('results');
+
+const samples = {
+  trailing: '{\n  "name": "John",\n  "age": 30,\n  "city": "NYC",\n}',
+  quotes: "{\n  'name': 'John',\n  'age': 30\n}",
+  missing: '{\n  "users": [\n    {"name": "Alice"},\n    {"name": "Bob"}\n  \n}',
+  unquoted: '{\n  name: "John",\n  age: 30\n}',
+  comment: '{\n  // user info\n  "name": "John",\n  "age": 30 /* years */\n}'
+};
+
+function loadSample(k){ input.value = samples[k]; updateLines(); analyze(); }
+
+input.addEventListener('input', updateLines);
+input.addEventListener('scroll', ()=>{ lineNums.scrollTop = input.scrollTop; });
+
+function updateLines(){
+  const n = input.value.split('\n').length;
+  lineNums.textContent = Array.from({length:n},(_,i)=>i+1).join('\n');
+}
+updateLines();
+
+function clearAll(){ input.value=''; results.innerHTML=''; updateLines(); }
+
+function prettify(){
+  try{ input.value = JSON.stringify(JSON.parse(input.value),null,2); updateLines(); analyze(); }
+  catch(e){ analyze(); }
+}
+
+function minify(){
+  try{ input.value = JSON.stringify(JSON.parse(input.value)); updateLines(); analyze(); }
+  catch(e){ analyze(); }
+}
+
+function analyze(){
+  const src = input.value.trim();
+  if(!src){ results.innerHTML = card('muted','💡','Paste some JSON above to get started.',''); return; }
+
+  const errors = findErrors(src);
+
+  if(errors.length === 0){
+    try{
+      JSON.parse(src);
+      const obj = JSON.parse(src);
+      const stats = jsonStats(obj);
+      results.innerHTML = card('success','✅ Valid JSON',`Your JSON is perfectly valid!`,`<div class="explain">${stats}</div>`);
+    }catch(e){
+      results.innerHTML = card('error','❌ Parse Error', nativeErrorExplain(e, src),'');
+    }
+    return;
+  }
+
+  results.innerHTML = `<div class="result-card" style="border-left-color:var(--red)"><h3>🔍 Found ${errors.length} issue${errors.length>1?'s':''}</h3></div>` +
+    errors.map(e => card('error', e.icon+' '+e.title, e.explain, e.fix ? `<div class="fix">💡 ${e.fix}</div>`:'')).join('');
+}
+
+function card(type,title,body,extra){
+  return `<div class="result-card ${type}"><h3>${title}</h3><div class="explain">${body}</div>${extra}</div>`;
+}
+
+function jsonStats(obj){
+  const t = typeof obj;
+  if(Array.isArray(obj)) return `Array with <strong>${obj.length}</strong> items. Total size: ~${JSON.stringify(obj).length} chars.`;
+  if(t==='object'&&obj!==null){ const k=Object.keys(obj); return `Object with <strong>${k.length}</strong> keys: ${k.slice(0,8).map(x=>`<code>${x}</code>`).join(', ')}${k.length>8?'…':''}. Total size: ~${JSON.stringify(obj).length} chars.`; }
+  return `Primitive value (${t}).`;
+}
+
+function nativeErrorExplain(e, src){
+  const m = e.message;
+  const posMatch = m.match(/position (\d+)/i);
+  if(posMatch){
+    const pos = parseInt(posMatch[1]);
+    const {line,col} = posToLineCol(src, pos);
+    return `<span class="location">Line ${line}, Column ${col}</span><br>${friendlyMsg(m)}`;
+  }
+  return friendlyMsg(m);
+}
+
+function friendlyMsg(m){
+  if(/unexpected.end/i.test(m)) return 'The JSON ends unexpectedly — you likely have an unclosed bracket, brace, or string.';
+  if(/unexpected.token/i.test(m)) return `${m}. Check for typos, missing quotes, or invalid characters near this position.`;
+  return m;
+}
+
+function posToLineCol(s, pos){
+  let line=1, col=1;
+  for(let i=0;i<pos&&i<s.length;i++){ if(s[i]==='\n'){line++;col=1;}else col++; }
+  return {line,col};
+}
+
+function findErrors(src){
+  const errs = [];
+  const lines = src.split('\n');
+
+  // Trailing commas
+  const trailingRe = /,\s*([}\]])/g;
+  let m;
+  while((m = trailingRe.exec(src))!==null){
+    const {line,col} = posToLineCol(src, m.index);
+    errs.push({icon:'🔴', title:`Trailing comma (line ${line})`, explain:`There's a comma before <code>${m[1]}</code> at line ${line}, col ${col}. JSON does not allow trailing commas.`, fix:`Remove the comma before "${m[1]}"`});
+  }
+
+  // Single quotes
+  const sqRe = /(?:^|[{,[\s:])(\s*')/gm;
+  const checked = new Set();
+  for(let i=0;i<lines.length;i++){
+    if(lines[i].includes("'") && !checked.has(i)){
+      checked.add(i);
+      errs.push({icon:'🔴', title:`Single quotes (line ${i+1})`, explain:`Line ${i+1} uses single quotes (<code>'</code>). JSON requires double quotes (<code>"</code>) for all strings and keys.`, fix:`Replace all ' with "`});
+    }
+  }
+
+  // Comments
+  for(let i=0;i<lines.length;i++){
+    const l = lines[i];
+    if(/^\s*\/\//.test(l) || /\/\/\s/.test(l)){
+      errs.push({icon:'🔴', title:`Comment found (line ${i+1})`, explain:`Line ${i+1} contains a <code>//</code> comment. JSON does not support comments.`, fix:'Remove the comment or use JSONC format'});
+    }
+    if(l.includes('/*')){
+      errs.push({icon:'🔴', title:`Block comment (line ${i+1})`, explain:`Line ${i+1} contains a <code>/* */</code> block comment. Not allowed in JSON.`, fix:'Remove the block comment'});
+    }
+  }
+
+  // Unquoted keys
+  const ukRe = /(?:^|[{,])\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/gm;
+  while((m = ukRe.exec(src))!==null){
+    const before = src.substring(Math.max(0, m.index), m.index + m[0].length);
+    if(!before.includes('"')){
+      const {line} = posToLineCol(src, m.index);
+      errs.push({icon:'🔴', title:`Unquoted key "${m[1]}" (line ${line})`, explain:`The key <code>${m[1]}</code> at line ${line} is not wrapped in double quotes.`, fix:`Change to "${m[1]}"`});
+    }
+  }
+
+  // Mismatched brackets
+  let braces=0, brackets=0, bLine=0, kLine=0;
+  for(let i=0;i<src.length;i++){
+    const c=src[i];
+    if(c==='{'){braces++;if(braces===1)bLine=posToLineCol(src,i).line;}
+    if(c==='}')braces--;
+    if(c==='['){brackets++;if(brackets===1)kLine=posToLineCol(src,i).line;}
+    if(c===']')brackets--;
+  }
+  if(braces>0) errs.push({icon:'🔴',title:'Unclosed brace {',explain:`There are ${braces} unclosed <code>{</code> brace(s). Every opening brace needs a matching <code>}</code>.`,fix:'Add the missing closing brace(s) }'});
+  if(braces<0) errs.push({icon:'🔴',title:'Extra closing brace }',explain:`There are ${-braces} extra <code>}</code> brace(s) without matching opening braces.`,fix:'Remove the extra }'});
+  if(brackets>0) errs.push({icon:'🔴',title:'Unclosed bracket [',explain:`There are ${brackets} unclosed <code>[</code> bracket(s).`,fix:'Add the missing closing bracket(s) ]'});
+  if(brackets<0) errs.push({icon:'🔴',title:'Extra closing bracket ]',explain:`There are ${-brackets} extra <code>]</code>.`,fix:'Remove the extra ]'});
+
+  // Undefined/NaN/Infinity
+  for(let i=0;i<lines.length;i++){
+    if(/\bundefined\b/.test(lines[i])) errs.push({icon:'🟡',title:`"undefined" (line ${i+1})`,explain:`<code>undefined</code> is not a valid JSON value. Use <code>null</code> instead.`,fix:'Replace undefined with null'});
+    if(/\bNaN\b/.test(lines[i])) errs.push({icon:'🟡',title:`NaN (line ${i+1})`,explain:`<code>NaN</code> is not valid in JSON.`,fix:'Use null or a string "NaN"'});
+    if(/\bInfinity\b/.test(lines[i])) errs.push({icon:'🟡',title:`Infinity (line ${i+1})`,explain:`<code>Infinity</code> is not valid JSON.`,fix:'Use null or a very large number'});
+  }
+
+  return errs;
+}
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

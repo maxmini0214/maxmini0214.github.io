@@ -1,8 +1,8 @@
-# Regex Tester
+# Hash Generator
 
-A real-time regex testing tool with match highlighting, capture group extraction, and a quick-reference cheatsheet.
+Generate MD5, SHA-1, SHA-256, and SHA-512 hashes using the Web Crypto API. Supports text and file hashing with zero dependencies.
 
-**[🔗 Try it live →](https://maxseats.github.io/regex-tester/)**
+**[🔗 Try it live →](https://maxseats.github.io/hash-generator/)**
 
 ## Features
 
@@ -13,7 +13,7 @@ A real-time regex testing tool with match highlighting, capture group extraction
 
 ## Usage
 
-Simply visit the [live demo](https://maxseats.github.io/regex-tester/) and start using it. No sign-up required.
+Simply visit the [live demo](https://maxseats.github.io/hash-generator/) and start using it. No sign-up required.
 
 ---
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Picker & Converter — HEX RGB HSL — Free Tool</title>
+<meta name="description" content="Pick colors and convert between HEX, RGB, and HSL formats instantly. Free online color picker and converter tool.">
+<meta property="og:title" content="Color Picker & Converter — HEX RGB HSL">
+<meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/color-picker/">
+<link rel="canonical" href="https://maxmini0214.github.io/color-picker/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--success:#10b981}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+h1{font-size:1.8rem;margin-bottom:.5rem}
+.subtitle{color:var(--muted);font-size:.95rem}
+main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.color-main{display:flex;gap:1.5rem;align-items:stretch;flex-wrap:wrap}
+.preview{width:160px;min-height:160px;border-radius:12px;border:2px solid var(--border);flex-shrink:0}
+.inputs{flex:1;min-width:200px}
+.field{margin-bottom:.75rem}
+.field label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.25rem;font-weight:600}
+.field input[type="text"]{width:100%;padding:.5rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem}
+.field input:focus{outline:none;border-color:var(--accent)}
+input[type="color"]{width:100%;height:50px;border:none;border-radius:8px;cursor:pointer;background:none}
+.copy-btn{background:var(--border);border:none;color:var(--text);padding:.25rem .5rem;border-radius:4px;cursor:pointer;font-size:.75rem;float:right;margin-top:-1.5rem}
+.copy-btn:hover{background:#475569}
+.palette{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.swatch{width:40px;height:40px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.swatch:hover{border-color:var(--text)}
+.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
+.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
+.tool-link:hover{border-color:var(--accent)}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
+@media(max-width:600px){h1{font-size:1.4rem}.preview{width:100%;min-height:100px}}
+</style>
+</head>
+<body>
+<header>
+<h1>디자이너가 준 색상 코드 HEX↔RGB 변환</h1>
+<p class="subtitle">HEX · RGB · HSL 즉시 변환 — 복사 한번이면 끝</p>
+</header>
+<main>
+<div class="ad-slot">📢 Ad Space</div>
+<div class="card">
+<div class="color-main">
+<div>
+<div class="preview" id="preview" style="background:#3b82f6"></div>
+<input type="color" id="picker" value="#3b82f6" style="margin-top:.5rem">
+</div>
+<div class="inputs">
+<div class="field"><label>HEX</label><input type="text" id="hex" value="#3b82f6"><button class="copy-btn" onclick="copy('hex')">📋</button></div>
+<div class="field"><label>RGB</label><input type="text" id="rgb" value="rgb(59, 130, 246)"><button class="copy-btn" onclick="copy('rgb')">📋</button></div>
+<div class="field"><label>HSL</label><input type="text" id="hsl" value="hsl(217, 91%, 60%)"><button class="copy-btn" onclick="copy('hsl')">📋</button></div>
+<div class="field"><label>CSS Variable</label><input type="text" id="css" value="--color: #3b82f6;" readonly><button class="copy-btn" onclick="copy('css')">📋</button></div>
+</div>
+</div>
+<h4 style="margin-top:1rem;font-size:.85rem;color:var(--muted)">Popular Colors</h4>
+<div class="palette" id="palette"></div>
+</div>
+
+<div class="cta">
+<h3>🚀 DevTools Pro Bundle — $9</h3>
+<p>All tools offline + API access + priority updates</p>
+<a href="https://payhip.com/b/4FosR" target="_blank">Get Pro →</a>
+</div>
+<div class="ad-slot">📢 Ad Space</div>
+<h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+</main>
+<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<script>
+const popular=['#ef4444','#f97316','#eab308','#22c55e','#10b981','#06b6d4','#3b82f6','#8b5cf6','#ec4899','#f43f5e','#ffffff','#000000'];
+const pal=document.getElementById('palette');
+popular.forEach(c=>{const d=document.createElement('div');d.className='swatch';d.style.background=c;d.onclick=()=>{document.getElementById('picker').value=c;fromHex(c)};pal.appendChild(d)});
+
+const picker=document.getElementById('picker'),hexI=document.getElementById('hex'),rgbI=document.getElementById('rgb'),hslI=document.getElementById('hsl'),cssI=document.getElementById('css'),prev=document.getElementById('preview');
+
+picker.addEventListener('input',e=>fromHex(e.target.value));
+hexI.addEventListener('input',e=>{let v=e.target.value;if(/^#?[0-9a-f]{6}$/i.test(v)){if(!v.startsWith('#'))v='#'+v;fromHex(v)}});
+rgbI.addEventListener('input',e=>{const m=e.target.value.match(/(\d+)/g);if(m&&m.length>=3)fromRGB(+m[0],+m[1],+m[2])});
+
+function fromHex(h){
+h=h.charAt(0)==='#'?h:'#'+h;
+const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
+update(r,g,b,h);
+}
+function fromRGB(r,g,b){update(r,g,b,'#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join(''))}
+function update(r,g,b,hex){
+prev.style.background=hex;picker.value=hex;
+hexI.value=hex;rgbI.value=`rgb(${r}, ${g}, ${b})`;
+const[h,s,l]=rgbToHsl(r,g,b);
+hslI.value=`hsl(${h}, ${s}%, ${l}%)`;
+cssI.value=`--color: ${hex};`;
+}
+function rgbToHsl(r,g,b){
+r/=255;g/=255;b/=255;
+const max=Math.max(r,g,b),min=Math.min(r,g,b),l=(max+min)/2;
+let h=0,s=0;
+if(max!==min){const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);
+switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break}}
+return[Math.round(h*360),Math.round(s*100),Math.round(l*100)];
+}
+function copy(id){navigator.clipboard.writeText(document.getElementById(id).value)}
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

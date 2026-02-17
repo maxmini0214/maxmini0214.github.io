@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Generator Online — MD5 SHA1 SHA256 — Free Tool</title>
+<meta name="description" content="Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. 100% client-side using Web Crypto API. Free online hash generator.">
+<meta property="og:title" content="Hash Generator — MD5 SHA1 SHA256 Online">
+<meta property="og:description" content="Generate cryptographic hashes instantly in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/hash-generator/">
+<link rel="canonical" href="https://maxmini0214.github.io/hash-generator/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+h1{font-size:1.8rem;margin-bottom:.5rem}
+.subtitle{color:var(--muted);font-size:.95rem}
+main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+textarea{width:100%;min-height:120px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent)}
+label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-size:.85rem}
+.btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
+.btn-group{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.hash-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.hash-label{min-width:70px;font-weight:600;font-size:.85rem;color:var(--accent)}
+.hash-value{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.5rem .75rem;font-family:'SF Mono',monospace;font-size:.8rem;word-break:break-all;cursor:pointer;transition:border-color .2s}
+.hash-value:hover{border-color:var(--accent)}
+.hash-value.copied{border-color:var(--success)}
+.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
+.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
+.tool-link:hover{border-color:var(--accent)}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
+@media(max-width:600px){h1{font-size:1.4rem}.hash-row{flex-direction:column;align-items:stretch}.hash-label{min-width:auto}}
+</style>
+</head>
+<body>
+<header>
+<h1>파일 무결성 체크, 비밀번호 해싱 — 즉시 생성</h1>
+<p class="subtitle">MD5 · SHA-1 · SHA-256 · SHA-512 — Web Crypto API로 브라우저에서 즉시</p>
+</header>
+<main>
+<div class="ad-slot">📢 Ad Space</div>
+<div class="card">
+<label>Input Text</label>
+<textarea id="input" placeholder="Type or paste text to hash..."></textarea>
+<div class="btn-group" style="margin-top:.75rem">
+<button class="btn btn-primary" onclick="hashAll()">Generate Hashes</button>
+<button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">📁 Hash File</button>
+<button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+<input type="file" id="fileInput" style="display:none" onchange="hashFile(event)">
+</div>
+</div>
+<div class="card" id="results">
+<div class="hash-row"><span class="hash-label">MD5</span><div class="hash-value" id="md5" onclick="copyHash(this)">—</div></div>
+<div class="hash-row"><span class="hash-label">SHA-1</span><div class="hash-value" id="sha1" onclick="copyHash(this)">—</div></div>
+<div class="hash-row"><span class="hash-label">SHA-256</span><div class="hash-value" id="sha256" onclick="copyHash(this)">—</div></div>
+<div class="hash-row"><span class="hash-label">SHA-512</span><div class="hash-value" id="sha512" onclick="copyHash(this)">—</div></div>
+<p style="font-size:.75rem;color:var(--muted);margin-top:.5rem">Click any hash to copy</p>
+</div>
+<div class="cta">
+<h3>🚀 DevTools Pro Bundle — $9</h3>
+<p>All tools offline + API access + priority updates</p>
+<a href="https://payhip.com/MaxDevTools" target="_blank">Get Pro →</a>
+</div>
+<div class="ad-slot">📢 Ad Space</div>
+<h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+</main>
+<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<script>
+// MD5 implementation (public domain)
+var md5=function(){function h(a,b){var c,d,e,f,g;e=a&2147483648;f=b&2147483648;c=a&1073741824;d=b&1073741824;g=(a&1073741823)+(b&1073741823);return c&d?g^2147483648^e^f:c|d?g&1073741824?g^3221225472^e^f:g^1073741824^e^f:g^e^f}function k(a,b,c,d,e,f,g){a=h(a,h(h(b&c|~b&d,e),g));return h(a<<f|a>>>32-f,b)}function l(a,b,c,d,e,f,g){a=h(a,h(h(b&d|c&~d,e),g));return h(a<<f|a>>>32-f,b)}function m(a,b,c,d,e,f,g){a=h(a,h(h(b^c^d,e),g));return h(a<<f|a>>>32-f,b)}function n(a,b,c,d,e,f,g){a=h(a,h(h(c^(b|~d),e),g));return h(a<<f|a>>>32-f,b)}function p(a){var b="",c,d;for(d=0;3>=d;d++)c=a>>>8*d&255,b+="0123456789abcdef".charAt(c>>>4&15)+"0123456789abcdef".charAt(c&15);return b}var q=Array();return function(a){var b=q,c,d,e,f,g,i,j;a=function(a){a=a.replace(/\r\n/g,"\n");for(var b="",c=0;c<a.length;c++){var d=a.charCodeAt(c);128>d?b+=String.fromCharCode(d):(127<d&&2048>d?b+=String.fromCharCode(d>>6|192):(b+=String.fromCharCode(d>>12|224),b+=String.fromCharCode(d>>6&63|128)),b+=String.fromCharCode(d&63|128))}return b}(a);b=function(a){for(var b,c=a.length,d=c+8,e=16*((d-d%64)/64+1),f=Array(e-1),g=0,h=0;h<c;)b=(h-h%4)/4,g=h%4*8,f[b]=f[b]|a.charCodeAt(h)<<g,h++;f[(h-h%4)/4]=f[(h-h%4)/4]|128<<h%4*8;f[e-2]=c<<3;f[e-1]=c>>>29;return f}(a);c=1732584193;d=4023233417;e=2562383102;f=271733878;for(a=0;a<b.length;a+=16)i=c,j=d,g=e,c=k(c,d,e,f,b[a],7,3614090360),f=k(f,c,d,e,b[a+1],12,3905402710),e=k(e,f,c,d,b[a+2],17,606105819),d=k(d,e,f,c,b[a+3],22,3250441966),c=k(c,d,e,f,b[a+4],7,4118548399),f=k(f,c,d,e,b[a+5],12,1200080426),e=k(e,f,c,d,b[a+6],17,2821735955),d=k(d,e,f,c,b[a+7],22,4249261313),c=k(c,d,e,f,b[a+8],7,1770035416),f=k(f,c,d,e,b[a+9],12,2336552879),e=k(e,f,c,d,b[a+10],17,4294925233),d=k(d,e,f,c,b[a+11],22,2304563134),c=k(c,d,e,f,b[a+12],7,1804603682),f=k(f,c,d,e,b[a+13],12,4254626195),e=k(e,f,c,d,b[a+14],17,2792965006),d=k(d,e,f,c,b[a+15],22,1236535329),c=l(c,d,e,f,b[a+1],5,4129170786),f=l(f,c,d,e,b[a+6],9,3225465664),e=l(e,f,c,d,b[a+11],14,643717713),d=l(d,e,f,c,b[a],20,3921069994),c=l(c,d,e,f,b[a+5],5,3593408605),f=l(f,c,d,e,b[a+10],9,38016083),e=l(e,f,c,d,b[a+15],14,3634488961),d=l(d,e,f,c,b[a+4],20,3889429448),c=l(c,d,e,f,b[a+9],5,568446438),f=l(f,c,d,e,b[a+14],9,3275163606),e=l(e,f,c,d,b[a+3],14,4107603335),d=l(d,e,f,c,b[a+8],20,1163531501),c=l(c,d,e,f,b[a+13],5,2850285829),f=l(f,c,d,e,b[a+2],9,4243563512),e=l(e,f,c,d,b[a+7],14,1735328473),d=l(d,e,f,c,b[a+12],20,2368359562),c=m(c,d,e,f,b[a+5],4,4294588738),f=m(f,c,d,e,b[a+8],11,2272392833),e=m(e,f,c,d,b[a+11],16,1839030562),d=m(d,e,f,c,b[a+14],23,4259657740),c=m(c,d,e,f,b[a+1],4,2763975236),f=m(f,c,d,e,b[a+4],11,1272893353),e=m(e,f,c,d,b[a+7],16,4139469664),d=m(d,e,f,c,b[a+10],23,3200236656),c=m(c,d,e,f,b[a+13],4,681279174),f=m(f,c,d,e,b[a],11,3936430074),e=m(e,f,c,d,b[a+3],16,3572445317),d=m(d,e,f,c,b[a+6],23,76029189),c=m(c,d,e,f,b[a+9],4,3654602809),f=m(f,c,d,e,b[a+12],11,3873151461),e=m(e,f,c,d,b[a+15],16,530742520),d=m(d,e,f,c,b[a+2],23,3299628645),c=n(c,d,e,f,b[a],6,4096336452),f=n(f,c,d,e,b[a+7],10,1126891415),e=n(e,f,c,d,b[a+14],15,2878612391),d=n(d,e,f,c,b[a+5],21,4237533241),c=n(c,d,e,f,b[a+12],6,1700485571),f=n(f,c,d,e,b[a+3],10,2399980690),e=n(e,f,c,d,b[a+10],15,4293915773),d=n(d,e,f,c,b[a+1],21,2240044497),c=n(c,d,e,f,b[a+8],6,1873313359),f=n(f,c,d,e,b[a+15],10,4264355552),e=n(e,f,c,d,b[a+6],15,2734768916),d=n(d,e,f,c,b[a+13],21,1309151649),c=n(c,d,e,f,b[a+4],6,4149444226),f=n(f,c,d,e,b[a+11],10,3174756917),e=n(e,f,c,d,b[a+2],15,718787259),d=n(d,e,f,c,b[a+9],21,3951481745),c=h(c,i),d=h(d,j),e=h(e,g),f=h(f,f);return(p(c)+p(d)+p(e)+p(f)).toLowerCase()}}();
+
+async function sha(algo,data){const buf=new TextEncoder().encode(data);const hash=await crypto.subtle.digest(algo,buf);return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+async function shaBuffer(algo,buf){const hash=await crypto.subtle.digest(algo,buf);return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+
+async function hashAll(){
+const t=document.getElementById('input').value;
+if(!t){return}
+document.getElementById('md5').textContent=md5(t);
+document.getElementById('sha1').textContent=await sha('SHA-1',t);
+document.getElementById('sha256').textContent=await sha('SHA-256',t);
+document.getElementById('sha512').textContent=await sha('SHA-512',t);
+}
+
+async function hashFile(e){
+const file=e.target.files[0];if(!file)return;
+const buf=await file.arrayBuffer();
+const enc=new TextDecoder().decode(buf);
+document.getElementById('md5').textContent=md5(enc);
+document.getElementById('sha1').textContent=await shaBuffer('SHA-1',buf);
+document.getElementById('sha256').textContent=await shaBuffer('SHA-256',buf);
+document.getElementById('sha512').textContent=await shaBuffer('SHA-512',buf);
+document.getElementById('input').value='[File: '+file.name+' ('+file.size+' bytes)]';
+}
+
+function copyHash(el){navigator.clipboard.writeText(el.textContent);el.classList.add('copied');setTimeout(()=>el.classList.remove('copied'),1000)}
+function clearAll(){document.getElementById('input').value='';['md5','sha1','sha256','sha512'].forEach(id=>document.getElementById(id).textContent='—')}
+document.getElementById('input').addEventListener('input',hashAll);
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

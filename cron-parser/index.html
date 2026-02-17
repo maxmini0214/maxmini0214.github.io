@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cron Expression Parser — Free Online Cron Schedule Explainer</title>
+<meta name="description" content="Parse and explain cron expressions in plain English. See next run times, validate syntax, and build cron schedules visually. 100% client-side, free forever.">
+<meta name="keywords" content="cron parser, cron expression, crontab, cron schedule, cron explainer, cron validator, cron generator">
+<meta property="og:title" content="Cron Expression Parser — Free Online Tool">
+<meta property="og:description" content="Parse cron expressions into plain English. See next run times instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/cron-parser/">
+<link rel="canonical" href="https://maxmini0214.github.io/cron-parser/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
+.container{max-width:800px;margin:0 auto;padding:20px;width:100%;flex:1}
+h1{text-align:center;font-size:1.8rem;margin:30px 0 8px;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{text-align:center;color:#94a3b8;margin-bottom:30px;font-size:.95rem}
+.input-section{background:#1e293b;border-radius:12px;padding:24px;margin-bottom:20px;border:1px solid #334155}
+.input-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.input-row input{flex:1;min-width:200px;padding:14px 16px;font-size:1.2rem;font-family:'SF Mono',Monaco,Consolas,monospace;background:#0f172a;border:2px solid #334155;border-radius:8px;color:#f1f5f9;outline:none;transition:border .2s}
+.input-row input:focus{border-color:#38bdf8}
+.field-labels{display:flex;gap:0;margin-top:8px;padding:0 4px}
+.field-labels span{flex:1;text-align:center;font-size:.7rem;color:#64748b;text-transform:uppercase}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.presets button{padding:6px 12px;background:#334155;border:1px solid #475569;border-radius:6px;color:#cbd5e1;font-size:.8rem;cursor:pointer;transition:all .2s}
+.presets button:hover{background:#475569;color:#f1f5f9}
+.result{background:#1e293b;border-radius:12px;padding:24px;margin-bottom:20px;border:1px solid #334155}
+.result h2{font-size:1rem;color:#38bdf8;margin-bottom:12px}
+.human-text{font-size:1.15rem;line-height:1.6;color:#f1f5f9;padding:16px;background:#0f172a;border-radius:8px;margin-bottom:16px}
+.error{color:#f87171;background:#1c1017;border:1px solid #7f1d1d;border-radius:8px;padding:16px}
+.next-runs{list-style:none;padding:0}
+.next-runs li{padding:8px 12px;border-bottom:1px solid #1e293b;font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.85rem;color:#94a3b8}
+.next-runs li:nth-child(odd){background:#0f172a}
+.next-runs li .day{color:#38bdf8;margin-right:8px}
+.breakdown{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+.breakdown .field{background:#0f172a;border-radius:8px;padding:10px;text-align:center}
+.breakdown .field .label{font-size:.65rem;color:#64748b;text-transform:uppercase;margin-bottom:4px}
+.breakdown .field .value{font-size:1rem;color:#38bdf8;font-family:monospace}
+.breakdown .field .meaning{font-size:.75rem;color:#94a3b8;margin-top:4px}
+.cta{text-align:center;margin:30px 0;padding:20px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:12px}
+.cta a{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#0f172a;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .2s}
+.cta a:hover{transform:translateY(-2px)}
+.cta p{color:#94a3b8;font-size:.85rem;margin-top:8px}
+footer{text-align:center;padding:20px;color:#475569;font-size:.8rem}
+footer a{color:#64748b;text-decoration:none}
+@media(max-width:600px){h1{font-size:1.3rem}.breakdown{grid-template-columns:repeat(5,1fr);gap:4px}.breakdown .field{padding:6px}.input-row input{font-size:1rem;padding:12px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>⏰ Cron Expression Parser</h1>
+<p class="subtitle">Explain cron schedules in plain English &amp; see next run times</p>
+
+<div class="input-section">
+<div class="input-row">
+<input type="text" id="cronInput" value="*/15 * * * *" placeholder="e.g. */5 * * * *" spellcheck="false" autocomplete="off">
+</div>
+<div class="field-labels"><span>Minute</span><span>Hour</span><span>Day</span><span>Month</span><span>Weekday</span></div>
+<div class="presets">
+<button onclick="setExpr('* * * * *')">Every minute</button>
+<button onclick="setExpr('*/5 * * * *')">Every 5 min</button>
+<button onclick="setExpr('0 * * * *')">Every hour</button>
+<button onclick="setExpr('0 0 * * *')">Daily midnight</button>
+<button onclick="setExpr('0 9 * * 1-5')">Weekdays 9AM</button>
+<button onclick="setExpr('0 0 * * 0')">Weekly Sunday</button>
+<button onclick="setExpr('0 0 1 * *')">Monthly 1st</button>
+<button onclick="setExpr('0 0 1 1 *')">Yearly Jan 1</button>
+</div>
+</div>
+
+<div id="output"></div>
+
+<div class="cta">
+<a href="https://payhip.com/b/4FosR" target="_blank" rel="noopener">🚀 Get the Pro Developer Toolkit</a>
+<p>50+ premium dev tools — one-time purchase, lifetime access</p>
+</div>
+
+<!-- Ad slot reserved -->
+<div id="ad-slot" style="min-height:90px;text-align:center;color:#334155;font-size:.7rem;margin:20px 0"><!-- Ad placement --></div>
+</div>
+
+<footer>
+<p>100% client-side — your data never leaves your browser</p>
+<p style="margin-top:6px"><a href="https://maxmini0214.github.io">More Free Dev Tools</a></p>
+</footer>
+
+<script>
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const FIELD_NAMES=['minute','hour','day of month','month','day of week'];
+const FIELD_RANGES=[[0,59],[0,23],[1,31],[1,12],[0,6]];
+
+function setExpr(e){document.getElementById('cronInput').value=e;parse()}
+
+function parseField(f,idx){
+  const[mn,mx]=FIELD_RANGES[idx];
+  const vals=new Set();
+  for(const part of f.split(',')){
+    const rm=part.match(/^(\d+|\*)-?(\d+)?(?:\/(\d+))?$|^(\*|\d+)\/(\d+)$|^(\*|\d+-\d+)$/);
+    if(part==='*'){for(let i=mn;i<=mx;i++)vals.add(i);continue}
+    const stepMatch=part.match(/^(.+)\/(\d+)$/);
+    if(stepMatch){
+      const[,range,step]=stepMatch;const s=parseInt(step);
+      let start=mn,end=mx;
+      if(range!=='*'){const rp=range.split('-');start=parseInt(rp[0]);end=rp[1]?parseInt(rp[1]):mx}
+      for(let i=start;i<=end;i+=s)vals.add(i);continue
+    }
+    const rangeMatch=part.match(/^(\d+)-(\d+)$/);
+    if(rangeMatch){const a=parseInt(rangeMatch[1]),b=parseInt(rangeMatch[2]);for(let i=a;i<=b;i++)vals.add(i);continue}
+    const n=parseInt(part);
+    if(!isNaN(n)&&n>=mn&&n<=mx){vals.add(n);continue}
+    throw new Error(`Invalid field value: "${part}" for ${FIELD_NAMES[idx]} (${mn}-${mx})`);
+  }
+  return[...vals].sort((a,b)=>a-b)
+}
+
+function describeField(vals,idx){
+  const[mn,mx]=FIELD_RANGES[idx];
+  if(vals.length===mx-mn+1)return'every '+FIELD_NAMES[idx].replace('day of ','');
+  if(idx===4)return vals.map(v=>DAYS[v]).join(', ');
+  if(idx===3)return vals.map(v=>MONTHS[v-1]).join(', ');
+  if(vals.length>1){
+    const d=vals[1]-vals[0];const isStep=vals.every((v,i)=>i===0||v-vals[i-1]===d);
+    if(isStep&&vals[0]===mn)return`every ${d} ${FIELD_NAMES[idx]}${d>1?'s':''}`;
+  }
+  return vals.join(', ')
+}
+
+function humanize(fields){
+  const[min,hr,dom,mon,dow]=fields;
+  const[minV,hrV,domV,monV,dowV]=fields.map((f,i)=>parseField(f,i));
+  let parts=[];
+  const allMin=minV.length===60,allHr=hrV.length===24,allDom=domV.length===31,allMon=monV.length===12,allDow=dowV.length===7;
+
+  // Time
+  if(allMin&&allHr)parts.push('Every minute');
+  else if(allMin)parts.push(`Every minute past ${hrV.map(h=>h+':00').join(', ')}`);
+  else if(minV.length>1&&allHr){const d=minV[1]-minV[0];const isStep=minV.every((v,i)=>i===0||v-minV[i-1]===d);
+    if(isStep&&minV[0]===0)parts.push(`Every ${d} minutes`);else parts.push(`At minute ${minV.join(', ')} of every hour`)}
+  else if(allHr)parts.push(`At minute ${minV.join(', ')} of every hour`);
+  else{const times=[];for(const h of hrV)for(const m of minV)times.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+    parts.push(`At ${times.join(', ')}`)}
+
+  if(!allDom)parts.push(`on day ${domV.join(', ')} of the month`);
+  if(!allMon)parts.push(`in ${monV.map(v=>MONTHS[v-1]).join(', ')}`);
+  if(!allDow)parts.push(`on ${dowV.map(v=>DAYS[v]).join(', ')}`);
+  return parts.join(' ')
+}
+
+function getNextRuns(fields,count=8){
+  const[minV,hrV,domV,monV,dowV]=fields.map((f,i)=>parseField(f,i));
+  const runs=[];const now=new Date();const d=new Date(now);d.setSeconds(0);d.setMilliseconds(0);d.setMinutes(d.getMinutes()+1);
+  const limit=525600;// 1 year in minutes
+  for(let i=0;i<limit&&runs.length<count;i++){
+    if(monV.includes(d.getMonth()+1)&&domV.includes(d.getDate())&&dowV.includes(d.getDay())&&hrV.includes(d.getHours())&&minV.includes(d.getMinutes())){
+      runs.push(new Date(d))}
+    d.setMinutes(d.getMinutes()+1)
+  }
+  return runs
+}
+
+function parse(){
+  const input=document.getElementById('cronInput').value.trim();
+  const out=document.getElementById('output');
+  const fields=input.split(/\s+/);
+  if(fields.length!==5){out.innerHTML=`<div class="result"><div class="error">⚠️ Expected 5 fields (minute hour day month weekday), got ${fields.length}</div></div>`;return}
+  try{
+    const human=humanize(fields);
+    const runs=getNextRuns(fields);
+    const descs=fields.map((f,i)=>{const v=parseField(f,i);return{raw:f,meaning:describeField(v,i),label:FIELD_NAMES[i]}});
+    out.innerHTML=`
+      <div class="result">
+        <h2>📖 Plain English</h2>
+        <div class="human-text">${human}</div>
+        <h2>🔍 Field Breakdown</h2>
+        <div class="breakdown">${descs.map(d=>`<div class="field"><div class="label">${d.label}</div><div class="value">${d.raw}</div><div class="meaning">${d.meaning}</div></div>`).join('')}</div>
+      </div>
+      <div class="result">
+        <h2>📅 Next ${runs.length} Runs</h2>
+        <ul class="next-runs">${runs.map(r=>`<li><span class="day">${DAYS[r.getDay()].slice(0,3)}</span>${r.toLocaleString()}</li>`).join('')}</ul>
+        ${runs.length===0?'<p style="color:#f87171;padding:8px">No runs found in the next year.</p>':''}
+      </div>`;
+  }catch(e){out.innerHTML=`<div class="result"><div class="error">⚠️ ${e.message}</div></div>`}
+}
+
+document.getElementById('cronInput').addEventListener('input',parse);
+parse();
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unix Timestamp Converter — Free Online Epoch Time Tool</title>
+<meta name="description" content="Convert Unix timestamps to human-readable dates and vice versa. Live clock, millisecond support, timezone display. 100% client-side, no data sent to servers.">
+<meta name="keywords" content="unix timestamp converter, epoch converter, unix time, timestamp to date, date to timestamp, epoch time">
+<meta property="og:title" content="Unix Timestamp Converter — Free Online Epoch Time Tool">
+<meta property="og:description" content="Convert Unix timestamps to human dates instantly. Free, private, no tracking.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/unix-timestamp/">
+<link rel="canonical" href="https://maxmini0214.github.io/unix-timestamp/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
+h1{font-size:1.8rem;margin:20px 0 8px;text-align:center}
+.sub{color:#94a3b8;margin-bottom:24px;text-align:center;font-size:.95rem}
+.card{background:#1e293b;border-radius:12px;padding:24px;width:100%;max-width:640px;margin-bottom:16px;border:1px solid #334155}
+.card h2{font-size:1.1rem;color:#38bdf8;margin-bottom:16px}
+label{display:block;font-size:.85rem;color:#94a3b8;margin-bottom:6px}
+input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:1rem;font-family:monospace;margin-bottom:12px}
+input:focus,select:focus{outline:none;border-color:#38bdf8}
+.row{display:flex;gap:12px;align-items:end}
+.row>*{flex:1}
+button{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-size:.9rem;font-weight:600;transition:.2s}
+.btn-primary{background:#38bdf8;color:#0f172a}
+.btn-primary:hover{background:#7dd3fc}
+.btn-copy{background:#334155;color:#e2e8f0}
+.btn-copy:hover{background:#475569}
+.live{font-family:monospace;font-size:1.6rem;text-align:center;color:#38bdf8;padding:8px 0}
+.live-sub{text-align:center;color:#64748b;font-size:.85rem;margin-bottom:8px}
+.result{background:#0f172a;border-radius:8px;padding:14px;font-family:monospace;font-size:.95rem;word-break:break-all;margin-top:8px;border:1px solid #334155;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.result span{flex:1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.grid-item{background:#0f172a;border-radius:6px;padding:10px;border:1px solid #334155}
+.grid-item .lbl{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+.grid-item .val{font-family:monospace;font-size:.9rem;margin-top:2px}
+.cta{display:block;text-align:center;margin:24px auto;padding:14px 28px;background:linear-gradient(135deg,#f472b6,#c084fc);color:#fff;border-radius:10px;text-decoration:none;font-weight:700;font-size:1rem;max-width:400px;transition:.2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(244,114,182,.3)}
+footer{margin-top:auto;padding:24px;color:#475569;font-size:.8rem;text-align:center}
+footer a{color:#38bdf8;text-decoration:none}
+@media(max-width:500px){h1{font-size:1.4rem}.row{flex-direction:column}.grid{grid-template-columns:1fr}.live{font-size:1.2rem}}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#38bdf8;color:#0f172a;padding:8px 20px;border-radius:8px;font-weight:600;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<h1>⏱️ Unix Timestamp Converter</h1>
+<p class="sub">Convert epoch timestamps to dates &amp; back. 100% client-side.</p>
+
+<div class="card">
+<h2>🕐 Current Unix Time</h2>
+<div class="live" id="liveClock"></div>
+<div class="live-sub" id="liveDate"></div>
+<button class="btn-copy" onclick="copyText(Math.floor(Date.now()/1000).toString())" style="width:100%">📋 Copy Current Timestamp</button>
+</div>
+
+<div class="card">
+<h2>🔢 Timestamp → Date</h2>
+<label for="tsInput">Enter Unix Timestamp (seconds or milliseconds)</label>
+<div class="row">
+<input type="text" id="tsInput" placeholder="e.g. 1708070400" oninput="tsToDate()">
+<button class="btn-primary" onclick="document.getElementById('tsInput').value=Math.floor(Date.now()/1000);tsToDate()">Now</button>
+</div>
+<div class="result" id="tsResult"><span>Enter a timestamp above</span></div>
+<div class="grid" id="tsGrid"></div>
+</div>
+
+<div class="card">
+<h2>📅 Date → Timestamp</h2>
+<div class="row">
+<div><label for="dYear">Year</label><input type="number" id="dYear" placeholder="2026"></div>
+<div><label for="dMonth">Month</label><input type="number" id="dMonth" placeholder="1" min="1" max="12"></div>
+<div><label for="dDay">Day</label><input type="number" id="dDay" placeholder="1" min="1" max="31"></div>
+</div>
+<div class="row">
+<div><label for="dHour">Hour</label><input type="number" id="dHour" placeholder="0" min="0" max="23"></div>
+<div><label for="dMin">Min</label><input type="number" id="dMin" placeholder="0" min="0" max="59"></div>
+<div><label for="dSec">Sec</label><input type="number" id="dSec" placeholder="0" min="0" max="59"></div>
+</div>
+<label for="dTz">Timezone</label>
+<select id="dTz" onchange="dateToTs()">
+<option value="local">Local (auto-detect)</option>
+<option value="utc">UTC</option>
+</select>
+<button class="btn-primary" onclick="dateToTs()" style="width:100%;margin-top:4px">Convert to Timestamp</button>
+<div class="result" id="dtResult"><span>Fill in the date above</span></div>
+</div>
+
+<a class="cta" href="https://payhip.com/b/4FosR" target="_blank" rel="noopener">🚀 Get Pro Developer Tools Pack →</a>
+
+<!-- Ad slot reserved -->
+<div id="ad-slot" style="width:100%;max-width:640px;min-height:0"></div>
+
+<footer>
+Built with ❤️ by <a href="https://github.com/maxseats">maxseats</a> · 100% client-side, zero tracking
+<br>© 2026 MaxxMini Tools
+</footer>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+function pad(n){return String(n).padStart(2,'0')}
+function updateClock(){
+const now=Date.now();
+const s=Math.floor(now/1000);
+document.getElementById('liveClock').textContent=s;
+const d=new Date(now);
+document.getElementById('liveDate').textContent=d.toUTCString()+' | Local: '+d.toLocaleString();
+}
+setInterval(updateClock,1000);updateClock();
+
+function tsToDate(){
+let v=document.getElementById('tsInput').value.trim();
+if(!v){document.getElementById('tsResult').innerHTML='<span>Enter a timestamp above</span>';document.getElementById('tsGrid').innerHTML='';return}
+let n=Number(v);
+if(isNaN(n)){document.getElementById('tsResult').innerHTML='<span style="color:#f87171">Invalid timestamp</span>';return}
+if(n>1e12)n=n; else n=n*1000;
+const d=new Date(n);
+if(isNaN(d.getTime())){document.getElementById('tsResult').innerHTML='<span style="color:#f87171">Invalid date</span>';return}
+const sec=Math.floor(n/1000);
+document.getElementById('tsResult').innerHTML=`<span>${d.toUTCString()}</span><button class="btn-copy" onclick="copyText('${d.toISOString()}')">📋</button>`;
+const items=[
+{l:'UTC',v:d.toUTCString()},
+{l:'ISO 8601',v:d.toISOString()},
+{l:'Local Time',v:d.toLocaleString()},
+{l:'Day of Week',v:d.toLocaleDateString('en',{weekday:'long'})},
+{l:'Seconds',v:sec.toLocaleString()},
+{l:'Milliseconds',v:n.toLocaleString()},
+{l:'Days Since Epoch',v:Math.floor(sec/86400).toLocaleString()},
+{l:'Relative',v:relativeTime(n)}
+];
+document.getElementById('tsGrid').innerHTML=items.map(i=>`<div class="grid-item"><div class="lbl">${i.l}</div><div class="val">${i.v}</div></div>`).join('');
+}
+
+function relativeTime(ms){
+const diff=Date.now()-ms;const abs=Math.abs(diff);const ago=diff>0;
+if(abs<60000)return'just now';
+if(abs<3600000)return Math.floor(abs/60000)+' min '+(ago?'ago':'from now');
+if(abs<86400000)return Math.floor(abs/3600000)+' hours '+(ago?'ago':'from now');
+if(abs<2592000000)return Math.floor(abs/86400000)+' days '+(ago?'ago':'from now');
+return Math.floor(abs/2592000000)+' months '+(ago?'ago':'from now');
+}
+
+function dateToTs(){
+const y=parseInt(document.getElementById('dYear').value)||new Date().getFullYear();
+const mo=(parseInt(document.getElementById('dMonth').value)||1)-1;
+const da=parseInt(document.getElementById('dDay').value)||1;
+const h=parseInt(document.getElementById('dHour').value)||0;
+const mi=parseInt(document.getElementById('dMin').value)||0;
+const s=parseInt(document.getElementById('dSec').value)||0;
+const tz=document.getElementById('dTz').value;
+let d;
+if(tz==='utc')d=new Date(Date.UTC(y,mo,da,h,mi,s));
+else d=new Date(y,mo,da,h,mi,s);
+const sec=Math.floor(d.getTime()/1000);
+document.getElementById('dtResult').innerHTML=`<span>${sec} (ms: ${d.getTime()})</span><button class="btn-copy" onclick="copyText('${sec}')">📋</button>`;
+}
+
+// Pre-fill date fields with now
+(function(){const d=new Date();document.getElementById('dYear').value=d.getFullYear();document.getElementById('dMonth').value=d.getMonth()+1;document.getElementById('dDay').value=d.getDate();document.getElementById('dHour').value=d.getHours();document.getElementById('dMin').value=d.getMinutes();document.getElementById('dSec').value=d.getSeconds();})();
+
+function copyText(t){navigator.clipboard.writeText(t).then(()=>{const el=document.getElementById('toast');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1500)}).catch(()=>{})}
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

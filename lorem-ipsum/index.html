@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorem Ipsum Generator — Free Placeholder Text Tool</title>
+<meta name="description" content="Generate lorem ipsum placeholder text by paragraphs, sentences, or words. Free online lorem ipsum generator for designers and developers.">
+<meta property="og:title" content="Lorem Ipsum Generator — Free Placeholder Text">
+<meta property="og:description" content="Generate placeholder text instantly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/lorem-ipsum/">
+<link rel="canonical" href="https://maxmini0214.github.io/lorem-ipsum/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+h1{font-size:1.8rem;margin-bottom:.5rem}
+.subtitle{color:var(--muted);font-size:.95rem}
+main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.controls{display:flex;gap:1rem;flex-wrap:wrap;align-items:end;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:.25rem}
+.field label{font-size:.8rem;color:var(--muted);font-weight:600}
+.field input,.field select{padding:.5rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.9rem}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
+.output{width:100%;min-height:200px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-size:.9rem;line-height:1.7;resize:vertical}
+.stats{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+.check{display:flex;align-items:center;gap:.5rem}
+.check input{accent-color:var(--accent)}
+.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
+.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
+.tool-link:hover{border-color:var(--accent)}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
+@media(max-width:600px){h1{font-size:1.4rem}.controls{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+<h1>목업에 넣을 더미 텍스트 — 길이/언어 맞춤 생성</h1>
+<p class="subtitle">문단/문장/단어 단위로 원하는 만큼 — 복사해서 바로 사용</p>
+</header>
+<main>
+<div class="ad-slot">📢 Ad Space</div>
+<div class="card">
+<div class="controls">
+<div class="field"><label>Count</label><input type="number" id="count" value="5" min="1" max="100"></div>
+<div class="field"><label>Type</label><select id="type"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select></div>
+<div class="check"><input type="checkbox" id="startLorem" checked><label for="startLorem" style="font-size:.85rem">Start with "Lorem ipsum..."</label></div>
+</div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+<button class="btn btn-primary" onclick="generate()">Generate</button>
+<button class="btn btn-secondary" onclick="copyText()">📋 Copy</button>
+<button class="btn btn-secondary" onclick="copyHtml()">Copy as HTML</button>
+</div>
+<textarea class="output" id="output" readonly></textarea>
+<div class="stats" id="stats"></div>
+</div>
+
+<div class="cta">
+<h3>🚀 DevTools Pro Bundle — $9</h3>
+<p>All tools offline + API access + priority updates</p>
+<a href="https://payhip.com/b/4FosR" target="_blank">Get Pro →</a>
+</div>
+<div class="ad-slot">📢 Ad Space</div>
+<h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a class="tool-link" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+</div>
+</main>
+<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<script>
+const WORDS='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
+const FIRST='Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+function randWord(){return WORDS[Math.floor(Math.random()*WORDS.length)]}
+function randSentence(){const len=8+Math.floor(Math.random()*12);let s=Array.from({length:len},randWord).join(' ');return s.charAt(0).toUpperCase()+s.slice(1)+'.'}
+function randParagraph(){const len=4+Math.floor(Math.random()*4);return Array.from({length:len},randSentence).join(' ')}
+
+function generate(){
+const count=+document.getElementById('count').value||5;
+const type=document.getElementById('type').value;
+const startL=document.getElementById('startLorem').checked;
+let result='';
+
+if(type==='paragraphs'){
+const paras=Array.from({length:count},(_,i)=>i===0&&startL?FIRST+' '+randParagraph():randParagraph());
+result=paras.join('\n\n');
+}else if(type==='sentences'){
+const sents=Array.from({length:count},(_,i)=>i===0&&startL?FIRST:randSentence());
+result=sents.join(' ');
+}else{
+const words=Array.from({length:count},randWord);
+if(startL&&count>=2){words[0]='lorem';words[1]='ipsum'}
+result=words.join(' ');
+}
+
+document.getElementById('output').value=result;
+const wc=result.split(/\s+/).length;
+document.getElementById('stats').textContent=`${wc} words · ${result.length} characters`;
+}
+
+function copyText(){navigator.clipboard.writeText(document.getElementById('output').value)}
+function copyHtml(){
+const text=document.getElementById('output').value;
+const html=text.split('\n\n').map(p=>'<p>'+p+'</p>').join('\n');
+navigator.clipboard.writeText(html);
+}
+generate();
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

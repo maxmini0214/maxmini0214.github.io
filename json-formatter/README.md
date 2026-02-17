@@ -1,34 +1,31 @@
 # JSON Formatter & Validator
 
-A free, browser-based JSON formatter that beautifies, minifies, and validates your JSON instantly. No data leaves your browser.
+A fast, free, browser-based JSON formatter and validator. Paste messy JSON, get it beautifully formatted with syntax highlighting and real-time validation.
 
-🔗 **[Try it live →](https://maxmini0214.github.io/json-formatter/)**
+**[🔗 Try it live →](https://maxseats.github.io/json-formatter/)**
 
 ## Features
 
-- ✅ Format & beautify JSON with customizable indentation
-- ✅ Minify JSON for production use
-- ✅ Syntax validation with clear error messages
-- ✅ Syntax highlighting for easy reading
-- ✅ Works 100% offline — your data stays private
+- 🚀 Instant, browser-based — no installation needed
+- 🔒 100% client-side — your data never leaves your browser
+- 📱 Responsive design with dark mode
+- ⚡ Zero dependencies
 
 ## Usage
 
-Paste your JSON, click Format. That's it.
+Simply visit the [live demo](https://maxseats.github.io/json-formatter/) and start using it. No sign-up required.
 
 ---
 
-## ⚡ Pro Version
+## 📦 Premium Resources
 
-Love the free formatter? **JSON Formatter Pro** takes it further:
+Level up your developer workflow:
 
-- 🔄 **JSON ↔ YAML/CSV/XML conversion** — switch between formats in one click
-- 📊 **Tree view & path navigator** — explore deeply nested structures visually
-- 🔍 **JSONPath query support** — extract exactly what you need
-- 📋 **Schema validation** — validate against JSON Schema drafts
-- 🌙 **Multiple themes** — dark mode, Monokai, Solarized, and more
-- 💾 **History & snippets** — save and reuse frequently used JSON
+- **[Developer Cheat Sheet Bundle](https://maxmini.gumroad.com/l/rsgxr)** — Essential cheat sheets for Git, terminal, regex, and more.
+- **[Git Cheat Sheet: 50 Commands You Actually Use](https://maxmini.gumroad.com/l/izbwc)** — The 50 most useful git commands, organized by workflow.
 
-**[Get JSON Formatter Pro →](https://maxmini.gumroad.com/l/json-formatter-pro)**
+---
 
-*One-time purchase. No subscription. Free updates forever.*
+## License
+
+MIT

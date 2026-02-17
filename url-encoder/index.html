@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Encoder/Decoder Online — Free Tool</title>
+<meta name="description" content="Encode and decode URLs instantly. Supports encodeURIComponent and encodeURI modes. 100% client-side, free online URL encoding tool.">
+<meta property="og:title" content="URL Encoder/Decoder — Free Online Tool">
+<meta property="og:description" content="Encode and decode URLs instantly in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/url-encoder/">
+<link rel="canonical" href="https://maxmini0214.github.io/url-encoder/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+h1{font-size:1.8rem;margin-bottom:.5rem}
+.subtitle{color:var(--muted);font-size:.95rem}
+main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.btn-group{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
+.btn-active{background:var(--accent);color:#fff}
+textarea{width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
+textarea:focus{outline:none;border-color:var(--accent)}
+label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-size:.85rem}
+.mode-toggle{display:flex;gap:.5rem;margin-bottom:1rem}
+.mode-btn{padding:.4rem .8rem;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;font-size:.8rem}
+.mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.status{margin-top:.5rem;font-size:.85rem;color:var(--success)}.status.error{color:var(--error)}
+.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
+.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
+.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
+.tool-link:hover{border-color:var(--accent)}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
+@media(max-width:600px){h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>쿼리 파라미터 특수문자 깨질 때</h1>
+<p class="subtitle">URL 인코딩/디코딩 즉시 처리 — encodeURI vs encodeURIComponent 둘 다 지원</p>
+</header>
+<main>
+<div class="ad-slot">📢 Ad Space</div>
+<div class="mode-toggle">
+<button class="mode-btn active" onclick="setMode('component')" id="mComponent">encodeURIComponent</button>
+<button class="mode-btn" onclick="setMode('uri')" id="mUri">encodeURI</button>
+</div>
+<div class="card">
+<label>Input</label>
+<textarea id="input" placeholder="Paste URL or encoded string here..."></textarea>
+</div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="encode()">Encode →</button>
+<button class="btn btn-primary" onclick="decode()">← Decode</button>
+<button class="btn btn-secondary" onclick="swap()">⇄ Swap</button>
+<button class="btn btn-secondary" onclick="copyOutput()">📋 Copy</button>
+<button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+</div>
+<div class="card">
+<label>Output</label>
+<textarea id="output" readonly></textarea>
+<div id="status" class="status"></div>
+</div>
+
+<div class="card">
+<h3 style="margin-bottom:.75rem">📖 URL Encoding Reference</h3>
+<table style="width:100%;font-size:.85rem;color:var(--muted)">
+<tr><td>Space</td><td><code>%20</code></td><td>&amp;</td><td><code>%26</code></td></tr>
+<tr><td>=</td><td><code>%3D</code></td><td>?</td><td><code>%3F</code></td></tr>
+<tr><td>/</td><td><code>%2F</code></td><td>#</td><td><code>%23</code></td></tr>
+</table>
+</div>
+
+<div class="cta">
+<h3>🚀 DevTools Pro Bundle — $9</h3>
+<p>All tools offline + API access + priority updates</p>
+<a href="https://payhip.com/b/4FosR" target="_blank">Get Pro →</a>
+</div>
+<div class="ad-slot">📢 Ad Space</div>
+<h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a class="tool-link" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+</main>
+<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<script>
+let mode='component';
+const inp=document.getElementById('input'),out=document.getElementById('output'),st=document.getElementById('status');
+function setMode(m){mode=m;document.getElementById('mComponent').className='mode-btn'+(m==='component'?' active':'');document.getElementById('mUri').className='mode-btn'+(m==='uri'?' active':'')}
+function encode(){try{out.value=mode==='component'?encodeURIComponent(inp.value):encodeURI(inp.value);st.textContent='✓ Encoded';st.className='status'}catch(e){st.textContent='✗ '+e.message;st.className='status error'}}
+function decode(){try{out.value=mode==='component'?decodeURIComponent(inp.value):decodeURI(inp.value);st.textContent='✓ Decoded';st.className='status'}catch(e){st.textContent='✗ Invalid encoded string';st.className='status error'}}
+function swap(){const t=inp.value;inp.value=out.value;out.value=t}
+function copyOutput(){navigator.clipboard.writeText(out.value);st.textContent='✓ Copied!'}
+function clearAll(){inp.value='';out.value='';st.textContent=''}
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

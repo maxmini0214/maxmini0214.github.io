@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Strength Analyzer — Free Online Security Tool | MaxDevTools</title>
+<meta name="description" content="Analyze your password strength with entropy-based scoring, time-to-crack estimates, and smart suggestions. 100% client-side, privacy-friendly.">
+<meta name="keywords" content="password strength checker, password analyzer, entropy calculator, security tool, password generator, brute force estimate">
+<meta name="author" content="MaxDevTools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/password-strength-analyzer/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Password Strength Analyzer — Free Online Security Tool">
+<meta property="og:description" content="Entropy-based password scoring with time-to-crack estimates. 100% client-side, privacy-friendly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/password-strength-analyzer/">
+<meta property="og:image" content="https://maxmini0214.github.io/password-strength-analyzer/og-image.png">
+<meta property="og:site_name" content="MaxDevTools Security Suite">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Password Strength Analyzer — Free Online Security Tool">
+<meta name="twitter:description" content="Entropy-based password scoring with time-to-crack estimates. 100% client-side.">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1a2332;--border:#1e2d3d;--green:#00ff88;--cyan:#00d4ff;--red:#ff4757;--orange:#ffa502;--yellow:#eccc68;--text:#e2e8f0;--text2:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Animated background grid */
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+
+/* Trust banner */
+.trust-banner{background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.08));border:1px solid rgba(0,255,136,.2);border-radius:10px;padding:.75rem 1.25rem;display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--green);margin-bottom:2rem}
+.trust-banner svg{flex-shrink:0}
+
+header{text-align:center;margin-bottom:2.5rem}
+header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+header p{color:var(--text2);font-size:1rem;line-height:1.6}
+
+/* Main input area */
+.input-group{position:relative;margin-bottom:1.5rem}
+.input-group input{width:100%;padding:1rem 3.5rem 1rem 1.25rem;font-size:1.15rem;font-family:var(--mono);background:var(--surface);border:2px solid var(--border);border-radius:12px;color:var(--text);outline:none;transition:border-color .2s}
+.input-group input:focus{border-color:var(--cyan)}
+.toggle-vis{position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.2rem;padding:.25rem}
+.toggle-vis:hover{color:var(--text)}
+
+/* Strength meter */
+.meter-wrap{margin-bottom:1.5rem}
+.meter-bar{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-bottom:.5rem}
+.meter-fill{height:100%;width:0;border-radius:3px;transition:width .4s ease,background .4s ease}
+.meter-label{display:flex;justify-content:space-between;font-size:.85rem}
+.meter-label .score{font-weight:600}
+
+/* Stats grid */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.stat .label{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.stat .value{font-size:1.1rem;font-weight:600;font-family:var(--mono);color:var(--cyan);word-break:break-all}
+
+/* Analysis section */
+.analysis{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.analysis h3{font-size:.9rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.checks{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.checks li{display:flex;align-items:center;gap:.5rem;font-size:.9rem;padding:.35rem 0}
+.checks li .icon{width:20px;text-align:center;flex-shrink:0}
+.pass{color:var(--green)}.fail{color:var(--red)}.warn{color:var(--orange)}
+
+.suggestions{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.suggestions h3{font-size:.9rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.suggestions ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.suggestions li{font-size:.9rem;color:var(--yellow);padding-left:1.2rem;position:relative}
+.suggestions li::before{content:'→';position:absolute;left:0;color:var(--cyan)}
+
+/* Generate button */
+.gen-wrap{text-align:center;margin-bottom:2rem}
+.gen-btn{background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;padding:.85rem 2rem;font-size:1rem;font-weight:700;border-radius:10px;cursor:pointer;transition:opacity .2s,transform .1s}
+.gen-btn:hover{opacity:.9}.gen-btn:active{transform:scale(.97)}
+.gen-output{margin-top:.75rem;font-family:var(--mono);font-size:1rem;color:var(--green);background:var(--surface);padding:.75rem 1rem;border-radius:8px;display:none;cursor:pointer;border:1px solid var(--border);word-break:break-all}
+.gen-output.show{display:block}
+.copy-hint{font-size:.75rem;color:var(--text2);margin-top:.3rem}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.cta h3{color:var(--cyan);margin-bottom:.5rem;font-size:1.1rem}
+.cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem;line-height:1.5}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;font-size:.95rem;transition:opacity .2s}
+.cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+
+/* Cross-links */
+.tools-nav{margin-bottom:2rem}
+.tools-nav h3{font-size:.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.tools-grid a{display:block;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-size:.85rem;color:var(--text);transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);text-decoration:none}
+.tools-grid a span{display:block;font-size:.75rem;color:var(--text2);margin-top:.2rem}
+
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
+footer .brand{color:var(--cyan);font-weight:600}
+
+@media(max-width:500px){
+  .stats{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr}
+  header h1{font-size:1.5rem}
+}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="trust-banner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+    <span><strong>100% Client-Side</strong> — Your password never leaves your browser. Zero network requests. Verify in DevTools.</span>
+  </div>
+
+  <header>
+    <h1>🔐 Password Strength Analyzer</h1>
+    <p>Entropy-based scoring with real-time crack-time estimates</p>
+  </header>
+
+  <div class="input-group">
+    <input type="password" id="pw" placeholder="Type or paste a password…" autocomplete="off" spellcheck="false">
+    <button class="toggle-vis" id="toggleVis" title="Toggle visibility">👁</button>
+  </div>
+
+  <div class="meter-wrap">
+    <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
+    <div class="meter-label"><span id="strengthText" class="score" style="color:var(--text2)">Enter a password</span><span id="entropyText" style="color:var(--text2)">0 bits</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Entropy</div><div class="value" id="statEntropy">—</div></div>
+    <div class="stat"><div class="label">Charset Size</div><div class="value" id="statCharset">—</div></div>
+    <div class="stat"><div class="label">Brute Force</div><div class="value" id="statBrute">—</div></div>
+    <div class="stat"><div class="label">Smart Attack</div><div class="value" id="statSmart">—</div></div>
+  </div>
+
+  <div class="analysis" id="analysisBox" style="display:none">
+    <h3>Analysis</h3>
+    <ul class="checks" id="checksList"></ul>
+  </div>
+
+  <div class="suggestions" id="suggestionsBox" style="display:none">
+    <h3>Suggestions</h3>
+    <ul id="suggestionsList"></ul>
+  </div>
+
+  <div class="gen-wrap">
+    <button class="gen-btn" id="genBtn">⚡ Generate Strong Password</button>
+    <div class="gen-output" id="genOutput"></div>
+    <div class="copy-hint" id="copyHint" style="display:none">Click to copy</div>
+  </div>
+
+  <div class="cta" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #e94560;padding:24px;border-radius:12px;margin-bottom:16px;text-align:center">
+    <h3 style="color:#e94560;margin:0 0 8px">🔐 Security Toolkit Pro — Offline Bundle</h3>
+    <p style="color:#ccc;margin:0 0 12px;font-size:14px">All 5 security tools in one offline HTML pack. No internet needed. Use on air-gapped systems, pentests, or offline audits. Includes Password Analyzer, Generator, Hash Tool, JWT Decoder & Base64.</p>
+    <a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener" style="background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:bold">Get Offline Bundle — $3</a>
+    <p style="color:#888;margin:8px 0 0;font-size:12px">One-time purchase · No subscription · Instant download</p>
+  </div>
+
+  <div class="cta">
+    <h3>⭐ Open Source</h3>
+    <p>100% client-side, privacy-friendly. Star on GitHub if you find it useful!</p>
+    <a class="cta-btn" href="https://github.com/maxmini0214/password-strength-analyzer" target="_blank" rel="noopener">View on GitHub →</a>
+  </div>
+
+  <nav class="tools-nav">
+    <h3>More Security Tools</h3>
+    <div class="tools-grid">
+      <a href="https://maxmini0214.github.io/hash-generator/"><strong>Hash Generator</strong><span>MD5, SHA-1, SHA-256, SHA-512</span></a>
+      <a href="https://maxmini0214.github.io/base64-tool/"><strong>Base64 Encoder</strong><span>Encode &amp; decode Base64</span></a>
+      <a href="https://maxmini0214.github.io/jwt-decoder/"><strong>JWT Decoder</strong><span>Inspect JSON Web Tokens</span></a>
+      <a href="https://maxmini0214.github.io/ip-lookup/"><strong>IP Lookup</strong><span>Geolocation &amp; info</span></a>
+    </div>
+  </nav>
+</div>
+
+<footer>
+  Part of <span class="brand">MaxDevTools Security Suite</span> · <a href="https://maxmini0214.github.io/">All Tools</a> · © 2024–2026
+</footer>
+
+<script>
+// === COMMON PASSWORDS (top patterns) ===
+const COMMON=new Set(["password","123456","12345678","qwerty","abc123","monkey","1234567","letmein","trustno1","dragon","baseball","iloveyou","master","sunshine","ashley","bailey","shadow","123123","654321","superman","qazwsx","michael","football","password1","password123","000000","1234","1q2w3e4r","qwerty123","admin","welcome","hello","charlie","donald","login","starwars","121212","flower","passw0rd","test","zaq1zaq1","mustang","access","love","matrix","buster","robert","jordan","jennifer","thomas","soccer","hockey","ranger","george","asshole","fuckyou","batman","cheese","andrea","joshua","summer","hannah","daniel","tigger","william","maggie","taylor","pepper","killer","1qaz2wsx","purple","whatever"]);
+
+// === PATTERNS ===
+const KEYBOARD_PATTERNS=["qwerty","qwertz","azerty","asdf","zxcv","1234","4321","0987","7890","!@#$","`~!@","qazwsx","wsxedc","rfvtgb"];
+const LEET_MAP={a:["4","@"],e:["3"],i:["1","!"],o:["0"],s:["5","$"],t:["7"],l:["1"],b:["8"],g:["9"]};
+
+function deLeet(s){let r=s.toLowerCase();for(const[ch,reps]of Object.entries(LEET_MAP))for(const rep of reps)r=r.replaceAll(rep,ch);return r}
+
+function getCharsetSize(pw){let s=0;if(/[a-z]/.test(pw))s+=26;if(/[A-Z]/.test(pw))s+=26;if(/[0-9]/.test(pw))s+=10;if(/[^a-zA-Z0-9]/.test(pw))s+=33;return s||1}
+
+function entropy(pw){if(!pw)return 0;const cs=getCharsetSize(pw);return pw.length*Math.log2(cs)}
+
+function formatTime(seconds){if(!isFinite(seconds)||seconds>3.15e18)return"centuries";if(seconds<.001)return"instant";const u=[["year",3.15e7],["month",2.63e6],["week",604800],["day",86400],["hour",3600],["minute",60],["second",1]];for(const[n,s]of u)if(seconds>=s){const v=Math.floor(seconds/s);return`${v.toLocaleString()} ${n}${v!==1?"s":""}`}return"instant"}
+
+// 100 billion guesses/sec for brute, 10 billion for smart
+function crackTime(pw){const e=entropy(pw);const combos=Math.pow(2,e);return{brute:combos/1e11,smart:combos/1e10}}
+
+function analyzePassword(pw){
+  const checks=[];const suggestions=[];
+  const len=pw.length;const e=entropy(pw);const cs=getCharsetSize(pw);
+  const lower=/[a-z]/.test(pw),upper=/[A-Z]/.test(pw),digit=/[0-9]/.test(pw),special=/[^a-zA-Z0-9]/.test(pw);
+  const dleet=deLeet(pw);
+
+  // Length
+  if(len>=16)checks.push({pass:true,text:`Length: ${len} characters (excellent)`});
+  else if(len>=12)checks.push({pass:true,text:`Length: ${len} characters (good)`});
+  else if(len>=8)checks.push({warn:true,text:`Length: ${len} characters (could be longer)`});
+  else checks.push({pass:false,text:`Length: ${len} characters (too short)`});
+
+  // Charset diversity
+  const types=[lower,upper,digit,special].filter(Boolean).length;
+  if(types>=4)checks.push({pass:true,text:`Character diversity: all 4 types used`});
+  else if(types>=3)checks.push({pass:true,text:`Character diversity: ${types}/4 types`});
+  else checks.push({warn:true,text:`Character diversity: only ${types}/4 types`});
+
+  // Common password check
+  if(COMMON.has(pw.toLowerCase())||COMMON.has(dleet)){
+    checks.push({pass:false,text:"Found in common password list!"});
+  }else{
+    checks.push({pass:true,text:"Not in common password list"});
+  }
+
+  // Repeated chars
+  if(/(.)\1{2,}/.test(pw)){checks.push({pass:false,text:"Contains repeated characters (aaa, 111…)"});}
+
+  // Sequential
+  const lpw=pw.toLowerCase();
+  let hasSeq=false;
+  for(const p of KEYBOARD_PATTERNS)if(lpw.includes(p)){hasSeq=true;break}
+  if(!hasSeq){for(let i=0;i<pw.length-2;i++){const a=pw.charCodeAt(i),b=pw.charCodeAt(i+1),c=pw.charCodeAt(i+2);if(b-a===1&&c-b===1||a-b===1&&b-c===1){hasSeq=true;break}}}
+  if(hasSeq)checks.push({pass:false,text:"Contains sequential/keyboard pattern"});
+  else checks.push({pass:true,text:"No sequential patterns detected"});
+
+  // All same case
+  if(pw.length>0&&pw===pw.toLowerCase()&&/[a-z]/.test(pw))checks.push({warn:true,text:"All lowercase letters"});
+  if(pw.length>0&&pw===pw.toUpperCase()&&/[A-Z]/.test(pw)&&!/[0-9]/.test(pw))checks.push({warn:true,text:"All uppercase letters"});
+
+  // Suggestions
+  if(len<12)suggestions.push("Use at least 12 characters (16+ is ideal)");
+  if(!special)suggestions.push("Add special characters (!@#$%^&*)");
+  if(!upper)suggestions.push("Mix in uppercase letters");
+  if(!digit)suggestions.push("Include some numbers");
+  if(types<3)suggestions.push("Use a passphrase: combine 4+ random words");
+  if(COMMON.has(dleet))suggestions.push("Avoid common words, even with character substitution");
+  if(hasSeq)suggestions.push("Avoid keyboard patterns and sequential characters");
+  if(/(.)\1{2,}/.test(pw))suggestions.push("Don't repeat the same character 3+ times");
+  if(len>=8&&suggestions.length===0)suggestions.push("Consider using a password manager for unique passwords per site");
+
+  // Score 0-100
+  let score=Math.min(100,Math.round(e*100/128));
+  if(COMMON.has(pw.toLowerCase())||COMMON.has(dleet))score=Math.min(score,5);
+  if(hasSeq)score=Math.max(0,score-20);
+  if(/(.)\1{2,}/.test(pw))score=Math.max(0,score-15);
+
+  return{entropy:e,charset:cs,score,checks,suggestions,...crackTime(pw)};
+}
+
+function getStrengthInfo(score){
+  if(score>=80)return{text:"Very Strong",color:"var(--green)"};
+  if(score>=60)return{text:"Strong",color:"#2ecc71"};
+  if(score>=40)return{text:"Moderate",color:"var(--yellow)"};
+  if(score>=20)return{text:"Weak",color:"var(--orange)"};
+  return{text:"Very Weak",color:"var(--red)"};
+}
+
+// === DOM ===
+const $=id=>document.getElementById(id);
+const pwInput=$("pw"),meterFill=$("meterFill"),strengthText=$("strengthText"),entropyText=$("entropyText");
+const statEntropy=$("statEntropy"),statCharset=$("statCharset"),statBrute=$("statBrute"),statSmart=$("statSmart");
+const checksList=$("checksList"),analysisBox=$("analysisBox"),suggestionsBox=$("suggestionsBox"),suggestionsList=$("suggestionsList");
+
+pwInput.addEventListener("input",()=>{
+  const pw=pwInput.value;
+  if(!pw){
+    meterFill.style.width="0";meterFill.style.background="transparent";
+    strengthText.textContent="Enter a password";strengthText.style.color="var(--text2)";
+    entropyText.textContent="0 bits";
+    statEntropy.textContent="—";statCharset.textContent="—";statBrute.textContent="—";statSmart.textContent="—";
+    analysisBox.style.display="none";suggestionsBox.style.display="none";
+    return;
+  }
+  const r=analyzePassword(pw);const si=getStrengthInfo(r.score);
+  meterFill.style.width=r.score+"%";meterFill.style.background=si.color;
+  strengthText.textContent=si.text+" ("+r.score+"/100)";strengthText.style.color=si.color;
+  entropyText.textContent=r.entropy.toFixed(1)+" bits";
+  statEntropy.textContent=r.entropy.toFixed(1)+" bits";
+  statCharset.textContent=r.charset+" chars";
+  statBrute.textContent=formatTime(r.brute);
+  statSmart.textContent=formatTime(r.smart);
+
+  checksList.innerHTML=r.checks.map(c=>{
+    const cls=c.pass?"pass":c.warn?"warn":"fail";
+    const icon=c.pass?"✓":c.warn?"⚠":"✗";
+    return`<li><span class="icon ${cls}">${icon}</span>${c.text}</li>`;
+  }).join("");
+  analysisBox.style.display="block";
+
+  if(r.suggestions.length){
+    suggestionsList.innerHTML=r.suggestions.map(s=>`<li>${s}</li>`).join("");
+    suggestionsBox.style.display="block";
+  }else suggestionsBox.style.display="none";
+});
+
+$("toggleVis").addEventListener("click",()=>{
+  const t=pwInput.type==="password"?"text":"password";
+  pwInput.type=t;$("toggleVis").textContent=t==="password"?"👁":"🙈";
+  pwInput.focus();
+});
+
+// === GENERATE ===
+function genPassword(len=20){
+  const chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
+  const arr=new Uint32Array(len);crypto.getRandomValues(arr);
+  let pw="";for(let i=0;i<len;i++)pw+=chars[arr[i]%chars.length];
+  // Ensure at least one of each type
+  const fix=[
+    ["abcdefghijklmnopqrstuvwxyz",0],["ABCDEFGHIJKLMNOPQRSTUVWXYZ",1],
+    ["0123456789",2],["!@#$%^&*()-_=+[]{}|;:,.<>?",3]
+  ];
+  const fixArr=new Uint32Array(4);crypto.getRandomValues(fixArr);
+  const pwa=[...pw];
+  for(const[set,pos]of fix)if(!new RegExp("["+set.replace(/[-[\]{}()*+?.,\\^$|#\s]/g,"\\$&")+"]").test(pw))pwa[pos]=set[fixArr[pos]%set.length];
+  return pwa.join("");
+}
+
+$("genBtn").addEventListener("click",()=>{
+  const pw=genPassword(20);
+  const out=$("genOutput");out.textContent=pw;out.classList.add("show");
+  $("copyHint").style.display="block";
+  pwInput.value=pw;pwInput.type="text";$("toggleVis").textContent="🙈";
+  pwInput.dispatchEvent(new Event("input"));
+});
+
+$("genOutput").addEventListener("click",()=>{
+  navigator.clipboard.writeText($("genOutput").textContent).then(()=>{
+    $("copyHint").textContent="✓ Copied!";setTimeout(()=>{$("copyHint").textContent="Click to copy"},1500);
+  });
+});
+
+// Focus on load
+pwInput.focus();
+</script>
+<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/password-strength-analyzer</body>count_bg=%2379C83D</body>title_bg=%23555555</body>icon=</body>icon_color=%23E7E7E7</body>title=visits</body>edge_flat=true" alt="Hits" /></a></div>
+</body>
+</html>

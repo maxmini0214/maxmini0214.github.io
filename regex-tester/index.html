@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RegexLab — Free Online Regex Tester & Debugger</title>
+<meta name="description" content="Test, debug, and learn regular expressions in real-time. Highlights matches, captures groups, explains patterns. 100% client-side, no data sent to servers.">
+<meta name="keywords" content="regex tester, regular expression, regex debugger, regex online, pattern matching, regex validator">
+<meta property="og:title" content="RegexLab — Free Online Regex Tester & Debugger">
+<meta property="og:description" content="Real-time regex testing with match highlighting, group captures, and pattern explanation. 100% client-side.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/regex-tester/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RegexLab — Free Online Regex Tester & Debugger">
+<meta name="twitter:description" content="Real-time regex testing with match highlighting, group captures, and pattern explanation. 100% client-side.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/regex-tester/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"RegexLab","url":"https://maxmini0214.github.io/regex-tester/","description":"Test, debug, and learn regular expressions in real-time with match highlighting and group captures. 100% client-side.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f1117;--surface:#1a1b26;--surface2:#24253a;--border:#3b3d57;--text:#c0caf5;--text2:#7982a9;--accent:#7aa2f7;--accent2:#bb9af7;--green:#9ece6a;--red:#f7768e;--orange:#e0af68;--yellow:#e0af68}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:16px}
+header{text-align:center;padding:24px 0 16px}
+header h1{font-size:1.8rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+header p{color:var(--text2);font-size:.9rem;margin-top:4px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.panel-title{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:8px;font-weight:600}
+.regex-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.regex-input{flex:1;min-width:200px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text);font-family:'SF Mono',Consolas,monospace;font-size:.95rem;outline:none;transition:border .2s}
+.regex-input:focus{border-color:var(--accent)}
+.flags{display:flex;gap:4px}
+.flag-btn{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:4px 10px;color:var(--text2);cursor:pointer;font-family:monospace;font-size:.85rem;transition:all .2s}
+.flag-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+textarea{width:100%;min-height:160px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;color:var(--text);font-family:'SF Mono',Consolas,monospace;font-size:.9rem;resize:vertical;outline:none;transition:border .2s}
+textarea:focus{border-color:var(--accent)}
+.result-area{position:relative;min-height:160px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'SF Mono',Consolas,monospace;font-size:.9rem;white-space:pre-wrap;word-break:break-all;overflow-y:auto;max-height:300px}
+.match{background:rgba(122,162,247,.25);border-bottom:2px solid var(--accent);border-radius:2px;padding:0 1px}
+.group1{background:rgba(158,206,106,.2);border-bottom:2px solid var(--green)}
+.group2{background:rgba(187,154,247,.2);border-bottom:2px solid var(--accent2)}
+.group3{background:rgba(224,175,104,.2);border-bottom:2px solid var(--orange)}
+.stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.stat{font-size:.8rem;color:var(--text2)}.stat b{color:var(--text)}
+.matches-list{margin-top:8px}
+.match-item{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:6px}
+.match-item .idx{color:var(--accent);font-weight:700;font-size:.8rem}
+.match-item .val{font-family:monospace;color:var(--green)}
+.match-item .groups{margin-top:4px;font-size:.8rem;color:var(--text2)}
+.match-item .groups span{color:var(--accent2);font-family:monospace}
+.error-msg{color:var(--red);font-size:.85rem;margin-top:6px}
+.cheatsheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:8px}
+.cheat-item{background:var(--surface2);border-radius:6px;padding:8px 12px;font-size:.8rem;display:flex;gap:10px;align-items:center}
+.cheat-item code{color:var(--accent);font-family:monospace;font-weight:700;min-width:50px}
+.cheat-item span{color:var(--text2)}
+.cta-banner{background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;padding:20px;text-align:center;margin:16px 0}
+.cta-banner h3{color:#fff;font-size:1.1rem;margin-bottom:6px}
+.cta-banner p{color:rgba(255,255,255,.85);font-size:.85rem;margin-bottom:12px}
+.cta-btn{display:inline-block;background:#fff;color:var(--accent);font-weight:700;padding:10px 28px;border-radius:8px;text-decoration:none;font-size:.9rem;transition:transform .2s}
+.cta-btn:hover{transform:scale(1.05)}
+footer{text-align:center;padding:20px;color:var(--text2);font-size:.75rem}
+/* ad slot */
+.ad-slot{background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:20px;text-align:center;color:var(--text2);font-size:.75rem;margin:12px 0}
+@media(max-width:600px){
+.regex-row{flex-direction:column}
+.regex-input{width:100%}
+.cheatsheet{grid-template-columns:1fr}
+header h1{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>정규식 매번 틀려서 30분 낭비? 실시간으로 확인</h1>
+<p>패턴 입력하면 즉시 매칭 · 그룹 캡처 · 설명까지 — 서버 전송 없음</p>
+</header>
+
+<div class="panel">
+<div class="panel-title">Regular Expression</div>
+<div class="regex-row">
+<span style="color:var(--text2);font-family:monospace;font-size:1.1rem">/</span>
+<input type="text" id="regexInput" class="regex-input" placeholder="Enter regex pattern..." value="(\w+)@(\w+)\.(\w+)" spellcheck="false">
+<span style="color:var(--text2);font-family:monospace;font-size:1.1rem">/</span>
+<div class="flags">
+<button class="flag-btn active" data-flag="g">g</button>
+<button class="flag-btn active" data-flag="i">i</button>
+<button class="flag-btn" data-flag="m">m</button>
+<button class="flag-btn" data-flag="s">s</button>
+<button class="flag-btn" data-flag="u">u</button>
+</div>
+</div>
+<div id="error" class="error-msg"></div>
+</div>
+
+<div class="panel">
+<div class="panel-title">Test String</div>
+<textarea id="testString" spellcheck="false">Contact us at hello@example.com or support@regexlab.io
+Visit https://regexlab.dev for more tools</textarea>
+</div>
+
+<div class="panel">
+<div class="panel-title">Match Results</div>
+<div id="resultArea" class="result-area"></div>
+<div id="stats" class="stats"></div>
+</div>
+
+<div class="panel">
+<div class="panel-title">Match Details</div>
+<div id="matchesList" class="matches-list"></div>
+</div>
+
+<div class="ad-slot">📢 Ad Space — Your ad here</div>
+
+<div class="cta-banner">
+<h3>🚀 RegexLab Pro — Coming Soon</h3>
+<p>Save patterns, AI regex generator, team sharing, history & more</p>
+<a href="https://payhip.com/b/4FosR" target="_blank" rel="noopener" class="cta-btn">Join Waitlist →</a>
+</div>
+
+<div class="panel">
+<div class="panel-title">Quick Reference</div>
+<div class="cheatsheet">
+<div class="cheat-item"><code>.</code><span>Any character</span></div>
+<div class="cheat-item"><code>\d</code><span>Digit [0-9]</span></div>
+<div class="cheat-item"><code>\w</code><span>Word char [a-zA-Z0-9_]</span></div>
+<div class="cheat-item"><code>\s</code><span>Whitespace</span></div>
+<div class="cheat-item"><code>^</code><span>Start of string</span></div>
+<div class="cheat-item"><code>$</code><span>End of string</span></div>
+<div class="cheat-item"><code>*</code><span>0 or more</span></div>
+<div class="cheat-item"><code>+</code><span>1 or more</span></div>
+<div class="cheat-item"><code>?</code><span>0 or 1</span></div>
+<div class="cheat-item"><code>{n,m}</code><span>n to m times</span></div>
+<div class="cheat-item"><code>(abc)</code><span>Capture group</span></div>
+<div class="cheat-item"><code>(?:abc)</code><span>Non-capture group</span></div>
+<div class="cheat-item"><code>[abc]</code><span>Character set</span></div>
+<div class="cheat-item"><code>[^abc]</code><span>Negated set</span></div>
+<div class="cheat-item"><code>a|b</code><span>Alternation</span></div>
+<div class="cheat-item"><code>(?=a)</code><span>Lookahead</span></div>
+<div class="cheat-item"><code>(?&lt;=a)</code><span>Lookbehind</span></div>
+<div class="cheat-item"><code>\b</code><span>Word boundary</span></div>
+</div>
+</div>
+
+<h3 style="margin-top:2rem;margin-bottom:.5rem;color:var(--text)">🛠 More Developer Tools</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem">
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+
+<footer>
+<p>RegexLab by <a href="https://github.com/maxseats" style="color:var(--accent);text-decoration:none">maxseats</a> — All processing happens in your browser. No data is ever sent to any server.</p>
+</footer>
+</div>
+
+<script>
+const regexInput=document.getElementById('regexInput'),testString=document.getElementById('testString'),resultArea=document.getElementById('resultArea'),statsEl=document.getElementById('stats'),matchesList=document.getElementById('matchesList'),errorEl=document.getElementById('error'),flagBtns=document.querySelectorAll('.flag-btn');
+const groupColors=['match','group1','group2','group3'];
+
+flagBtns.forEach(b=>b.addEventListener('click',()=>{b.classList.toggle('active');run()}));
+regexInput.addEventListener('input',run);
+testString.addEventListener('input',run);
+
+function getFlags(){return[...flagBtns].filter(b=>b.classList.contains('active')).map(b=>b.dataset.flag).join('')}
+
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function run(){
+  const pattern=regexInput.value,text=testString.value,flags=getFlags();
+  errorEl.textContent='';
+  if(!pattern){resultArea.innerHTML=escapeHtml(text);statsEl.innerHTML='';matchesList.innerHTML='';return}
+  let re;
+  try{re=new RegExp(pattern,flags)}catch(e){errorEl.textContent='⚠ '+e.message;resultArea.innerHTML=escapeHtml(text);statsEl.innerHTML='';matchesList.innerHTML='';return}
+  
+  const matches=[];
+  if(flags.includes('g')){
+    let m;re.lastIndex=0;
+    while((m=re.exec(text))!==null){matches.push({index:m.index,length:m[0].length,value:m[0],groups:[...m].slice(1)});if(!m[0].length){re.lastIndex++}}
+  }else{
+    const m=re.exec(text);
+    if(m)matches.push({index:m.index,length:m[0].length,value:m[0],groups:[...m].slice(1)})
+  }
+
+  // highlight
+  let html='',last=0;
+  matches.forEach(m=>{
+    html+=escapeHtml(text.slice(last,m.index));
+    html+='<span class="match">'+escapeHtml(m.value)+'</span>';
+    last=m.index+m.length;
+  });
+  html+=escapeHtml(text.slice(last));
+  resultArea.innerHTML=html||escapeHtml(text);
+
+  // stats
+  const totalChars=matches.reduce((a,m)=>a+m.length,0);
+  statsEl.innerHTML=`<div class="stat">Matches: <b>${matches.length}</b></div><div class="stat">Characters matched: <b>${totalChars}</b></div><div class="stat">Steps: <b>~${text.length*2}</b></div>`;
+
+  // match details
+  matchesList.innerHTML=matches.map((m,i)=>{
+    let g='';
+    if(m.groups.length){g='<div class="groups">'+m.groups.map((v,j)=>`Group ${j+1}: <span>${escapeHtml(v||'(empty)')}</span>`).join(' &nbsp;|&nbsp; ')+'</div>'}
+    return`<div class="match-item"><span class="idx">Match ${i+1}</span> @ index ${m.index}: <span class="val">${escapeHtml(m.value)}</span>${g}</div>`
+  }).join('');
+}
+run();
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
