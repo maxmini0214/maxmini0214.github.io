@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Diff Checker — Compare Text Online Free</title>
+<meta name="description" content="Free online text diff checker. Compare two texts side-by-side with line-by-line highlighting. Added, deleted, and modified lines shown instantly. 100% browser-based, no data sent to servers.">
+<meta name="keywords" content="diff checker, text compare, text diff, compare text online, diff tool, text comparison, free diff checker">
+<meta name="author" content="MaxDevTools">
+<meta property="og:title" content="Text Diff Checker — Compare Text Online Free">
+<meta property="og:description" content="Compare two texts side-by-side with line-by-line diff highlighting. 100% client-side, no data leaves your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/diff-checker/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Text Diff Checker — Compare Text Online Free">
+<meta name="twitter:description" content="Compare two texts with instant diff highlighting. 100% client-side, privacy first.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/diff-checker/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text Diff Checker — Compare Text Online Free","description":"Free online text diff checker. Compare two texts with line-by-line highlighting. 100% browser-based.","url":"https://maxmini0214.github.io/diff-checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--accent:#3b82f6;--accent-hover:#2563eb;--green:#22c55e;--green-bg:#22c55e20;--red:#ef4444;--red-bg:#ef444420;--yellow:#eab308;--yellow-bg:#eab30820;--text:#f1f5f9;--muted:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:2rem 1rem 1rem}
+header h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--muted);margin-top:.4rem;font-size:.95rem}
+.container{max-width:1400px;margin:0 auto;padding:0 1rem 2rem;flex:1;width:100%}
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;align-items:center}
+.toolbar button{padding:.5rem 1rem;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:6px;cursor:pointer;font-size:.85rem;transition:all .15s}
+.toolbar button:hover{border-color:var(--accent);background:#253352}
+.toolbar button.primary{background:var(--accent);border-color:var(--accent);font-weight:600}
+.toolbar button.primary:hover{background:var(--accent-hover)}
+.status{margin-left:auto;font-size:.85rem;padding:.4rem .8rem;border-radius:6px;color:var(--muted)}
+.editor-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+@media(max-width:768px){.editor-wrap{grid-template-columns:1fr}.pane{min-height:30vh}}
+.pane{display:flex;flex-direction:column}
+.pane label{font-size:.8rem;color:var(--muted);margin-bottom:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+textarea{flex:1;min-height:35vh;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:.875rem;line-height:1.6;resize:vertical;outline:none;transition:border-color .15s}
+textarea:focus{border-color:var(--accent)}
+textarea::placeholder{color:#475569}
+.diff-output{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:.85rem;line-height:1.7;overflow-x:auto;min-height:200px;max-height:70vh;overflow-y:auto}
+.diff-line{padding:2px 8px;border-radius:3px;margin:1px 0;white-space:pre-wrap;word-break:break-all}
+.diff-add{background:var(--green-bg);color:var(--green);border-left:3px solid var(--green)}
+.diff-del{background:var(--red-bg);color:var(--red);border-left:3px solid var(--red)}
+.diff-mod{background:var(--yellow-bg);color:var(--yellow);border-left:3px solid var(--yellow)}
+.diff-eq{color:var(--muted);border-left:3px solid transparent}
+.line-num{display:inline-block;width:3rem;color:#475569;text-align:right;margin-right:.75rem;user-select:none;font-size:.8rem}
+.stats{display:flex;gap:1.5rem;margin:.75rem 0;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+.stats .added{color:var(--green)}.stats .deleted{color:var(--red)}.stats .modified{color:var(--yellow)}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
+.feature h4{font-size:.9rem;margin-bottom:.3rem}
+.feature p{font-size:.8rem;color:var(--muted)}
+.more-tools h3{margin-top:2rem;margin-bottom:.5rem}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tools-grid a{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .15s}
+.tools-grid a:hover{border-color:var(--accent)}
+.cta-bar{text-align:center;margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#253352);border-radius:12px;border:1px solid var(--border)}
+.cta-bar a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
+.cta-bar a:hover{transform:translateY(-1px)}
+footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+footer a{color:var(--accent);text-decoration:none}
+.swap-btn{font-size:1.2rem;padding:.5rem}
+</style>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header>
+<h1>Text Diff Checker</h1>
+<p>Compare two texts side-by-side — instant line-by-line diff, 100% in your browser</p>
+</header>
+<div class="container">
+<div class="toolbar">
+<button class="primary" onclick="compare()">▶ Compare</button>
+<button class="swap-btn" onclick="swapTexts()" title="Swap texts">⇄</button>
+<button onclick="clearAll()">Clear</button>
+<button onclick="loadSample()">Sample</button>
+<button onclick="copyDiff()">📋 Copy Diff</button>
+<span class="status" id="status">Paste text to compare</span>
+</div>
+<div class="editor-wrap">
+<div class="pane">
+<label>Original Text</label>
+<textarea id="textA" placeholder="Paste original text here..."></textarea>
+</div>
+<div class="pane">
+<label>Modified Text</label>
+<textarea id="textB" placeholder="Paste modified text here..."></textarea>
+</div>
+</div>
+<div class="stats" id="stats"></div>
+<div class="diff-output" id="diffOutput"><span style="color:var(--muted)">Click "Compare" to see differences...</span></div>
+
+<div class="features">
+<div class="feature"><h4>🔒 Privacy First</h4><p>Nothing leaves your browser. Zero server calls.</p></div>
+<div class="feature"><h4>⚡ Instant</h4><p>Line-by-line diff computed in milliseconds.</p></div>
+<div class="feature"><h4>🎨 Color Coded</h4><p>Green=added, Red=deleted, Yellow=modified.</p></div>
+<div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
+</div>
+
+<div class="more-tools">
+<h3>🛠 More Developer Tools</h3>
+<div class="tools-grid">
+<a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a href="https://maxmini0214.github.io/markdown-preview/">Markdown Preview</a>
+</div>
+</div>
+
+<div class="cta-bar">
+<a href="https://paypal.me/maxseats">☕ Buy Me a Coffee</a>
+</div>
+</div>
+<footer>
+<p>Built by <a href="https://github.com/maxseats" target="_blank">MaxxMini</a> · Open source · No tracking</p>
+</footer>
+<script>
+const $a=document.getElementById('textA'),$b=document.getElementById('textB'),$out=document.getElementById('diffOutput'),$st=document.getElementById('status'),$stats=document.getElementById('stats');
+
+function compare(){
+  const a=$a.value.split('\n'), b=$b.value.split('\n');
+  if(!$a.value&&!$b.value){$st.textContent='Paste text to compare';$out.innerHTML='<span style="color:var(--muted)">Click "Compare" to see differences...</span>';$stats.innerHTML='';return}
+  const diff=lcs(a,b);
+  let html='',added=0,deleted=0,modified=0,unchanged=0;
+  diff.forEach((d,i)=>{
+    const ln=`<span class="line-num">${i+1}</span>`;
+    const v=esc(d.value);
+    if(d.type==='add'){html+=`<div class="diff-line diff-add">${ln}+ ${v}</div>`;added++}
+    else if(d.type==='del'){html+=`<div class="diff-line diff-del">${ln}- ${v}</div>`;deleted++}
+    else if(d.type==='mod'){html+=`<div class="diff-line diff-mod">${ln}~ ${v}</div>`;modified++}
+    else{html+=`<div class="diff-line diff-eq">${ln}  ${v}</div>`;unchanged++}
+  });
+  $out.innerHTML=html;
+  const total=added+deleted+modified+unchanged;
+  $stats.innerHTML=`<span>Total: ${total} lines</span><span class="added">+${added} added</span><span class="deleted">-${deleted} deleted</span><span class="modified">~${modified} modified</span><span>${unchanged} unchanged</span>`;
+  $st.textContent=`${added+deleted+modified} difference${added+deleted+modified!==1?'s':''}`;
+}
+
+function lcs(a,b){
+  // Myers-like simple diff with modification detection
+  const result=[];
+  const n=a.length,m=b.length;
+  // LCS table
+  const dp=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=1;i<=n;i++)for(let j=1;j<=m;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  // Backtrack
+  let i=n,j=m;
+  const ops=[];
+  while(i>0||j>0){
+    if(i>0&&j>0&&a[i-1]===b[j-1]){ops.push({type:'eq',value:a[i-1]});i--;j--}
+    else if(j>0&&(i===0||dp[i][j-1]>=dp[i-1][j])){ops.push({type:'add',value:b[j-1]});j--}
+    else{ops.push({type:'del',value:a[i-1]});i--}
+  }
+  ops.reverse();
+  // Merge adjacent del+add into mod
+  for(let k=0;k<ops.length;k++){
+    if(ops[k].type==='del'&&k+1<ops.length&&ops[k+1].type==='add'){
+      result.push({type:'mod',value:`${ops[k].value} → ${ops[k+1].value}`});
+      k++;
+    }else{result.push(ops[k])}
+  }
+  return result;
+}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function swapTexts(){const t=$a.value;$a.value=$b.value;$b.value=t}
+function clearAll(){$a.value='';$b.value='';$out.innerHTML='<span style="color:var(--muted)">Click "Compare" to see differences...</span>';$st.textContent='Paste text to compare';$stats.innerHTML=''}
+function copyDiff(){const t=$out.innerText;navigator.clipboard.writeText(t);const o=$st.textContent;$st.textContent='📋 Copied!';setTimeout(()=>$st.textContent=o,1500)}
+function loadSample(){
+  $a.value='function greet(name) {\n  console.log("Hello, " + name);\n  return true;\n}\n\ngreet("World");';
+  $b.value='function greet(name, greeting) {\n  console.log(greeting + ", " + name + "!");\n  return true;\n}\n\ngreet("World", "Hi");\nconsole.log("Done");';
+  compare();
+}
+</script>
+</body>
+</html>
