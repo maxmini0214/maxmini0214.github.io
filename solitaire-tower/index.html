@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Solitaire Tower - Free Online Solitaire Game | MaxMini</title>
-  <meta name="description" content="Play Solitaire Tower free online. Stack cards strategically and clear the tower. No download, no signup required.">
-  <meta property="og:title" content="Solitaire Tower - Free Online Solitaire Game">
-  <meta property="og:description" content="Play Solitaire Tower free online. Stack cards strategically and clear the tower.">
-  <meta name="keywords" content="solitaire online free, free solitaire, browser solitaire, solitaire tower game free, solitaire online free no download">
+  <title>Solitaire Tower - Free Online Card Game | MaxMini</title>
+  <meta name="description" content="Play Solitaire Tower free online. Remove cards one higher or lower than the draw pile to clear the tower. No download, no signup. Works on mobile & desktop.">
+  <meta property="og:title" content="Solitaire Tower - Free Online Card Game">
+  <meta property="og:description" content="Play Solitaire Tower free online. Remove cards one higher or lower than the draw pile to clear the tower. No download required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxmini0214.github.io/solitaire-tower/">
+  <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="solitaire online free, free solitaire game, tower solitaire, card game free, solitaire no download, solitaire mobile, tri peaks solitaire free">
   <link rel="canonical" href="https://maxmini0214.github.io/solitaire-tower/">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": "Solitaire Tower",
-    "description": "Play Solitaire Tower free online. Stack cards strategically and clear the tower. No download, no signup required.",
+    "description": "Play Solitaire Tower free online. Remove cards one higher or lower than the draw pile to clear the tower. No download, no signup required.",
     "url": "https://maxmini0214.github.io/solitaire-tower/",
     "genre": "Card Game",
     "gamePlatform": "Web Browser",
@@ -34,14 +37,224 @@
     "isAccessibleForFree": true
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I play Solitaire Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click cards that are one higher or one lower than the current draw pile card. Chain combos by removing multiple cards in a row. Clear all cards from the tower to win. Kings wrap to Aces and vice versa."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Solitaire Tower free to play?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, completely free. No download, no signup, no ads. Play instantly in your browser on desktop or mobile."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Solitaire Tower work on mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The game is fully responsive and works on iOS Safari, Android Chrome, and all modern mobile browsers. Just tap cards to play."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best strategy for Solitaire Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Focus on uncovering face-down cards first. Build long chains for combo bonuses. Save your draw pile cards — don't draw when you can still match. Look for sequences that let you remove many cards in one chain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data collected while playing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The game runs 100% in your browser. No data is sent to any server. No cookies, no tracking, no analytics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play Solitaire Tower offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After the page loads once, the game runs entirely in your browser. If your connection drops mid-game, you can keep playing. Bookmark the page for quick access."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "MaxMini", "item": "https://maxmini0214.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "Games", "item": "https://maxmini0214.github.io/games.html"},
+      {"@type": "ListItem", "position": 3, "name": "Solitaire Tower"}
+    ]
+  }
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { background: #000; width: 100%; height: 100%; overflow: hidden; }
+    html { background: #0a0a0a; color: #e0e0e0; font-family: system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+    body { background: #0a0a0a; }
+    #game-section { width: 100%; height: 100vh; position: relative; }
     #game-container { width: 100%; height: 100%; }
+    #scroll-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); color: #666; font-size: 12px; animation: bounce 2s infinite; z-index: 10; pointer-events: none; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
+    .content { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+    h2 { font-size: 1.4em; margin: 32px 0 16px; color: #fff; }
+    h3 { font-size: 1.1em; margin: 24px 0 10px; color: #ddd; }
+    p, li { line-height: 1.7; color: #bbb; margin-bottom: 8px; }
+    ul, ol { padding-left: 24px; margin-bottom: 16px; }
+    .breadcrumb { font-size: 13px; color: #666; margin-bottom: 24px; }
+    .breadcrumb a { color: #888; text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+    .how-to { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 24px; margin: 20px 0; }
+    .step { display: flex; gap: 14px; margin-bottom: 16px; }
+    .step-num { background: #2563eb; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .step-text { flex: 1; }
+    .step-text strong { color: #fff; }
+    details { background: #141414; border: 1px solid #222; border-radius: 8px; margin-bottom: 8px; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: #ddd; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::after { content: '+'; font-size: 18px; color: #666; transition: transform .2s; }
+    details[open] summary::after { content: '−'; }
+    details .faq-answer { padding: 0 18px 16px; color: #aaa; line-height: 1.7; }
+    .share-row { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+    .share-row button, .share-row a { background: #1a1a2e; border: 1px solid #333; color: #ccc; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; text-decoration: none; transition: all .15s; display: inline-flex; align-items: center; gap: 6px; }
+    .share-row button:hover, .share-row a:hover { background: #222; border-color: #555; color: #fff; }
+    .cta-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #2563eb33; border-radius: 12px; padding: 24px; margin: 28px 0; text-align: center; }
+    .cta-box h3 { color: #60a5fa; margin-top: 0; }
+    .cta-box a { display: inline-block; background: #2563eb; color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 10px; }
+    .cta-box a:hover { background: #3b82f6; }
+    .cross-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
+    .cross-links a { background: #141414; border: 1px solid #222; border-radius: 8px; padding: 12px 16px; color: #ccc; text-decoration: none; font-size: 14px; transition: all .15s; }
+    .cross-links a:hover { background: #1a1a2e; border-color: #444; color: #fff; }
+    .newsletter { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 20px; margin: 28px 0; text-align: center; }
+    .newsletter a { color: #60a5fa; text-decoration: none; font-weight: 600; }
+    footer { text-align: center; padding: 20px; color: #555; font-size: 13px; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { color: #aaa; }
+    .strategy-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .strategy-table th, .strategy-table td { padding: 10px 14px; border: 1px solid #222; text-align: left; }
+    .strategy-table th { background: #141414; color: #ddd; font-weight: 600; }
+    .strategy-table td { color: #aaa; }
   </style>
 </head>
 <body>
-  <div id="game-container"></div>
+  <section id="game-section">
+    <div id="game-container"></div>
+    <div id="scroll-hint">↓ Tips & FAQ below</div>
+  </section>
+
+  <div class="content">
+    <nav class="breadcrumb">
+      <a href="/">MaxMini</a> › <a href="/games.html">Games</a> › Solitaire Tower
+    </nav>
+
+    <h2>🃏 How to Play Solitaire Tower</h2>
+    <div class="how-to">
+      <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Check the draw pile</strong> — Look at the face-up card on your draw pile. This is your active card.</div></div>
+      <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Match ±1</strong> — Click any uncovered tower card that is exactly one higher or lower than the active card. Kings wrap to Aces.</div></div>
+      <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Build chains</strong> — Keep removing cards in a row without drawing for combo bonuses. Longer chains = higher scores.</div></div>
+      <div class="step"><span class="step-num">4</span><div class="step-text"><strong>Clear the tower</strong> — Remove all cards from the tower to win. If stuck, draw from the stock pile to get a new active card.</div></div>
+    </div>
+
+    <h2>🎯 Pro Strategies</h2>
+    <table class="strategy-table">
+      <thead><tr><th>Strategy</th><th>When to Use</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>🔓 Uncover face-downs</td><td>Multiple options available</td><td>⭐⭐⭐⭐ Reveals more moves</td></tr>
+        <tr><td>🔗 Build long chains</td><td>Sequence visible (e.g. 7→6→7→8)</td><td>⭐⭐⭐⭐ Maximum combo points</td></tr>
+        <tr><td>💾 Save stock draws</td><td>Playable cards still on tower</td><td>⭐⭐⭐ More options later</td></tr>
+        <tr><td>🔄 Use King-Ace wrap</td><td>Stuck at King or Ace</td><td>⭐⭐⭐ Keeps chain alive</td></tr>
+        <tr><td>📊 Count remaining cards</td><td>Late game with few cards left</td><td>⭐⭐ Plan final sequence</td></tr>
+      </tbody>
+    </table>
+
+    <div class="share-row">
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='✅ Copied!')">🔗 Share Game</button>
+      <a href="https://maxmini0214.itch.io/solitaire-tower" target="_blank" rel="noopener">❤️ Rate on itch.io</a>
+      <a href="/games.html">🎮 More Games</a>
+    </div>
+
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>How do I play Solitaire Tower?</summary>
+      <div class="faq-answer">Click cards that are one higher or one lower than the current draw pile card. Chain combos by removing multiple cards in a row. Clear all cards from the tower to win. Kings wrap to Aces and vice versa.</div>
+    </details>
+    <details>
+      <summary>Is Solitaire Tower completely free?</summary>
+      <div class="faq-answer">Yes — 100% free. No download, no signup, no ads, no in-app purchases. Play instantly in any modern browser.</div>
+    </details>
+    <details>
+      <summary>Does it work on mobile phones?</summary>
+      <div class="faq-answer">Yes! Fully responsive on iOS Safari, Android Chrome, and all modern mobile browsers. Tap cards to play — works just like the desktop version.</div>
+    </details>
+    <details>
+      <summary>What's the best strategy for high scores?</summary>
+      <div class="faq-answer">Focus on uncovering face-down cards first — they reveal more options. Build long chains for combo bonuses. Save your stock pile draws for when you truly have no matches. Remember: Kings wrap to Aces, so you can chain K→A→2 or 2→A→K.</div>
+    </details>
+    <details>
+      <summary>Is my data collected while playing?</summary>
+      <div class="faq-answer">No. The game runs 100% in your browser with zero server communication. No cookies, no tracking, no analytics. Your gameplay stays completely private.</div>
+    </details>
+    <details>
+      <summary>Can I play offline?</summary>
+      <div class="faq-answer">After the page loads once, the game runs entirely in your browser. If your connection drops mid-game, you can keep playing. Bookmark the page for quick access.</div>
+    </details>
+
+    <div class="cta-box">
+      <h3>💰 Track Your Budget Like You Track Your Score</h3>
+      <p style="color:#8899aa;margin-bottom:8px;">DonFlow — free budget planning tool. See where your money <em>should</em> go vs where it <em>actually</em> goes.</p>
+      <a href="https://maxmini0214.github.io/donflow/?demo">Try DonFlow Free →</a>
+    </div>
+
+    <h2>🎮 More Free Browser Games</h2>
+    <div class="cross-links">
+      <a href="/bubble-shooter/">🫧 Bubble Shooter</a>
+      <a href="/mine-field/">💣 Minesweeper</a>
+      <a href="/block-puzzle/">🧩 Block Puzzle</a>
+      <a href="/snake-arena/">🐍 Snake Arena</a>
+      <a href="/tower-defense/">🏰 Tower Defense</a>
+      <a href="/brick-breaker/">🧱 Brick Breaker</a>
+      <a href="/memory-cards/">🧠 Memory Cards</a>
+      <a href="/maze-runner/">🏃 Maze Runner</a>
+      <a href="/word-fall/">📝 Word Fall</a>
+      <a href="/random-defense/">⚔️ Random Defense</a>
+    </div>
+
+    <h3>🛠️ Developer Tools</h3>
+    <div class="cross-links">
+      <a href="/json-formatter/">JSON Formatter</a>
+      <a href="/password-generator/">Password Generator</a>
+      <a href="/regex-tester/">Regex Tester</a>
+    </div>
+
+    <div class="newsletter">
+      <p>📬 Get notified about new games & tools</p>
+      <a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Newsletter →</a>
+    </div>
+
+    <footer>
+      <a href="https://maxmini0214.github.io">maxmini0214</a> · <a href="/games.html">Games</a> · <a href="/">Tools</a> · <a href="https://github.com/maxmini0214">GitHub</a>
+    </footer>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
-<div id="itch-cta" style="position:fixed;bottom:0;left:0;right:0;background:rgba(30,30,30,0.95);padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:12px;z-index:9999;font-family:system-ui,sans-serif;font-size:14px;color:#ccc;backdrop-filter:blur(4px);border-top:1px solid #333"><span>❤️ Enjoy Solitaire Tower?</span><a href="https://maxmini0214.itch.io/solitaire-tower" target="_blank" rel="noopener" style="background:#fa5c5c;color:#fff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px">Support on itch.io</a><a href="/games.html" style="color:#aaa;text-decoration:none;font-size:12px;margin-left:8px">🎮 More Games</a><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;cursor:pointer;font-size:18px;margin-left:8px;padding:4px">✕</button></div></body>
+  <script>
+    let hintEl = document.getElementById('scroll-hint');
+    window.addEventListener('scroll', () => { if (hintEl && window.scrollY > 50) { hintEl.style.display = 'none'; } }, { passive: true });
+  </script>
+</body>
 </html>
