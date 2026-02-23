@@ -50,22 +50,79 @@ footer a{color:#64748b;text-decoration:none}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "Cron Expression Parser — Free Online Cron Schedule Explainer",
-  "description": "Parse and explain cron expressions in plain English. See next run times, validate syntax, and build cron schedules visually. 100% client-side, free forever.",
   "url": "https://maxmini0214.github.io/cron-parser/",
+  "description": "Parse and explain cron expressions in plain English. See next run times, validate syntax, and build cron schedules visually. 100% client-side, free forever.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
+  "operatingSystem": "Any",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
   },
+  "browserRequirements": "Requires JavaScript",
   "author": {
     "@type": "Organization",
     "name": "MaxDevTools",
     "url": "https://maxmini0214.github.io"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a cron expression?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A cron expression is a string of 5 fields (minute, hour, day of month, month, day of week) that defines a recurring schedule. For example, '0 9 * * 1-5' means 'every weekday at 9:00 AM'. Cron is used in Linux/Unix systems, CI/CD pipelines, and cloud schedulers like AWS CloudWatch and Google Cloud Scheduler."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does */5 mean in a cron expression?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The */5 syntax means 'every 5th unit'. In the minute field, */5 means every 5 minutes (0, 5, 10, 15...). In the hour field, */5 means every 5 hours. The * represents 'all values' and /5 is the step value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between cron and crontab?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cron is the scheduling daemon that runs in the background on Unix/Linux systems. Crontab (cron table) is the file where you define your scheduled tasks. You edit it with 'crontab -e'. Each line in a crontab file contains a cron expression followed by the command to run."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I run a cron job every Monday at 9 AM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the cron expression '0 9 * * 1'. Field breakdown: minute=0, hour=9, day=* (any), month=* (any), weekday=1 (Monday). In cron, 0=Sunday, 1=Monday, ..., 6=Saturday. Some systems also accept 7 for Sunday."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this cron parser free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, this cron expression parser is 100% free and runs entirely in your browser. No data is sent to any server, no account required, and no tracking. You can bookmark it or share a link with your cron expression pre-loaded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I share a cron expression with my team?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the 🔗 Share button to generate a URL with your cron expression encoded. Send the link to your team — when they open it, the expression is automatically loaded and parsed. No account or sign-up needed."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -91,15 +148,58 @@ footer a{color:#64748b;text-decoration:none}
 </div>
 </div>
 
+<div style="display:flex;gap:8px;margin-bottom:16px">
+<button id="shareBtn" onclick="shareCron()" style="padding:8px 16px;background:#334155;border:1px solid #475569;border-radius:8px;color:#38bdf8;font-size:.9rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px">🔗 Share</button>
+<span id="shareMsg" style="color:#4ade80;font-size:.85rem;align-self:center;display:none">Copied!</span>
+</div>
 <div id="output"></div>
 
-<div class="cta">
-<a href="https://github.com/maxmini0214" target="_blank" rel="noopener">🚀 Get the Pro Developer Toolkit</a>
-<p>50+ premium dev tools — one-time purchase, lifetime access</p>
+<!-- How to Use Guide -->
+<div class="result" style="margin-top:30px">
+<h2>📚 How to Use This Cron Parser</h2>
+<div style="padding:12px 0;line-height:1.8;color:#cbd5e1">
+<p><strong>Step 1:</strong> Enter a cron expression in the input field (5 fields: minute hour day month weekday).</p>
+<p style="margin-top:8px"><strong>Step 2:</strong> Read the plain English explanation that appears instantly.</p>
+<p style="margin-top:8px"><strong>Step 3:</strong> Check the "Next Runs" list to verify it matches your expected schedule.</p>
+<p style="margin-top:8px"><strong>Step 4:</strong> Click 🔗 <strong>Share</strong> to get a URL with your expression pre-loaded — perfect for documentation or team Slack.</p>
+<p style="margin-top:12px;color:#94a3b8;font-size:.85rem"><strong>Tip:</strong> Use the preset buttons for common patterns, then tweak the fields to match your needs. The field breakdown shows exactly what each part means.</p>
+</div>
 </div>
 
-<!-- Ad slot reserved -->
-<div id="ad-slot" style="min-height:90px;text-align:center;color:#334155;font-size:.7rem;margin:20px 0"><!-- Ad placement --></div>
+<!-- FAQ Section -->
+<div class="result" style="margin-top:20px">
+<h2>❓ Frequently Asked Questions</h2>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">What is a cron expression?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">A cron expression is a string of 5 fields (minute, hour, day of month, month, day of week) that defines a recurring schedule. It's used in Linux/Unix systems, CI/CD pipelines, and cloud schedulers like AWS CloudWatch and Google Cloud Scheduler.</p>
+</details>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">What does */5 mean in cron?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">The */5 syntax means "every 5th unit." In the minute field, */5 = every 5 minutes (0, 5, 10, 15...). The * means "all values" and /5 is the step.</p>
+</details>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">What's the difference between cron and crontab?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">Cron is the scheduling daemon. Crontab (cron table) is the file where you define your scheduled tasks. Edit it with <code style="background:#1e293b;padding:2px 6px;border-radius:4px">crontab -e</code>.</p>
+</details>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">How do I run a cron job every Monday at 9 AM?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">Use <code style="background:#1e293b;padding:2px 6px;border-radius:4px">0 9 * * 1</code>. Minute=0, hour=9, day=any, month=any, weekday=1 (Monday). In cron, 0=Sunday through 6=Saturday.</p>
+</details>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">Can I share a cron expression as a link?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">Yes! Click the 🔗 Share button to copy a URL with your expression encoded. When someone opens the link, the expression is automatically loaded and parsed. No sign-up needed.</p>
+</details>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">Is this tool free?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">100% free, forever. Runs entirely in your browser — no data is sent anywhere. No account, no tracking, no ads.</p>
+</details>
+</div>
+
+<!-- DonFlow CTA -->
+<div class="cta">
+<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">🏦 DonFlow — Budget Drift Detector</a>
+<p>See where your budget plan and reality diverge. Zero backend, zero tracking — try the live demo.</p>
+</div>
 </div>
 
 <footer>
@@ -206,17 +306,36 @@ function parse(){
   }catch(e){out.innerHTML=`<div class="result"><div class="error">⚠️ ${e.message}</div></div>`}
 }
 
+function shareCron(){
+  const expr=document.getElementById('cronInput').value.trim();
+  const url=new URL(window.location.href.split('?')[0]);
+  url.searchParams.set('expr',expr);
+  navigator.clipboard.writeText(url.toString()).then(()=>{
+    const msg=document.getElementById('shareMsg');
+    msg.style.display='inline';
+    setTimeout(()=>msg.style.display='none',2000);
+  }).catch(()=>{prompt('Copy this link:',url.toString())});
+}
+
+// Load from URL params
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  const expr=params.get('expr');
+  if(expr){document.getElementById('cronInput').value=expr}
+})();
+
 document.getElementById('cronInput').addEventListener('input',parse);
 parse();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
+<!-- Newsletter CTA -->
+<div style="max-width:480px;margin:2rem auto;padding:1.5rem;background:#f8f9fa;border-radius:12px;text-align:center;font-family:system-ui,sans-serif">
+<p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600">📬 Get Dev Tools & Tips Weekly</p>
+<p style="margin:0 0 1rem;color:#666;font-size:0.9rem">Free tools, automation tricks, and AI insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="email" name="email" placeholder="your@email.com" required style="padding:0.5rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;width:200px">
+<input type="submit" value="Subscribe" style="padding:0.5rem 1rem;background:#0069ff;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600">
+</form>
 </div>
 </body>
 </html>
