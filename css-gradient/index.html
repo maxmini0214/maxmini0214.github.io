@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CSS Gradient Generator — Free Online Tool | MaxDevTools</title>
-<meta name="description" content="Create beautiful CSS gradients with 2-3 colors, adjustable direction, and one-click CSS code copy. Free online gradient maker.">
+<meta name="description" content="Create beautiful CSS gradients with 2-3 colors, adjustable direction, and one-click CSS code copy. Free online gradient maker — no signup, no tracking.">
+<meta name="keywords" content="css gradient generator, linear gradient, radial gradient, css gradient maker, gradient css code, background gradient, css gradient tool">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/css-gradient/">
 <meta property="og:title" content="CSS Gradient Generator — Free Online Tool">
-<meta property="og:description" content="Create beautiful CSS gradients visually and copy the code. Free, no signup.">
+<meta property="og:description" content="Create beautiful CSS gradients visually and copy the code. Free, no signup, no tracking.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/css-gradient/">
 <meta name="twitter:card" content="summary">
@@ -38,15 +39,36 @@ header p{color:var(--text2)}
 .switch input:checked+.slider::before{transform:translateX(20px)}
 .code-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;font-family:var(--mono);font-size:.9rem;color:var(--green);cursor:pointer;word-break:break-all;margin-bottom:.5rem;transition:border-color .2s}
 .code-box:hover{border-color:var(--cyan)}
-.copy-hint{font-size:.8rem;color:var(--text2);text-align:center;margin-bottom:2rem}
-.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.copy-hint{font-size:.8rem;color:var(--text2);text-align:center;margin-bottom:1rem}
+.btn-row{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem}
+.btn-row button{background:var(--surface);color:var(--cyan);border:1px solid var(--border);padding:.6rem 1.25rem;border-radius:8px;cursor:pointer;font-size:.85rem;transition:border-color .2s}
+.btn-row button:hover{border-color:var(--cyan)}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.section h2{font-size:1.2rem;margin-bottom:1rem;color:var(--green)}
+.section h3{font-size:1rem;margin:1rem 0 .5rem;color:var(--cyan)}
+.section p,.section li{color:var(--text2);font-size:.9rem;line-height:1.6}
+.section ol,.section ul{padding-left:1.5rem;margin-bottom:.75rem}
+.section code{background:var(--bg);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.85rem;color:var(--green)}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:.75rem 1rem;cursor:pointer;font-size:.9rem;color:var(--text)}
+details summary:hover{color:var(--cyan)}
+details[open] summary{border-bottom:1px solid var(--border)}
+details .faq-body{padding:.75rem 1rem;font-size:.85rem;color:var(--text2);line-height:1.6}
+details .faq-body code{background:var(--bg);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.8rem;color:var(--green)}
+.cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:1.5rem}
 .cta h3{color:var(--cyan);margin-bottom:.5rem}
 .cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
 .cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;margin-bottom:1.5rem}
+.newsletter p{color:var(--text2);font-size:.85rem;margin-bottom:.75rem}
+.newsletter a{color:var(--cyan);font-weight:600}
+.tools-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+.tools-grid a{background:var(--bg);border:1px solid var(--border);padding:.4rem .75rem;border-radius:6px;font-size:.8rem;color:var(--text2);transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none}
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
-@media(max-width:500px){header h1{font-size:1.5rem}.preview{height:150px}}
+@media(max-width:500px){header h1{font-size:1.5rem}.preview{height:150px}.btn-row{flex-direction:column;align-items:center}}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -70,57 +92,224 @@ footer .brand{color:var(--cyan);font-weight:600}
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between linear-gradient and radial-gradient in CSS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "linear-gradient creates a color transition along a straight line (e.g., left to right, top to bottom, or at any angle). radial-gradient creates a color transition radiating outward from a center point in a circle or ellipse. Both accept multiple color stops. Use linear for backgrounds and headers; radial for spotlight effects and buttons."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a CSS gradient with JavaScript?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Set the background property directly: element.style.background = 'linear-gradient(135deg, #00ff88, #00d4ff)'; For dynamic gradients, build the string from variables: const grad = `linear-gradient(${angle}deg, ${color1}, ${color2})`; element.style.background = grad;"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use more than two colors in a CSS gradient?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! CSS gradients support unlimited color stops. Example: background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); You can also control where each color starts/ends: linear-gradient(to right, red 0%, yellow 33%, blue 66%, green 100%). This tool supports up to 3 colors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a gradient text effect in CSS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use background-clip: text with a transparent text color. CSS: h1 { background: linear-gradient(135deg, #00ff88, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; } This works in all modern browsers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the best gradient color combinations for web design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Popular gradient pairs: Blue→Purple (#667eea→#764ba2, 'Cosmic Fusion'), Green→Cyan (#00ff88→#00d4ff, 'Aurora'), Orange→Pink (#f093fb→#f5576c, 'Sunset'), Dark Blue→Teal (#0f2027→#2c5364, 'Midnight'). Tip: Use analogous colors (next to each other on the color wheel) for smooth gradients, or complementary colors for bold contrast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this CSS gradient generator free and private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This tool runs entirely in your browser — no data is sent to any server. No signup, no tracking cookies, no accounts. Your gradient settings stay on your device. You can share specific gradients via URL parameters."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="container">
 <header>
 <h1>🎨 CSS Gradient Generator</h1>
-<p>Pick colors, choose direction, copy the CSS</p>
+<p>Pick colors, choose direction, copy the CSS — free, no signup</p>
 </header>
 
-<div class="preview" id="preview"></div>
+<div class="preview" id="preview" role="img" aria-label="Gradient preview"></div>
 
 <div class="controls">
 <div class="control-row">
 <label>Color 1</label>
-<input type="color" id="c1" value="#00ff88">
+<input type="color" id="c1" value="#00ff88" aria-label="First gradient color">
 </div>
 <div class="control-row">
 <label>Color 2</label>
-<input type="color" id="c2" value="#00d4ff">
+<input type="color" id="c2" value="#00d4ff" aria-label="Second gradient color">
 </div>
 <div class="control-row switch-row">
 <label>Color 3</label>
-<label class="switch"><input type="checkbox" id="useC3"><span class="slider"></span></label>
-<input type="color" id="c3" value="#8b5cf6" style="opacity:.4">
+<label class="switch"><input type="checkbox" id="useC3" aria-label="Enable third color"><span class="slider"></span></label>
+<input type="color" id="c3" value="#8b5cf6" style="opacity:.4" aria-label="Third gradient color">
 </div>
 <div class="control-row">
 <label>Direction</label>
-<select id="dir">
+<select id="dir" aria-label="Gradient direction">
 <option value="to right">→ to right</option>
 <option value="to left">← to left</option>
 <option value="to bottom">↓ to bottom</option>
 <option value="to top">↑ to top</option>
 <option value="135deg" selected>↘ 135°</option>
 <option value="45deg">↗ 45°</option>
-<option value="circle" >⊙ radial</option>
+<option value="circle">⊙ radial</option>
 </select>
 </div>
 </div>
 
-<div class="code-box" id="codeBox"></div>
+<div class="code-box" id="codeBox" role="button" aria-label="Click to copy CSS code"></div>
 <div class="copy-hint" id="copyHint">Click CSS to copy</div>
 
+<div class="btn-row">
+<button onclick="shareGradient()" aria-label="Share this gradient">🔗 Share</button>
+<button onclick="randomGradient()" aria-label="Generate random gradient">🎲 Random</button>
+</div>
+
+<!-- How to Use -->
+<div class="section">
+<h2>📖 How to Use This CSS Gradient Generator</h2>
+<ol>
+<li><strong>Pick colors</strong> — Choose 2 colors with the color pickers. Toggle "Color 3" for tri-color gradients.</li>
+<li><strong>Set direction</strong> — Select from linear directions (→ ← ↑ ↓ ↗ ↘) or radial (⊙).</li>
+<li><strong>Copy the CSS</strong> — Click the code box to copy the <code>background</code> property to your clipboard.</li>
+<li><strong>Share it</strong> — Click 🔗 Share to get a URL with your exact gradient settings. Send it to your team or bookmark it.</li>
+</ol>
+
+<h3>CSS Gradient Syntax Quick Reference</h3>
+<p><strong>Linear:</strong> <code>background: linear-gradient(135deg, #00ff88, #00d4ff);</code></p>
+<p><strong>Radial:</strong> <code>background: radial-gradient(circle, #00ff88, #00d4ff);</code></p>
+<p><strong>With stops:</strong> <code>background: linear-gradient(to right, red 0%, blue 50%, green 100%);</code></p>
+<p><strong>Text gradient:</strong></p>
+<p><code>background: linear-gradient(135deg, #00ff88, #00d4ff);<br>-webkit-background-clip: text;<br>-webkit-text-fill-color: transparent;</code></p>
+</div>
+
+<!-- FAQ Accordion -->
+<div class="section">
+<h2>❓ Frequently Asked Questions</h2>
+
+<details>
+<summary>What's the difference between linear-gradient and radial-gradient?</summary>
+<div class="faq-body">
+<p><strong>linear-gradient</strong> transitions along a line (left→right, top→bottom, or any angle). <strong>radial-gradient</strong> radiates from a center point outward. Use linear for page backgrounds, headers, and cards. Use radial for spotlight effects, buttons, and circular highlights.</p>
+</div>
+</details>
+
+<details>
+<summary>How do I create a gradient with JavaScript?</summary>
+<div class="faq-body">
+<p>Set the <code>background</code> property directly:</p>
+<p><code>element.style.background = `linear-gradient(${angle}deg, ${c1}, ${c2})`;</code></p>
+<p>For React: <code>style=&#123;&#123; background: `linear-gradient(135deg, ${c1}, ${c2})` &#125;&#125;</code></p>
+<p>In Tailwind CSS: <code>bg-gradient-to-r from-green-400 to-blue-500</code></p>
+</div>
+</details>
+
+<details>
+<summary>Can I animate a CSS gradient?</summary>
+<div class="faq-body">
+<p>CSS can't directly animate <code>background</code> gradients. Two workarounds:</p>
+<p><strong>1. CSS Houdini (modern browsers):</strong> Register a custom property with <code>@property</code> and animate it.</p>
+<p><strong>2. Background-size trick:</strong> Set <code>background-size: 200% 200%</code> and animate <code>background-position</code> with keyframes. This creates a smooth gradient shift effect.</p>
+</div>
+</details>
+
+<details>
+<summary>What are the best gradient color combinations?</summary>
+<div class="faq-body">
+<p><strong>Popular pairs:</strong> Blue→Purple (#667eea→#764ba2), Green→Cyan (#00ff88→#00d4ff), Orange→Pink (#f093fb→#f5576c), Dark→Teal (#0f2027→#2c5364).</p>
+<p><strong>Tip:</strong> Analogous colors (neighbors on the color wheel) = smooth. Complementary colors = bold contrast. Click 🎲 Random to discover unexpected combos!</p>
+</div>
+</details>
+
+<details>
+<summary>How do I create gradient text in CSS?</summary>
+<div class="faq-body">
+<p>Use <code>background-clip: text</code>:</p>
+<p><code>h1 {<br>&nbsp;&nbsp;background: linear-gradient(135deg, #00ff88, #00d4ff);<br>&nbsp;&nbsp;-webkit-background-clip: text;<br>&nbsp;&nbsp;-webkit-text-fill-color: transparent;<br>&nbsp;&nbsp;background-clip: text;<br>}</code></p>
+<p>Works in all modern browsers (Chrome, Firefox, Safari, Edge).</p>
+</div>
+</details>
+
+<details>
+<summary>Is this tool free and private?</summary>
+<div class="faq-body">
+<p>100% free, 100% private. Everything runs in your browser — no data leaves your device. No signup, no cookies, no tracking. You can share gradients via URL parameters, but that's your choice.</p>
+</div>
+</details>
+</div>
+
+<!-- DonFlow CTA -->
 <div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>Plan your budget, import bank data, see where reality drifts from your plan. Zero signup, zero cloud — just like this tool.</p>
+<a class="cta-btn" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try DonFlow Free →</a>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get notified when we ship new tools</p>
+<a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Morning Brief →</a>
+</div>
+
+<!-- Cross-links -->
+<div class="section">
+<h2>🔧 More Free Developer Tools</h2>
+<div class="tools-grid">
+<a href="/color-picker/">Color Picker</a>
+<a href="/box-shadow-generator/">Box Shadow</a>
+<a href="/json-formatter/">JSON Formatter</a>
+<a href="/regex-tester/">Regex Tester</a>
+<a href="/base64-tool/">Base64</a>
+<a href="/jwt-decoder/">JWT Decoder</a>
+<a href="/hash-generator/">Hash Generator</a>
+<a href="/password-generator/">Password Gen</a>
+<a href="/url-encoder/">URL Encoder</a>
+<a href="/unix-timestamp/">Unix Timestamp</a>
+<a href="/keyword-mixer/">Keyword Mixer</a>
+<a href="/cron-parser/">Cron Parser</a>
+<a href="/lorem-ipsum/">Lorem Ipsum</a>
+<a href="/markdown-preview/">Markdown Preview</a>
+<a href="/qr-code-generator/">QR Code</a>
+<a href="/diff-checker/">Diff Checker</a>
+<a href="/pomodoro-timer/">Pomodoro Timer</a>
 </div>
 </div>
+</div>
+
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+<a href="/">← Back to All Tools</a> · <a href="/games.html">🎮 Games</a> · <a href="/store.html">📦 Store</a><br><br>
+Part of <span class="brand"><a href="https://maxmini0214.github.io">MaxDevTools</a></span> · <a href="https://github.com/maxmini0214">GitHub</a> · © 2024–2026
 </footer>
+
 <script>
 const $=id=>document.getElementById(id);
 function update(){
@@ -139,15 +328,37 @@ $('codeBox').addEventListener('click',()=>{
     $('copyHint').textContent='✓ Copied!';setTimeout(()=>$('copyHint').textContent='Click CSS to copy',1500);
   });
 });
-update();
+
+function shareGradient(){
+  const p=new URLSearchParams();
+  p.set('c1',$('c1').value);
+  p.set('c2',$('c2').value);
+  if($('useC3').checked)p.set('c3',$('c3').value);
+  p.set('d',$('dir').value);
+  const url=location.origin+location.pathname+'?'+p.toString();
+  navigator.clipboard.writeText(url).then(()=>{
+    $('copyHint').textContent='✓ Share link copied!';setTimeout(()=>$('copyHint').textContent='Click CSS to copy',2000);
+  });
+}
+
+function randomGradient(){
+  const rnd=()=>'#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+  $('c1').value=rnd();$('c2').value=rnd();
+  if(Math.random()>.5){$('useC3').checked=true;$('c3').value=rnd();$('c3').style.opacity='1';}
+  const dirs=['to right','to left','to bottom','to top','135deg','45deg','circle'];
+  $('dir').value=dirs[Math.floor(Math.random()*dirs.length)];
+  update();
+}
+
+// Restore from URL params
+(function(){
+  const p=new URLSearchParams(location.search);
+  if(p.has('c1'))$('c1').value=p.get('c1');
+  if(p.has('c2'))$('c2').value=p.get('c2');
+  if(p.has('c3')){$('useC3').checked=true;$('c3').value=p.get('c3');$('c3').style.opacity='1';}
+  if(p.has('d'))$('dir').value=p.get('d');
+  update();
+})();
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
