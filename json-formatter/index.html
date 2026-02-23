@@ -16,7 +16,19 @@
 <meta name="twitter:description" content="Beautify, validate, and minify JSON instantly. 100% client-side, no data leaves your browser.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/json-formatter/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter & Validator Online","description":"Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser. No data sent to servers.","url":"https://maxmini0214.github.io/json-formatter/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSONForge","url":"https://maxmini0214.github.io/json-formatter/","description":"Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is this JSON formatter safe to use with sensitive data?","acceptedAnswer":{"@type":"Answer","text":"Yes. JSONForge runs 100% in your browser. Your JSON data is never sent to any server. You can verify this by opening your browser's Network tab — zero requests are made when you paste or format JSON."}},
+    {"@type":"Question","name":"What is the maximum JSON file size I can format?","acceptedAnswer":{"@type":"Answer","text":"JSONForge can handle JSON files up to several megabytes directly in your browser. Performance depends on your device, but typical API responses and config files are processed instantly."}},
+    {"@type":"Question","name":"How do I validate JSON syntax?","acceptedAnswer":{"@type":"Answer","text":"Simply paste your JSON into the input area. JSONForge automatically validates the syntax and shows a green checkmark for valid JSON, or a red error message with the exact line and position of any syntax error."}},
+    {"@type":"Question","name":"Can I minify JSON to reduce file size?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click the Minify button to remove all whitespace and newlines from your JSON, producing the smallest possible output. This is useful for API payloads, config files, and reducing bandwidth."}},
+    {"@type":"Question","name":"How do I sort JSON keys alphabetically?","acceptedAnswer":{"@type":"Answer","text":"Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files."}},
+    {"@type":"Question","name":"Can I share my formatted JSON with someone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed."}}
+  ]
+}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--accent:#3b82f6;--accent-hover:#2563eb;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
@@ -42,25 +54,35 @@ textarea{flex:1;background:var(--surface);color:var(--text);border:1px solid var
 textarea:focus{border-color:var(--accent)}
 textarea::placeholder{color:#475569}
 .stats{display:flex;gap:1.5rem;margin-top:.75rem;font-size:.8rem;color:var(--muted)}
-.cta-bar{text-align:center;margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#253352);border-radius:12px;border:1px solid var(--border)}
-.cta-bar h3{font-size:1.1rem;margin-bottom:.5rem}
-.cta-bar p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
-.cta-bar a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
-.cta-bar a:hover{transform:translateY(-1px)}
-footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
-footer a{color:var(--accent);text-decoration:none}
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
 .feature{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
 .feature h4{font-size:.9rem;margin-bottom:.3rem}
 .feature p{font-size:.8rem;color:var(--muted)}
 .error-line{color:var(--red);font-size:.8rem;margin-top:.3rem;min-height:1.2em}
+.guide{margin:2rem 0;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.guide h2{font-size:1.2rem;margin-bottom:1rem}
+.guide ol{padding-left:1.5rem;color:var(--muted);line-height:2}
+.guide ol li{margin-bottom:.5rem}
+.guide ol li strong{color:var(--text)}
+.faq-section{margin:2rem 0}
+.faq-section h2{font-size:1.2rem;margin-bottom:1rem}
+.faq-section details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;padding:1rem}
+.faq-section summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--text)}
+.faq-section details p{margin-top:.75rem;color:var(--muted);font-size:.85rem;line-height:1.6}
+.cta-donflow{text-align:center;margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#253352);border-radius:12px;border:1px solid var(--border)}
+.cta-donflow h3{font-size:1.1rem;margin-bottom:.5rem}
+.cta-donflow p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
+.cta-donflow a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,var(--accent),#a78bfa);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
+.cta-donflow a:hover{transform:translateY(-1px)}
+footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+footer a{color:var(--accent);text-decoration:none}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <header>
-<h1>API 응답 디버깅할 때 깨진 JSON, 1초만에 정리</h1>
-<p>붙여넣기만 하면 포맷팅 · 검증 · 압축 — 브라우저에서 바로, 서버 전송 없음</p>
+<h1>JSON Formatter & Validator Online</h1>
+<p>Paste → Beautify → Copy. 100% in your browser, zero server calls.</p>
 </header>
 <div class="container">
 <div class="toolbar">
@@ -68,6 +90,7 @@ footer a{color:var(--accent);text-decoration:none}
 <button onclick="minifyJSON()">Minify</button>
 <button onclick="sortKeys()">Sort Keys</button>
 <button onclick="copyOutput()">📋 Copy</button>
+<button onclick="shareJSON()">🔗 Share</button>
 <button onclick="clearAll()">Clear</button>
 <button onclick="loadSample()">Sample</button>
 <span class="status idle" id="status">Paste JSON to start</span>
@@ -75,7 +98,9 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="editor-wrap">
 <div class="pane">
 <label>Input</label>
-<textarea id="input" placeholder='Paste your JSON here...\n\n{"name": "example", "value": 42}'></textarea>
+<textarea id="input" placeholder='Paste your JSON here...
+
+{"name": "example", "value": 42}'></textarea>
 <div class="error-line" id="error"></div>
 </div>
 <div class="pane">
@@ -97,31 +122,71 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
 </div>
 
-<!-- Ad placeholder -->
-<!-- <div id="ad-slot" style="text-align:center;margin:1rem 0;min-height:90px;"></div> -->
+<!-- How to Use Guide -->
+<div class="guide">
+<h2>📖 How to Use This JSON Formatter</h2>
+<ol>
+<li><strong>Paste your JSON</strong> into the Input area on the left. The tool instantly validates it and shows ✓ Valid or ✗ Invalid.</li>
+<li><strong>Click Beautify</strong> to format with proper indentation, or <strong>Minify</strong> to compress into a single line for API payloads.</li>
+<li><strong>Sort Keys</strong> alphabetically for consistent ordering — great for comparing configs or debugging diffs.</li>
+<li><strong>Copy or Share</strong> — use 📋 Copy to grab the output, or 🔗 Share to generate a URL with your JSON pre-loaded (no server storage).</li>
+</ol>
+</div>
 
-<div style="margin:20px auto;max-width:500px;background:linear-gradient(135deg,#3b82f6,#a78bfa);border-radius:12px;padding:20px;text-align:center;color:white;">
-<h3 style="margin:0 0 8px">⚡ JSON Power Tools Pro — $3</h3>
-<p style="margin:0 0 12px;opacity:0.9;font-size:14px">Offline desktop app + large file support (100MB+). Includes JSON diff, schema validation & CSV/YAML conversion.</p>
-<a href="https://github.com/maxmini0214" target="_blank" style="display:inline-block;background:white;color:#3b82f6;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:bold">⭐ More Free Tools →</a>
+<!-- DonFlow CTA -->
+<div class="cta-donflow">
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>See where your budget plan and reality diverge. Zero backend, zero tracking — just like this tool.</p>
+<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank">Try the Live Demo →</a>
+</div>
+
+<!-- FAQ Section -->
+<div class="faq-section">
+<h2>❓ Frequently Asked Questions</h2>
+<details><summary>Is this JSON formatter safe to use with sensitive data?</summary><p>Yes. JSONForge runs 100% in your browser. Your JSON data is never sent to any server. You can verify this by opening your browser's Network tab — zero requests are made when you paste or format JSON.</p></details>
+<details><summary>What is the maximum JSON file size I can format?</summary><p>JSONForge can handle JSON files up to several megabytes directly in your browser. Performance depends on your device, but typical API responses and config files are processed instantly.</p></details>
+<details><summary>How do I validate JSON syntax?</summary><p>Simply paste your JSON into the input area. JSONForge automatically validates the syntax and shows a green checkmark for valid JSON, or a red error message with the exact line and position of any syntax error.</p></details>
+<details><summary>Can I minify JSON to reduce file size?</summary><p>Yes. Click the Minify button to remove all whitespace and newlines from your JSON, producing the smallest possible output. This is useful for API payloads, config files, and reducing bandwidth.</p></details>
+<details><summary>How do I sort JSON keys alphabetically?</summary><p>Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files.</p></details>
+<details><summary>Can I share my formatted JSON with someone?</summary><p>Yes! Click the 🔗 Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed.</p></details>
 </div>
 
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
-<div class="tools-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem">
 <a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
 <a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
 <a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
 <a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
-<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
-<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+<a style="display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600" href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+</div>
+
+<!-- Newsletter CTA -->
+<div style="max-width:480px;margin:2rem auto;padding:1.5rem;background:#f8f9fa;border-radius:12px;text-align:center;font-family:system-ui,sans-serif">
+<p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#1e293b">📬 Get Dev Tools & Tips Weekly</p>
+<p style="margin:0 0 1rem;color:#666;font-size:0.9rem">Free tools, automation tricks, and AI insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="email" name="email" placeholder="your@email.com" required style="padding:0.5rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;width:200px">
+<input type="submit" value="Subscribe" style="padding:0.5rem 1rem;background:#0069ff;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600">
+</form>
 </div>
 </div>
+
 <footer>
-<p>Built by <a href="https://github.com/maxseats" target="_blank">MaxxMini</a> · Open source · No tracking</p>
+<p>Built by <a href="https://github.com/maxmini0214" target="_blank">MaxxMini</a> · Open source · No tracking</p>
 </footer>
+
 <script>
 const $i=document.getElementById('input'),$o=document.getElementById('output'),$s=document.getElementById('status'),$e=document.getElementById('error');
 $i.addEventListener('input',validate);
+
+// Load shared JSON from URL
+(function(){
+  const p=new URLSearchParams(location.search);
+  const d=p.get('d');
+  if(d){try{$i.value=atob(d);validate();formatJSON()}catch(e){}}
+})();
+
 function validate(){
   const v=$i.value.trim();
   if(!v){$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('');return null}
@@ -133,6 +198,14 @@ function minifyJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p);
 function sortKeys(){const p=validate();if(p!==null){const o=JSON.stringify(sortObj(p),null,2);$o.value=o;updateStats(o)}}
 function sortObj(o){if(Array.isArray(o))return o.map(sortObj);if(o&&typeof o==='object'){const s={};Object.keys(o).sort().forEach(k=>s[k]=sortObj(o[k]));return s}return o}
 function copyOutput(){if($o.value){navigator.clipboard.writeText($o.value);const t=$s.textContent;$s.textContent='📋 Copied!';setTimeout(()=>$s.textContent=t,1500)}}
+function shareJSON(){
+  const v=$i.value.trim();
+  if(!v){$s.textContent='Nothing to share';return}
+  const url=location.origin+location.pathname+'?d='+btoa(v);
+  navigator.clipboard.writeText(url);
+  $s.textContent='🔗 Link copied!';
+  setTimeout(()=>validate(),2000);
+}
 function clearAll(){$i.value='';$o.value='';$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('')}
 function loadSample(){$i.value=JSON.stringify({name:"JSONForge",version:"1.0",features:["format","validate","minify","sort"],config:{theme:"dark",indent:2,maxDepth:10},tags:["json","tool","free"],stats:{users:12500,rating:4.8}},null,2);validate();formatJSON()}
 function updateStats(s){
@@ -144,14 +217,5 @@ function updateStats(s){
 }
 function getDepth(o){if(typeof o!=='object'||o===null)return 0;const vals=Object.values(o);if(!vals.length)return 1;return 1+Math.max(...vals.map(getDepth))}
 </script>
-<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmaxmini0214.github.io%2Fjson-formatter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true" alt="Hits" /></a></div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
 </body>
 </html>
