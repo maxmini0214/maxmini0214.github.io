@@ -22,6 +22,9 @@ main{flex:1;max-width:900px;width:100%;margin:0 auto;padding:1rem}
 label{display:block;font-weight:600;margin-bottom:.5rem;color:#cbd5e1;font-size:.9rem}
 textarea{width:100%;height:120px;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#f1f5f9;padding:12px;font-family:'Fira Code',monospace;font-size:.85rem;resize:vertical;outline:none;transition:border .2s}
 textarea:focus{border-color:#818cf8}
+.btn-row{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+.sample-btn,.share-btn{background:none;border:1px solid #475569;color:#94a3b8;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.sample-btn:hover,.share-btn:hover{color:#f1f5f9;border-color:#818cf8}
 .status{margin-top:.5rem;padding:.4rem .8rem;border-radius:6px;font-size:.8rem;display:inline-block}
 .status.valid{background:#065f4620;color:#34d399;border:1px solid #065f46}
 .status.invalid{background:#7f1d1d20;color:#f87171;border:1px solid #7f1d1d}
@@ -30,7 +33,6 @@ textarea:focus{border-color:#818cf8}
 @media(max-width:600px){.panels{grid-template-columns:1fr}}
 .panel{background:#1e293b;border:1px solid #334155;border-radius:8px;overflow:hidden}
 .panel-header{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:#334155;font-weight:600;font-size:.85rem}
-.panel-header span{color:#94a3b8;font-size:.75rem;font-weight:400}
 .panel-body{padding:1rem;font-family:'Fira Code',monospace;font-size:.8rem;white-space:pre-wrap;word-break:break-all;min-height:80px;color:#e2e8f0;line-height:1.6}
 .copy-btn{background:none;border:1px solid #475569;color:#94a3b8;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:.7rem}
 .copy-btn:hover{color:#f1f5f9;border-color:#818cf8}
@@ -41,51 +43,69 @@ textarea:focus{border-color:#818cf8}
 .claim-value{font-size:.9rem;font-weight:600}
 .claim-value.expired{color:#f87171}
 .claim-value.valid-time{color:#34d399}
+h2{font-size:1.3rem;margin:2rem 0 1rem;color:#e2e8f0}
+.guide-steps{list-style:none;counter-reset:step}
+.guide-steps li{counter-increment:step;padding:.8rem 1rem .8rem 3rem;background:#1e293b;border:1px solid #334155;border-radius:8px;margin-bottom:.5rem;position:relative;line-height:1.5}
+.guide-steps li::before{content:counter(step);position:absolute;left:1rem;top:.8rem;background:#818cf8;color:#0f172a;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}
+.faq-item{border:1px solid #334155;border-radius:8px;margin-bottom:.5rem;overflow:hidden}
+.faq-item summary{padding:.8rem 1rem;cursor:pointer;font-weight:600;color:#cbd5e1;background:#1e293b;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::after{content:'▸';transition:transform .2s}
+.faq-item[open] summary::after{transform:rotate(90deg)}
+.faq-item .faq-body{padding:.8rem 1rem;color:#94a3b8;line-height:1.6;font-size:.9rem}
 .cta{text-align:center;padding:2rem 1rem;margin:1rem 0;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:12px}
 .cta h3{margin-bottom:.5rem;color:#e2e8f0}
 .cta p{color:#94a3b8;margin-bottom:1rem;font-size:.9rem}
 .cta a{display:inline-block;padding:.7rem 2rem;background:linear-gradient(135deg,#818cf8,#38bdf8);color:#0f172a;font-weight:700;border-radius:8px;text-decoration:none;transition:transform .2s}
 .cta a:hover{transform:scale(1.05)}
+.cross-links{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}
+.cross-links a{color:#818cf8;text-decoration:none;padding:4px 10px;border:1px solid #334155;border-radius:6px;font-size:.8rem;transition:border-color .2s}
+.cross-links a:hover{border-color:#818cf8}
 footer{text-align:center;padding:1.5rem;color:#475569;font-size:.8rem}
 footer a{color:#818cf8;text-decoration:none}
-.sample-btn{background:none;border:1px solid #475569;color:#94a3b8;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-top:.5rem}
-.sample-btn:hover{color:#f1f5f9;border-color:#818cf8}
-/* ad slot */
-.ad-slot{text-align:center;padding:1rem;margin:1rem 0;min-height:90px;border:1px dashed #334155;border-radius:8px;color:#475569;font-size:.75rem;display:flex;align-items:center;justify-content:center}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "JWT Decoder — Free Online JWT Token Debugger",
-  "description": "Decode and inspect JWT tokens instantly. View header, payload, and signature. Check expiration. 100% client-side, no data sent to servers.",
   "url": "https://maxmini0214.github.io/jwt-decoder/",
+  "description": "Decode and inspect JWT tokens instantly. View header, payload, and signature. Check expiration. 100% client-side, no data sent to servers.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is this JWT decoder safe to use with production tokens?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. This decoder runs 100% in your browser. No data is ever sent to any server. Your tokens never leave your machine."}},
+    {"@type": "Question", "name": "Can this tool verify JWT signatures?", "acceptedAnswer": {"@type": "Answer", "text": "This tool decodes and inspects JWT structure, header, payload, and claims. It does not verify cryptographic signatures since that requires the secret key or public key, which should never be shared with a web tool."}},
+    {"@type": "Question", "name": "What JWT algorithms are supported?", "acceptedAnswer": {"@type": "Answer", "text": "The decoder works with any JWT regardless of algorithm (HS256, RS256, ES256, etc.) since it decodes the base64 structure without needing the signing key."}},
+    {"@type": "Question", "name": "How do I check if a JWT is expired?", "acceptedAnswer": {"@type": "Answer", "text": "Paste your JWT and look at the Decoded Claims section. The 'exp' (Expiration) claim will show the expiry date and whether it's currently expired (red) or valid (green)."}},
+    {"@type": "Question", "name": "Can I share a decoded JWT with my team?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Click the Share button to generate a URL with your JWT encoded. Anyone opening the link will see the same decoded result instantly."}},
+    {"@type": "Question", "name": "What is the difference between JWT header and payload?", "acceptedAnswer": {"@type": "Answer", "text": "The header (JOSE) contains metadata like the signing algorithm (alg) and token type (typ). The payload contains the actual claims — user data, expiration, issuer, and custom fields."}}
+  ]
 }
 </script>
 </head>
 <body>
 <header>
-<h1>토큰 만료됐는데 언제인지 모를 때 — 1초 디코딩</h1>
-<p>Header · Payload · 만료시간 즉시 확인 — 서버 전송 없이 브라우저에서</p>
+<h1>JWT Decoder — Decode & Inspect Tokens Instantly</h1>
+<p>View header, payload, claims & expiration — 100% client-side, zero server calls</p>
 </header>
 <main>
 <div class="input-section">
 <label for="jwt-input">Paste your JWT token</label>
 <textarea id="jwt-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c" spellcheck="false"></textarea>
-<button class="sample-btn" id="sample-btn">Load sample JWT</button>
+<div class="btn-row">
+<button class="sample-btn" id="sample-btn">📋 Load Sample</button>
+<button class="share-btn" id="share-btn">🔗 Share</button>
+</div>
 <div class="status empty" id="status"></div>
 </div>
 
@@ -105,20 +125,46 @@ footer a{color:#818cf8;text-decoration:none}
 <div class="claim-grid" id="claim-grid"></div>
 </div>
 
-<div class="ad-slot"><!-- Ad Space Reserved --></div>
+<h2>How to Use This JWT Decoder</h2>
+<ol class="guide-steps">
+<li><strong>Paste your JWT</strong> — Copy the token from your API response, auth header, or cookie and paste it in the input box above.</li>
+<li><strong>View decoded parts</strong> — The header (algorithm, type) and payload (claims, user data) appear instantly in separate panels.</li>
+<li><strong>Check expiration</strong> — The Decoded Claims section shows exp/iat/nbf timestamps with color-coded validity (green = valid, red = expired).</li>
+<li><strong>Share or copy</strong> — Click Copy on any panel or use the Share button to generate a URL your team can open to see the same decoded token.</li>
+</ol>
 
 <div class="cta">
-<h3>⚡ Need a Developer Toolkit?</h3>
-<p>Get 50+ premium dev tools in one offline-ready package</p>
-<a href="https://github.com/maxmini0214" target="_blank" rel="noopener">Get Pro Toolkit →</a>
+<h3>🏦 Track Your Budget Like You Track Your Tokens</h3>
+<p>DonFlow — Plan vs reality budget tracker. 100% browser-only, zero accounts, zero servers.</p>
+<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try DonFlow →</a>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<details class="faq-item"><summary>Is this JWT decoder safe to use with production tokens?</summary><div class="faq-body">Yes. This decoder runs 100% in your browser. No data is ever sent to any server. Your tokens never leave your machine. You can verify this by opening DevTools → Network tab — zero requests are made when you paste a token.</div></details>
+<details class="faq-item"><summary>Can this tool verify JWT signatures?</summary><div class="faq-body">This tool decodes and inspects JWT structure, header, payload, and claims. It does not verify cryptographic signatures since that requires the secret key or public key, which should never be shared with a web tool. For signature verification, use a local library like <code>jsonwebtoken</code> (Node.js) or <code>PyJWT</code> (Python).</div></details>
+<details class="faq-item"><summary>What JWT algorithms are supported?</summary><div class="faq-body">The decoder works with any JWT regardless of algorithm — HS256, RS256, ES256, PS256, EdDSA, and more. Since it decodes the base64 structure without needing the signing key, the algorithm doesn't matter for inspection.</div></details>
+<details class="faq-item"><summary>How do I check if a JWT token is expired?</summary><div class="faq-body">Paste your JWT and look at the Decoded Claims section below the panels. The <strong>exp</strong> (Expiration) claim shows the expiry date with color coding — <span style="color:#34d399">green</span> means valid, <span style="color:#f87171">red</span> means expired. You can also see <strong>iat</strong> (Issued At) and <strong>nbf</strong> (Not Before) timestamps.</div></details>
+<details class="faq-item"><summary>Can I share a decoded JWT with my team?</summary><div class="faq-body">Yes! Click the 🔗 Share button to generate a URL with your JWT encoded in the URL parameters. Anyone opening the link will see the same decoded result instantly — great for debugging auth issues together.</div></details>
+<details class="faq-item"><summary>What is the difference between JWT header and payload?</summary><div class="faq-body">The <strong>header</strong> (JOSE Header) contains metadata: the signing algorithm (<code>alg</code>) and token type (<code>typ</code>). The <strong>payload</strong> contains the actual claims — user data, permissions, expiration time, issuer, and any custom fields your application needs.</div></details>
+
+<h2>More Developer Tools</h2>
+<div class="cross-links">
+<a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+<a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+<a href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+<a href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
 </div>
 </main>
 <footer>
-<p>Built by <a href="https://github.com/maxseats" target="_blank">maxseats</a> · No data leaves your browser · <a href="https://maxmini0214.github.io/json-formatter/">JSONForge</a> · <a href="https://maxmini0214.github.io/regex-tester/">RegexLab</a></p>
+<p>Built by <a href="https://github.com/maxmini0214" target="_blank">maxmini0214</a> · No data leaves your browser · Open source</p>
 </footer>
 
 <script>
-const input=document.getElementById('jwt-input'),headerBody=document.getElementById('header-body'),payloadBody=document.getElementById('payload-body'),status=document.getElementById('status'),claimsSection=document.getElementById('claims-section'),claimGrid=document.getElementById('claim-grid'),sampleBtn=document.getElementById('sample-btn');
+const input=document.getElementById('jwt-input'),headerBody=document.getElementById('header-body'),payloadBody=document.getElementById('payload-body'),status=document.getElementById('status'),claimsSection=document.getElementById('claims-section'),claimGrid=document.getElementById('claim-grid');
 
 const SAMPLE='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxODkzNDU2MDAwfQ.VEFt7VEBFpafWO2LDeUE1bFQxmd96wmqmNbpSqLCrcc';
 
@@ -130,27 +176,27 @@ function decode(){const v=input.value.trim();if(!v){headerBody.textContent='Past
 const parts=v.split('.');if(parts.length!==3){status.textContent='⚠ Invalid JWT — expected 3 parts (header.payload.signature), got '+parts.length;status.className='status invalid';headerBody.textContent='—';payloadBody.textContent='—';claimsSection.style.display='none';return}
 const header=b64decode(parts[0]),payload=b64decode(parts[1]);
 if(!header||!payload){status.textContent='⚠ Invalid JWT — could not decode base64';status.className='status invalid';headerBody.textContent=header?JSON.stringify(header,null,2):'Decode error';payloadBody.textContent=payload?JSON.stringify(payload,null,2):'Decode error';claimsSection.style.display='none';return}
-status.textContent='✓ Valid JWT structure · Algorithm: '+(header.alg||'?')+' · Type: '+(header.typ||'?');status.className='status valid';
+status.textContent='✓ Valid JWT · Algorithm: '+(header.alg||'?')+' · Type: '+(header.typ||'?');status.className='status valid';
 headerBody.textContent=JSON.stringify(header,null,2);payloadBody.textContent=JSON.stringify(payload,null,2);
 claimGrid.innerHTML='';const now=Math.floor(Date.now()/1000);
 for(const[k,val]of Object.entries(payload)){const card=document.createElement('div');card.className='claim-card';const lbl=document.createElement('div');lbl.className='claim-label';lbl.textContent=CLAIM_LABELS[k]||k;const vEl=document.createElement('div');vEl.className='claim-value';
-if((k==='exp'||k==='iat'||k==='nbf')&&typeof val==='number'){const d=new Date(val*1000);vEl.textContent=d.toLocaleString();if(k==='exp'){vEl.classList.add(val<now?'expired':'valid-time');vEl.textContent+= val<now?' (EXPIRED)':' (valid)'}}else{vEl.textContent=typeof val==='object'?JSON.stringify(val):String(val)}
+if((k==='exp'||k==='iat'||k==='nbf')&&typeof val==='number'){const d=new Date(val*1000);vEl.textContent=d.toLocaleString();if(k==='exp'){vEl.classList.add(val<now?'expired':'valid-time');vEl.textContent+=val<now?' (EXPIRED)':' (valid)'}}else{vEl.textContent=typeof val==='object'?JSON.stringify(val):String(val)}
 card.append(lbl,vEl);claimGrid.appendChild(card)}
 claimsSection.style.display=claimGrid.children.length?'block':'none'}
 
 input.addEventListener('input',decode);
-sampleBtn.addEventListener('click',()=>{input.value=SAMPLE;decode()});
+document.getElementById('sample-btn').addEventListener('click',()=>{input.value=SAMPLE;decode()});
+
+// Share button
+document.getElementById('share-btn').addEventListener('click',()=>{
+const v=input.value.trim();if(!v){alert('Paste a JWT first');return}
+const url=new URL(location.href.split('?')[0]);url.searchParams.set('token',btoa(v));
+navigator.clipboard.writeText(url.toString()).then(()=>{const b=document.getElementById('share-btn');b.textContent='✅ Link Copied!';setTimeout(()=>b.textContent='🔗 Share',2000)})});
+
+// Restore from URL
+(function(){const p=new URLSearchParams(location.search);const t=p.get('token');if(t){try{input.value=atob(t);decode()}catch(e){}}})();
 
 function copyPanel(id){const t=document.getElementById(id).textContent;navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('#'+id).closest('.panel').querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500)})}
 </script>
-<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmaxmini0214.github.io%2Fjwt-decoder&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true" alt="Hits" /></a></div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
 </body>
 </html>
