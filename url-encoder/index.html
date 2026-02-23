@@ -23,7 +23,6 @@ main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
 .btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
 .btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
-.btn-active{background:var(--accent);color:#fff}
 textarea{width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
 textarea:focus{outline:none;border-color:var(--accent)}
 label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-size:.85rem}
@@ -31,44 +30,82 @@ label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-
 .mode-btn{padding:.4rem .8rem;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;font-size:.8rem}
 .mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .status{margin-top:.5rem;font-size:.85rem;color:var(--success)}.status.error{color:var(--error)}
-.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
 .cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
 .cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
 .tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
 .tool-link:hover{border-color:var(--accent)}
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.guide h3{margin-bottom:1rem}
+.guide ol{padding-left:1.5rem;color:var(--muted);line-height:1.8}
+.guide ol li{margin-bottom:.5rem}
+.faq-section{margin:1.5rem 0}
+.faq-section h3{margin-bottom:1rem}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;padding:1rem}
+details summary{cursor:pointer;font-weight:600;color:var(--text)}
+details p{margin-top:.75rem;color:var(--muted);line-height:1.6}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 @media(max-width:600px){h1{font-size:1.4rem}}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "URL Encoder/Decoder Online — Free Tool",
-  "description": "Encode and decode URLs instantly. Supports encodeURIComponent and encodeURI modes. 100% client-side, free online URL encoding tool.",
   "url": "https://maxmini0214.github.io/url-encoder/",
+  "description": "Encode and decode URLs instantly. Supports encodeURIComponent and encodeURI modes. 100% client-side, free online URL encoding tool.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between encodeURI and encodeURIComponent?",
+      "acceptedAnswer": { "@type": "Answer", "text": "encodeURI encodes a full URI but preserves special characters like :, /, ?, and #. encodeURIComponent encodes everything except letters, digits, and - _ . ~ making it ideal for encoding query parameter values." }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use URL encoding?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use URL encoding when passing special characters in query parameters, form data, or API requests. Characters like &, =, ?, and spaces must be encoded to avoid breaking the URL structure." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this URL encoder safe to use with sensitive data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. This tool runs 100% in your browser using JavaScript's built-in encodeURIComponent and encodeURI functions. No data is sent to any server." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I encode a URL with spaces?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Spaces are encoded as %20 with encodeURIComponent. Simply paste your text into the input field and click Encode. The tool handles all special characters automatically." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I decode a URL that was encoded multiple times?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. If a URL was double-encoded (e.g., %2520 instead of %20), click Decode multiple times until the output looks correct. Each click decodes one layer." }
+    },
+    {
+      "@type": "Question",
+      "name": "What characters does encodeURIComponent not encode?",
+      "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent preserves A-Z, a-z, 0-9, and the characters - _ . ~ (tilde). Everything else is percent-encoded." }
+    }
+  ]
 }
 </script>
 </head>
 <body>
 <header>
-<h1>쿼리 파라미터 특수문자 깨질 때</h1>
-<p class="subtitle">URL 인코딩/디코딩 즉시 처리 — encodeURI vs encodeURIComponent 둘 다 지원</p>
+<h1>URL Encoder / Decoder Online</h1>
+<p class="subtitle">Encode and decode URLs instantly — encodeURI vs encodeURIComponent, 100% in your browser</p>
 </header>
 <main>
-<div class="ad-slot">📢 Ad Space</div>
 <div class="mode-toggle">
 <button class="mode-btn active" onclick="setMode('component')" id="mComponent">encodeURIComponent</button>
 <button class="mode-btn" onclick="setMode('uri')" id="mUri">encodeURI</button>
@@ -82,6 +119,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="btn btn-primary" onclick="decode()">← Decode</button>
 <button class="btn btn-secondary" onclick="swap()">⇄ Swap</button>
 <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy</button>
+<button class="btn btn-secondary" onclick="shareUrl()">🔗 Share</button>
 <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
 </div>
 <div class="card">
@@ -99,23 +137,66 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </table>
 </div>
 
-<div class="cta">
-<h3>🚀 DevTools Pro Bundle — $9</h3>
-<p>All tools offline + API access + priority updates</p>
-<a href="https://github.com/maxmini0214" target="_blank">⭐ More Free Tools →</a>
+<div class="guide">
+<h3>📘 How to Use This URL Encoder</h3>
+<ol>
+<li><strong>Choose your mode</strong> — <code>encodeURIComponent</code> for query parameter values, <code>encodeURI</code> for full URLs</li>
+<li><strong>Paste your text</strong> — Enter the URL or string you want to encode/decode</li>
+<li><strong>Click Encode or Decode</strong> — Results appear instantly in the output box</li>
+<li><strong>Copy or Share</strong> — Use 📋 Copy to clipboard or 🔗 Share to create a shareable link with your input pre-filled</li>
+</ol>
 </div>
-<div class="ad-slot">📢 Ad Space</div>
+
+<div class="cta">
+<h3>🏦 Track Your Budget Drift</h3>
+<p>Plan vs. reality budget tracker — 100% browser-based, zero sign-up</p>
+<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank">Try DonFlow →</a>
+</div>
+
+<div class="faq-section">
+<h3>❓ Frequently Asked Questions</h3>
+<details>
+<summary>What is the difference between encodeURI and encodeURIComponent?</summary>
+<p><code>encodeURI</code> encodes a full URI but preserves special characters like <code>:</code>, <code>/</code>, <code>?</code>, and <code>#</code>. <code>encodeURIComponent</code> encodes everything except letters, digits, and <code>- _ . ~</code>, making it ideal for encoding individual query parameter values.</p>
+</details>
+<details>
+<summary>When should I use URL encoding?</summary>
+<p>Use URL encoding when passing special characters in query parameters, form data, or API requests. Characters like <code>&amp;</code>, <code>=</code>, <code>?</code>, and spaces must be encoded to avoid breaking the URL structure.</p>
+</details>
+<details>
+<summary>Is this tool safe for sensitive data?</summary>
+<p>Yes. This tool runs 100% in your browser using JavaScript's built-in functions. No data is sent to any server — you can verify in your browser's Network tab. See also: <a href="https://maxmini0214.github.io/base64-tool/" style="color:var(--accent)">Base64 Encoder</a> and <a href="https://maxmini0214.github.io/hash-generator/" style="color:var(--accent)">Hash Generator</a> for more client-side security tools.</p>
+</details>
+<details>
+<summary>How do I encode a URL with spaces?</summary>
+<p>Spaces are encoded as <code>%20</code> with <code>encodeURIComponent</code>. Simply paste your text and click Encode — the tool handles all special characters automatically.</p>
+</details>
+<details>
+<summary>Can I decode a URL that was encoded multiple times?</summary>
+<p>Yes! If a URL was double-encoded (e.g., <code>%2520</code> instead of <code>%20</code>), click Decode multiple times until the output looks correct. Each click decodes one layer.</p>
+</details>
+<details>
+<summary>What characters does encodeURIComponent NOT encode?</summary>
+<p><code>encodeURIComponent</code> preserves <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the characters <code>- _ . ~</code>. Everything else gets percent-encoded. Use <a href="https://maxmini0214.github.io/jwt-decoder/" style="color:var(--accent)">JWT Decoder</a> if you need to inspect encoded JWT tokens.</p>
+</details>
+</div>
+
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
 <div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
 <a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
 <a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
-<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
 <a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
-<a class="tool-link" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
-<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+<a class="tool-link" href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+<a class="tool-link" href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+<a class="tool-link" href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+<a class="tool-link" href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
 </div>
 </main>
-<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<footer>
+<p>🔒 Privacy First — Nothing leaves your browser.</p>
+<p style="margin-top:.5rem">© 2026 <a href="https://github.com/maxmini0214" style="color:var(--muted)">maxmini0214</a></p>
+</footer>
 <script>
 let mode='component';
 const inp=document.getElementById('input'),out=document.getElementById('output'),st=document.getElementById('status');
@@ -125,15 +206,9 @@ function decode(){try{out.value=mode==='component'?decodeURIComponent(inp.value)
 function swap(){const t=inp.value;inp.value=out.value;out.value=t}
 function copyOutput(){navigator.clipboard.writeText(out.value);st.textContent='✓ Copied!'}
 function clearAll(){inp.value='';out.value='';st.textContent=''}
+function shareUrl(){try{const data={i:inp.value,m:mode};const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(data))));const url=location.origin+location.pathname+'?d='+encoded;navigator.clipboard.writeText(url);st.textContent='✓ Share link copied!';st.className='status'}catch(e){st.textContent='✗ Could not create share link';st.className='status error'}}
+(function(){const params=new URLSearchParams(location.search);const d=params.get('d');if(d){try{const data=JSON.parse(decodeURIComponent(escape(atob(d))));if(data.i)inp.value=data.i;if(data.m)setMode(data.m)}catch(e){}}})();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
