@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Browser Games — No Download, No Signup | MaxMini</title>
   <meta name="description" content="Play 30+ free browser games instantly. No download, no signup, no ads. Snake, Tower Defense, Puzzle, Memory games and more — all running in your browser.">
-  <meta name="keywords" content="free browser games, online games no download, html5 games, free games no signup, play games online free">
+  <meta name="keywords" content="free browser games, online games no download, html5 games, free games no signup, play games online free, arcade games, puzzle games, strategy games">
   <meta property="og:title" content="Free Browser Games — No Download, No Signup">
   <meta property="og:description" content="30+ free games that run in your browser. No download, no signup, no ads.">
   <meta property="og:type" content="website">
@@ -81,10 +81,25 @@
     .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
     h1 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; }
     h1 span { color: var(--accent); }
-    .subtitle { text-align: center; color: #8b949e; margin-bottom: 2rem; font-size: 1.1rem; }
+    .subtitle { text-align: center; color: #8b949e; margin-bottom: 1rem; font-size: 1.1rem; }
+
+    /* Search */
+    .search-bar { display: flex; justify-content: center; margin-bottom: 1rem; }
+    .search-bar input { width: 100%; max-width: 400px; padding: 0.6rem 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 0.95rem; outline: none; }
+    .search-bar input:focus { border-color: var(--accent); }
+    .search-bar input::placeholder { color: #484f58; }
+    .result-count { text-align: center; color: #8b949e; font-size: 0.85rem; margin-bottom: 0.5rem; min-height: 1.2em; }
+
+    /* Genre filter */
+    .genre-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .genre-pill { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: #8b949e; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; }
+    .genre-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .genre-pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
     .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
     .game-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, border-color 0.2s; }
     .game-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .game-card.hidden { display: none; }
     .game-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
     .game-card h3 a { color: var(--accent); text-decoration: none; }
     .game-card p { color: #8b949e; font-size: 0.9rem; margin-bottom: 0.75rem; }
@@ -93,6 +108,7 @@
     .play-btn:hover { opacity: 0.9; }
     .itch-link { display: inline-block; color: #8b949e; font-size: 0.8rem; margin-left: 8px; text-decoration: none; }
     .itch-link:hover { color: var(--accent); }
+    .no-results { text-align: center; color: #8b949e; padding: 3rem 1rem; display: none; }
     .section { margin: 2.5rem 0; }
     .section h2 { font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
     details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; }
@@ -115,8 +131,22 @@
     <h1>🎮 Free <span>Browser Games</span></h1>
     <p class="subtitle">30+ games that run in your browser. No download, no signup, no ads.</p>
 
-    <div class="games-grid">
-      <div class="game-card">
+    <div class="search-bar">
+      <input type="text" id="gameSearch" placeholder="Search games... (press / to focus)" autocomplete="off">
+    </div>
+    <div class="result-count" id="resultCount"></div>
+
+    <div class="genre-filters" id="genreFilters">
+      <button class="genre-pill active" data-genre="all">All</button>
+      <button class="genre-pill" data-genre="arcade">🕹️ Arcade</button>
+      <button class="genre-pill" data-genre="puzzle">🧩 Puzzle</button>
+      <button class="genre-pill" data-genre="strategy">🏰 Strategy</button>
+      <button class="genre-pill" data-genre="casual">🎯 Casual</button>
+      <button class="genre-pill" data-genre="rpg">⚔️ RPG & Adventure</button>
+    </div>
+
+    <div class="games-grid" id="gamesGrid">
+      <div class="game-card" data-genre="arcade" data-keywords="snake classic eat grow arena">
         <h3><a href="/snake-arena/">🐍 Snake Arena</a></h3>
         <p>Classic snake with arena combat. Eat, grow, survive.</p>
         <span class="tag">Arcade</span><span class="tag">Action</span>
@@ -124,7 +154,7 @@
         <a href="https://maxmini0214.itch.io/snake-arena" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="strategy" data-keywords="tower defense td enemies waves place">
         <h3><a href="/tower-defense/">🏰 Tower Defense</a></h3>
         <p>Place towers strategically. Defeat waves of enemies.</p>
         <span class="tag">Strategy</span><span class="tag">TD</span>
@@ -132,7 +162,7 @@
         <a href="https://maxmini0214.itch.io/tower-defense" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="maze procedural exit navigate labyrinth">
         <h3><a href="/maze-runner/">🏃 Maze Runner</a></h3>
         <p>Navigate procedurally generated mazes. Find the exit.</p>
         <span class="tag">Puzzle</span><span class="tag">Adventure</span>
@@ -140,7 +170,7 @@
         <a href="https://maxmini0214.itch.io/maze-runner" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="memory match pairs cards brain training">
         <h3><a href="/memory-cards/">🃏 Memory Cards</a></h3>
         <p>Match pairs of cards. Train your memory with increasing difficulty.</p>
         <span class="tag">Puzzle</span><span class="tag">Brain</span>
@@ -148,7 +178,7 @@
         <a href="https://maxmini0214.itch.io/memory-cards" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="block tetris lines clear high score drop">
         <h3><a href="/block-puzzle/">🧱 Block Puzzle</a></h3>
         <p>Tetris-style block dropping. Clear lines, chase high scores.</p>
         <span class="tag">Puzzle</span><span class="tag">Classic</span>
@@ -156,14 +186,14 @@
         <a href="https://maxmini0214.itch.io/block-puzzle" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="strategy" data-keywords="random defense merge summon units waves td">
         <h3><a href="/random-defense/">⚔️ Random Defense</a></h3>
         <p>Summon random units to defend against waves. Merge for power.</p>
         <span class="tag">Strategy</span><span class="tag">TD</span><span class="tag">Merge</span>
         <br><a href="/random-defense/" class="play-btn">▶ Play Now</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="bubble shooter aim match colorful pop">
         <h3><a href="/bubble-shooter/">🫧 Bubble Shooter</a></h3>
         <p>Aim, shoot, and match colorful bubbles to clear the board.</p>
         <span class="tag">Puzzle</span><span class="tag">Casual</span>
@@ -171,7 +201,7 @@
         <a href="https://maxmini0214.itch.io/bubble-shooter" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="minesweeper mine flag uncover classic field">
         <h3><a href="/mine-field/">💣 Mine Field</a></h3>
         <p>Classic minesweeper. Uncover tiles, flag mines, clear the field.</p>
         <span class="tag">Puzzle</span><span class="tag">Classic</span>
@@ -179,7 +209,7 @@
         <a href="https://maxmini0214.itch.io/mine-field" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="brick breaker breakout bounce ball classic">
         <h3><a href="/brick-breaker/">🧱 Brick Breaker</a></h3>
         <p>Bounce the ball and break all the bricks. Classic breakout fun.</p>
         <span class="tag">Arcade</span><span class="tag">Classic</span>
@@ -187,7 +217,7 @@
         <a href="https://maxmini0214.itch.io/brick-breaker" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="word fall letters form spelling brain">
         <h3><a href="/word-fall/">📝 Word Fall</a></h3>
         <p>Catch falling letters and form words before time runs out.</p>
         <span class="tag">Word</span><span class="tag">Brain</span>
@@ -195,7 +225,7 @@
         <a href="https://maxmini0214.itch.io/word-fall" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="solitaire card tower stack classic patience">
         <h3><a href="/solitaire-tower/">🃏 Solitaire Tower</a></h3>
         <p>Stack cards strategically and clear the tower. Classic solitaire reimagined.</p>
         <span class="tag">Card</span><span class="tag">Classic</span>
@@ -203,7 +233,7 @@
         <a href="https://maxmini0214.itch.io/solitaire-tower" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="whack mole hammer reflexes fast arcade">
         <h3><a href="/whack-a-mole/">🔨 Whack a Mole</a></h3>
         <p>Classic whack-a-mole arcade game. Test your reflexes and smash those moles!</p>
         <span class="tag">Arcade</span><span class="tag">Reflexes</span>
@@ -211,7 +241,7 @@
         <a href="https://maxmini0214.itch.io/whack-a-mole" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="fruit catch falling basket simple addictive">
         <h3><a href="/fruit-catch/">🍎 Fruit Catch</a></h3>
         <p>Catch falling fruits before they hit the ground. Simple, addictive arcade fun.</p>
         <span class="tag">Arcade</span><span class="tag">Casual</span>
@@ -219,7 +249,7 @@
         <a href="https://maxmini0214.itch.io/fruit-catch" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="color switch match barrier timing precision">
         <h3><a href="/color-switch/">🎨 Color Switch</a></h3>
         <p>Match colors to pass through barriers. Challenging timing game that tests precision.</p>
         <span class="tag">Timing</span><span class="tag">Casual</span>
@@ -227,7 +257,7 @@
         <a href="https://maxmini0214.itch.io/color-switch" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="space dodge asteroids survival deep fast">
         <h3><a href="/space-dodge/">🚀 Space Dodge</a></h3>
         <p>Dodge asteroids in deep space. Fast-paced survival game for thrill seekers.</p>
         <span class="tag">Arcade</span><span class="tag">Survival</span>
@@ -235,7 +265,7 @@
         <a href="https://maxmini0214.itch.io/space-dodge" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="coin factory idle tycoon wealth empire clicker">
         <h3><a href="/coin-factory/">🏭 Coin Factory</a></h3>
         <p>Build your coin empire. Idle factory tycoon game — watch your wealth grow.</p>
         <span class="tag">Idle</span><span class="tag">Tycoon</span>
@@ -243,7 +273,7 @@
         <a href="https://maxmini0214.itch.io/coin-factory" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="gravity bird flappy fly obstacles tap addictive">
         <h3><a href="/gravity-bird/">🐦 Gravity Bird</a></h3>
         <p>Tap to fly through obstacles in this addictive flappy-style game. How far can you go?</p>
         <span class="tag">Flappy</span><span class="tag">Arcade</span>
@@ -251,7 +281,7 @@
         <a href="https://maxmini0214.itch.io/gravity-bird" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="rpg" data-keywords="dungeon roguelike loot monsters fight procedural descent">
         <h3><a href="/dungeon-descent/">⚔️ Dungeon Descent</a></h3>
         <p>Explore procedurally generated dungeons. Fight monsters, collect loot, descend deeper.</p>
         <span class="tag">Roguelike</span><span class="tag">RPG</span>
@@ -259,7 +289,7 @@
         <a href="https://maxmini0214.itch.io/dungeon-descent" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="pixel runner endless dodge obstacles fast survive">
         <h3><a href="/pixel-runner/">🏃 Pixel Runner</a></h3>
         <p>Dodge obstacles in this fast-paced endless runner. How long can you survive?</p>
         <span class="tag">Runner</span><span class="tag">Arcade</span>
@@ -267,7 +297,7 @@
         <a href="https://maxmini0214.itch.io/pixel-runner" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="puzzle" data-keywords="ice slide logic plan move sokoban sliding">
         <h3><a href="/ice-slide/">🧊 Ice Slide</a></h3>
         <p>Slide on ice to reach the goal. Plan your moves — once you start sliding, you can't stop!</p>
         <span class="tag">Puzzle</span><span class="tag">Logic</span>
@@ -275,7 +305,7 @@
         <a href="https://maxmini0214.itch.io/ice-slide" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="merge combine items 2048 mania power">
         <h3><a href="/merge-mania/">🔀 Merge Mania</a></h3>
         <p>Combine items to create powerful new ones. How high can you merge?</p>
         <span class="tag">Merge</span><span class="tag">Casual</span>
@@ -283,7 +313,7 @@
         <a href="https://maxmini0214.itch.io/merge-mania" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="rpg" data-keywords="horror escape elevator dark floor survive scary">
         <h3><a href="/the-last-floor/">👻 The Last Floor</a></h3>
         <p>Survive a terrifying elevator descent through dark floors. Horror escape game.</p>
         <span class="tag">Horror</span><span class="tag">Escape</span>
@@ -291,7 +321,7 @@
         <a href="https://maxmini0214.itch.io/the-last-floor" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="math arithmetic fast solve numbers dash education">
         <h3><a href="/math-dash/">🧮 Math Dash</a></h3>
         <p>Solve math problems against the clock. Fast-paced arithmetic challenge.</p>
         <span class="tag">Brain</span><span class="tag">Education</span>
@@ -299,7 +329,7 @@
         <a href="https://maxmini0214.itch.io/math-dash" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="arcade" data-keywords="gravity flip platformer physics obstacles challenge">
         <h3><a href="/gravity-flip/">🔄 Gravity Flip</a></h3>
         <p>Flip gravity to navigate through obstacles. Challenging platformer.</p>
         <span class="tag">Platformer</span><span class="tag">Physics</span>
@@ -307,7 +337,7 @@
         <a href="https://maxmini0214.itch.io/gravity-flip" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="strategy" data-keywords="orbit defense space invaders station waves shoot">
         <h3><a href="/orbit-defense/">🛸 Orbit Defense</a></h3>
         <p>Defend your orbital station from waves of space invaders.</p>
         <span class="tag">Strategy</span><span class="tag">Space</span>
@@ -315,7 +345,7 @@
         <a href="https://maxmini0214.itch.io/orbit-defense" class="itch-link">itch.io →</a>
       </div>
 
-      <div class="game-card">
+      <div class="game-card" data-genre="casual" data-keywords="beat rush rhythm music hit notes tempo">
         <h3><a href="/beat-rush/">🎵 Beat Rush</a></h3>
         <p>Hit the beats to the rhythm. Fast-paced music game.</p>
         <span class="tag">Rhythm</span><span class="tag">Music</span>
@@ -324,12 +354,16 @@
       </div>
 
       <!-- More games on itch.io -->
-      <div class="game-card" style="border-style: dashed;">
+      <div class="game-card" data-genre="all" data-keywords="more itch all genres" style="border-style: dashed;">
         <h3>🎮 More on itch.io</h3>
         <p>Hex Collapse, Wire Connect, and more games on our itch.io page.</p>
         <span class="tag">All Genres</span>
         <br><a href="https://maxmini0214.itch.io" class="play-btn" style="background: var(--accent);">Browse on itch.io →</a>
       </div>
+    </div>
+
+    <div class="no-results" id="noResults">
+      <p>😕 No games found. Try a different search or genre.</p>
     </div>
 
     <div class="section">
@@ -368,5 +402,58 @@
       <p>Built by <a href="https://github.com/maxmini0214">MaxMini</a> · <a href="/">Dev Tools</a> · <a href="/store.html">📚 Store</a> · <a href="https://maxmini0214.itch.io">itch.io</a></p>
     </footer>
   </div>
+
+  <script>
+    const searchInput = document.getElementById('gameSearch');
+    const grid = document.getElementById('gamesGrid');
+    const cards = grid.querySelectorAll('.game-card');
+    const resultCount = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+    const pills = document.querySelectorAll('.genre-pill');
+    let activeGenre = 'all';
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); }
+    });
+
+    // URL params
+    const params = new URLSearchParams(location.search);
+    if (params.get('q')) { searchInput.value = params.get('q'); }
+    if (params.get('g')) {
+      activeGenre = params.get('g');
+      pills.forEach(p => { p.classList.toggle('active', p.dataset.genre === activeGenre); });
+    }
+
+    function filterGames() {
+      const query = searchInput.value.toLowerCase().trim();
+      let visible = 0;
+      cards.forEach(card => {
+        const genre = card.dataset.genre;
+        const text = (card.textContent + ' ' + (card.dataset.keywords || '')).toLowerCase();
+        const matchGenre = activeGenre === 'all' || genre === activeGenre || genre === 'all';
+        const matchSearch = !query || text.includes(query);
+        const show = matchGenre && matchSearch;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      resultCount.textContent = query || activeGenre !== 'all' ? `Showing ${visible} game${visible !== 1 ? 's' : ''}` : '';
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    searchInput.addEventListener('input', filterGames);
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeGenre = pill.dataset.genre;
+        filterGames();
+      });
+    });
+
+    // Init
+    filterGames();
+  </script>
 </body>
 </html>
