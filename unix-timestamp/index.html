@@ -36,8 +36,26 @@ button{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-size:
 .grid-item{background:#0f172a;border-radius:6px;padding:10px;border:1px solid #334155}
 .grid-item .lbl{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
 .grid-item .val{font-family:monospace;font-size:.9rem;margin-top:2px}
-.cta{display:block;text-align:center;margin:24px auto;padding:14px 28px;background:linear-gradient(135deg,#f472b6,#c084fc);color:#fff;border-radius:10px;text-decoration:none;font-weight:700;font-size:1rem;max-width:400px;transition:.2s}
-.cta:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(244,114,182,.3)}
+.guide{background:#1e293b;border-radius:12px;padding:24px;width:100%;max-width:640px;margin:16px 0;border:1px solid #334155}
+.guide h2{font-size:1.2rem;color:#38bdf8;margin-bottom:16px}
+.guide ol{padding-left:20px;line-height:1.8;color:#cbd5e1}
+.guide ol li{margin-bottom:8px}
+.faq-section{width:100%;max-width:640px;margin:16px 0}
+.faq-section h2{font-size:1.2rem;color:#38bdf8;margin-bottom:16px;text-align:center}
+details{background:#1e293b;border-radius:8px;padding:16px;margin-bottom:8px;border:1px solid #334155;cursor:pointer}
+details summary{font-weight:600;color:#e2e8f0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::after{content:'▶';font-size:.7rem;color:#64748b;transition:.2s}
+details[open] summary::after{transform:rotate(90deg)}
+details p{margin-top:12px;color:#94a3b8;line-height:1.6;font-size:.9rem}
+details a{color:#38bdf8;text-decoration:none}
+details a:hover{text-decoration:underline}
+.cta{display:block;text-align:center;margin:24px auto;padding:14px 28px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-radius:10px;text-decoration:none;font-weight:700;font-size:1rem;max-width:480px;transition:.2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(99,102,241,.3)}
+.tools{width:100%;max-width:640px;margin:16px 0}
+.tools h2{font-size:1rem;color:#64748b;margin-bottom:12px;text-align:center}
+.tools-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tools-grid a{background:#1e293b;color:#38bdf8;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:.85rem;border:1px solid #334155;transition:.2s}
+.tools-grid a:hover{background:#334155}
 footer{margin-top:auto;padding:24px;color:#475569;font-size:.8rem;text-align:center}
 footer a{color:#38bdf8;text-decoration:none}
 @media(max-width:500px){h1{font-size:1.4rem}.row{flex-direction:column}.grid{grid-template-columns:1fr}.live{font-size:1.2rem}}
@@ -47,22 +65,53 @@ footer a{color:#38bdf8;text-decoration:none}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "Unix Timestamp Converter — Free Online Epoch Time Tool",
-  "description": "Convert Unix timestamps to human-readable dates and vice versa. Live clock, millisecond support, timezone display. 100% client-side, no data sent to servers.",
   "url": "https://maxmini0214.github.io/unix-timestamp/",
+  "description": "Convert Unix timestamps to human-readable dates and vice versa. Live clock, millisecond support, timezone display.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a Unix timestamp?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Unix timestamp (also called epoch time or POSIX time) is the number of seconds elapsed since January 1, 1970 00:00:00 UTC. It's a universal way to represent time in programming, used by virtually every operating system, database, and API." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert a Unix timestamp to a human-readable date?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Paste your timestamp into the 'Timestamp → Date' field above. The tool automatically detects whether it's in seconds or milliseconds and shows the UTC date, ISO 8601 format, local time, day of week, and relative time." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between seconds and milliseconds timestamps?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Unix timestamps in seconds are 10 digits (e.g. 1708070400), while milliseconds are 13 digits (e.g. 1708070400000). JavaScript's Date.now() returns milliseconds; most APIs and databases use seconds. This tool auto-detects and handles both." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe with this converter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. This tool runs 100% in your browser. No data is sent to any server — all conversions happen client-side using JavaScript. You can verify by checking your network tab or disconnecting from the internet." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Year 2038 problem?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Year 2038 problem occurs because 32-bit systems store Unix timestamps as signed 32-bit integers, which overflow on January 19, 2038. This tool uses JavaScript's 64-bit numbers, so it handles dates well beyond 2038 without issues." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I share a specific timestamp conversion?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Click the '🔗 Share' button after entering a timestamp. It creates a URL that automatically loads and converts your timestamp when opened — great for sharing with teammates or bookmarking." }
+    }
+  ]
 }
 </script>
 </head>
@@ -85,6 +134,7 @@ footer a{color:#38bdf8;text-decoration:none}
 <input type="text" id="tsInput" placeholder="e.g. 1708070400" oninput="tsToDate()">
 <button class="btn-primary" onclick="document.getElementById('tsInput').value=Math.floor(Date.now()/1000);tsToDate()">Now</button>
 </div>
+<div style="text-align:right;margin-bottom:8px"><button class="btn-copy" onclick="shareTimestamp()" style="font-size:.8rem;padding:6px 14px">🔗 Share</button></div>
 <div class="result" id="tsResult"><span>Enter a timestamp above</span></div>
 <div class="grid" id="tsGrid"></div>
 </div>
@@ -110,14 +160,60 @@ footer a{color:#38bdf8;text-decoration:none}
 <div class="result" id="dtResult"><span>Fill in the date above</span></div>
 </div>
 
-<a class="cta" href="https://github.com/maxmini0214" target="_blank" rel="noopener">🚀 Get Pro Developer Tools Pack →</a>
+<!-- How to Use -->
+<div class="guide">
+<h2>📖 How to Use This Unix Timestamp Converter</h2>
+<ol>
+<li><strong>Convert timestamp → date:</strong> Paste any Unix timestamp (seconds or milliseconds) into the input field. The tool auto-detects the format and shows UTC, ISO 8601, local time, and relative time.</li>
+<li><strong>Convert date → timestamp:</strong> Enter year, month, day, hour, minute, second and select your timezone. Click "Convert to Timestamp" to get the epoch value.</li>
+<li><strong>Copy the live clock:</strong> The current Unix time updates every second. Click "Copy Current Timestamp" to grab the exact value.</li>
+<li><strong>Share a conversion:</strong> Click the 🔗 Share button to create a link that auto-loads your timestamp — perfect for team communication or bug reports.</li>
+</ol>
+</div>
 
-<!-- Ad slot reserved -->
-<div id="ad-slot" style="width:100%;max-width:640px;min-height:0"></div>
+<!-- DonFlow CTA -->
+<a class="cta" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">🏦 DonFlow — See Where Your Budget Plan and Reality Diverge →</a>
+
+<!-- FAQ Section -->
+<div class="faq-section">
+<h2>❓ Frequently Asked Questions</h2>
+<details><summary>What is a Unix timestamp?</summary><p>A Unix timestamp (epoch time) is the number of seconds since January 1, 1970 00:00:00 UTC. It's the universal time format used by operating systems, databases, and APIs worldwide. For example, <code>1708070400</code> represents February 16, 2024.</p></details>
+<details><summary>Seconds vs milliseconds — how do I tell?</summary><p>Seconds timestamps are 10 digits (e.g. <code>1708070400</code>), milliseconds are 13 digits (e.g. <code>1708070400000</code>). JavaScript's <code>Date.now()</code> returns milliseconds. Most APIs use seconds. This tool auto-detects both formats. For other encoding tasks, try our <a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder/Decoder</a>.</p></details>
+<details><summary>Is my data safe?</summary><p>Yes. Everything runs in your browser — no data leaves your device. You can verify by opening DevTools → Network tab. Zero requests are made with your data. This is the same privacy-first approach used by <a href="https://maxmini0214.github.io/donflow/?demo">DonFlow</a>.</p></details>
+<details><summary>What is the Year 2038 problem?</summary><p>32-bit systems store timestamps as signed integers that overflow on January 19, 2038 at 03:14:07 UTC. This tool uses JavaScript's 64-bit floating-point numbers, handling dates well beyond 2038. Modern 64-bit systems won't be affected either.</p></details>
+<details><summary>How do I get Unix time in my code?</summary><p>In JavaScript: <code>Math.floor(Date.now()/1000)</code>. In Python: <code>import time; time.time()</code>. In Bash: <code>date +%s</code>. In SQL: <code>UNIX_TIMESTAMP()</code>. Use our <a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a> to inspect API responses containing timestamps.</p></details>
+<details><summary>Can I share a specific conversion?</summary><p>Yes! Click the 🔗 Share button to generate a URL with your timestamp encoded. Opening the link will auto-convert it — great for <a href="https://maxmini0214.github.io/cron-parser/">scheduling with cron</a>, debugging, or sharing with teammates.</p></details>
+</div>
+
+<!-- Cross-links -->
+<div class="tools">
+<h2>🧰 More Developer Tools</h2>
+<div class="tools-grid">
+<a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+<a href="https://maxmini0214.github.io/base64-tool/">Base64 Tool</a>
+<a href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
+<a href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+<a href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+<a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+<a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+<a href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+</div>
+</div>
+
+<!-- Newsletter -->
+<div style="max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border-radius:12px;text-align:center;border:1px solid #334155">
+<p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0">📬 Get Dev Tools & Tips Weekly</p>
+<p style="margin:0 0 1rem;color:#94a3b8;font-size:0.9rem">Free tools, automation tricks, and AI insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="email" name="email" placeholder="your@email.com" required style="padding:0.5rem 1rem;border:1px solid #475569;border-radius:8px;font-size:0.9rem;width:200px;background:#0f172a;color:#e2e8f0">
+<input type="submit" value="Subscribe" style="padding:0.5rem 1rem;background:#38bdf8;color:#0f172a;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600">
+</form>
+</div>
 
 <footer>
-Built with ❤️ by <a href="https://github.com/maxseats">maxseats</a> · 100% client-side, zero tracking
-<br>© 2026 MaxxMini Tools
+Built with ❤️ by <a href="https://github.com/maxmini0214">maxmini0214</a> · 100% client-side, zero tracking
+<br>© 2026 MaxDevTools
 </footer>
 
 <div class="toast" id="toast">Copied!</div>
@@ -125,8 +221,7 @@ Built with ❤️ by <a href="https://github.com/maxseats">maxseats</a> · 100% 
 <script>
 function pad(n){return String(n).padStart(2,'0')}
 function updateClock(){
-const now=Date.now();
-const s=Math.floor(now/1000);
+const now=Date.now();const s=Math.floor(now/1000);
 document.getElementById('liveClock').textContent=s;
 const d=new Date(now);
 document.getElementById('liveDate').textContent=d.toUTCString()+' | Local: '+d.toLocaleString();
@@ -144,14 +239,10 @@ if(isNaN(d.getTime())){document.getElementById('tsResult').innerHTML='<span styl
 const sec=Math.floor(n/1000);
 document.getElementById('tsResult').innerHTML=`<span>${d.toUTCString()}</span><button class="btn-copy" onclick="copyText('${d.toISOString()}')">📋</button>`;
 const items=[
-{l:'UTC',v:d.toUTCString()},
-{l:'ISO 8601',v:d.toISOString()},
-{l:'Local Time',v:d.toLocaleString()},
-{l:'Day of Week',v:d.toLocaleDateString('en',{weekday:'long'})},
-{l:'Seconds',v:sec.toLocaleString()},
-{l:'Milliseconds',v:n.toLocaleString()},
-{l:'Days Since Epoch',v:Math.floor(sec/86400).toLocaleString()},
-{l:'Relative',v:relativeTime(n)}
+{l:'UTC',v:d.toUTCString()},{l:'ISO 8601',v:d.toISOString()},
+{l:'Local Time',v:d.toLocaleString()},{l:'Day of Week',v:d.toLocaleDateString('en',{weekday:'long'})},
+{l:'Seconds',v:sec.toLocaleString()},{l:'Milliseconds',v:n.toLocaleString()},
+{l:'Days Since Epoch',v:Math.floor(sec/86400).toLocaleString()},{l:'Relative',v:relativeTime(n)}
 ];
 document.getElementById('tsGrid').innerHTML=items.map(i=>`<div class="grid-item"><div class="lbl">${i.l}</div><div class="val">${i.v}</div></div>`).join('');
 }
@@ -173,26 +264,32 @@ const h=parseInt(document.getElementById('dHour').value)||0;
 const mi=parseInt(document.getElementById('dMin').value)||0;
 const s=parseInt(document.getElementById('dSec').value)||0;
 const tz=document.getElementById('dTz').value;
-let d;
-if(tz==='utc')d=new Date(Date.UTC(y,mo,da,h,mi,s));
-else d=new Date(y,mo,da,h,mi,s);
+let d;if(tz==='utc')d=new Date(Date.UTC(y,mo,da,h,mi,s));else d=new Date(y,mo,da,h,mi,s);
 const sec=Math.floor(d.getTime()/1000);
 document.getElementById('dtResult').innerHTML=`<span>${sec} (ms: ${d.getTime()})</span><button class="btn-copy" onclick="copyText('${sec}')">📋</button>`;
 }
 
-// Pre-fill date fields with now
-(function(){const d=new Date();document.getElementById('dYear').value=d.getFullYear();document.getElementById('dMonth').value=d.getMonth()+1;document.getElementById('dDay').value=d.getDate();document.getElementById('dHour').value=d.getHours();document.getElementById('dMin').value=d.getMinutes();document.getElementById('dSec').value=d.getSeconds();})();
+function shareTimestamp(){
+const v=document.getElementById('tsInput').value.trim();
+if(!v){showToast('Enter a timestamp first');return}
+const url=location.origin+location.pathname+'?ts='+encodeURIComponent(v);
+navigator.clipboard.writeText(url).then(()=>showToast('Link copied!')).catch(()=>{prompt('Copy this link:',url)});
+}
 
-function copyText(t){navigator.clipboard.writeText(t).then(()=>{const el=document.getElementById('toast');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1500)}).catch(()=>{})}
+// URL restore
+(function(){
+const p=new URLSearchParams(location.search);
+const ts=p.get('ts');
+if(ts){document.getElementById('tsInput').value=ts;tsToDate();return}
+const d=new Date();
+document.getElementById('dYear').value=d.getFullYear();document.getElementById('dMonth').value=d.getMonth()+1;
+document.getElementById('dDay').value=d.getDate();document.getElementById('dHour').value=d.getHours();
+document.getElementById('dMin').value=d.getMinutes();document.getElementById('dSec').value=d.getSeconds();
+})();
+
+function copyText(t){navigator.clipboard.writeText(t).then(()=>showToast('Copied!')).catch(()=>{})}
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1500)}
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
