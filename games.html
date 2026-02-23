@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Browser Games — No Download, No Signup | MaxMini</title>
+  <meta name="description" content="Play 30+ free browser games instantly. No download, no signup, no ads. Snake, Tower Defense, Puzzle, Memory games and more — all running in your browser.">
+  <meta name="keywords" content="free browser games, online games no download, html5 games, free games no signup, play games online free">
+  <meta property="og:title" content="Free Browser Games — No Download, No Signup">
+  <meta property="og:description" content="30+ free games that run in your browser. No download, no signup, no ads.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxmini0214.github.io/games.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://maxmini0214.github.io/games.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Free Browser Games",
+    "description": "30+ free browser games. No download, no signup, no ads.",
+    "url": "https://maxmini0214.github.io/games.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MaxMini",
+      "url": "https://maxmini0214.github.io"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are these games really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — all 30+ games are completely free. No signup, no ads, no in-app purchases. Every game runs 100% client-side in your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to download anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No downloads needed. All games run directly in your browser using HTML5/JavaScript. Just click and play."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play on mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! All games are responsive and support touch controls. Play on phone, tablet, or desktop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you track my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All games run entirely in your browser. No analytics, no cookies, no data collection. Your privacy is guaranteed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — once a game is loaded in your browser, it works offline. Bookmark the game page for offline access anytime."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --accent: #58a6ff; --green: #3fb950; --purple: #bc8cff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    h1 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; }
+    h1 span { color: var(--accent); }
+    .subtitle { text-align: center; color: #8b949e; margin-bottom: 2rem; font-size: 1.1rem; }
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .game-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: transform 0.2s, border-color 0.2s; }
+    .game-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .game-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .game-card h3 a { color: var(--accent); text-decoration: none; }
+    .game-card p { color: #8b949e; font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .tag { display: inline-block; background: #21262d; color: var(--purple); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-right: 4px; }
+    .play-btn { display: inline-block; background: var(--green); color: #000; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-top: 0.5rem; }
+    .play-btn:hover { opacity: 0.9; }
+    .itch-link { display: inline-block; color: #8b949e; font-size: 0.8rem; margin-left: 8px; text-decoration: none; }
+    .itch-link:hover { color: var(--accent); }
+    .section { margin: 2.5rem 0; }
+    .section h2 { font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    details { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; }
+    details summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 500; }
+    details p { padding: 0 1rem 0.75rem; color: #8b949e; }
+    .cta { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; margin: 2rem 0; }
+    .cta a { color: var(--accent); }
+    .nav { text-align: center; margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; }
+    footer { text-align: center; color: #484f58; padding: 2rem 0; font-size: 0.85rem; }
+    footer a { color: #58a6ff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/">🛠️ Dev Tools</a> · <a href="/games.html">🎮 Games</a> · <a href="/donflow/?demo">💰 DonFlow</a>
+    </nav>
+
+    <h1>🎮 Free <span>Browser Games</span></h1>
+    <p class="subtitle">30+ games that run in your browser. No download, no signup, no ads.</p>
+
+    <div class="games-grid">
+      <div class="game-card">
+        <h3><a href="/snake-arena/">🐍 Snake Arena</a></h3>
+        <p>Classic snake with arena combat. Eat, grow, survive.</p>
+        <span class="tag">Arcade</span><span class="tag">Action</span>
+        <br><a href="/snake-arena/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/snake-arena" class="itch-link">itch.io →</a>
+      </div>
+
+      <div class="game-card">
+        <h3><a href="/tower-defense/">🏰 Tower Defense</a></h3>
+        <p>Place towers strategically. Defeat waves of enemies.</p>
+        <span class="tag">Strategy</span><span class="tag">TD</span>
+        <br><a href="/tower-defense/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/tower-defense" class="itch-link">itch.io →</a>
+      </div>
+
+      <div class="game-card">
+        <h3><a href="/maze-runner/">🏃 Maze Runner</a></h3>
+        <p>Navigate procedurally generated mazes. Find the exit.</p>
+        <span class="tag">Puzzle</span><span class="tag">Adventure</span>
+        <br><a href="/maze-runner/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/maze-runner" class="itch-link">itch.io →</a>
+      </div>
+
+      <div class="game-card">
+        <h3><a href="/memory-cards/">🃏 Memory Cards</a></h3>
+        <p>Match pairs of cards. Train your memory with increasing difficulty.</p>
+        <span class="tag">Puzzle</span><span class="tag">Brain</span>
+        <br><a href="/memory-cards/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/memory-cards" class="itch-link">itch.io →</a>
+      </div>
+
+      <div class="game-card">
+        <h3><a href="/block-puzzle/">🧱 Block Puzzle</a></h3>
+        <p>Tetris-style block dropping. Clear lines, chase high scores.</p>
+        <span class="tag">Puzzle</span><span class="tag">Classic</span>
+        <br><a href="/block-puzzle/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/block-puzzle" class="itch-link">itch.io →</a>
+      </div>
+
+      <div class="game-card">
+        <h3><a href="/random-defense/">⚔️ Random Defense</a></h3>
+        <p>Summon random units to defend against waves. Merge for power.</p>
+        <span class="tag">Strategy</span><span class="tag">TD</span><span class="tag">Merge</span>
+        <br><a href="/random-defense/" class="play-btn">▶ Play Now</a>
+      </div>
+
+      <!-- More games on itch.io -->
+      <div class="game-card" style="border-style: dashed;">
+        <h3>🎮 25+ More Games</h3>
+        <p>Gravity Bird, Dungeon Descent, Orbit Defense, Word Fall, and more on itch.io.</p>
+        <span class="tag">All Genres</span>
+        <br><a href="https://maxmini0214.itch.io" class="play-btn" style="background: var(--accent);">Browse on itch.io →</a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>❓ Frequently Asked Questions</h2>
+      <details>
+        <summary>Are these games really free?</summary>
+        <p>Yes — all 30+ games are completely free. No signup, no ads, no in-app purchases. Every game runs 100% client-side in your browser. The source code is on <a href="https://github.com/maxmini0214" style="color:var(--accent)">GitHub</a>.</p>
+      </details>
+      <details>
+        <summary>Do I need to download anything?</summary>
+        <p>No downloads needed. All games run directly in your browser using HTML5 and JavaScript. Just click "Play Now" and start playing instantly.</p>
+      </details>
+      <details>
+        <summary>Can I play on my phone?</summary>
+        <p>Yes! All games are responsive and support touch controls. Play on any device — phone, tablet, or desktop computer.</p>
+      </details>
+      <details>
+        <summary>Do you track my data or show ads?</summary>
+        <p>No. Zero tracking, zero ads, zero cookies. All games run entirely in your browser with no server communication. Your privacy is guaranteed.</p>
+      </details>
+      <details>
+        <summary>Can I play offline?</summary>
+        <p>Yes — once a game is loaded, it works offline. Bookmark the page for instant access anytime, even without internet.</p>
+      </details>
+    </div>
+
+    <div class="cta">
+      <p>💰 <strong>Like free tools?</strong> Check out <a href="/donflow/?demo">DonFlow</a> — a free budget tracker that compares your plan vs reality. Zero signup, zero cloud, your data stays in your browser.</p>
+    </div>
+
+    <div class="cta">
+      <p>🛠️ <strong>Developer?</strong> We also have <a href="/">27+ free dev tools</a> — JSON formatter, regex tester, hash generator, and more.</p>
+    </div>
+
+    <footer>
+      <p>Built by <a href="https://github.com/maxmini0214">MaxMini</a> · <a href="/">Dev Tools</a> · <a href="https://maxmini0214.itch.io">itch.io</a></p>
+    </footer>
+  </div>
+</body>
+</html>
