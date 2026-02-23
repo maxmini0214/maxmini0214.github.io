@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Color Picker & Converter — HEX RGB HSL — Free Tool</title>
-<meta name="description" content="Pick colors and convert between HEX, RGB, and HSL formats instantly. Free online color picker and converter tool.">
+<title>Color Picker & Converter — HEX RGB HSL — Free Online Tool</title>
+<meta name="description" content="Pick colors and convert between HEX, RGB, and HSL formats instantly. Free online color picker with CSS variable output, share via URL, and one-click copy.">
 <meta property="og:title" content="Color Picker & Converter — HEX RGB HSL">
-<meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly.">
+<meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly. Share colors via URL.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/color-picker/">
 <link rel="canonical" href="https://maxmini0214.github.io/color-picker/">
@@ -29,12 +29,25 @@ main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
 input[type="color"]{width:100%;height:50px;border:none;border-radius:8px;cursor:pointer;background:none}
 .copy-btn{background:var(--border);border:none;color:var(--text);padding:.25rem .5rem;border-radius:4px;cursor:pointer;font-size:.75rem;float:right;margin-top:-1.5rem}
 .copy-btn:hover{background:#475569}
+.share-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;border:none;padding:.5rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;margin-top:.75rem}
+.share-btn:hover{opacity:.9}
 .palette{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
 .swatch{width:40px;height:40px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
 .swatch:hover{border-color:var(--text)}
-.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
+.guide h2{font-size:1.2rem;margin-bottom:1rem}
+.guide ol{padding-left:1.5rem;line-height:1.8;color:var(--muted)}
+.guide ol li{margin-bottom:.5rem}
+.guide ol li strong{color:var(--text)}
 .cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
 .cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.faq-section{margin:2rem 0}
+.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:1rem;cursor:pointer;font-weight:600;font-size:.95rem}
+details summary:hover{color:var(--accent)}
+details .answer{padding:0 1rem 1rem;color:var(--muted);line-height:1.7}
+details .answer code{background:var(--bg);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--accent)}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
 .tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
 .tool-link:hover{border-color:var(--accent)}
@@ -44,32 +57,62 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Color Picker & Converter — HEX RGB HSL — Free Tool",
-  "description": "Pick colors and convert between HEX, RGB, and HSL formats instantly. Free online color picker and converter tool.",
+  "@type": "WebApplication",
+  "name": "Color Picker & Converter — HEX RGB HSL",
   "url": "https://maxmini0214.github.io/color-picker/",
+  "description": "Pick colors and convert between HEX, RGB, and HSL formats instantly.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert HEX to RGB?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Enter a HEX color code like #3b82f6 and the RGB value appears instantly. Each pair of hex digits represents Red (3b=59), Green (82=130), and Blue (f6=246). In JavaScript: parseInt('3b', 16) gives 59." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between HEX, RGB, and HSL?",
+      "acceptedAnswer": { "@type": "Answer", "text": "HEX uses base-16 notation (#RRGGBB), RGB uses decimal values 0-255 for each channel, and HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is often more intuitive for designers since you can adjust brightness and saturation independently." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I share a color with my team?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Click the 🔗 Share button to copy a URL with the color encoded. When your teammate opens the link, the color is automatically loaded and converted to all formats." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this color picker for CSS variables?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes! The CSS Variable field shows the ready-to-paste syntax like --color: #3b82f6; Just click the copy button and paste it into your stylesheet." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my color data sent to any server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs 100% in your browser. No data is sent anywhere, no cookies are set, and no account is needed. Even the Share URL encodes the color in the URL itself — no server involved." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert RGB to HEX in code?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In JavaScript: `'#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')`. In Python: `f'#{r:02x}{g:02x}{b:02x}'`. In CSS, you can use rgb() or hex interchangeably." }
+    }
+  ]
 }
 </script>
 </head>
 <body>
 <header>
-<h1>디자이너가 준 색상 코드 HEX↔RGB 변환</h1>
-<p class="subtitle">HEX · RGB · HSL 즉시 변환 — 복사 한번이면 끝</p>
+<h1>Color Picker & Converter — HEX RGB HSL</h1>
+<p class="subtitle">Pick any color · Convert between HEX, RGB, HSL · Copy CSS · Share via URL</p>
 </header>
 <main>
-<div class="ad-slot">📢 Ad Space</div>
 <div class="card">
 <div class="color-main">
 <div>
@@ -81,18 +124,42 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="field"><label>RGB</label><input type="text" id="rgb" value="rgb(59, 130, 246)"><button class="copy-btn" onclick="copy('rgb')">📋</button></div>
 <div class="field"><label>HSL</label><input type="text" id="hsl" value="hsl(217, 91%, 60%)"><button class="copy-btn" onclick="copy('hsl')">📋</button></div>
 <div class="field"><label>CSS Variable</label><input type="text" id="css" value="--color: #3b82f6;" readonly><button class="copy-btn" onclick="copy('css')">📋</button></div>
+<button class="share-btn" onclick="shareColor()">🔗 Share Color</button>
 </div>
 </div>
 <h4 style="margin-top:1rem;font-size:.85rem;color:var(--muted)">Popular Colors</h4>
 <div class="palette" id="palette"></div>
 </div>
 
-<div class="cta">
-<h3>🚀 DevTools Pro Bundle — $9</h3>
-<p>All tools offline + API access + priority updates</p>
-<a href="https://github.com/maxmini0214" target="_blank">⭐ More Free Tools →</a>
+<!-- How to Use -->
+<div class="guide">
+<h2>📖 How to Use This Color Picker</h2>
+<ol>
+<li><strong>Pick a color</strong> — Use the color wheel or enter a HEX/RGB value in the input fields</li>
+<li><strong>See all formats</strong> — HEX, RGB, HSL, and CSS variable update instantly as you pick</li>
+<li><strong>Copy</strong> — Click 📋 next to any format to copy it to your clipboard</li>
+<li><strong>Share</strong> — Click 🔗 Share to get a URL that loads this exact color for your team</li>
+</ol>
 </div>
-<div class="ad-slot">📢 Ad Space</div>
+
+<!-- DonFlow CTA -->
+<div class="cta">
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>See where your budget plan and reality diverge. Zero accounts, zero cloud — runs in your browser.</p>
+<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank">Try the Live Demo →</a>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+<h2>❓ Frequently Asked Questions</h2>
+<details><summary>How do I convert HEX to RGB?</summary><div class="answer">Enter a HEX color code like <code>#3b82f6</code> and the RGB value appears instantly. Each pair of hex digits represents Red (3b=59), Green (82=130), and Blue (f6=246). In JavaScript: <code>parseInt('3b', 16)</code> gives 59.</div></details>
+<details><summary>What is the difference between HEX, RGB, and HSL?</summary><div class="answer">HEX uses base-16 notation (#RRGGBB), RGB uses decimal 0-255 per channel, and HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is often more intuitive for designers — you can adjust brightness without changing the hue.</div></details>
+<details><summary>How do I share a color with my team?</summary><div class="answer">Click the 🔗 Share button to copy a URL with the color encoded. When your teammate opens the link, the color loads automatically in all formats. No account needed.</div></details>
+<details><summary>Can I use this for CSS variables?</summary><div class="answer">Yes! The CSS Variable field shows ready-to-paste syntax: <code>--color: #3b82f6;</code> Just click 📋 and paste into your stylesheet. Works with any CSS preprocessor too.</div></details>
+<details><summary>Is my data sent to any server?</summary><div class="answer">No. Everything runs 100% in your browser. No data is sent anywhere, no cookies, no tracking, no account needed. The Share URL encodes the color in the URL itself — no server involved.</div></details>
+<details><summary>How do I convert RGB to HEX in code?</summary><div class="answer"><strong>JavaScript:</strong> <code>'#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('')</code><br><strong>Python:</strong> <code>f'#{r:02x}{g:02x}{b:02x}'</code><br><strong>CSS:</strong> <code>rgb()</code> and hex are interchangeable in all modern browsers.</div></details>
+</div>
+
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
 <div class="tools-grid">
 <a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
@@ -100,10 +167,17 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
 <a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
 <a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
-<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+<a class="tool-link" href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+<a class="tool-link" href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
+<a class="tool-link" href="https://maxmini0214.github.io/unix-timestamp/">Unix Timestamp</a>
+<a class="tool-link" href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+<a class="tool-link" href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
 </div>
 </main>
-<footer><p>🔒 Privacy First — Nothing leaves your browser.</p><p style="margin-top:.5rem">© 2026 DevTools by maxseats</p></footer>
+<footer>
+<p>🔒 Privacy First — Nothing leaves your browser.</p>
+<p style="margin-top:.5rem">© 2026 <a href="https://github.com/maxmini0214" style="color:var(--muted)">MaxDevTools</a></p>
+</footer>
 <script>
 const popular=['#ef4444','#f97316','#eab308','#22c55e','#10b981','#06b6d4','#3b82f6','#8b5cf6','#ec4899','#f43f5e','#ffffff','#000000'];
 const pal=document.getElementById('palette');
@@ -137,15 +211,30 @@ switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;ca
 return[Math.round(h*360),Math.round(s*100),Math.round(l*100)];
 }
 function copy(id){navigator.clipboard.writeText(document.getElementById(id).value)}
+function shareColor(){
+const hex=hexI.value.replace('#','');
+const url=location.origin+location.pathname+'?c='+hex;
+navigator.clipboard.writeText(url).then(()=>{
+const btn=document.querySelector('.share-btn');
+btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='🔗 Share Color',2000);
+});
+}
+// Restore from URL
+(function(){
+const p=new URLSearchParams(location.search);
+const c=p.get('c');
+if(c&&/^[0-9a-f]{6}$/i.test(c)){fromHex('#'+c)}
+})();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
+<!-- Newsletter CTA -->
+<div style="max-width:480px;margin:2rem auto;padding:1.5rem;background:var(--surface,#1e293b);border:1px solid var(--border,#334155);border-radius:12px;text-align:center;font-family:system-ui,sans-serif;color:var(--text,#e2e8f0)">
+<p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600">📬 Get Dev Tools & Tips Weekly</p>
+<p style="margin:0 0 1rem;color:var(--muted,#94a3b8);font-size:0.9rem">Free tools, automation tricks, and AI insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
+<input type="email" name="email" placeholder="your@email.com" required style="padding:0.5rem 1rem;border:1px solid var(--border,#334155);border-radius:8px;font-size:0.9rem;width:200px;background:var(--bg,#0f172a);color:var(--text,#e2e8f0)">
+<input type="submit" value="Subscribe" style="padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600">
+</form>
 </div>
 </body>
 </html>
