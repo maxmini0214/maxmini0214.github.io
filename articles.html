@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Articles & Tutorials — Interview Prep, Browser Tools, Game Dev | MaxDevTools</title>
+  <meta name="description" content="35+ developer articles and tutorials: coding interview prep, browser-based tools, AI automation, game dev, and finance apps. Free knowledge from a solo developer.">
+  <meta name="keywords" content="developer articles, coding interview prep, system design tutorial, browser tools, AI automation, game development, budget app, dev.to tutorials">
+  <link rel="canonical" href="https://maxmini0214.github.io/articles.html">
+  <meta property="og:title" content="Developer Articles & Tutorials — MaxDevTools">
+  <meta property="og:description" content="35+ articles on coding interviews, browser tools, AI automation, game dev, and finance apps. Free tutorials from a solo developer.">
+  <meta property="og:url" content="https://maxmini0214.github.io/articles.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Developer Articles & Tutorials — MaxDevTools">
+  <meta name="twitter:description" content="35+ articles on coding interviews, browser tools, AI automation, game dev, and finance apps.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Developer Articles & Tutorials",
+    "description": "35+ developer articles and tutorials covering coding interviews, browser tools, AI automation, game development, and finance apps.",
+    "url": "https://maxmini0214.github.io/articles.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MaxDevTools",
+      "url": "https://maxmini0214.github.io"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "MaxDevTools", "item": "https://maxmini0214.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://maxmini0214.github.io/articles.html"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What topics do these articles cover?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Articles cover coding interview prep (DSA, SQL, System Design, Frontend), browser-based developer tools, AI automation workflows, game development with AI agents, and building finance apps with browser-only architecture."}
+      },
+      {
+        "@type": "Question",
+        "name": "Are these tutorials beginner-friendly?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes! Most articles include practical code examples and step-by-step explanations. They range from beginner to intermediate level, with interview prep articles targeting job seekers at all levels."}
+      },
+      {
+        "@type": "Question",
+        "name": "How often are new articles published?",
+        "acceptedAnswer": {"@type": "Answer", "text": "New articles are published multiple times per week on Dev.to. Topics rotate between interview prep, tool building tutorials, AI automation, and project case studies."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the code examples in my projects?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Absolutely! All code examples are free to use. Most tools mentioned are open source on GitHub. The articles are meant to be practical — copy, paste, and adapt."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is DonFlow mentioned in the finance articles?",
+        "acceptedAnswer": {"@type": "Answer", "text": "DonFlow is a free, browser-only budget tracker that compares your planned budget against actual spending. It uses IndexedDB for local storage — your financial data never leaves your device."}
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I follow for new articles?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Follow @maxxmini on Dev.to for new articles, or subscribe to the Morning Brief newsletter on Buttondown for weekly updates on new tools and tutorials."}
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --accent: #58a6ff; --green: #3fb950; --purple: #bc8cff; --yellow: #e3b341; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .nav { text-align: center; margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; }
+    .nav a.current { color: var(--yellow); font-weight: 600; }
+    h1 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; color: #f0f6fc; }
+    h1 span { color: var(--accent); }
+    .subtitle { text-align: center; color: #8b949e; margin-bottom: 1.5rem; font-size: 1.1rem; }
+
+    /* Search */
+    .search-box { position: relative; margin-bottom: 1rem; }
+    .search-box input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: #f0f6fc; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .search-box input:focus { border-color: var(--accent); }
+    .search-box input::placeholder { color: #484f58; }
+    .search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: #484f58; pointer-events: none; }
+    .result-count { text-align: center; color: #8b949e; font-size: 0.85rem; margin-bottom: 0.5rem; min-height: 1.2em; }
+
+    /* Filters */
+    .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .filter-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: #8b949e; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+    /* Featured section */
+    .featured-section { margin-bottom: 2rem; }
+    .featured-section h2 { font-size: 1.2rem; color: var(--yellow); margin-bottom: 1rem; border-bottom: 1px solid #21262d; padding-bottom: 0.5rem; }
+    .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; }
+
+    /* Article cards */
+    .article-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; transition: transform 0.2s, border-color 0.2s; display: block; text-decoration: none; color: var(--text); }
+    .article-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .article-card.hidden { display: none; }
+    .article-card.featured-card { border-color: #e3b34133; background: linear-gradient(135deg, var(--card), #1a1a05); }
+    .article-card.featured-card:hover { border-color: var(--yellow); }
+    .card-badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; font-weight: 600; }
+    .badge-featured { background: #e3b34122; color: var(--yellow); }
+    .badge-reactions { background: #3fb95022; color: var(--green); margin-left: 4px; }
+    .card-title { font-weight: 600; color: #f0f6fc; font-size: 0.95rem; margin-bottom: 4px; line-height: 1.4; }
+    .card-desc { font-size: 0.82rem; color: #8b949e; margin-bottom: 8px; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .tag { display: inline-block; background: #21262d; color: var(--purple); padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; }
+    .read-time { font-size: 0.72rem; color: #484f58; margin-left: auto; white-space: nowrap; }
+
+    /* Articles grid */
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+
+    .section-label { font-size: 1.2rem; color: var(--accent); margin: 2rem 0 1rem; border-bottom: 1px solid #21262d; padding-bottom: 0.5rem; }
+    .no-results { text-align: center; padding: 3rem 1rem; color: #484f58; font-size: 1.1rem; display: none; }
+
+    /* FAQ */
+    .faq { margin-top: 2.5rem; }
+    .faq h2 { font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; text-align: center; }
+    details { background: var(--card); border: 1px solid #21262d; border-radius: 8px; margin-bottom: 0.5rem; }
+    details summary { padding: 0.8rem 1rem; cursor: pointer; color: #f0f6fc; font-weight: 500; font-size: 0.92rem; }
+    details summary:hover { color: var(--accent); }
+    details p { padding: 0 1rem 0.8rem; color: #8b949e; font-size: 0.88rem; }
+
+    /* CTA */
+    .cta { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; margin: 2rem 0; }
+    .cta a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .cta-donflow { border-color: #22c55e33; background: linear-gradient(135deg, var(--card), #05150a); }
+    .cta-donflow a { color: #4ade80; }
+    .newsletter { margin-top: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem; text-align: center; }
+    .newsletter p { color: #8b949e; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .newsletter a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    footer { text-align: center; color: #484f58; padding: 2rem 0; font-size: 0.85rem; border-top: 1px solid #21262d; margin-top: 2rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .featured-grid, .articles-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.5rem; }
+      .filters { gap: 0.3rem; }
+      .filter-btn { font-size: 0.78rem; padding: 4px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/">🛠️ Tools</a> · <a href="/games.html">🎮 Games</a> · <a href="/store.html">📚 Store</a> · <a href="/articles.html" class="current">📝 Articles</a>
+    </nav>
+
+    <h1>📝 Developer <span>Articles & Tutorials</span></h1>
+    <p class="subtitle">35+ articles on interviews, tools, AI automation, game dev & more. All on Dev.to.</p>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search articles... (press / to focus)" autocomplete="off" aria-label="Search articles">
+    </div>
+    <div class="result-count" id="resultCount"></div>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="featured">🔥 Featured</button>
+      <button class="filter-btn" data-cat="interview">💻 Interview Prep</button>
+      <button class="filter-btn" data-cat="tools">🛠️ Developer Tools</button>
+      <button class="filter-btn" data-cat="gamedev">🎮 Game Dev</button>
+      <button class="filter-btn" data-cat="finance">💰 Finance & Productivity</button>
+      <button class="filter-btn" data-cat="all">📖 All</button>
+    </div>
+
+    <div id="articlesContainer">
+
+      <!-- ⭐ FEATURED -->
+      <div class="articles-grid" id="featuredGrid">
+        <a class="article-card featured-card" href="https://dev.to/maxxmini/share-your-web-app-state-via-url-no-backend-required-1806" target="_blank" rel="noopener" data-cat="featured tools" data-keywords="url state share backend web app javascript frontend tutorial">
+          <span class="card-badge badge-featured">⭐ Featured</span><span class="card-badge badge-reactions">❤️ 2</span>
+          <div class="card-title">Share Your Web App State via URL — No Backend Required</div>
+          <div class="card-desc">Let users share exact tool state via URL using Base64 encoding — no database needed.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">javascript</span><span class="tag">tutorial</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card featured-card" href="https://dev.to/maxxmini/i-built-a-budget-app-with-zero-ai-zero-backend-zero-tracking-heres-why-58m9" target="_blank" rel="noopener" data-cat="featured finance" data-keywords="budget app zero ai backend tracking privacy donflow local-first">
+          <span class="card-badge badge-featured">⭐ Featured</span><span class="card-badge badge-reactions">❤️ 1</span>
+          <div class="card-title">I Built a Budget App With Zero AI, Zero Backend, Zero Tracking — Here's Why</div>
+          <div class="card-desc">Why boring tech, local-first storage, and no AI was the right call for a finance tool.</div>
+          <div class="card-meta"><span class="tag">privacy</span><span class="tag">showdev</span><span class="tag">javascript</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card featured-card" href="https://dev.to/maxxmini/i-built-a-finance-app-with-zero-backend-heres-what-i-learned-about-browser-only-architecture-1aad" target="_blank" rel="noopener" data-cat="featured finance" data-keywords="finance app zero backend browser-only architecture indexeddb privacy">
+          <span class="card-badge badge-featured">⭐ Featured</span><span class="card-badge badge-reactions">❤️ 1</span>
+          <div class="card-title">I Built a Finance App With Zero Backend. Here's What I Learned About Browser-Only Architecture.</div>
+          <div class="card-desc">Lessons from building DonFlow with IndexedDB, zero server, and full client-side processing.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">indexeddb</span><span class="tag">privacy</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card featured-card" href="https://dev.to/maxxmini/how-i-automated-my-entire-dev-workflow-with-a-single-ai-agent-on-a-mac-mini-41a8" target="_blank" rel="noopener" data-cat="featured tools" data-keywords="automated dev workflow ai agent mac mini automation devops productivity">
+          <span class="card-badge badge-featured">⭐ Featured</span><span class="card-badge badge-reactions">❤️ 1</span>
+          <div class="card-title">How I Automated My Entire Dev Workflow with a Single AI Agent on a Mac Mini</div>
+          <div class="card-desc">One AI agent handles deploys, SEO, content, and monitoring — running 24/7 on a Mac Mini.</div>
+          <div class="card-meta"><span class="tag">ai</span><span class="tag">automation</span><span class="tag">devops</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card featured-card" href="https://dev.to/maxxmini/5-free-browser-tools-i-built-to-speed-up-my-dev-workflow-2nga" target="_blank" rel="noopener" data-cat="featured tools" data-keywords="free browser tools dev workflow javascript productivity opensource">
+          <span class="card-badge badge-featured">⭐ Featured</span><span class="card-badge badge-reactions">❤️ 1</span>
+          <div class="card-title">5 Free Browser Tools I Built to Speed Up My Dev Workflow</div>
+          <div class="card-desc">JSON formatter, regex tester, password analyzer, and more — all running client-side.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">productivity</span><span class="tag">opensource</span><span class="read-time">2 min read</span></div>
+        </a>
+      </div>
+
+      <!-- 💻 INTERVIEW PREP -->
+      <div class="articles-grid" id="interviewGrid">
+        <a class="article-card" href="https://dev.to/maxxmini/10-algorithm-patterns-that-solve-80-of-coding-interview-problems-59fb" target="_blank" rel="noopener" data-cat="interview" data-keywords="algorithm patterns coding interview dsa leetcode two pointers sliding window">
+          <div class="card-title">10 Algorithm Patterns That Solve 80% of Coding Interview Problems</div>
+          <div class="card-desc">Master these 10 DSA patterns and you'll recognize most interview questions instantly.</div>
+          <div class="card-meta"><span class="tag">algorithms</span><span class="tag">interview</span><span class="tag">career</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/8-system-design-patterns-that-come-up-in-every-senior-interview-3l0e" target="_blank" rel="noopener" data-cat="interview" data-keywords="system design patterns senior interview architecture scalability caching sharding">
+          <div class="card-title">8 System Design Patterns That Come Up in Every Senior Interview</div>
+          <div class="card-desc">8 core patterns that cover 90% of system design interview questions.</div>
+          <div class="card-meta"><span class="tag">systemdesign</span><span class="tag">interview</span><span class="tag">architecture</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/12-frontend-interview-questions-that-senior-devs-still-get-wrong-3k55" target="_blank" rel="noopener" data-cat="interview" data-keywords="frontend interview questions react css dom javascript senior">
+          <div class="card-title">12 Frontend Interview Questions That Senior Devs Still Get Wrong</div>
+          <div class="card-desc">DOM, CSS, React, and performance questions that trip up even experienced developers.</div>
+          <div class="card-meta"><span class="tag">javascript</span><span class="tag">interview</span><span class="tag">frontend</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/8-sql-queries-that-catch-90-of-interview-candidates-off-guard-4fae" target="_blank" rel="noopener" data-cat="interview" data-keywords="sql queries interview candidates database window functions cte">
+          <div class="card-title">8 SQL Queries That Catch 90% of Interview Candidates Off Guard</div>
+          <div class="card-desc">Window functions, CTEs, and advanced patterns that separate juniors from seniors.</div>
+          <div class="card-meta"><span class="tag">sql</span><span class="tag">database</span><span class="tag">interview</span><span class="read-time">5 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/10-git-commands-that-90-of-developers-dont-know-exist-5ani" target="_blank" rel="noopener" data-cat="interview" data-keywords="git commands developers hidden power tools bisect stash cherry-pick">
+          <div class="card-title">10 Git Commands That 90% of Developers Don't Know Exist</div>
+          <div class="card-desc">Hidden Git power tools: bisect, stash, cherry-pick, and more that save hours.</div>
+          <div class="card-meta"><span class="tag">git</span><span class="tag">github</span><span class="tag">programming</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/10-git-commands-that-even-senior-developers-google-every-week-5f13" target="_blank" rel="noopener" data-cat="interview" data-keywords="git commands senior developers google branching rebasing workflows">
+          <div class="card-title">10 Git Commands That Even Senior Developers Google Every Week</div>
+          <div class="card-desc">Stop Googling the same Git commands — master branching, rebasing, and GitHub workflows.</div>
+          <div class="card-meta"><span class="tag">git</span><span class="tag">github</span><span class="tag">productivity</span><span class="read-time">5 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/7-python-one-liners-that-replace-20-lines-of-code-36op" target="_blank" rel="noopener" data-cat="interview" data-keywords="python one-liners replace code tricks list comprehension generators">
+          <div class="card-title">7 Python One-Liners That Replace 20 Lines of Code</div>
+          <div class="card-desc">Elegant Python tricks: list comprehensions, generators, and decorators in one line.</div>
+          <div class="card-meta"><span class="tag">python</span><span class="tag">programming</span><span class="tag">productivity</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/7-api-design-mistakes-that-make-your-users-hate-you-and-how-to-fix-them-3722" target="_blank" rel="noopener" data-cat="interview" data-keywords="api design mistakes rest backend naming errors pagination">
+          <div class="card-title">7 API Design Mistakes That Make Your Users Hate You</div>
+          <div class="card-desc">Inconsistent naming, cryptic errors, broken pagination — and how to fix each one.</div>
+          <div class="card-meta"><span class="tag">api</span><span class="tag">backend</span><span class="tag">webdev</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/10-docker-kubernetes-commands-that-every-devops-engineer-uses-daily-3ajk" target="_blank" rel="noopener" data-cat="interview" data-keywords="docker kubernetes commands devops engineer daily containers k8s">
+          <div class="card-title">10 Docker & Kubernetes Commands Every DevOps Engineer Uses Daily</div>
+          <div class="card-desc">The 10 most-used Docker and K8s commands from years of production experience.</div>
+          <div class="card-meta"><span class="tag">docker</span><span class="tag">kubernetes</span><span class="tag">devops</span><span class="read-time">5 min read</span></div>
+        </a>
+      </div>
+
+      <!-- 🛠️ DEVELOPER TOOLS -->
+      <div class="articles-grid" id="toolsGrid">
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-25-free-developer-tools-heres-the-full-collection-2geh" target="_blank" rel="noopener" data-cat="tools" data-keywords="25 free developer tools collection browser json regex password hash">
+          <div class="card-title">I Built 25+ Free Developer Tools — Here's the Full Collection</div>
+          <div class="card-desc">The complete list of browser-based dev tools: JSON, regex, hash, password, and more.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">buildinpublic</span><span class="tag">productivity</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/8-dev-tools-you-can-use-right-now-no-install-171g" target="_blank" rel="noopener" data-cat="tools" data-keywords="dev tools no install browser online free instant">
+          <div class="card-title">8 Dev Tools You Can Use Right Now (No Install)</div>
+          <div class="card-desc">Browser-based tools for everyday dev tasks — no signup, no download required.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">productivity</span><span class="tag">tools</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/5-tiny-browser-tools-every-developer-needs-all-free-no-install-2l9k" target="_blank" rel="noopener" data-cat="tools" data-keywords="tiny browser tools developer needs free no install micro">
+          <div class="card-title">5 Tiny Browser Tools Every Developer Needs</div>
+          <div class="card-desc">Small but mighty tools you'll use daily — all free, all browser-based.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">tools</span><span class="tag">javascript</span><span class="read-time">1 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/13-free-developer-tools-you-didnt-know-you-needed-all-browser-based-533g" target="_blank" rel="noopener" data-cat="tools" data-keywords="13 browser dev tools free online productivity opensource">
+          <div class="card-title">13 Browser-Based Dev Tools You Can Use Right Now</div>
+          <div class="card-desc">Dev tools you didn't know you needed — all running in your browser, no install.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">productivity</span><span class="tag">opensource</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/50-chatgpt-prompts-that-actually-help-you-code-faster-440k" target="_blank" rel="noopener" data-cat="tools" data-keywords="chatgpt prompts code faster ai programming productivity gpt">
+          <div class="card-title">50 ChatGPT Prompts That Actually Help You Code Faster</div>
+          <div class="card-desc">Tested prompts for code review, debugging, architecture, and learning — copy-paste ready.</div>
+          <div class="card-meta"><span class="tag">chatgpt</span><span class="tag">ai</span><span class="tag">programming</span><span class="read-time">9 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/10-ai-prompts-that-will-10x-your-coding-productivity-5895" target="_blank" rel="noopener" data-cat="tools" data-keywords="ai prompts coding productivity 10x programming automation">
+          <div class="card-title">10 AI Prompts That Will 10x Your Coding Productivity</div>
+          <div class="card-desc">The AI prompts that actually work for real development tasks.</div>
+          <div class="card-meta"><span class="tag">ai</span><span class="tag">productivity</span><span class="tag">programming</span><span class="read-time">7 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/3-automation-patterns-that-save-me-6-hours-every-week-as-a-solo-dev-dfj" target="_blank" rel="noopener" data-cat="tools" data-keywords="automation patterns save hours solo dev weekly workflow">
+          <div class="card-title">3 Automation Patterns That Save Me 6+ Hours Every Week</div>
+          <div class="card-desc">Repeatable automation patterns for solo devs building browser-based tools.</div>
+          <div class="card-meta"><span class="tag">productivity</span><span class="tag">ai</span><span class="tag">devtools</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/how-i-set-up-an-ai-agent-that-runs-247-on-a-mac-mini-openclaw-cron-jobs-5g72" target="_blank" rel="noopener" data-cat="tools" data-keywords="ai agent 24/7 mac mini openclaw cron jobs automation setup">
+          <div class="card-title">How I Set Up an AI Agent That Runs 24/7 on a Mac Mini</div>
+          <div class="card-desc">OpenClaw + cron jobs: the setup behind a fully automated dev workflow.</div>
+          <div class="card-meta"><span class="tag">ai</span><span class="tag">automation</span><span class="tag">productivity</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/why-every-developer-needs-an-ai-powered-cli-in-2026-g9f" target="_blank" rel="noopener" data-cat="tools" data-keywords="ai powered cli 2026 developer devtools programming terminal">
+          <div class="card-title">Why Every Developer Needs an AI-Powered CLI in 2026</div>
+          <div class="card-desc">AI CLIs are the next evolution of developer tooling — here's why.</div>
+          <div class="card-meta"><span class="tag">ai</span><span class="tag">devtools</span><span class="tag">programming</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/faqpage-schema-shareable-urls-two-quick-wins-for-web-tool-seo-16m3" target="_blank" rel="noopener" data-cat="tools" data-keywords="faqpage schema shareable urls seo web tool google rich snippets">
+          <div class="card-title">FAQPage Schema + Shareable URLs: Two Quick Wins for Web Tool SEO</div>
+          <div class="card-desc">Add Google rich snippets and viral URL sharing to any client-side web tool.</div>
+          <div class="card-meta"><span class="tag">seo</span><span class="tag">webdev</span><span class="tag">tutorial</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/7-no-code-tools-that-can-replace-a-full-stack-developer-with-real-examples-1opp" target="_blank" rel="noopener" data-cat="tools" data-keywords="no-code tools replace full-stack developer startup nocode">
+          <div class="card-title">7 No-Code Tools That Can Replace a Full-Stack Developer</div>
+          <div class="card-desc">The best no-code tools for building real products — with real examples.</div>
+          <div class="card-meta"><span class="tag">nocode</span><span class="tag">startup</span><span class="tag">webdev</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-run-an-ai-agent-247-on-my-mac-mini-heres-my-security-checklist-9l1" target="_blank" rel="noopener" data-cat="tools" data-keywords="ai agent security checklist mac mini 24/7 running safety">
+          <div class="card-title">7 Things That Went Wrong Running an AI Agent 24/7</div>
+          <div class="card-desc">Security lessons from running an autonomous AI agent around the clock.</div>
+          <div class="card-meta"><span class="tag">security</span><span class="tag">ai</span><span class="tag">buildinpublic</span><span class="read-time">5 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-a-free-ad-free-google-ads-keyword-mixer-because-every-other-one-sucks-j0i" target="_blank" rel="noopener" data-cat="tools" data-keywords="keyword mixer google ads free ad-free seo tool browser">
+          <div class="card-title">Every Google Ads Keyword Tool Is Full of Ads — So I Made a Free One</div>
+          <div class="card-desc">A free, ad-free keyword mixer that runs in your browser. No signup needed.</div>
+          <div class="card-meta"><span class="tag">productivity</span><span class="tag">opensource</span><span class="tag">webdev</span><span class="read-time">2 min read</span></div>
+        </a>
+      </div>
+
+      <!-- 🎮 GAME DEV -->
+      <div class="articles-grid" id="gamedevGrid">
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-27-games-in-one-day-using-ai-heres-what-i-learned-5hgg" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="27 games 24 hours ai agents game dev spree javascript browser">
+          <div class="card-title">27 Games in 24 Hours: What Happens When AI Agents Go on a Game Dev Spree</div>
+          <div class="card-desc">I used AI agents to build 27 browser games in a single day. Here's what happened.</div>
+          <div class="card-meta"><span class="tag">gamedev</span><span class="tag">ai</span><span class="tag">javascript</span><span class="read-time">6 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-a-cozy-adventure-game-in-one-night-with-ai-agents-heres-what-happened-34ie" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="cozy adventure game one night ai agents godot indiedev">
+          <div class="card-title">I Built a Cozy Adventure Game in One Night with AI Agents</div>
+          <div class="card-desc">What happens when you let AI agents build a cozy adventure game from scratch.</div>
+          <div class="card-meta"><span class="tag">gamedev</span><span class="tag">godot</span><span class="tag">ai</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-a-full-game-in-one-day-using-ai-agents-heres-what-happened-3c3o" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="full game one day ai agents godot productivity build">
+          <div class="card-title">I Built a Full Game in One Day Using AI Agents</div>
+          <div class="card-desc">From concept to playable game in 24 hours — powered by AI agents and Godot.</div>
+          <div class="card-meta"><span class="tag">gamedev</span><span class="tag">godot</span><span class="tag">productivity</span><span class="read-time">5 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/day-1-im-building-a-cozy-adventure-game-with-ai-heres-my-plan-4je4" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="cozy adventure game ai plan day 1 godot indiedev buildinpublic">
+          <div class="card-title">Day 1: I'm Building a Cozy Adventure Game with AI — Here's My Plan</div>
+          <div class="card-desc">Starting a new game dev journey with AI tools — day 1 devlog and roadmap.</div>
+          <div class="card-meta"><span class="tag">gamedev</span><span class="tag">indiedev</span><span class="tag">buildinpublic</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/26-free-browser-games-you-can-play-right-now-no-download-no-signup-lhn" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="26 free browser games no download no signup play html5">
+          <div class="card-title">26 Free Browser Games You Can Play Right Now</div>
+          <div class="card-desc">The full collection of free browser games — no download, no signup needed.</div>
+          <div class="card-meta"><span class="tag">gamedev</span><span class="tag">javascript</span><span class="tag">free</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/5-mistakes-i-made-launching-27-browser-games-and-what-id-do-differently-1bi8" target="_blank" rel="noopener" data-cat="gamedev" data-keywords="5 mistakes launching 27 browser games lessons learned showdev">
+          <div class="card-title">5 Mistakes I Made Launching 27 Browser Games</div>
+          <div class="card-desc">What went wrong and what I'd do differently launching a game portfolio.</div>
+          <div class="card-meta"><span class="tag">showdev</span><span class="tag">webdev</span><span class="tag">gamedev</span><span class="read-time">4 min read</span></div>
+        </a>
+      </div>
+
+      <!-- 💰 FINANCE & PRODUCTIVITY -->
+      <div class="articles-grid" id="financeGrid">
+        <a class="article-card" href="https://dev.to/maxxmini/why-your-budget-app-fails-plan-vs-reality-tracking-with-donflow-28dk" target="_blank" rel="noopener" data-cat="finance" data-keywords="budget app fails plan reality tracking donflow drift spending">
+          <div class="card-title">Why Your Budget App Fails: Plan vs Reality Tracking with DonFlow</div>
+          <div class="card-desc">How DonFlow detects "budget drift" — where reality diverges from your plan.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">opensource</span><span class="tag">productivity</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/storing-financial-data-in-the-browser-an-indexeddb-dexiejs-architecture-guide-pf1" target="_blank" rel="noopener" data-cat="finance" data-keywords="storing financial data browser indexeddb dexie architecture guide local">
+          <div class="card-title">Storing Financial Data in the Browser: An IndexedDB + Dexie.js Guide</div>
+          <div class="card-desc">Architecture deep-dive: how DonFlow stores sensitive data entirely in the browser.</div>
+          <div class="card-meta"><span class="tag">javascript</span><span class="tag">indexeddb</span><span class="tag">tutorial</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/7-productivity-systems-that-saved-me-15-hours-per-week-as-a-developer-58ai" target="_blank" rel="noopener" data-cat="finance" data-keywords="productivity systems saved 15 hours week developer workflow optimize">
+          <div class="card-title">7 Productivity Systems That Saved Me 15+ Hours Per Week</div>
+          <div class="card-desc">Tested 50+ productivity methods — these 7 actually work for developers.</div>
+          <div class="card-meta"><span class="tag">productivity</span><span class="tag">programming</span><span class="tag">webdev</span><span class="read-time">4 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/7-productivity-hacks-that-10x-your-developer-output-with-real-examples-1ng7" target="_blank" rel="noopener" data-cat="finance" data-keywords="productivity hacks 10x developer output real examples workflow">
+          <div class="card-title">7 Productivity Hacks That 10x Your Developer Output</div>
+          <div class="card-desc">Ship more in less time with these battle-tested productivity hacks.</div>
+          <div class="card-meta"><span class="tag">productivity</span><span class="tag">programming</span><span class="tag">webdev</span><span class="read-time">5 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/im-building-a-tenant-rights-tool-for-koreas-unique-rental-system-1akn" target="_blank" rel="noopener" data-cat="finance" data-keywords="tenant rights tool korea rental system jeonse buildinpublic startup">
+          <div class="card-title">I'm Building a Tenant Rights Tool for Korea's Unique Rental System</div>
+          <div class="card-desc">A web tool to help Korean tenants navigate the complex jeonse rental system.</div>
+          <div class="card-meta"><span class="tag">buildinpublic</span><span class="tag">startup</span><span class="tag">webdev</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/how-i-prepared-my-show-hn-launch-a-solo-dev-checklist-3fh0" target="_blank" rel="noopener" data-cat="finance" data-keywords="show hn launch solo dev checklist hacker news preparation">
+          <div class="card-title">How I Prepared My Show HN Launch — A Solo Dev Checklist</div>
+          <div class="card-desc">Everything I did to prepare for a Hacker News launch as a solo developer.</div>
+          <div class="card-meta"><span class="tag">showdev</span><span class="tag">opensource</span><span class="tag">webdev</span><span class="read-time">3 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-shipped-18-micro-tools-and-27-browser-games-nobody-came-what-am-i-doing-wrong-1jb9" target="_blank" rel="noopener" data-cat="finance" data-keywords="shipped micro tools browser games nobody came marketing distribution">
+          <div class="card-title">I Shipped 18 Micro Tools and 27 Browser Games — Nobody Came</div>
+          <div class="card-desc">Honest reflection on building in public when no one shows up.</div>
+          <div class="card-meta"><span class="tag">discuss</span><span class="tag">webdev</span><span class="tag">gamedev</span><span class="read-time">2 min read</span></div>
+        </a>
+        <a class="article-card" href="https://dev.to/maxxmini/i-built-9-free-developer-tools-in-a-weekend-heres-how-each-one-makes-me-passive-income-414c" target="_blank" rel="noopener" data-cat="finance" data-keywords="9 free developer tools weekend passive income monetization">
+          <div class="card-title">9 Free Browser-Based Dev Tools That Actually Generate Passive Income</div>
+          <div class="card-desc">How free browser tools can become a sustainable income stream for solo devs.</div>
+          <div class="card-meta"><span class="tag">webdev</span><span class="tag">productivity</span><span class="tag">ai</span><span class="read-time">9 min read</span></div>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="no-results" id="noResults">😕 No articles found. Try a different search or category.</div>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+      <details>
+        <summary>What topics do these articles cover?</summary>
+        <p>Articles cover coding interview prep (DSA, SQL, System Design, Frontend), browser-based developer tools, AI automation workflows, game development with AI agents, and building finance apps with browser-only architecture.</p>
+      </details>
+      <details>
+        <summary>Are these tutorials beginner-friendly?</summary>
+        <p>Yes! Most articles include practical code examples and step-by-step explanations. They range from beginner to intermediate level, with interview prep articles targeting job seekers at all levels.</p>
+      </details>
+      <details>
+        <summary>Can I use the code examples in my projects?</summary>
+        <p>Absolutely! All code examples are free to use. Most tools mentioned are open source on <a href="https://github.com/maxmini0214" style="color:var(--accent)">GitHub</a>. The articles are meant to be practical — copy, paste, and adapt.</p>
+      </details>
+      <details>
+        <summary>What is DonFlow?</summary>
+        <p>DonFlow is a free, browser-only budget tracker that compares your planned budget against actual spending. Your financial data never leaves your device. <a href="/donflow/?demo" style="color:#4ade80;">Try the demo →</a></p>
+      </details>
+      <details>
+        <summary>How often are new articles published?</summary>
+        <p>New articles are published multiple times per week on Dev.to. Topics rotate between interview prep, tool building tutorials, AI automation, and project case studies.</p>
+      </details>
+      <details>
+        <summary>Where can I follow for new articles?</summary>
+        <p>Follow <a href="https://dev.to/maxxmini" style="color:var(--accent)">@maxxmini on Dev.to</a> for new articles, or subscribe to the Morning Brief newsletter for weekly updates.</p>
+      </details>
+    </section>
+
+    <!-- DonFlow CTA -->
+    <div class="cta cta-donflow">
+      <p>💰 <strong>Track your budget drift</strong> — <a href="/donflow/?demo">DonFlow</a> compares your plan vs reality. Zero signup, zero cloud, 100% browser-based.</p>
+    </div>
+
+    <!-- Cross-links -->
+    <div class="cta">
+      <p>🛠️ <strong>Like these tools?</strong> Try our <a href="/">27+ free dev tools</a> — JSON formatter, regex tester, and more.</p>
+      <p style="margin-top:8px;">🎮 We also have <a href="/games.html">30+ free browser games</a> — no download needed!</p>
+      <p style="margin-top:8px;">📚 Level up? Check out <a href="/store.html">developer cheat sheets & interview prep kits</a>.</p>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter">
+      <p>📬 Get weekly dev tool tips & new article announcements</p>
+      <a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Morning Brief →</a>
+    </div>
+
+    <footer>
+      <p>Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · <a href="/">Tools</a> · <a href="/games.html">Games</a> · <a href="/store.html">Store</a> · <a href="https://dev.to/maxxmini">Dev.to</a></p>
+    </footer>
+  </div>
+
+  <script>
+  (function(){
+    const searchInput = document.getElementById('searchInput');
+    const resultCount = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+    const cards = document.querySelectorAll('.article-card');
+    const grids = {
+      featured: document.getElementById('featuredGrid'),
+      interview: document.getElementById('interviewGrid'),
+      tools: document.getElementById('toolsGrid'),
+      gamedev: document.getElementById('gamedevGrid'),
+      finance: document.getElementById('financeGrid')
+    };
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let activeFilter = 'featured';
+
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== searchInput) { e.preventDefault(); searchInput.focus(); }
+    });
+
+    function applyFilter() {
+      const q = searchInput.value.toLowerCase().trim();
+      let visible = 0;
+
+      // Show/hide grids based on active filter
+      Object.entries(grids).forEach(([key, grid]) => {
+        if (activeFilter === 'all' || activeFilter === key) {
+          grid.style.display = '';
+        } else {
+          grid.style.display = 'none';
+        }
+      });
+
+      cards.forEach(card => {
+        const cats = card.dataset.cat || '';
+        const matchCat = activeFilter === 'all' || cats.includes(activeFilter);
+        const text = (card.textContent + ' ' + (card.dataset.keywords || '')).toLowerCase();
+        const matchSearch = !q || text.includes(q);
+        const show = matchCat && matchSearch;
+        card.classList.toggle('hidden', !show);
+
+        // Check if this card's parent grid is visible
+        const parentGrid = card.closest('.articles-grid');
+        if (parentGrid && parentGrid.style.display === 'none') {
+          // Don't count cards in hidden grids
+        } else if (show) {
+          visible++;
+        }
+      });
+
+      // Recount visible properly
+      if (activeFilter !== 'all') {
+        visible = 0;
+        cards.forEach(card => {
+          const parentGrid = card.closest('.articles-grid');
+          if (parentGrid && parentGrid.style.display !== 'none' && !card.classList.contains('hidden')) {
+            visible++;
+          }
+        });
+      }
+
+      resultCount.textContent = q || activeFilter !== 'featured' ? `Showing ${visible} article${visible !== 1 ? 's' : ''}` : '';
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    searchInput.addEventListener('input', applyFilter);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.cat;
+        applyFilter();
+      });
+    });
+
+    applyFilter();
+  })();
+  </script>
+  <script data-goatcounter="https://maxmini0214.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
