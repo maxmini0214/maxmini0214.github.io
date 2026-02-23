@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pomodoro Timer — Free Online Focus Tool | MaxDevTools</title>
-<meta name="description" content="Simple Pomodoro timer with 25-min work and 5-min break intervals. Browser notifications and audio alerts. 100% client-side.">
+<meta name="description" content="Free online Pomodoro timer with 25-min work and 5-min break intervals. Browser notifications, audio alerts, session tracking. 100% client-side, no signup.">
+<meta name="keywords" content="pomodoro timer, pomodoro timer online, focus timer, productivity timer, 25 minute timer, pomodoro technique, study timer, work timer">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/pomodoro-timer/">
 <meta property="og:title" content="Pomodoro Timer — Free Online Focus Tool">
-<meta property="og:description" content="Stay focused with the Pomodoro technique. 25-min work, 5-min break. Free online timer.">
+<meta property="og:description" content="Stay focused with the Pomodoro technique. 25-min work, 5-min break. Browser notifications + audio alerts. Free, no signup.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/pomodoro-timer/">
 <meta name="twitter:card" content="summary">
@@ -18,10 +19,11 @@
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
 body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
 a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
-.container{max-width:520px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1;text-align:center}
-header{margin-bottom:2rem}
+.container{max-width:600px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+header{text-align:center;margin-bottom:2rem}
 header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
 header p{color:var(--text2)}
+.timer-section{text-align:center}
 .mode-tabs{display:flex;gap:.5rem;justify-content:center;margin-bottom:2rem}
 .mode-tabs button{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:.6rem 1.25rem;border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .2s}
 .mode-tabs button.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.1)}
@@ -33,13 +35,35 @@ header p{color:var(--text2)}
 .btn-pause{background:var(--red);color:#fff}
 .btn-reset{background:var(--surface);border:1px solid var(--border);color:var(--text2)}
 .btn-reset:hover{border-color:var(--cyan);color:var(--text)}
+.btn-share{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:.5rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;margin:1rem auto;display:inline-block}
+.btn-share:hover{border-color:var(--green);color:var(--green)}
 .sessions{color:var(--text2);font-size:.9rem;margin-bottom:2rem}
 .sessions span{color:var(--green);font-weight:600}
+section{margin-bottom:2rem}
+section h2{font-size:1.25rem;color:var(--green);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.guide-steps{counter-reset:step}
+.guide-steps .step{counter-increment:step;padding:1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.75rem}
+.guide-steps .step::before{content:'Step 'counter(step);display:block;color:var(--cyan);font-weight:700;font-size:.85rem;margin-bottom:.4rem}
+.guide-steps .step p{color:var(--text2);font-size:.9rem;line-height:1.5}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:1rem;cursor:pointer;font-weight:600;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::after{content:'＋';color:var(--cyan);font-size:1.2rem}
+details[open] summary::after{content:'－'}
+details .answer{padding:0 1rem 1rem;color:var(--text2);line-height:1.6;font-size:.9rem}
+details .answer code{background:var(--bg);padding:.15rem .4rem;border-radius:4px;font-family:var(--mono);font-size:.85rem;color:var(--green)}
 .cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
 .cta h3{color:var(--cyan);margin-bottom:.5rem}
 .cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
 .cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+.cross-links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.cross-links a{background:var(--surface);border:1px solid var(--border);padding:.4rem .8rem;border-radius:6px;font-size:.8rem;color:var(--text2);transition:all .2s}
+.cross-links a:hover{border-color:var(--cyan);color:var(--cyan);text-decoration:none}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.newsletter h3{color:var(--text);margin-bottom:.5rem;font-size:1rem}
+.newsletter p{color:var(--text2);font-size:.85rem;margin-bottom:1rem}
+.newsletter a{display:inline-block;background:var(--green);color:var(--bg);padding:.6rem 1.5rem;border-radius:8px;font-weight:700;font-size:.9rem}
+.newsletter a:hover{opacity:.85;text-decoration:none}
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
 @media(max-width:500px){.timer-display{font-size:4rem}header h1{font-size:1.5rem}}
@@ -49,10 +73,10 @@ footer .brand{color:var(--cyan);font-weight:600}
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Pomodoro Timer — Free Online Focus Tool | MaxDevTools",
-  "description": "Simple Pomodoro timer with 25-min work and 5-min break intervals. Browser notifications and audio alerts. 100% client-side.",
+  "name": "Pomodoro Timer — Free Online Focus Tool",
+  "description": "Free online Pomodoro timer with 25-min work and 5-min break intervals. Browser notifications, audio alerts, session tracking. 100% client-side.",
   "url": "https://maxmini0214.github.io/pomodoro-timer/",
-  "applicationCategory": "DeveloperApplication",
+  "applicationCategory": "ProductivityApplication",
   "operatingSystem": "Web Browser",
   "offers": {
     "@type": "Offer",
@@ -66,14 +90,71 @@ footer .brand{color:var(--cyan);font-weight:600}
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Pomodoro Technique?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Pomodoro Technique is a time management method created by Francesco Cirillo in the late 1980s. It uses a kitchen timer (pomodoro = tomato in Italian) to break work into 25-minute focused intervals called 'pomodoros', separated by 5-minute breaks. After 4 pomodoros, take a longer 15-30 minute break. Studies show this reduces mental fatigue and improves sustained concentration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why 25 minutes? Can I change the timer duration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "25 minutes is the classic Pomodoro interval, proven to be long enough for meaningful work but short enough to maintain focus. However, many people customize it: developers often use 50/10 (50-min work, 10-min break), students prefer 25/5 for study sessions, and writers sometimes use 45/15. This tool lets you switch between Work (25m), Short Break (5m), and Long Break (15m)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I set a Pomodoro timer in code (JavaScript, Python)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In JavaScript: setInterval(() => { if (--seconds <= 0) { clearInterval(timer); alert('Pomodoro done!'); } }, 1000); In Python: import time; time.sleep(25*60); print('Done!'); Or use the `playsound` library for audio alerts. For terminal: use `sleep 1500 && echo 'Done'` on macOS/Linux, or `timeout /t 1500` on Windows."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this timer work offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, no internet connection is needed. Your session count is tracked in memory during the current browser session. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I share my timer settings with a team?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the '🔗 Share Settings' button to generate a URL that encodes your current mode (work/break/long break). Send this link to your team and they'll open the timer with the same configuration. The URL uses base64 encoding — no data is sent to any server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the best Pomodoro apps and alternatives?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Popular alternatives include: Forest (gamified, $3.99), Focus Keeper (iOS), Toggl Track (with time logging), Be Focused (macOS), and Pomofocus.io (web). This tool is unique because it's 100% free, requires no signup or account, runs entirely in the browser, and has zero tracking — your data never leaves your device."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="container">
 <header>
 <h1>🍅 Pomodoro Timer</h1>
-<p>Stay focused with the Pomodoro technique</p>
+<p>Stay focused with the Pomodoro technique — free, no signup, 100% browser-based</p>
 </header>
 
+<div class="timer-section">
 <div class="mode-tabs">
 <button class="active" data-time="25">Work 25m</button>
 <button data-time="5">Break 5m</button>
@@ -90,23 +171,92 @@ footer .brand{color:var(--cyan);font-weight:600}
 
 <div class="sessions">Sessions completed: <span id="count">0</span></div>
 
+<button class="btn-share" id="shareBtn" title="Share timer settings via URL">🔗 Share Settings</button>
+</div>
+
+<section>
+<h2>📖 How to Use This Pomodoro Timer</h2>
+<div class="guide-steps">
+<div class="step"><p>Choose your mode — <strong>Work 25m</strong> for focused sessions, <strong>Break 5m</strong> for short rests, or <strong>Long Break 15m</strong> after 4 work sessions.</p></div>
+<div class="step"><p>Click <strong>▶ Start</strong> to begin. The timer counts down with a live display in your browser tab title, so you can see it even in other tabs.</p></div>
+<div class="step"><p>When time's up, you'll hear an audio alert and get a browser notification (allow notifications when prompted). Your completed work sessions are tracked automatically.</p></div>
+<div class="step"><p>Use <strong>🔗 Share Settings</strong> to send your current timer mode to teammates via URL. They'll open the same configuration instantly.</p></div>
+</div>
+</section>
+
 <div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+<h3>🏦 Track Where Your Time Goes — DonFlow</h3>
+<p>Free budget planning tool. Plan vs Reality drift detection, zero signup.</p>
+<a class="cta-btn" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try DonFlow Free →</a>
 </div>
+
+<section>
+<h2>❓ Frequently Asked Questions</h2>
+<details><summary>What is the Pomodoro Technique?</summary><div class="answer">The Pomodoro Technique is a time management method created by Francesco Cirillo in the late 1980s. It uses a kitchen timer (pomodoro = tomato in Italian) to break work into <strong>25-minute focused intervals</strong> called "pomodoros", separated by 5-minute breaks. After 4 pomodoros, take a longer 15–30 minute break. Studies show this reduces mental fatigue and improves sustained concentration.</div></details>
+<details><summary>Why 25 minutes? Can I change the duration?</summary><div class="answer">25 minutes is the classic Pomodoro interval — long enough for meaningful work, short enough to maintain focus. Many people customize it: <strong>developers</strong> often use 50/10, <strong>students</strong> prefer 25/5, and <strong>writers</strong> sometimes use 45/15. This tool offers Work (25m), Short Break (5m), and Long Break (15m) modes.</div></details>
+<details><summary>How do I set a Pomodoro timer in code?</summary><div class="answer"><strong>JavaScript:</strong><br><code>setInterval(() =&gt; { if (--s &lt;= 0) { clearInterval(t); alert('Done!'); }}, 1000);</code><br><br><strong>Python:</strong><br><code>import time; time.sleep(25*60); print('Pomodoro done!')</code><br><br><strong>Terminal (macOS/Linux):</strong><br><code>sleep 1500 && echo "Done" && afplay /System/Library/Sounds/Glass.aiff</code><br><br><strong>Windows:</strong><br><code>timeout /t 1500 && echo Done</code></div></details>
+<details><summary>Does this timer work offline?</summary><div class="answer">Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, <strong>no internet connection is needed</strong>. Session count is tracked in memory during your browser session. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications.</div></details>
+<details><summary>How can I share my timer settings with a team?</summary><div class="answer">Click the <strong>🔗 Share Settings</strong> button to generate a URL that encodes your current timer mode. Send this link to teammates — they'll open the timer with the exact same configuration. The URL uses parameter encoding — <strong>no data is sent to any server</strong>.</div></details>
+<details><summary>What are the best Pomodoro apps and alternatives?</summary><div class="answer">Popular alternatives: <strong>Forest</strong> (gamified, $3.99), <strong>Focus Keeper</strong> (iOS), <strong>Toggl Track</strong> (with time logging), <strong>Be Focused</strong> (macOS), <strong>Pomofocus.io</strong> (web). This tool is unique: 100% free, no signup, runs entirely in the browser, and zero tracking — your data never leaves your device.</div></details>
+</section>
+
+<div class="newsletter">
+<h3>📬 Dev Tools & Productivity Tips</h3>
+<p>Free weekly newsletter — no spam, unsubscribe anytime</p>
+<a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe Free →</a>
 </div>
+
+<section>
+<h2>🔗 More Free Tools</h2>
+<div class="cross-links">
+<a href="/keyword-mixer/">⭐ Keyword Mixer</a>
+<a href="/json-formatter/">JSON Formatter</a>
+<a href="/regex-tester/">Regex Tester</a>
+<a href="/cron-parser/">Cron Parser</a>
+<a href="/hash-generator/">Hash Generator</a>
+<a href="/password-generator/">Password Gen</a>
+<a href="/base64-tool/">Base64 Tool</a>
+<a href="/url-encoder/">URL Encoder</a>
+<a href="/jwt-decoder/">JWT Decoder</a>
+<a href="/color-picker/">Color Picker</a>
+<a href="/unix-timestamp/">Unix Timestamp</a>
+<a href="/qr-code-generator/">QR Generator</a>
+<a href="/markdown-preview/">Markdown Preview</a>
+<a href="/box-shadow-generator/">Box Shadow</a>
+<a href="/lorem-ipsum/">Lorem Ipsum</a>
+<a href="/diff-checker/">Diff Checker</a>
+<a href="/image-compressor/">Image Compressor</a>
+<a href="/css-gradient/">CSS Gradient</a>
+<a href="/website-audit/">Website Audit</a>
+<a href="/devtools/">DevTools</a>
+</div>
+</section>
+</div>
+
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+<a href="/">← Back to All Tools</a> · <a href="/games.html">🎮 Games</a> · <a href="/store.html">📦 Store</a><br><br>
+Part of <a href="https://maxmini0214.github.io" class="brand">MaxDevTools</a> · Built by <a href="https://github.com/maxmini0214">maxmini0214</a>
 </footer>
+
 <script>
 let timeLeft=25*60,running=false,interval=null,sessions=0,currentMode=25;
 const display=document.getElementById('timer'),label=document.getElementById('label'),startBtn=document.getElementById('startBtn'),countEl=document.getElementById('count');
 const tabs=document.querySelectorAll('.mode-tabs button');
 
+// Restore from URL params
+(function(){
+  const p=new URLSearchParams(location.search);
+  const m=+p.get('m');
+  if([25,5,15].includes(m)){
+    currentMode=m;timeLeft=m*60;
+    tabs.forEach(b=>{b.classList.toggle('active',+b.dataset.time===m)});
+    label.textContent=m===25?'Work Session':m===5?'Short Break':'Long Break';
+  }
+})();
+
 function fmt(s){const m=Math.floor(s/60),sec=s%60;return String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')}
 function updateDisplay(){display.textContent=fmt(timeLeft);document.title=fmt(timeLeft)+' — Pomodoro Timer'}
+updateDisplay();
 
 function beep(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();o.type='sine';o.frequency.value=880;o.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.3);setTimeout(()=>{const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=880;o2.connect(ctx.destination);o2.start();o2.stop(ctx.currentTime+.3)},400)}catch(e){}}
 
@@ -144,14 +294,16 @@ tabs.forEach(btn=>btn.addEventListener('click',()=>{
   label.textContent=currentMode===25?'Work Session':currentMode===5?'Short Break':'Long Break';
   startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
 }));
+
+// Share button
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const url=new URL(location.href.split('?')[0]);
+  url.searchParams.set('m',currentMode);
+  navigator.clipboard.writeText(url.toString()).then(()=>{
+    const btn=document.getElementById('shareBtn');
+    btn.textContent='✅ Link Copied!';setTimeout(()=>btn.textContent='🔗 Share Settings',2000);
+  }).catch(()=>{prompt('Copy this URL:',url.toString())});
+});
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
