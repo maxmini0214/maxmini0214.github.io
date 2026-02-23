@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Cheat Sheets & Interview Prep — MaxDevTools Store</title>
+  <meta name="description" content="Developer cheat sheets, interview prep kits, and coding guides. Git, Docker, SQL, System Design, Python, API Design, and more. Instant download, DRM-free.">
+  <meta name="keywords" content="developer cheat sheet, coding interview prep, system design interview, git cheat sheet, docker cheat sheet, sql cookbook, python tricks, api design guide, frontend interview, dsa patterns">
+  <link rel="canonical" href="https://maxmini0214.github.io/store.html">
+  <meta property="og:title" content="Developer Cheat Sheets & Interview Prep — MaxDevTools Store">
+  <meta property="og:description" content="12 developer cheat sheets and guides. Git, Docker, SQL, System Design, Python, API Design. Instant download, DRM-free.">
+  <meta property="og:url" content="https://maxmini0214.github.io/store.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Developer Cheat Sheets & Interview Prep">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Developer Cheat Sheets & Interview Prep",
+    "description": "12 developer cheat sheets, interview prep kits, and coding guides. Instant download, DRM-free.",
+    "url": "https://maxmini0214.github.io/store.html",
+    "numberOfItems": 12,
+    "author": {"@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io"}
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "What format are the cheat sheets in?", "acceptedAnswer": {"@type": "Answer", "text": "All products are delivered as PDF and Markdown files. PDF for printing and quick reference, Markdown for easy searching and copy-paste into your own notes."}},
+      {"@type": "Question", "name": "Can I use these for my team?", "acceptedAnswer": {"@type": "Answer", "text": "Personal use is included. For team distribution, purchase one copy per team member or contact us for a team license."}},
+      {"@type": "Question", "name": "Are these AI-generated?", "acceptedAnswer": {"@type": "Answer", "text": "Content is researched, written, and curated by a developer. AI assists with formatting and organization, but every example is tested and every explanation is human-reviewed."}},
+      {"@type": "Question", "name": "Do you offer refunds?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, Gumroad offers a 30-day refund policy. If the content doesn't meet your expectations, you can request a full refund."}},
+      {"@type": "Question", "name": "How do I download after purchase?", "acceptedAnswer": {"@type": "Answer", "text": "After purchase on Gumroad, you'll receive an instant download link via email. You can also access your library anytime at gumroad.com/library."}}
+    ]
+  }]
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; padding: 40px 0 30px; }
+    header h1 { font-size: 2rem; color: #f0f6fc; margin-bottom: 8px; }
+    header p { color: #8b949e; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .badge-row { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+    .badge { background: #21262d; border: 1px solid #30363d; border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; color: #8b949e; }
+    .categories { display: flex; gap: 8px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+    .cat-btn { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+    .cat-btn:hover, .cat-btn.active { background: #238636; border-color: #238636; color: #fff; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin: 30px 0; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px; transition: transform 0.2s, border-color 0.2s; }
+    .card:hover { transform: translateY(-2px); border-color: #58a6ff; }
+    .card h3 { color: #f0f6fc; font-size: 1.1rem; margin-bottom: 6px; }
+    .card .price { color: #3fb950; font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
+    .card .desc { color: #8b949e; font-size: 0.9rem; margin-bottom: 12px; }
+    .card .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .card .tag { background: #21262d; border-radius: 12px; padding: 2px 10px; font-size: 0.75rem; color: #58a6ff; }
+    .card .cta { display: inline-block; background: #238636; color: #fff; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: background 0.2s; }
+    .card .cta:hover { background: #2ea043; }
+    .card .details { color: #8b949e; font-size: 0.8rem; margin-top: 8px; }
+    .faq-section { margin: 40px 0; }
+    .faq-section h2 { color: #f0f6fc; font-size: 1.3rem; margin-bottom: 16px; text-align: center; }
+    details { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 8px; }
+    details summary { padding: 12px 16px; cursor: pointer; color: #c9d1d9; font-weight: 500; }
+    details summary:hover { color: #58a6ff; }
+    details > div { padding: 0 16px 12px; color: #8b949e; font-size: 0.9rem; }
+    .cross-links { text-align: center; margin: 30px 0; padding: 20px; background: #161b22; border: 1px solid #30363d; border-radius: 12px; }
+    .cross-links a { color: #58a6ff; text-decoration: none; margin: 0 12px; }
+    .cross-links a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 30px 0; color: #484f58; font-size: 0.8rem; border-top: 1px solid #21262d; margin-top: 40px; }
+    footer a { color: #58a6ff; text-decoration: none; }
+    .hidden { display: none; }
+    .count { text-align: center; color: #8b949e; font-size: 0.9rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 Developer Cheat Sheets & Guides</h1>
+      <p>Interview prep, quick references, and practical guides. Instant download, DRM-free, works offline.</p>
+      <div class="badge-row">
+        <span class="badge">📦 12 Products</span>
+        <span class="badge">⬇️ Instant Download</span>
+        <span class="badge">🔓 DRM-Free</span>
+        <span class="badge">💰 30-Day Refund</span>
+      </div>
+    </header>
+
+    <div class="categories">
+      <button class="cat-btn active" data-cat="all">All</button>
+      <button class="cat-btn" data-cat="interview">Interview Prep</button>
+      <button class="cat-btn" data-cat="devops">DevOps</button>
+      <button class="cat-btn" data-cat="coding">Coding</button>
+      <button class="cat-btn" data-cat="productivity">Productivity</button>
+    </div>
+    <div class="count"><span id="product-count">12</span> products</div>
+
+    <div class="grid" id="product-grid">
+
+      <div class="card" data-cat="interview">
+        <h3>🧩 DSA Cheat Sheet: 50 Coding Interview Patterns</h3>
+        <div class="price">$9</div>
+        <div class="desc">50 algorithm patterns with decision guides and complexity tables. Arrays, trees, graphs, DP — every pattern you need for FAANG interviews.</div>
+        <div class="meta">
+          <span class="tag">Algorithms</span><span class="tag">Interview</span><span class="tag">FAANG</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/dsa-interview-cheatsheet" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~6,500 words · 50 patterns · Decision flowchart</div>
+      </div>
+
+      <div class="card" data-cat="interview">
+        <h3>🏗️ System Design Interview Cheat Sheet</h3>
+        <div class="price">$9</div>
+        <div class="desc">40 essential patterns and 8 mini-designs. Load balancers, caching, sharding, message queues — senior-level interview prep.</div>
+        <div class="meta">
+          <span class="tag">System Design</span><span class="tag">Senior</span><span class="tag">Architecture</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/system-design-cheatsheet" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~6,000 words · 40 patterns · 8 mini-designs</div>
+      </div>
+
+      <div class="card" data-cat="interview">
+        <h3>💻 Frontend Interview Prep Kit</h3>
+        <div class="price">$9</div>
+        <div class="desc">DOM, CSS layouts, React patterns, performance optimization, accessibility — everything for frontend interviews in one kit.</div>
+        <div class="meta">
+          <span class="tag">Frontend</span><span class="tag">React</span><span class="tag">CSS</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/frontend-interview-prep" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~5,000 words · DOM + CSS + React + Performance</div>
+      </div>
+
+      <div class="card" data-cat="coding">
+        <h3>🐍 Python One-Liners: 50 Powerful Tricks</h3>
+        <div class="price">$7</div>
+        <div class="desc">50 Python one-liners that replace 5-10 lines of code. List comprehensions, generators, decorators, and more.</div>
+        <div class="meta">
+          <span class="tag">Python</span><span class="tag">Tricks</span><span class="tag">Productivity</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/python-oneliners" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~2,300 words · 50 one-liners · Copy-paste ready</div>
+      </div>
+
+      <div class="card" data-cat="coding">
+        <h3>📋 SQL Query Cookbook: 60 Ready-to-Use Recipes</h3>
+        <div class="price">$7</div>
+        <div class="desc">60 SQL recipes from basic CRUD to window functions, CTEs, and performance tuning. PostgreSQL, MySQL, SQLite compatible.</div>
+        <div class="meta">
+          <span class="tag">SQL</span><span class="tag">Database</span><span class="tag">Data Analysis</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/sql-query-cookbook" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~5,500 words · 60 recipes · Multi-DB compatible</div>
+      </div>
+
+      <div class="card" data-cat="coding">
+        <h3>🔗 API Design Guide</h3>
+        <div class="price">$9</div>
+        <div class="desc">RESTful API design patterns, versioning strategies, error handling, authentication, and rate limiting. For backend developers and tech leads.</div>
+        <div class="meta">
+          <span class="tag">API</span><span class="tag">REST</span><span class="tag">Backend</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/api-design-guide" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~3,700 words · Patterns + Anti-patterns + Examples</div>
+      </div>
+
+      <div class="card" data-cat="devops">
+        <h3>🐳 Docker & Kubernetes Cheat Sheet</h3>
+        <div class="price">$7</div>
+        <div class="desc">70+ commands and patterns from dev to production. Dockerfiles, Compose, K8s deployments, services, and debugging.</div>
+        <div class="meta">
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">DevOps</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/docker-kubernetes-cheatsheet" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~5,500 words · 70+ commands · Dev→Prod workflow</div>
+      </div>
+
+      <div class="card" data-cat="devops">
+        <h3>🔧 Git & GitHub Cheat Sheet</h3>
+        <div class="price">$5</div>
+        <div class="desc">Every Git command you need: branching, rebasing, cherry-pick, stash, bisect, and GitHub-specific workflows.</div>
+        <div class="meta">
+          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Version Control</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/git-github-cheatsheet" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~2,500 words · Branch strategies + GitHub Actions</div>
+      </div>
+
+      <div class="card" data-cat="devops">
+        <h3>⚡ Developer Productivity Cheat Sheet Bundle</h3>
+        <div class="price">$5</div>
+        <div class="desc">5 cheat sheets in one: Git, CLI, VS Code shortcuts, Regex quick reference, and Docker essentials.</div>
+        <div class="meta">
+          <span class="tag">Bundle</span><span class="tag">Productivity</span><span class="tag">5-in-1</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/dev-productivity-cheatsheet-bundle" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">5 cheat sheets · Best value bundle</div>
+      </div>
+
+      <div class="card" data-cat="coding">
+        <h3>🤖 100 ChatGPT Prompts for Developers</h3>
+        <div class="price">$9</div>
+        <div class="desc">100 tested prompts for code review, debugging, architecture, testing, documentation, and learning. Copy-paste into ChatGPT/Claude.</div>
+        <div class="meta">
+          <span class="tag">AI</span><span class="tag">ChatGPT</span><span class="tag">Prompts</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/chatgpt-prompts-developers" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~5,700 words · 100 prompts · 10 categories</div>
+      </div>
+
+      <div class="card" data-cat="productivity">
+        <h3>🚀 The No-Code Automation Playbook</h3>
+        <div class="price">$9</div>
+        <div class="desc">50 ready-to-use workflows for Zapier, Make, n8n. Automate emails, social media, data entry, reporting — no coding required.</div>
+        <div class="meta">
+          <span class="tag">No-Code</span><span class="tag">Automation</span><span class="tag">Zapier</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/nocode-automation-playbook" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~6,500 words · 50 workflows · 3 appendices</div>
+      </div>
+
+      <div class="card" data-cat="productivity">
+        <h3>📝 Ultimate Productivity Templates Pack</h3>
+        <div class="price">$7</div>
+        <div class="desc">30 ready-to-use templates for project management, goal tracking, meeting notes, habit tracking, and team coordination.</div>
+        <div class="meta">
+          <span class="tag">Templates</span><span class="tag">Notion</span><span class="tag">Productivity</span>
+        </div>
+        <a class="cta" href="https://maxmini.gumroad.com/l/notion-productivity-templates" target="_blank" rel="noopener">Get It →</a>
+        <div class="details">~6,800 words · 30 templates · Works in any tool</div>
+      </div>
+
+    </div>
+
+    <!-- DonFlow CTA -->
+    <div style="text-align:center; margin: 30px 0; padding: 20px; background: linear-gradient(135deg, #161b22, #1a2332); border: 1px solid #1f6feb; border-radius: 12px;">
+      <div style="font-size: 1.1rem; margin-bottom: 8px;">🏦 <strong>Need a budget tracker?</strong></div>
+      <div style="color: #8b949e; margin-bottom: 12px;">DonFlow — Plan vs Reality Budget Tracker. Zero signup, zero cloud, 100% browser-based.</div>
+      <a href="https://maxmini0214.github.io/donflow/?demo" style="color: #58a6ff; text-decoration: none; font-weight: 600;">Try DonFlow Free →</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>❓ Frequently Asked Questions</h2>
+      <details><summary>What format are the cheat sheets in?</summary><div>All products are delivered as PDF and Markdown files. PDF for printing and quick reference, Markdown for easy searching and copy-paste into your own notes.</div></details>
+      <details><summary>Can I use these for my team?</summary><div>Personal use is included. For team distribution, purchase one copy per team member or contact us for a team license.</div></details>
+      <details><summary>Are these AI-generated?</summary><div>Content is researched, written, and curated by a developer. AI assists with formatting and organization, but every example is tested and every explanation is human-reviewed.</div></details>
+      <details><summary>Do you offer refunds?</summary><div>Yes, Gumroad offers a 30-day refund policy. If the content doesn't meet your expectations, you can request a full refund.</div></details>
+      <details><summary>How do I download after purchase?</summary><div>After purchase on Gumroad, you'll receive an instant download link via email. You can also access your library anytime at gumroad.com/library.</div></details>
+    </div>
+
+    <!-- Cross-links -->
+    <div class="cross-links">
+      <strong>More from MaxDevTools:</strong><br>
+      <a href="/">🔧 27+ Free Tools</a> ·
+      <a href="/games.html">🎮 Free Browser Games</a> ·
+      <a href="https://maxmini0214.github.io/donflow/?demo">🏦 DonFlow Budget Tracker</a> ·
+      <a href="https://dev.to/maxxmini">📝 Dev.to Blog</a>
+    </div>
+
+    <footer>
+      <p>Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · <a href="/">Free Tools</a> · <a href="/games.html">Games</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Category filter
+    const btns = document.querySelectorAll('.cat-btn');
+    const cards = document.querySelectorAll('.card');
+    const countEl = document.getElementById('product-count');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        let visible = 0;
+        cards.forEach(card => {
+          if (cat === 'all' || card.dataset.cat === cat) {
+            card.classList.remove('hidden');
+            visible++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        countEl.textContent = visible;
+      });
+    });
+  </script>
+</body>
+</html>
