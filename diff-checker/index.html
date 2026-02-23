@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Text Diff Checker — Compare Text Online Free</title>
 <meta name="description" content="Free online text diff checker. Compare two texts side-by-side with line-by-line highlighting. Added, deleted, and modified lines shown instantly. 100% browser-based, no data sent to servers.">
-<meta name="keywords" content="diff checker, text compare, text diff, compare text online, diff tool, text comparison, free diff checker">
+<meta name="keywords" content="diff checker, text compare, text diff, compare text online, diff tool, text comparison, free diff checker, code diff, file compare">
 <meta name="author" content="MaxDevTools">
 <meta property="og:title" content="Text Diff Checker — Compare Text Online Free">
 <meta property="og:description" content="Compare two texts side-by-side with line-by-line diff highlighting. 100% client-side, no data leaves your browser.">
@@ -17,6 +17,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/diff-checker/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text Diff Checker — Compare Text Online Free","description":"Free online text diff checker. Compare two texts with line-by-line highlighting. 100% browser-based.","url":"https://maxmini0214.github.io/diff-checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does an online diff checker work?","acceptedAnswer":{"@type":"Answer","text":"A diff checker compares two texts using algorithms like the Longest Common Subsequence (LCS). It finds the minimal set of changes (additions, deletions, modifications) needed to transform one text into the other. Lines are color-coded: green for added, red for deleted, yellow for modified."}},{"@type":"Question","name":"Is my data safe when using this diff tool?","acceptedAnswer":{"@type":"Answer","text":"Yes. This diff checker runs 100% in your browser using JavaScript. No data is sent to any server. You can verify by opening DevTools → Network tab — zero requests are made when comparing text. Works offline too."}},{"@type":"Question","name":"How do I compare two files using this tool?","acceptedAnswer":{"@type":"Answer","text":"Open each file in a text editor, copy the contents, and paste into the Original and Modified text areas. Click Compare. For programmatic use: diff on Linux/Mac ('diff file1 file2'), or use 'git diff' for version-controlled files."}},{"@type":"Question","name":"What is the difference between diff, patch, and merge?","acceptedAnswer":{"@type":"Answer","text":"Diff shows the differences between two texts. Patch is a file containing those differences that can be applied to transform one file into another ('patch < changes.patch'). Merge combines changes from two different versions into one, resolving conflicts where both sides changed the same lines."}},{"@type":"Question","name":"Can I compare JSON, code, or config files?","acceptedAnswer":{"@type":"Answer","text":"Yes. This tool compares any plain text line-by-line. For JSON, format both files first (use our JSON Formatter tool), then paste. For code, the diff shows exact line changes. For config files like .env or YAML, paste both versions to see what changed."}},{"@type":"Question","name":"How do I share a diff comparison with someone?","acceptedAnswer":{"@type":"Answer","text":"Click the 🔗 Share button after comparing. It encodes both texts into a URL that anyone can open to see the exact same comparison. The URL contains the data — no server storage needed."}}]}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--accent:#3b82f6;--accent-hover:#2563eb;--green:#22c55e;--green-bg:#22c55e20;--red:#ef4444;--red-bg:#ef444420;--yellow:#eab308;--yellow-bg:#eab30820;--text:#f1f5f9;--muted:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
@@ -30,6 +31,8 @@ header p{color:var(--muted);margin-top:.4rem;font-size:.95rem}
 .toolbar button:hover{border-color:var(--accent);background:#253352}
 .toolbar button.primary{background:var(--accent);border-color:var(--accent);font-weight:600}
 .toolbar button.primary:hover{background:var(--accent-hover)}
+.toolbar button.share-btn{background:#059669;border-color:#059669}
+.toolbar button.share-btn:hover{background:#047857}
 .status{margin-left:auto;font-size:.85rem;padding:.4rem .8rem;border-radius:6px;color:var(--muted)}
 .editor-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
 @media(max-width:768px){.editor-wrap{grid-template-columns:1fr}.pane{min-height:30vh}}
@@ -51,13 +54,33 @@ textarea::placeholder{color:#475569}
 .feature{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
 .feature h4{font-size:.9rem;margin-bottom:.3rem}
 .feature p{font-size:.8rem;color:var(--muted)}
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:2rem 0}
+.guide h3{margin-bottom:1rem;font-size:1.1rem}
+.guide ol{padding-left:1.5rem;color:var(--muted);font-size:.9rem;line-height:1.8}
+.guide ol li{margin-bottom:.5rem}
+.guide ol li strong{color:var(--text)}
+.faq{margin:2rem 0}
+.faq h3{margin-bottom:1rem;font-size:1.1rem}
+.faq details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;padding:1rem}
+.faq summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--text)}
+.faq summary:hover{color:var(--accent)}
+.faq details[open] summary{margin-bottom:.5rem}
+.faq p,.faq code{font-size:.85rem;color:var(--muted);line-height:1.7}
+.faq code{background:#0f172a;padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.8rem}
+.faq pre{background:#0f172a;padding:.75rem;border-radius:6px;overflow-x:auto;margin:.5rem 0}
+.faq pre code{padding:0;background:none;font-size:.8rem;color:var(--green)}
 .more-tools h3{margin-top:2rem;margin-bottom:.5rem}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
-.tools-grid a{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .15s}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:1rem}
+.tools-grid a{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;font-size:.85rem;transition:border-color .15s}
 .tools-grid a:hover{border-color:var(--accent)}
 .cta-bar{text-align:center;margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#253352);border-radius:12px;border:1px solid var(--border)}
-.cta-bar a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
+.cta-bar h4{margin-bottom:.5rem;font-size:1rem}
+.cta-bar p{color:var(--muted);font-size:.85rem;margin-bottom:1rem}
+.cta-bar a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
 .cta-bar a:hover{transform:translateY(-1px)}
+.newsletter{text-align:center;margin:1.5rem 0;padding:1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.newsletter a{color:var(--accent);font-weight:600;text-decoration:none}
+.newsletter a:hover{text-decoration:underline}
 footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
 footer a{color:var(--accent);text-decoration:none}
 .swap-btn{font-size:1.2rem;padding:.5rem}
@@ -76,6 +99,7 @@ footer a{color:var(--accent);text-decoration:none}
 <button onclick="clearAll()">Clear</button>
 <button onclick="loadSample()">Sample</button>
 <button onclick="copyDiff()">📋 Copy Diff</button>
+<button class="share-btn" onclick="shareDiff()">🔗 Share</button>
 <span class="status" id="status">Paste text to compare</span>
 </div>
 <div class="editor-wrap">
@@ -98,6 +122,55 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
 </div>
 
+<div class="guide">
+<h3>📖 How to Use This Diff Checker</h3>
+<ol>
+<li><strong>Paste your original text</strong> in the left panel (or drag from a file)</li>
+<li><strong>Paste the modified text</strong> in the right panel</li>
+<li><strong>Click "Compare"</strong> to see line-by-line differences with color-coded highlighting</li>
+<li><strong>Share or copy</strong> — click 🔗 Share to create a URL with your comparison, or 📋 Copy Diff to paste elsewhere</li>
+</ol>
+</div>
+
+<div class="faq">
+<h3>❓ Frequently Asked Questions</h3>
+<details>
+<summary>How does an online diff checker work?</summary>
+<p>A diff checker uses the Longest Common Subsequence (LCS) algorithm to find the minimal set of changes between two texts. Lines are classified as added (green), deleted (red), or modified (yellow). Example in JavaScript:</p>
+<pre><code>// Simple LCS-based diff
+function diff(a, b) {
+  const dp = Array.from({length: a.length+1},
+    () => new Array(b.length+1).fill(0));
+  for (let i=1; i<=a.length; i++)
+    for (let j=1; j<=b.length; j++)
+      dp[i][j] = a[i-1]===b[j-1]
+        ? dp[i-1][j-1]+1
+        : Math.max(dp[i-1][j], dp[i][j-1]);
+  return dp;
+}</code></pre>
+</details>
+<details>
+<summary>Is my data safe when using this tool?</summary>
+<p>Yes — 100% client-side. No data is sent to any server. Open DevTools → Network tab to verify: zero requests on compare. This tool even works offline after the page loads.</p>
+</details>
+<details>
+<summary>How do I compare two files from the command line?</summary>
+<p>On Linux/macOS use <code>diff file1.txt file2.txt</code> or <code>diff -u file1.txt file2.txt</code> for unified format. For Git repositories, <code>git diff</code> shows staged changes. On Windows, use <code>fc file1.txt file2.txt</code> or install a tool like WinMerge.</p>
+</details>
+<details>
+<summary>What's the difference between diff, patch, and merge?</summary>
+<p><strong>Diff</strong> shows differences. <strong>Patch</strong> is a file containing those differences that can be applied: <code>patch &lt; changes.patch</code>. <strong>Merge</strong> combines changes from two branches, resolving conflicts where both sides edited the same lines.</p>
+</details>
+<details>
+<summary>Can I compare JSON, YAML, or code files?</summary>
+<p>Yes. This tool compares any plain text line-by-line. For best results with JSON, format both versions first (try our <a href="https://maxmini0214.github.io/json-formatter/" style="color:var(--accent)">JSON Formatter</a>), then paste. For minified code, pretty-print before comparing.</p>
+</details>
+<details>
+<summary>How do I share a comparison with my team?</summary>
+<p>Click the 🔗 Share button after comparing. It encodes both texts into a URL that anyone can open to see the exact same diff. No server storage — everything is in the URL itself.</p>
+</details>
+</div>
+
 <div class="more-tools">
 <h3>🛠 More Developer Tools</h3>
 <div class="tools-grid">
@@ -106,16 +179,32 @@ footer a{color:var(--accent);text-decoration:none}
 <a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
 <a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
 <a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+<a href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
 <a href="https://maxmini0214.github.io/markdown-preview/">Markdown Preview</a>
+<a href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+<a href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+<a href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+<a href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+<a href="https://maxmini0214.github.io/unix-timestamp/">Unix Timestamp</a>
+<a href="https://maxmini0214.github.io/qr-code-generator/">QR Code Generator</a>
+<a href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+<a href="https://maxmini0214.github.io/box-shadow-generator/">Box Shadow Generator</a>
+<a href="https://maxmini0214.github.io/css-gradient/">CSS Gradient</a>
 </div>
 </div>
 
 <div class="cta-bar">
-<a href="https://paypal.me/maxseats">☕ Buy Me a Coffee</a>
+<h4>🏦 Track Your Budget Drift</h4>
+<p>Plan vs Reality — see where your money actually goes. Zero login, zero cloud, 100% browser.</p>
+<a href="https://maxmini0214.github.io/donflow/?demo">Try DonFlow Free →</a>
+</div>
+
+<div class="newsletter">
+📬 Get dev tool tips & updates — <a href="https://buttondown.com/maxmini0214" target="_blank">Subscribe to our newsletter</a>
 </div>
 </div>
 <footer>
-<p>Built by <a href="https://github.com/maxseats" target="_blank">MaxxMini</a> · Open source · No tracking</p>
+<p>Built by <a href="https://github.com/maxmini0214" target="_blank">MaxxMini</a> · <a href="https://maxmini0214.github.io/">All Tools</a> · Open source · No tracking</p>
 </footer>
 <script>
 const $a=document.getElementById('textA'),$b=document.getElementById('textB'),$out=document.getElementById('diffOutput'),$st=document.getElementById('status'),$stats=document.getElementById('stats');
@@ -140,13 +229,10 @@ function compare(){
 }
 
 function lcs(a,b){
-  // Myers-like simple diff with modification detection
   const result=[];
   const n=a.length,m=b.length;
-  // LCS table
   const dp=Array.from({length:n+1},()=>new Uint16Array(m+1));
   for(let i=1;i<=n;i++)for(let j=1;j<=m;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
-  // Backtrack
   let i=n,j=m;
   const ops=[];
   while(i>0||j>0){
@@ -155,7 +241,6 @@ function lcs(a,b){
     else{ops.push({type:'del',value:a[i-1]});i--}
   }
   ops.reverse();
-  // Merge adjacent del+add into mod
   for(let k=0;k<ops.length;k++){
     if(ops[k].type==='del'&&k+1<ops.length&&ops[k+1].type==='add'){
       result.push({type:'mod',value:`${ops[k].value} → ${ops[k+1].value}`});
@@ -174,6 +259,28 @@ function loadSample(){
   $b.value='function greet(name, greeting) {\n  console.log(greeting + ", " + name + "!");\n  return true;\n}\n\ngreet("World", "Hi");\nconsole.log("Done");';
   compare();
 }
+function shareDiff(){
+  try{
+    const data=JSON.stringify({a:$a.value,b:$b.value});
+    const encoded=btoa(unescape(encodeURIComponent(data)));
+    const url=location.origin+location.pathname+'?d='+encoded;
+    navigator.clipboard.writeText(url);
+    const o=$st.textContent;$st.textContent='🔗 Link copied!';setTimeout(()=>$st.textContent=o,2000);
+  }catch(e){$st.textContent='Text too long to share'}
+}
+// Restore from URL
+(function(){
+  const p=new URLSearchParams(location.search);
+  const d=p.get('d');
+  if(d){
+    try{
+      const data=JSON.parse(decodeURIComponent(escape(atob(d))));
+      if(data.a!=null)$a.value=data.a;
+      if(data.b!=null)$b.value=data.b;
+      compare();
+    }catch(e){}
+  }
+})();
 </script>
 </body>
 </html>
