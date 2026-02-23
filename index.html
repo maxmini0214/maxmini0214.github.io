@@ -19,7 +19,12 @@
     "@type": "WebSite",
     "name": "MaxDevTools — Free Developer Tools",
     "url": "https://maxmini0214.github.io/",
-    "description": "26+ free online developer tools: JSON formatter, regex tester, JWT decoder, password analyzer, and more. No signup, no ads, 100% client-side.",
+    "description": "27+ free online developer tools: JSON formatter, regex tester, JWT decoder, password analyzer, and more. No signup, no ads, 100% client-side.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://maxmini0214.github.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
     "author": {"@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io"}
   },
   {
@@ -56,6 +61,37 @@
       {"@type": "ListItem", "position": 26, "url": "https://maxmini0214.github.io/image-compressor/", "name": "Image Compressor"},
       {"@type": "ListItem", "position": 27, "url": "https://maxmini0214.github.io/devtools/", "name": "DevTools Collection"}
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are these developer tools free?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Yes, all 27+ tools are completely free with no signup, no ads, and no usage limits. Every tool runs 100% client-side in your browser."}
+      },
+      {
+        "@type": "Question",
+        "name": "Do these tools send my data to a server?",
+        "acceptedAnswer": {"@type": "Answer", "text": "No. Every tool processes data entirely in your browser using JavaScript. Nothing is ever uploaded. You can verify by checking the Network tab in DevTools — zero outgoing requests with your data."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use these tools offline?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Most tools work offline once loaded since they are pure client-side HTML/CSS/JS. Bookmark the page and it works without internet (some tools with external libraries may need initial loading)."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is DonFlow?",
+        "acceptedAnswer": {"@type": "Answer", "text": "DonFlow is a local-first budget tracker that compares your planned budget against actual spending. It detects 'budget drift' — where reality diverges from your plan. Your financial data never leaves your browser. Built with IndexedDB + Dexie.js."}
+      },
+      {
+        "@type": "Question",
+        "name": "Who built these tools?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Built by maxmini0214, a developer who believes dev tools should be free, fast, and private. All source code is available on GitHub."}
+      }
+    ]
   }]
   </script>
   <style>
@@ -63,16 +99,48 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.6; }
     .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
     h1 { font-size: 2rem; color: #f0f6fc; margin-bottom: 0.5rem; }
-    .subtitle { color: #8b949e; margin-bottom: 2rem; font-size: 1.1rem; }
+    .subtitle { color: #8b949e; margin-bottom: 1.5rem; font-size: 1.1rem; }
+
+    /* Search */
+    .search-box { position: relative; margin-bottom: 1rem; }
+    .search-box input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: #f0f6fc; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .search-box input:focus { border-color: #58a6ff; }
+    .search-box input::placeholder { color: #484f58; }
+    .search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: #484f58; font-size: 0.9rem; pointer-events: none; }
+    .search-count { color: #8b949e; font-size: 0.85rem; margin-bottom: 0.5rem; }
+
+    /* Category Filters */
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .filter-btn { padding: 0.4rem 0.9rem; background: #161b22; border: 1px solid #30363d; border-radius: 20px; color: #8b949e; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: #58a6ff; color: #c9d1d9; }
+    .filter-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+
     h2 { font-size: 1.2rem; color: #58a6ff; margin: 2rem 0 1rem; border-bottom: 1px solid #21262d; padding-bottom: 0.5rem; }
     .tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.75rem; }
-    .tool { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.2rem; text-decoration: none; color: #c9d1d9; transition: border-color 0.2s, transform 0.1s; }
+    .tool { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1rem 1.2rem; text-decoration: none; color: #c9d1d9; transition: border-color 0.2s, transform 0.1s; display: block; }
     .tool:hover { border-color: #58a6ff; transform: translateY(-1px); }
+    .tool.hidden { display: none; }
     .tool-name { font-weight: 600; color: #f0f6fc; font-size: 0.95rem; }
     .tool-desc { font-size: 0.82rem; color: #8b949e; margin-top: 0.25rem; }
+    .category-section.hidden { display: none; }
+    .no-results { text-align: center; padding: 3rem 1rem; color: #484f58; font-size: 1.1rem; display: none; }
+
+    /* FAQ */
+    .faq { margin-top: 2.5rem; }
+    .faq h2 { color: #58a6ff; }
+    .faq details { background: #161b22; border: 1px solid #21262d; border-radius: 8px; margin-bottom: 0.5rem; }
+    .faq summary { padding: 0.8rem 1rem; cursor: pointer; color: #f0f6fc; font-weight: 500; font-size: 0.92rem; }
+    .faq summary:hover { color: #58a6ff; }
+    .faq details p { padding: 0 1rem 0.8rem; color: #8b949e; font-size: 0.88rem; }
+
+    /* Newsletter */
+    .newsletter { margin-top: 2rem; background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 1.2rem; text-align: center; }
+    .newsletter p { color: #8b949e; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .newsletter a { color: #58a6ff; text-decoration: none; font-weight: 600; }
+
     footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #21262d; color: #8b949e; font-size: 0.85rem; text-align: center; }
     footer a { color: #58a6ff; text-decoration: none; }
-    @media (max-width: 600px) { .tools { grid-template-columns: 1fr; } h1 { font-size: 1.5rem; } }
+    @media (max-width: 600px) { .tools { grid-template-columns: 1fr; } h1 { font-size: 1.5rem; } .filters { gap: 0.35rem; } .filter-btn { font-size: 0.78rem; padding: 0.35rem 0.7rem; } }
   </style>
 </head>
 <body>
@@ -80,76 +148,195 @@
     <h1>🛠️ Free Developer Tools</h1>
     <p class="subtitle">27+ tools that run in your browser. No signup, no tracking, no ads.</p>
 
-    <h2>🔒 Security</h2>
-    <div class="tools">
-      <a class="tool" href="/password-strength-analyzer/"><div class="tool-name">Password Strength Analyzer</div><div class="tool-desc">Entropy-based scoring with real-time crack-time estimates</div></a>
-      <a class="tool" href="/password-generator/"><div class="tool-name">Password Generator</div><div class="tool-desc">Generate secure random passwords with custom rules</div></a>
-      <a class="tool" href="/hash-generator/"><div class="tool-name">Hash Generator</div><div class="tool-desc">MD5, SHA-1, SHA-256, SHA-512 hash any text instantly</div></a>
-      <a class="tool" href="/dev-security-checklist/"><div class="tool-name">Dev Security Checklist</div><div class="tool-desc">Essential security checklist for web developers</div></a>
-      <a class="tool" href="/ai-security-checklist/"><div class="tool-name">AI Security Checklist</div><div class="tool-desc">Security best practices for AI/ML applications</div></a>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search tools... (e.g. JSON, password, color)" autocomplete="off" aria-label="Search developer tools">
+    </div>
+    <div class="search-count" id="searchCount"></div>
+
+    <div class="filters" role="group" aria-label="Filter by category">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="security">🔒 Security</button>
+      <button class="filter-btn" data-cat="code">📝 Code & Text</button>
+      <button class="filter-btn" data-cat="encoding">🔧 Encoding</button>
+      <button class="filter-btn" data-cat="design">🎨 Design</button>
+      <button class="filter-btn" data-cat="finance">💰 Finance</button>
+      <button class="filter-btn" data-cat="productivity">⚡ Productivity</button>
     </div>
 
-    <h2>📝 Code & Text</h2>
-    <div class="tools">
-      <a class="tool" href="/json-formatter/"><div class="tool-name">JSON Formatter</div><div class="tool-desc">Format, validate, and beautify JSON with syntax highlighting</div></a>
-      <a class="tool" href="/json-error-explainer/"><div class="tool-name">JSON Error Explainer</div><div class="tool-desc">Paste broken JSON — get human-readable error explanations</div></a>
-      <a class="tool" href="/regex-tester/"><div class="tool-name">Regex Tester</div><div class="tool-desc">Test regular expressions with real-time matching and groups</div></a>
-      <a class="tool" href="/diff-checker/"><div class="tool-name">Diff Checker</div><div class="tool-desc">Compare two texts and see differences highlighted</div></a>
-      <a class="tool" href="/markdown-preview/"><div class="tool-name">Markdown Preview</div><div class="tool-desc">Live markdown editor with instant preview</div></a>
-      <a class="tool" href="/lorem-ipsum/"><div class="tool-name">Lorem Ipsum Generator</div><div class="tool-desc">Generate placeholder text for your designs</div></a>
+    <div class="no-results" id="noResults">No tools match your search. Try different keywords.</div>
+
+    <div class="category-section" data-cat="security">
+      <h2>🔒 Security</h2>
+      <div class="tools">
+        <a class="tool" href="/password-strength-analyzer/" data-cat="security" data-keywords="password strength entropy crack time analyzer"><div class="tool-name">Password Strength Analyzer</div><div class="tool-desc">Entropy-based scoring with real-time crack-time estimates</div></a>
+        <a class="tool" href="/password-generator/" data-cat="security" data-keywords="password generator random secure rules"><div class="tool-name">Password Generator</div><div class="tool-desc">Generate secure random passwords with custom rules</div></a>
+        <a class="tool" href="/hash-generator/" data-cat="security" data-keywords="hash md5 sha1 sha256 sha512 generator checksum"><div class="tool-name">Hash Generator</div><div class="tool-desc">MD5, SHA-1, SHA-256, SHA-512 hash any text instantly</div></a>
+        <a class="tool" href="/dev-security-checklist/" data-cat="security" data-keywords="security checklist developer web owasp"><div class="tool-name">Dev Security Checklist</div><div class="tool-desc">Essential security checklist for web developers</div></a>
+        <a class="tool" href="/ai-security-checklist/" data-cat="security" data-keywords="ai ml security checklist machine learning"><div class="tool-name">AI Security Checklist</div><div class="tool-desc">Security best practices for AI/ML applications</div></a>
+      </div>
     </div>
 
-    <h2>🔧 Encoding & Conversion</h2>
-    <div class="tools">
-      <a class="tool" href="/jwt-decoder/"><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JSON Web Tokens instantly</div></a>
-      <a class="tool" href="/base64-tool/"><div class="tool-name">Base64 Encoder/Decoder</div><div class="tool-desc">Encode and decode Base64 strings</div></a>
-      <a class="tool" href="/url-encoder/"><div class="tool-name">URL Encoder/Decoder</div><div class="tool-desc">Encode and decode URL components</div></a>
-      <a class="tool" href="/unix-timestamp/"><div class="tool-name">Unix Timestamp Converter</div><div class="tool-desc">Convert between Unix timestamps and human dates</div></a>
-      <a class="tool" href="/uuid-generator/"><div class="tool-name">UUID Generator</div><div class="tool-desc">Generate v4 UUIDs instantly for your projects</div></a>
+    <div class="category-section" data-cat="code">
+      <h2>📝 Code & Text</h2>
+      <div class="tools">
+        <a class="tool" href="/json-formatter/" data-cat="code" data-keywords="json formatter validator beautify minify pretty print"><div class="tool-name">JSON Formatter</div><div class="tool-desc">Format, validate, and beautify JSON with syntax highlighting</div></a>
+        <a class="tool" href="/json-error-explainer/" data-cat="code" data-keywords="json error explainer fix broken syntax"><div class="tool-name">JSON Error Explainer</div><div class="tool-desc">Paste broken JSON — get human-readable error explanations</div></a>
+        <a class="tool" href="/regex-tester/" data-cat="code" data-keywords="regex regular expression tester debugger match groups"><div class="tool-name">Regex Tester</div><div class="tool-desc">Test regular expressions with real-time matching and groups</div></a>
+        <a class="tool" href="/diff-checker/" data-cat="code" data-keywords="diff checker compare text differences"><div class="tool-name">Diff Checker</div><div class="tool-desc">Compare two texts and see differences highlighted</div></a>
+        <a class="tool" href="/markdown-preview/" data-cat="code" data-keywords="markdown preview editor live render github"><div class="tool-name">Markdown Preview</div><div class="tool-desc">Live markdown editor with instant preview</div></a>
+        <a class="tool" href="/lorem-ipsum/" data-cat="code" data-keywords="lorem ipsum placeholder text generator dummy"><div class="tool-name">Lorem Ipsum Generator</div><div class="tool-desc">Generate placeholder text for your designs</div></a>
+      </div>
     </div>
 
-    <h2>🎨 Design & CSS</h2>
-    <div class="tools">
-      <a class="tool" href="/color-picker/"><div class="tool-name">Color Picker</div><div class="tool-desc">Pick colors in HEX, RGB, HSL with palette generation</div></a>
-      <a class="tool" href="/css-gradient/"><div class="tool-name">CSS Gradient Generator</div><div class="tool-desc">Create beautiful CSS gradients with live preview</div></a>
-      <a class="tool" href="/box-shadow-generator/"><div class="tool-name">Box Shadow Generator</div><div class="tool-desc">Design CSS box shadows with visual controls</div></a>
+    <div class="category-section" data-cat="encoding">
+      <h2>🔧 Encoding & Conversion</h2>
+      <div class="tools">
+        <a class="tool" href="/jwt-decoder/" data-cat="encoding" data-keywords="jwt json web token decoder inspect payload header"><div class="tool-name">JWT Decoder</div><div class="tool-desc">Decode and inspect JSON Web Tokens instantly</div></a>
+        <a class="tool" href="/base64-tool/" data-cat="encoding" data-keywords="base64 encode decode encoder decoder"><div class="tool-name">Base64 Encoder/Decoder</div><div class="tool-desc">Encode and decode Base64 strings</div></a>
+        <a class="tool" href="/url-encoder/" data-cat="encoding" data-keywords="url encode decode percent encoding uri component"><div class="tool-name">URL Encoder/Decoder</div><div class="tool-desc">Encode and decode URL components</div></a>
+        <a class="tool" href="/unix-timestamp/" data-cat="encoding" data-keywords="unix timestamp epoch converter date time"><div class="tool-name">Unix Timestamp Converter</div><div class="tool-desc">Convert between Unix timestamps and human dates</div></a>
+        <a class="tool" href="/uuid-generator/" data-cat="encoding" data-keywords="uuid v4 generator unique id guid"><div class="tool-name">UUID Generator</div><div class="tool-desc">Generate v4 UUIDs instantly for your projects</div></a>
+      </div>
     </div>
 
-    <h2>💰 Finance</h2>
-    <div class="tools">
-      <a class="tool" href="/donflow/" style="border-color:#22c55e;background:linear-gradient(135deg,#161b22,#05150a);">
-        <div class="tool-name" style="color:#4ade80;">💰 DonFlow — Plan vs Reality Budget Tracker</div>
-        <div class="tool-desc">Set a budget plan, upload bank exports, see where reality drifts. 100% browser-only, zero tracking. Your financial data never leaves your device.</div>
-      </a>
+    <div class="category-section" data-cat="design">
+      <h2>🎨 Design & CSS</h2>
+      <div class="tools">
+        <a class="tool" href="/color-picker/" data-cat="design" data-keywords="color picker hex rgb hsl converter palette"><div class="tool-name">Color Picker</div><div class="tool-desc">Pick colors in HEX, RGB, HSL with palette generation</div></a>
+        <a class="tool" href="/css-gradient/" data-cat="design" data-keywords="css gradient generator linear radial background"><div class="tool-name">CSS Gradient Generator</div><div class="tool-desc">Create beautiful CSS gradients with live preview</div></a>
+        <a class="tool" href="/box-shadow-generator/" data-cat="design" data-keywords="box shadow css generator visual material design"><div class="tool-name">Box Shadow Generator</div><div class="tool-desc">Design CSS box shadows with visual controls</div></a>
+      </div>
     </div>
 
-    <h2>⚡ Productivity</h2>
-    <div class="tools">
-      <a class="tool" href="/cron-parser/"><div class="tool-name">Cron Parser</div><div class="tool-desc">Explain cron expressions in plain English with next run times</div></a>
-      <a class="tool" href="/keyword-mixer/"><div class="tool-name">Keyword Mixer</div><div class="tool-desc">Generate keyword combinations for SEO and ads</div></a>
-      <a class="tool" href="/website-audit/"><div class="tool-name">Website Audit</div><div class="tool-desc">Quick audit of any website's SEO and performance</div></a>
-      <a class="tool" href="/qr-code-generator/"><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate QR codes for URLs, text, WiFi, and more</div></a>
-      <a class="tool" href="/pomodoro-timer/"><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">Focus timer with break reminders</div></a>
-      <a class="tool" href="/image-compressor/"><div class="tool-name">Image Compressor</div><div class="tool-desc">Compress images in-browser without uploading</div></a>
-      <a class="tool" href="/devtools/"><div class="tool-name">DevTools Collection</div><div class="tool-desc">Multi-tool dashboard for quick dev tasks</div></a>
+    <div class="category-section" data-cat="finance">
+      <h2>💰 Finance</h2>
+      <div class="tools">
+        <a class="tool" href="/donflow/" data-cat="finance" data-keywords="budget tracker finance plan reality drift donflow money spending" style="border-color:#22c55e;background:linear-gradient(135deg,#161b22,#05150a);">
+          <div class="tool-name" style="color:#4ade80;">💰 DonFlow — Plan vs Reality Budget Tracker</div>
+          <div class="tool-desc">Set a budget plan, upload bank exports, see where reality drifts. 100% browser-only, zero tracking. Your financial data never leaves your device.</div>
+        </a>
+      </div>
     </div>
 
-    <h2>📦 Premium Resources</h2>
-    <div class="tools">
-      <a class="tool" href="https://maxmini.gumroad.com" target="_blank" rel="noopener" style="border-color:#f97316;background:linear-gradient(135deg,#161b22,#1a1205);">
-        <div class="tool-name" style="color:#fb923c;">🛒 Gumroad Store — Dev Templates & Cheatsheets</div>
-        <div class="tool-desc">Notion templates, dev cheatsheets, prompt packs, and productivity bundles. Support the tools you love!</div>
-      </a>
-      <a class="tool" href="https://dev.to/maxxmini" target="_blank" rel="noopener">
-        <div class="tool-name">📰 Dev Blog</div>
-        <div class="tool-desc">Tutorials, AI tips, and developer productivity articles</div>
-      </a>
+    <div class="category-section" data-cat="productivity">
+      <h2>⚡ Productivity</h2>
+      <div class="tools">
+        <a class="tool" href="/cron-parser/" data-cat="productivity" data-keywords="cron expression parser scheduler next run time"><div class="tool-name">Cron Parser</div><div class="tool-desc">Explain cron expressions in plain English with next run times</div></a>
+        <a class="tool" href="/keyword-mixer/" data-cat="productivity" data-keywords="keyword mixer combiner seo google ads ppc"><div class="tool-name">Keyword Mixer</div><div class="tool-desc">Generate keyword combinations for SEO and ads</div></a>
+        <a class="tool" href="/website-audit/" data-cat="productivity" data-keywords="website audit seo performance check"><div class="tool-name">Website Audit</div><div class="tool-desc">Quick audit of any website's SEO and performance</div></a>
+        <a class="tool" href="/qr-code-generator/" data-cat="productivity" data-keywords="qr code generator url text wifi barcode"><div class="tool-name">QR Code Generator</div><div class="tool-desc">Generate QR codes for URLs, text, WiFi, and more</div></a>
+        <a class="tool" href="/pomodoro-timer/" data-cat="productivity" data-keywords="pomodoro timer focus break productivity 25 min"><div class="tool-name">Pomodoro Timer</div><div class="tool-desc">Focus timer with break reminders</div></a>
+        <a class="tool" href="/image-compressor/" data-cat="productivity" data-keywords="image compressor optimize resize jpeg png webp"><div class="tool-name">Image Compressor</div><div class="tool-desc">Compress images in-browser without uploading</div></a>
+        <a class="tool" href="/devtools/" data-cat="productivity" data-keywords="devtools collection multi tool dashboard"><div class="tool-name">DevTools Collection</div><div class="tool-desc">Multi-tool dashboard for quick dev tasks</div></a>
+      </div>
+    </div>
+
+    <div class="category-section" data-cat="all">
+      <h2>📦 More</h2>
+      <div class="tools">
+        <a class="tool" href="https://maxmini.gumroad.com" target="_blank" rel="noopener" data-cat="all" data-keywords="gumroad templates cheatsheets premium" style="border-color:#f97316;background:linear-gradient(135deg,#161b22,#1a1205);">
+          <div class="tool-name" style="color:#fb923c;">🛒 Gumroad Store — Dev Templates & Cheatsheets</div>
+          <div class="tool-desc">Notion templates, dev cheatsheets, prompt packs, and productivity bundles. Support the tools you love!</div>
+        </a>
+        <a class="tool" href="https://dev.to/maxxmini" target="_blank" rel="noopener" data-cat="all" data-keywords="blog tutorials articles dev.to">
+          <div class="tool-name">📰 Dev Blog</div>
+          <div class="tool-desc">Tutorials, AI tips, and developer productivity articles</div>
+        </a>
+      </div>
+    </div>
+
+    <section class="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+      <details>
+        <summary>Are all these tools really free?</summary>
+        <p>Yes — 27+ tools, completely free. No signup, no ads, no usage limits. Every tool runs 100% client-side in your browser. The source code is on <a href="https://github.com/maxmini0214" style="color:#58a6ff;">GitHub</a>.</p>
+      </details>
+      <details>
+        <summary>Do you collect my data?</summary>
+        <p>No. Every tool processes your data entirely in your browser using JavaScript. Nothing is uploaded to any server. Check the Network tab in DevTools — zero outgoing requests with your data.</p>
+      </details>
+      <details>
+        <summary>Can I use these tools offline?</summary>
+        <p>Most tools work offline once loaded since they are pure client-side HTML/CSS/JS. Bookmark the page and use it without internet.</p>
+      </details>
+      <details>
+        <summary>What is DonFlow?</summary>
+        <p>DonFlow is a local-first budget tracker that compares your planned budget against actual spending. It detects "budget drift" — where reality diverges from your plan. Your financial data never leaves your browser. <a href="/donflow/?demo" style="color:#4ade80;">Try the demo →</a></p>
+      </details>
+      <details>
+        <summary>How do I share a tool result with my team?</summary>
+        <p>Many tools have a 🔗 Share button that encodes your input into a URL. Send the link to anyone — they'll see exactly what you see, no signup required.</p>
+      </details>
+    </section>
+
+    <div class="newsletter">
+      <p>📬 Get weekly dev tool tips & new tool announcements</p>
+      <a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Morning Brief →</a>
     </div>
 
     <footer>
       <p>Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · All tools run client-side · <a href="https://github.com/maxmini0214">GitHub</a> · <a href="https://maxmini.gumroad.com">Gumroad</a></p>
     </footer>
   </div>
+
+<script>
+(function(){
+  const search = document.getElementById('search');
+  const countEl = document.getElementById('searchCount');
+  const noResults = document.getElementById('noResults');
+  const tools = document.querySelectorAll('.tool[data-keywords]');
+  const sections = document.querySelectorAll('.category-section');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  let activeFilter = 'all';
+
+  // URL param support
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) { search.value = params.get('q'); }
+
+  function applyFilter() {
+    const q = search.value.toLowerCase().trim();
+    let visible = 0;
+    tools.forEach(t => {
+      const matchCat = activeFilter === 'all' || t.dataset.cat === activeFilter;
+      const matchSearch = !q || t.dataset.keywords.includes(q) || t.querySelector('.tool-name').textContent.toLowerCase().includes(q) || t.querySelector('.tool-desc').textContent.toLowerCase().includes(q);
+      const show = matchCat && matchSearch;
+      t.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    // Show/hide category sections
+    sections.forEach(s => {
+      const cat = s.dataset.cat;
+      if (activeFilter !== 'all' && cat !== activeFilter && cat !== 'all') {
+        s.classList.add('hidden');
+        return;
+      }
+      const visibleTools = s.querySelectorAll('.tool[data-keywords]:not(.hidden)');
+      s.classList.toggle('hidden', visibleTools.length === 0);
+    });
+    countEl.textContent = q || activeFilter !== 'all' ? `${visible} tool${visible!==1?'s':''} found` : '';
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  search.addEventListener('input', applyFilter);
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      applyFilter();
+    });
+  });
+
+  // Keyboard shortcut: / to focus search
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== search) { e.preventDefault(); search.focus(); }
+  });
+
+  if (search.value) applyFilter();
+})();
+</script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
