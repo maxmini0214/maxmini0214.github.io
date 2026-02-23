@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website SEO Audit Checklist — Free Online Tool | MaxDevTools</title>
-<meta name="description" content="Quick SEO checklist for your website. Check essential SEO factors and get a score. Free, no signup required.">
+<meta name="description" content="Free SEO audit checklist for your website. Check 22 essential SEO factors across meta, content, technical, and social categories. Get your score instantly — no signup required.">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="seo audit checklist, website seo checker, free seo audit, seo score, website audit tool, seo checklist online, on-page seo checker">
 <link rel="canonical" href="https://maxmini0214.github.io/website-audit/">
 <meta property="og:title" content="Website SEO Audit Checklist — Free Online Tool">
-<meta property="og:description" content="Quick SEO checklist to audit your website. Free and instant.">
+<meta property="og:description" content="Check 22 SEO factors and get your score instantly. Free, no signup.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/website-audit/">
 <meta name="twitter:card" content="summary">
@@ -33,37 +34,105 @@ header p{color:var(--text2)}
 .check-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:.8rem}
 .check-item input:checked~.check-box{background:var(--green);border-color:var(--green);color:var(--bg)}
 .check-item .text{font-size:.95rem}
-.reset-btn{display:block;margin:0 auto 2rem;background:none;border:1px solid var(--border);color:var(--text2);padding:.5rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.85rem}
-.reset-btn:hover{border-color:var(--cyan);color:var(--text)}
+.reset-btn,.share-btn{display:inline-block;margin:0 .5rem 2rem;background:none;border:1px solid var(--border);color:var(--text2);padding:.5rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.85rem}
+.reset-btn:hover,.share-btn:hover{border-color:var(--cyan);color:var(--text)}
+.btn-row{text-align:center}
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.guide h2{color:var(--cyan);font-size:1.1rem;margin-bottom:1rem}
+.guide ol{padding-left:1.5rem;color:var(--text2);line-height:1.8}
+.guide ol li{margin-bottom:.5rem}
+.guide ol li strong{color:var(--text)}
+.faq-section{margin-bottom:2rem}
+.faq-section h2{color:var(--cyan);font-size:1.1rem;margin-bottom:1rem;text-align:center}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:.8rem 1rem;cursor:pointer;font-weight:600;font-size:.95rem}
+details summary:hover{color:var(--cyan)}
+details .faq-body{padding:0 1rem 1rem;color:var(--text2);font-size:.9rem;line-height:1.6}
+details .faq-body code{background:var(--bg);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--green)}
 .cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
 .cta h3{color:var(--cyan);margin-bottom:.5rem}
 .cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
 .cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:2rem}
+.tools-grid a{display:block;padding:.6rem .8rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.85rem;transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);text-decoration:none}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.newsletter h3{color:var(--green);margin-bottom:.5rem}
+.newsletter p{color:var(--text2);font-size:.85rem;margin-bottom:.75rem}
+.newsletter a{color:var(--cyan);font-weight:600}
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
-@media(max-width:500px){header h1{font-size:1.5rem}}
+@media(max-width:500px){header h1{font-size:1.5rem}.tools-grid{grid-template-columns:1fr}}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Website SEO Audit Checklist — Free Online Tool | MaxDevTools",
-  "description": "Quick SEO checklist for your website. Check essential SEO factors and get a score. Free, no signup required.",
+  "name": "Website SEO Audit Checklist",
+  "description": "Free SEO audit checklist — check 22 essential SEO factors and get your score instantly.",
   "url": "https://maxmini0214.github.io/website-audit/",
-  "applicationCategory": "DeveloperApplication",
+  "applicationCategory": "WebApplication",
   "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does an SEO audit checklist cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A comprehensive SEO audit covers four areas: Meta & Head (title, meta description, canonical, viewport, lang, favicon), Content (headings, alt text, word count, links), Technical (HTTPS, mobile responsive, speed, sitemap, robots.txt), and Social & Structured Data (Open Graph, Twitter Cards, JSON-LD). This tool checks all 22 items."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I check my website's SEO score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use this free checklist: go through each of the 22 SEO factors, check the ones your site has, and the tool calculates your score as a percentage. 80%+ is good, 50-79% needs improvement, below 50% needs significant work. You can also use Lighthouse in Chrome DevTools: open DevTools → Lighthouse tab → run SEO audit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the ideal title tag length for SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Keep title tags under 60 characters (or ~580px display width). Google truncates longer titles in search results. Include your primary keyword near the beginning. Format: 'Primary Keyword — Secondary Keyword | Brand'. Example: <title>Free SEO Audit Checklist — Online Website Checker | MaxDevTools</title>"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I add structured data (JSON-LD) to my website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add a <script type=\"application/ld+json\"> tag in your <head> with schema.org markup. Common types: FAQPage (for FAQ sections), HowTo (for tutorials), SoftwareApplication (for tools), Article (for blog posts). Validate with Google's Rich Results Test at search.google.com/test/rich-results. Example: {\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"...\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"...\"}}]}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe when using this SEO audit tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. This tool runs entirely in your browser — no data is sent to any server. Your checklist state is stored only in your browser's memory and resets when you reload. There are no cookies, no tracking pixels, and no server-side processing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What free alternatives exist for SEO auditing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free options: (1) Google Lighthouse — built into Chrome DevTools, scores SEO/performance/accessibility. (2) Google Search Console — tracks your actual search performance. (3) Bing Webmaster Tools — similar to GSC for Bing. (4) This checklist — manual but comprehensive. Paid alternatives include Ahrefs ($99/mo), SEMrush ($129/mo), and Screaming Frog (free up to 500 URLs). This tool is best for quick manual checks before diving into automated tools."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -71,7 +140,7 @@ footer .brand{color:var(--cyan);font-weight:600}
 <div class="container">
 <header>
 <h1>🔍 Website SEO Audit Checklist</h1>
-<p>Check off each item to see your SEO score</p>
+<p>Check 22 essential SEO factors and get your score instantly — free, no signup</p>
 </header>
 
 <div class="score-box">
@@ -80,17 +149,87 @@ footer .brand{color:var(--cyan);font-weight:600}
 </div>
 
 <div class="checklist" id="checklist"></div>
-<button class="reset-btn" id="resetBtn">Reset All</button>
+<div class="btn-row">
+<button class="reset-btn" id="resetBtn">🔄 Reset All</button>
+<button class="share-btn" id="shareBtn">🔗 Share</button>
+</div>
+
+<div class="guide">
+<h2>📖 How to Use This SEO Audit Checklist</h2>
+<ol>
+<li><strong>Open your website</strong> in another tab and inspect the source (Ctrl+U or right-click → View Page Source)</li>
+<li><strong>Check each item</strong> by verifying if your site has that SEO element (title tag, meta description, HTTPS, etc.)</li>
+<li><strong>Review your score</strong> — aim for 80%+ for good SEO health. Items below 80% need attention</li>
+<li><strong>Share your results</strong> with your team using the 🔗 Share button — it encodes your checked items in the URL</li>
+</ol>
+</div>
+
+<div class="faq-section">
+<h2>❓ Frequently Asked Questions</h2>
+<details>
+<summary>What does an SEO audit checklist cover?</summary>
+<div class="faq-body">A comprehensive SEO audit covers four areas: <strong>Meta & Head</strong> (title, meta description, canonical, viewport, lang, favicon), <strong>Content</strong> (headings, alt text, word count, links), <strong>Technical</strong> (HTTPS, mobile responsive, speed, sitemap, robots.txt), and <strong>Social & Structured Data</strong> (Open Graph, Twitter Cards, JSON-LD). This tool checks all 22 items across these categories.</div>
+</details>
+<details>
+<summary>How do I check my website's SEO score?</summary>
+<div class="faq-body">Go through each of the 22 SEO factors, check the ones your site has, and the tool calculates your score as a percentage. <strong>80%+</strong> is good, <strong>50-79%</strong> needs improvement, below 50% needs significant work. You can also use <strong>Lighthouse</strong> in Chrome DevTools: open DevTools → Lighthouse tab → run SEO audit.</div>
+</details>
+<details>
+<summary>What is the ideal title tag length for SEO?</summary>
+<div class="faq-body">Keep title tags under <strong>60 characters</strong> (or ~580px display width). Google truncates longer titles. Include your primary keyword near the beginning. Format: <code>Primary Keyword — Secondary | Brand</code></div>
+</details>
+<details>
+<summary>How do I add structured data (JSON-LD)?</summary>
+<div class="faq-body">Add a <code>&lt;script type="application/ld+json"&gt;</code> tag in your <code>&lt;head&gt;</code> with schema.org markup. Common types: FAQPage, HowTo, SoftwareApplication, Article. Validate with <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener">Google's Rich Results Test</a>.</div>
+</details>
+<details>
+<summary>Is my data safe when using this tool?</summary>
+<div class="faq-body">Yes, 100%. This tool runs entirely in your browser — no data is sent to any server. Your checklist state resets on reload. No cookies, no tracking pixels, no server-side processing.</div>
+</details>
+<details>
+<summary>What free alternatives exist for SEO auditing?</summary>
+<div class="faq-body"><strong>Google Lighthouse</strong> — built into Chrome DevTools. <strong>Google Search Console</strong> — tracks your actual search performance. <strong>Bing Webmaster Tools</strong> — similar for Bing. Paid: Ahrefs ($99/mo), SEMrush ($129/mo), Screaming Frog (free up to 500 URLs). This tool is best for quick manual checks.</div>
+</details>
+</div>
 
 <div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>Plan your budget, import bank data, see where reality drifts from your plan. Zero signup, zero cloud — your data stays in your browser.</p>
+<a class="cta-btn" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try Free Demo →</a>
+</div>
+
+<h3 style="color:var(--text2);font-size:.9rem;margin-bottom:.75rem">🔧 More Free Tools</h3>
+<div class="tools-grid">
+<a href="/keyword-mixer/">⭐ Keyword Mixer</a>
+<a href="/json-formatter/">JSON Formatter</a>
+<a href="/regex-tester/">Regex Tester</a>
+<a href="/hash-generator/">Hash Generator</a>
+<a href="/base64-tool/">Base64 Encoder</a>
+<a href="/jwt-decoder/">JWT Decoder</a>
+<a href="/url-encoder/">URL Encoder</a>
+<a href="/password-generator/">Password Generator</a>
+<a href="/cron-parser/">Cron Parser</a>
+<a href="/color-picker/">Color Picker</a>
+<a href="/unix-timestamp/">Unix Timestamp</a>
+<a href="/qr-code-generator/">QR Code Generator</a>
+<a href="/markdown-preview/">Markdown Preview</a>
+<a href="/box-shadow-generator/">Box Shadow Generator</a>
+<a href="/lorem-ipsum/">Lorem Ipsum</a>
+<a href="/diff-checker/">Diff Checker</a>
+<a href="/pomodoro-timer/">Pomodoro Timer</a>
+<a href="/devtools/">Text Utilities</a>
+<a href="/games.html">🎮 Free Games</a>
+</div>
+
+<div class="newsletter">
+<h3>📬 Developer Newsletter</h3>
+<p>Free tools, tutorials, and dev tips — no spam, unsubscribe anytime.</p>
+<a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe Free →</a>
 </div>
 </div>
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+<a href="https://maxmini0214.github.io/">← Back to All Tools</a><br><br>
+Part of <span class="brand"><a href="https://maxmini0214.github.io/">MaxDevTools</a></span> · Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · © 2024–2026
 </footer>
 <script>
 const items=[
@@ -104,10 +243,10 @@ const cl=document.getElementById('checklist');
 let total=0;
 items.forEach(sec=>{
   const t=document.createElement('div');t.className='section-title';t.textContent=sec.s;cl.appendChild(t);
-  sec.items.forEach(item=>{
+  sec.items.forEach((item,i)=>{
     total++;
     const label=document.createElement('label');label.className='check-item';
-    label.innerHTML=`<input type="checkbox"><span class="check-box">✓</span><span class="text">${item}</span>`;
+    label.innerHTML=`<input type="checkbox" data-idx="${total-1}"><span class="check-box">✓</span><span class="text">${item}</span>`;
     cl.appendChild(label);
   });
 });
@@ -125,14 +264,35 @@ cl.addEventListener('change',updateScore);
 document.getElementById('resetBtn').addEventListener('click',()=>{
   cl.querySelectorAll('input').forEach(i=>i.checked=false);updateScore();
 });
+
+// Share: encode checked items as bitmask in URL
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const bits=[];
+  cl.querySelectorAll('input').forEach(i=>bits.push(i.checked?'1':'0'));
+  const encoded=btoa(bits.join(''));
+  const url=new URL(window.location.href);
+  url.searchParams.set('s',encoded);
+  navigator.clipboard.writeText(url.toString()).then(()=>{
+    const btn=document.getElementById('shareBtn');
+    btn.textContent='✓ Link Copied!';
+    setTimeout(()=>btn.textContent='🔗 Share',2000);
+  });
+});
+
+// Restore from URL
+(function(){
+  const p=new URLSearchParams(window.location.search);
+  const s=p.get('s');
+  if(s){
+    try{
+      const bits=atob(s).split('');
+      cl.querySelectorAll('input').forEach((inp,i)=>{
+        if(bits[i]==='1')inp.checked=true;
+      });
+      updateScore();
+    }catch(e){}
+  }
+})();
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>

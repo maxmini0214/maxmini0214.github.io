@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Developer Text Utilities — Free Online DevTools | MaxDevTools</title>
-<meta name="description" content="Text utilities for developers: remove line breaks, trim whitespace, count characters/words/lines, and more. 100% client-side.">
+<meta name="description" content="14 text utilities for developers: remove line breaks, trim whitespace, count characters/words/lines, URL encode/decode, escape HTML, and more. 100% client-side, no signup.">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="text utilities online, developer text tools, remove line breaks online, character counter, word counter, url encode decode, escape html online, text manipulation tool, devtools online">
 <link rel="canonical" href="https://maxmini0214.github.io/devtools/">
-<meta property="og:title" content="Developer Text Utilities — Free Online DevTools">
-<meta property="og:description" content="Text manipulation tools for developers. Remove line breaks, trim whitespace, count characters, and more.">
+<meta property="og:title" content="Developer Text Utilities — 14 Free Online Tools">
+<meta property="og:description" content="Remove line breaks, trim whitespace, count characters, URL encode/decode, and more. Free, no signup.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/devtools/">
 <meta name="twitter:card" content="summary">
@@ -31,24 +32,115 @@ textarea:focus{border-color:var(--cyan)}
 .actions button{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:.6rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;transition:all .2s}
 .actions button:hover{border-color:var(--cyan);color:var(--cyan)}
 .output-label{font-size:.8rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
-.copy-btn{display:block;width:100%;padding:.8rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-bottom:2rem}
+.btn-row{display:flex;gap:.5rem;margin-bottom:2rem}
+.copy-btn{flex:1;padding:.8rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer}
 .copy-btn:hover{opacity:.9}
+.share-btn{padding:.8rem 1.5rem;background:none;border:1px solid var(--border);color:var(--text2);border-radius:10px;font-size:1rem;cursor:pointer}
+.share-btn:hover{border-color:var(--cyan);color:var(--text)}
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.guide h2{color:var(--cyan);font-size:1.1rem;margin-bottom:1rem}
+.guide ol{padding-left:1.5rem;color:var(--text2);line-height:1.8}
+.guide ol li{margin-bottom:.5rem}
+.guide ol li strong{color:var(--text)}
+.faq-section{margin-bottom:2rem}
+.faq-section h2{color:var(--cyan);font-size:1.1rem;margin-bottom:1rem;text-align:center}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:.8rem 1rem;cursor:pointer;font-weight:600;font-size:.95rem}
+details summary:hover{color:var(--cyan)}
+details .faq-body{padding:0 1rem 1rem;color:var(--text2);font-size:.9rem;line-height:1.6}
+details .faq-body code{background:var(--bg);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--green)}
 .cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
 .cta h3{color:var(--cyan);margin-bottom:.5rem}
 .cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
-.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
+.cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700;transition:opacity .2s}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.5rem;margin-bottom:2rem}
+.tools-grid a{display:block;padding:.6rem .8rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.85rem;transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);text-decoration:none}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.newsletter h3{color:var(--green);margin-bottom:.5rem}
+.newsletter p{color:var(--text2);font-size:.85rem;margin-bottom:.75rem}
+.newsletter a{color:var(--cyan);font-weight:600}
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
-@media(max-width:500px){header h1{font-size:1.5rem}.stats{flex-direction:column}}
+@media(max-width:500px){header h1{font-size:1.5rem}.stats{flex-direction:column}.tools-grid{grid-template-columns:1fr}}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Developer Text Utilities",
+  "description": "14 text utilities for developers: remove line breaks, trim whitespace, count characters/words/lines, URL encode/decode, and more.",
+  "url": "https://maxmini0214.github.io/devtools/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I remove line breaks from text online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste your text into this tool and click 'Remove Line Breaks'. It replaces all newline characters (\\n) with spaces. In JavaScript: text.replace(/\\n/g, ' '). In Python: text.replace('\\n', ' '). In Bash: tr '\\n' ' ' < file.txt. This is useful when copying text from PDFs or emails that have unwanted line breaks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I count characters and words in text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This tool shows real-time stats as you type: characters, words, lines, and bytes. In JavaScript: characters = text.length, words = text.trim().split(/\\s+/).length, bytes = new Blob([text]).size. Note: bytes ≠ characters for Unicode text (emoji = 4 bytes, CJK = 3 bytes in UTF-8)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between URL encode and escape HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "URL encoding (percent-encoding) converts characters like spaces → %20, & → %26 for use in URLs. It uses encodeURIComponent() in JavaScript. HTML escaping converts < → &lt;, > → &gt;, & → &amp; to prevent XSS attacks and display HTML as text. They serve different purposes: URL encoding is for URLs/query strings, HTML escaping is for rendering user input safely in web pages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I share my text transformations with others?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click the 🔗 Share button to encode your input text into a URL. When someone opens the link, the text is automatically restored. The text is encoded with base64 and stays in the URL — nothing is sent to any server. Note: very long texts may exceed URL length limits (~2000 chars)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text data safe in this tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% safe. This tool runs entirely in your browser using JavaScript — no data is ever sent to a server. All transformations happen client-side. There are no cookies, no analytics on your text content, and no server-side processing. Your text stays on your machine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are some command-line alternatives for text manipulation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bash: sed 's/^ *//;s/ *$//' (trim), sort -u (dedupe+sort), wc -l (line count), wc -w (word count), tr '[:lower:]' '[:upper:]' (uppercase), awk '{print NR\": \"$0}' (add line numbers). Python: textwrap.dedent(), str.strip(), collections.Counter(). For complex transformations, use awk or Python scripts. This online tool is convenient for quick one-off operations without opening a terminal."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="container">
 <header>
 <h1>🛠 Developer Text Utilities</h1>
-<p>Transform, clean, and analyze text instantly</p>
+<p>14 text tools — transform, clean, and analyze text instantly</p>
 </header>
 
 <textarea id="input" placeholder="Paste your text here…"></textarea>
@@ -79,17 +171,87 @@ footer .brand{color:var(--cyan);font-weight:600}
 
 <div class="output-label">Output</div>
 <textarea id="output" readonly placeholder="Result will appear here…"></textarea>
+<div class="btn-row">
 <button class="copy-btn" id="copyBtn">📋 Copy Output</button>
+<button class="share-btn" id="shareBtn">🔗 Share</button>
+</div>
+
+<div class="guide">
+<h2>📖 How to Use These Text Utilities</h2>
+<ol>
+<li><strong>Paste your text</strong> into the input area — stats update in real-time (characters, words, lines, bytes)</li>
+<li><strong>Click a transformation</strong> button — Remove Line Breaks, Trim, Sort, Dedupe, URL Encode, etc.</li>
+<li><strong>Copy the output</strong> with one click, or apply multiple transformations in sequence</li>
+<li><strong>Share with your team</strong> using the 🔗 Share button — it encodes your text in the URL for instant sharing</li>
+</ol>
+</div>
+
+<div class="faq-section">
+<h2>❓ Frequently Asked Questions</h2>
+<details>
+<summary>How do I remove line breaks from text?</summary>
+<div class="faq-body">Paste your text and click <strong>"Remove Line Breaks"</strong>. It replaces all newline characters with spaces. In code: <code>text.replace(/\n/g, ' ')</code> (JS) or <code>text.replace('\n', ' ')</code> (Python) or <code>tr '\n' ' ' &lt; file.txt</code> (Bash).</div>
+</details>
+<details>
+<summary>How do I count characters and words?</summary>
+<div class="faq-body">Stats update in real-time as you type. Note: <strong>bytes ≠ characters</strong> for Unicode — emoji = 4 bytes, CJK characters = 3 bytes in UTF-8. In JS: <code>new Blob([text]).size</code> for bytes, <code>text.trim().split(/\s+/).length</code> for words.</div>
+</details>
+<details>
+<summary>What's the difference between URL encode and HTML escape?</summary>
+<div class="faq-body"><strong>URL encoding</strong>: spaces → %20, & → %26 (for URLs). Uses <code>encodeURIComponent()</code>. <strong>HTML escaping</strong>: &lt; → &amp;lt;, &gt; → &amp;gt; (prevents XSS). Different purposes: URL encoding for query strings, HTML escaping for safe rendering.</div>
+</details>
+<details>
+<summary>Can I share my text with others?</summary>
+<div class="faq-body">Yes! Click 🔗 Share to encode your text into a URL. The recipient sees the same text automatically. Everything stays in the URL — nothing sent to a server. Note: very long texts may exceed URL limits (~2000 chars).</div>
+</details>
+<details>
+<summary>Is my text data safe?</summary>
+<div class="faq-body">100% safe. Everything runs in your browser — no data is sent to any server. No cookies, no analytics on your content, no server-side processing. Your text never leaves your machine.</div>
+</details>
+<details>
+<summary>What are command-line alternatives?</summary>
+<div class="faq-body">Bash: <code>sed 's/^ *//;s/ *$//'</code> (trim), <code>sort -u</code> (dedupe+sort), <code>wc -l</code> (lines), <code>wc -w</code> (words), <code>tr '[:lower:]' '[:upper:]'</code> (uppercase). Python: <code>str.strip()</code>, <code>textwrap.dedent()</code>. This tool is for quick one-off ops without a terminal.</div>
+</details>
+</div>
 
 <div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>Plan your budget, import bank data, see where reality drifts from your plan. Zero signup, zero cloud — your data stays in your browser.</p>
+<a class="cta-btn" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try Free Demo →</a>
+</div>
+
+<h3 style="color:var(--text2);font-size:.9rem;margin-bottom:.75rem">🔧 More Free Tools</h3>
+<div class="tools-grid">
+<a href="/keyword-mixer/">⭐ Keyword Mixer</a>
+<a href="/json-formatter/">JSON Formatter</a>
+<a href="/regex-tester/">Regex Tester</a>
+<a href="/hash-generator/">Hash Generator</a>
+<a href="/base64-tool/">Base64 Encoder</a>
+<a href="/jwt-decoder/">JWT Decoder</a>
+<a href="/url-encoder/">URL Encoder</a>
+<a href="/password-generator/">Password Generator</a>
+<a href="/cron-parser/">Cron Parser</a>
+<a href="/color-picker/">Color Picker</a>
+<a href="/unix-timestamp/">Unix Timestamp</a>
+<a href="/qr-code-generator/">QR Code Generator</a>
+<a href="/markdown-preview/">Markdown Preview</a>
+<a href="/box-shadow-generator/">Box Shadow Generator</a>
+<a href="/lorem-ipsum/">Lorem Ipsum</a>
+<a href="/diff-checker/">Diff Checker</a>
+<a href="/pomodoro-timer/">Pomodoro Timer</a>
+<a href="/website-audit/">SEO Audit Checklist</a>
+<a href="/games.html">🎮 Free Games</a>
+</div>
+
+<div class="newsletter">
+<h3>📬 Developer Newsletter</h3>
+<p>Free tools, tutorials, and dev tips — no spam, unsubscribe anytime.</p>
+<a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe Free →</a>
 </div>
 </div>
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+<a href="https://maxmini0214.github.io/">← Back to All Tools</a><br><br>
+Part of <span class="brand"><a href="https://maxmini0214.github.io/">MaxDevTools</a></span> · Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · © 2024–2026
 </footer>
 <script>
 const input=document.getElementById('input'),output=document.getElementById('output');
@@ -132,14 +294,29 @@ document.getElementById('copyBtn').addEventListener('click',()=>{
     setTimeout(()=>btn.textContent='📋 Copy Output',1500);
   });
 });
+
+// Share: encode input text in URL
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const url=new URL(window.location.href);
+  url.searchParams.set('d',btoa(unescape(encodeURIComponent(input.value))));
+  navigator.clipboard.writeText(url.toString()).then(()=>{
+    const btn=document.getElementById('shareBtn');
+    btn.textContent='✓ Link Copied!';
+    setTimeout(()=>btn.textContent='🔗 Share',2000);
+  });
+});
+
+// Restore from URL
+(function(){
+  const p=new URLSearchParams(window.location.search);
+  const d=p.get('d');
+  if(d){
+    try{
+      input.value=decodeURIComponent(escape(atob(d)));
+      updateStats();
+    }catch(e){}
+  }
+})();
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
