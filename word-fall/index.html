@@ -4,24 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Word Fall - Free Online Word Game | MaxMini</title>
-  <meta name="description" content="Play Word Fall free online. Catch falling letters and form words before time runs out. No download, no signup required.">
+  <meta name="description" content="Play Word Fall free online. Catch falling letters and form words before time runs out. No download, no signup. Works on mobile & desktop.">
   <meta property="og:title" content="Word Fall - Free Online Word Game">
-  <meta property="og:description" content="Play Word Fall free online. Catch falling letters and form words before time runs out.">
-  <meta name="keywords" content="word game online free, free word game, browser word game, word fall game free">
+  <meta property="og:description" content="Play Word Fall free online. Catch falling letters and form words before time runs out. No download required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maxmini0214.github.io/word-fall/">
+  <meta name="twitter:card" content="summary">
+  <meta name="keywords" content="word game online, free word game, browser word game, word fall game, word puzzle online free, typing game">
   <link rel="canonical" href="https://maxmini0214.github.io/word-fall/">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { background: #000; width: 100%; height: 100%; overflow: hidden; }
-    #game-container { width: 100%; height: 100%; }
-  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "VideoGame",
     "name": "Word Fall",
-    "description": "Catch falling letters and form words. Fun word puzzle game — play free online, no download.",
+    "description": "Catch falling letters and form words before time runs out. Play free online word game, no download required.",
     "url": "https://maxmini0214.github.io/word-fall/",
-    "genre": "Puzzle",
+    "genre": ["Puzzle", "Word"],
     "gamePlatform": "Web Browser",
     "applicationCategory": "Game",
     "operatingSystem": "Any",
@@ -39,9 +37,237 @@
     "isAccessibleForFree": true
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I play Word Fall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Letters fall from the top of the screen. Click or tap the letters to form words, then submit before time runs out. Longer words score more points. Keep forming words to advance through levels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Word Fall free to play?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, completely free. No download, no signup, no ads. Play instantly in your browser on desktop or mobile."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Word Fall work on mobile?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The game is fully responsive and works on iOS Safari, Android Chrome, and all modern mobile browsers. Tap letters to select them and form words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best strategy for Word Fall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with short 3-letter words to build momentum. Look for common prefixes and suffixes. Use frequently appearing letters first. Chain combos for bonus points and stay calm under time pressure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data collected while playing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The game runs 100% in your browser. No data is sent to any server. No cookies, no tracking, no analytics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I play Word Fall offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After the page loads once, the game runs entirely in your browser. If your connection drops mid-game, you can keep playing. Bookmark the page for quick access."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "MaxMini", "item": "https://maxmini0214.github.io/"},
+      {"@type": "ListItem", "position": 2, "name": "Games", "item": "https://maxmini0214.github.io/games.html"},
+      {"@type": "ListItem", "position": 3, "name": "Word Fall"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Play Word Fall",
+    "step": [
+      {"@type": "HowToStep", "position": 1, "name": "Read falling letters", "text": "Watch as letters fall from the top of the screen. Identify letters you can use to form words."},
+      {"@type": "HowToStep", "position": 2, "name": "Form words", "text": "Click or tap letters to select them and spell out valid words. Longer words earn more points."},
+      {"@type": "HowToStep", "position": 3, "name": "Submit before time", "text": "Submit your word before the timer runs out. Speed matters — faster submissions earn bonus points."},
+      {"@type": "HowToStep", "position": 4, "name": "Score points", "text": "Earn points for each valid word. Chain combos for multipliers and advance through increasingly challenging levels."}
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #0a0a0a; color: #e0e0e0; font-family: system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
+    body { background: #0a0a0a; }
+    #game-section { width: 100%; height: 100vh; position: relative; }
+    #game-container { width: 100%; height: 100%; }
+    #scroll-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); color: #666; font-size: 12px; animation: bounce 2s infinite; z-index: 10; pointer-events: none; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6px)} }
+    .content { max-width: 720px; margin: 0 auto; padding: 40px 20px 60px; }
+    h2 { font-size: 1.4em; margin: 32px 0 16px; color: #fff; }
+    h3 { font-size: 1.1em; margin: 24px 0 10px; color: #ddd; }
+    p, li { line-height: 1.7; color: #bbb; margin-bottom: 8px; }
+    ul, ol { padding-left: 24px; margin-bottom: 16px; }
+    .breadcrumb { font-size: 13px; color: #666; margin-bottom: 24px; }
+    .breadcrumb a { color: #888; text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+    .how-to { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 24px; margin: 20px 0; }
+    .step { display: flex; gap: 14px; margin-bottom: 16px; }
+    .step-num { background: #2563eb; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .step-text { flex: 1; }
+    .step-text strong { color: #fff; }
+    details { background: #141414; border: 1px solid #222; border-radius: 8px; margin-bottom: 8px; }
+    summary { padding: 14px 18px; cursor: pointer; font-weight: 600; color: #ddd; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::after { content: '+'; font-size: 18px; color: #666; transition: transform .2s; }
+    details[open] summary::after { content: '−'; }
+    details .faq-answer { padding: 0 18px 16px; color: #aaa; line-height: 1.7; }
+    .share-row { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+    .share-row button, .share-row a { background: #1a1a2e; border: 1px solid #333; color: #ccc; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; text-decoration: none; transition: all .15s; display: inline-flex; align-items: center; gap: 6px; }
+    .share-row button:hover, .share-row a:hover { background: #222; border-color: #555; color: #fff; }
+    .cta-box { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #2563eb33; border-radius: 12px; padding: 24px; margin: 28px 0; text-align: center; }
+    .cta-box h3 { color: #60a5fa; margin-top: 0; }
+    .cta-box a { display: inline-block; background: #2563eb; color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 10px; }
+    .cta-box a:hover { background: #3b82f6; }
+    .cross-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
+    .cross-links a { background: #141414; border: 1px solid #222; border-radius: 8px; padding: 12px 16px; color: #ccc; text-decoration: none; font-size: 14px; transition: all .15s; }
+    .cross-links a:hover { background: #1a1a2e; border-color: #444; color: #fff; }
+    .newsletter { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 20px; margin: 28px 0; text-align: center; }
+    .newsletter a { color: #60a5fa; text-decoration: none; font-weight: 600; }
+    footer { text-align: center; padding: 20px; color: #555; font-size: 13px; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+    footer a { color: #666; text-decoration: none; }
+    footer a:hover { color: #aaa; }
+    .strategy-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    .strategy-table th, .strategy-table td { padding: 10px 14px; border: 1px solid #222; text-align: left; }
+    .strategy-table th { background: #141414; color: #ddd; font-weight: 600; }
+    .strategy-table td { color: #aaa; }
+  </style>
 </head>
 <body>
-  <div id="game-container"></div>
+  <section id="game-section">
+    <div id="game-container"></div>
+    <div id="scroll-hint">↓ Tips & FAQ below</div>
+  </section>
+
+  <div class="content">
+    <nav class="breadcrumb">
+      <a href="/">MaxMini</a> › <a href="/games.html">Games</a> › Word Fall
+    </nav>
+
+    <h2>📝 How to Play Word Fall</h2>
+    <div class="how-to">
+      <div class="step"><span class="step-num">1</span><div class="step-text"><strong>Read falling letters</strong> — Watch as letters fall from the top of the screen. Identify letters you can use to form words.</div></div>
+      <div class="step"><span class="step-num">2</span><div class="step-text"><strong>Form words</strong> — Click or tap letters to select them and spell out valid words. Longer words earn more points.</div></div>
+      <div class="step"><span class="step-num">3</span><div class="step-text"><strong>Submit before time</strong> — Submit your word before the timer runs out. Speed matters — faster submissions earn bonus points.</div></div>
+      <div class="step"><span class="step-num">4</span><div class="step-text"><strong>Score points</strong> — Earn points for each valid word. Chain combos for multipliers and advance through increasingly challenging levels.</div></div>
+    </div>
+
+    <h2>🎯 Pro Strategies</h2>
+    <table class="strategy-table">
+      <thead><tr><th>Strategy</th><th>When to Use</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>📏 Start with short words</td><td>Early game and when under pressure</td><td>⭐⭐⭐ Quick points, builds momentum</td></tr>
+        <tr><td>🔤 Look for prefixes</td><td>When longer words are available</td><td>⭐⭐⭐⭐ UN-, RE-, PRE- boost scores</td></tr>
+        <tr><td>🅰️ Use common letters first</td><td>When board is crowded</td><td>⭐⭐⭐ Clears space efficiently</td></tr>
+        <tr><td>🔗 Chain combos</td><td>Mid to late game</td><td>⭐⭐⭐⭐ Multiplier bonuses</td></tr>
+        <tr><td>😌 Stay calm under pressure</td><td>When timer is running low</td><td>⭐⭐ Prevents mistakes</td></tr>
+      </tbody>
+    </table>
+
+    <div class="share-row">
+      <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='✅ Copied!')">🔗 Share Game</button>
+      <a href="https://maxmini0214.itch.io/word-fall" target="_blank" rel="noopener">❤️ Rate on itch.io</a>
+      <a href="/games.html">🎮 More Games</a>
+    </div>
+
+    <h2>❓ Frequently Asked Questions</h2>
+    <details>
+      <summary>How do I play Word Fall?</summary>
+      <div class="faq-answer">Letters fall from the top of the screen. Click or tap the letters to form words, then submit before time runs out. Longer words score more points. Keep forming words to advance through levels.</div>
+    </details>
+    <details>
+      <summary>Is Word Fall completely free?</summary>
+      <div class="faq-answer">Yes — 100% free. No download, no signup, no ads, no in-app purchases. Play instantly in any modern browser.</div>
+    </details>
+    <details>
+      <summary>Does it work on mobile phones?</summary>
+      <div class="faq-answer">Yes! Fully responsive on iOS Safari, Android Chrome, and all modern mobile browsers. Tap letters to select them and form words.</div>
+    </details>
+    <details>
+      <summary>What's the best strategy for high scores?</summary>
+      <div class="faq-answer">Start with short 3-letter words to build momentum. Look for common prefixes like UN-, RE-, PRE- to form longer words quickly. Use frequently appearing letters first to clear space. Chain combos for multiplier bonuses and stay calm under time pressure.</div>
+    </details>
+    <details>
+      <summary>Is my data collected while playing?</summary>
+      <div class="faq-answer">No. The game runs 100% in your browser with zero server communication. No cookies, no tracking, no analytics. Your gameplay stays completely private.</div>
+    </details>
+    <details>
+      <summary>Can I play offline?</summary>
+      <div class="faq-answer">After the page loads once, the game runs entirely in your browser. If your connection drops mid-game, you can keep playing. Bookmark the page for quick access.</div>
+    </details>
+
+    <div class="cta-box">
+      <h3>💰 Track Your Budget Like You Track Your Score</h3>
+      <p style="color:#8899aa;margin-bottom:8px;">DonFlow — free budget planning tool. See where your money <em>should</em> go vs where it <em>actually</em> goes.</p>
+      <a href="https://maxmini0214.github.io/donflow/?demo">Try DonFlow Free →</a>
+    </div>
+
+    <h2>🎮 More Free Browser Games</h2>
+    <div class="cross-links">
+      <a href="/bubble-shooter/">🫧 Bubble Shooter</a>
+      <a href="/solitaire-tower/">🃏 Solitaire Tower</a>
+      <a href="/mine-field/">💣 Minesweeper</a>
+      <a href="/block-puzzle/">🧩 Block Puzzle</a>
+      <a href="/snake-arena/">🐍 Snake Arena</a>
+      <a href="/tower-defense/">🏰 Tower Defense</a>
+      <a href="/brick-breaker/">🧱 Brick Breaker</a>
+      <a href="/memory-cards/">🧠 Memory Cards</a>
+      <a href="/maze-runner/">🏃 Maze Runner</a>
+      <a href="/math-dash/">🔢 Math Dash</a>
+    </div>
+
+    <h3>🛠️ Developer Tools</h3>
+    <div class="cross-links">
+      <a href="/json-formatter/">JSON Formatter</a>
+      <a href="/password-generator/">Password Generator</a>
+      <a href="/regex-tester/">Regex Tester</a>
+    </div>
+
+    <div class="newsletter">
+      <p>📬 Get notified about new games & tools</p>
+      <a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Newsletter →</a>
+    </div>
+
+    <footer>
+      <a href="https://maxmini0214.github.io">maxmini0214</a> · <a href="/games.html">Games</a> · <a href="/">Tools</a> · <a href="https://github.com/maxmini0214">GitHub</a>
+    </footer>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
-<div id="itch-cta" style="position:fixed;bottom:0;left:0;right:0;background:rgba(30,30,30,0.95);padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:12px;z-index:9999;font-family:system-ui,sans-serif;font-size:14px;color:#ccc;backdrop-filter:blur(4px);border-top:1px solid #333"><span>❤️ Enjoy Word Fall?</span><a href="https://maxmini0214.itch.io/word-fall" target="_blank" rel="noopener" style="background:#fa5c5c;color:#fff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px">Support on itch.io</a><a href="/games.html" style="color:#aaa;text-decoration:none;font-size:12px;margin-left:8px">🎮 More Games</a><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#666;cursor:pointer;font-size:18px;margin-left:8px;padding:4px">✕</button></div></body>
+  <script>
+    let hintEl = document.getElementById('scroll-hint');
+    window.addEventListener('scroll', () => { if (hintEl && window.scrollY > 50) { hintEl.style.display = 'none'; } }, { passive: true });
+  </script>
+</body>
 </html>
