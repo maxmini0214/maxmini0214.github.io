@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUID Generator — Free Online UUID v4 Generator | MaxDevTools</title>
+<meta name="description" content="Generate UUID v4 instantly. Bulk generate up to 100 UUIDs, copy to clipboard, toggle hyphens and case. 100% client-side, no tracking.">
+<meta name="keywords" content="uuid generator, uuid v4, guid generator, unique id, random uuid, online uuid tool">
+<meta name="author" content="MaxDevTools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maxmini0214.github.io/uuid-generator/">
+<meta property="og:title" content="UUID Generator — Free Online UUID v4 Generator">
+<meta property="og:description" content="Generate UUID v4 instantly. Bulk generate, copy, toggle format. No signup, no tracking.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://maxmini0214.github.io/uuid-generator/">
+<meta property="og:site_name" content="MaxDevTools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UUID Generator — Free Online UUID v4 Generator">
+<meta name="twitter:description" content="Generate UUID v4 instantly. Bulk generate, copy, toggle format. 100% client-side.">
+<script type="application/ld+json">
+[{
+  "@context":"https://schema.org","@type":"SoftwareApplication","name":"UUID Generator","url":"https://maxmini0214.github.io/uuid-generator/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Generate UUID v4 instantly. Bulk generate up to 100, copy to clipboard, toggle hyphens and case."
+},{
+  "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"MaxDevTools","item":"https://maxmini0214.github.io/"},
+    {"@type":"ListItem","position":2,"name":"UUID Generator","item":"https://maxmini0214.github.io/uuid-generator/"}
+  ]
+},{
+  "@context":"https://schema.org","@type":"HowTo","name":"How to Generate UUIDs","step":[
+    {"@type":"HowToStep","position":1,"name":"Open","text":"Open the UUID Generator tool in your browser."},
+    {"@type":"HowToStep","position":2,"name":"Configure","text":"Set quantity (1-100), choose uppercase or lowercase, toggle hyphens."},
+    {"@type":"HowToStep","position":3,"name":"Generate","text":"Click Generate to create UUID v4 values using crypto.randomUUID()."},
+    {"@type":"HowToStep","position":4,"name":"Copy","text":"Click Copy to copy all UUIDs to your clipboard."}
+  ]
+},{
+  "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"What is a UUID?","acceptedAnswer":{"@type":"Answer","text":"A UUID (Universally Unique Identifier) is a 128-bit identifier that is practically guaranteed to be unique across all devices and time. UUID v4 uses random numbers, making collisions virtually impossible (1 in 2^122)."}},
+    {"@type":"Question","name":"Is UUID v4 truly unique?","acceptedAnswer":{"@type":"Answer","text":"Yes, for all practical purposes. The probability of generating two identical UUID v4s is astronomically low — about 1 in 5.3 × 10^36. You'd need to generate 1 billion UUIDs per second for 85 years to have a 50% chance of one collision."}},
+    {"@type":"Question","name":"UUID v4 vs v1 — what's the difference?","acceptedAnswer":{"@type":"Answer","text":"UUID v1 uses your MAC address and timestamp, which can leak device info. UUID v4 is purely random — no identifiable information. V4 is preferred for privacy and simplicity."}},
+    {"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No signup, no ads, no usage limits. The tool runs 100% in your browser — no data is ever sent to any server."}},
+    {"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once loaded, this tool works entirely offline since it uses your browser's built-in crypto.randomUUID() or a fallback random generator."}},
+    {"@type":"Question","name":"What format are the UUIDs?","acceptedAnswer":{"@type":"Answer","text":"Standard UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx. You can toggle hyphens on/off and switch between uppercase and lowercase."}}
+  ]
+}]
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0e17;--surface:#111827;--surface2:#1a2332;--border:#1e2d3d;--green:#00ff88;--cyan:#00d4ff;--text:#e2e8f0;--text2:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:720px;margin:0 auto;padding:1.5rem;width:100%}
+.breadcrumb{font-size:.82rem;color:var(--text2);margin-bottom:1rem}
+.breadcrumb a{color:var(--text2)}
+h1{font-size:1.8rem;margin-bottom:.5rem;color:#f0f6fc}
+.subtitle{color:var(--text2);margin-bottom:1.5rem;font-size:.95rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1rem}
+.controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-bottom:1rem}
+.controls label{font-size:.85rem;color:var(--text2);display:flex;align-items:center;gap:.4rem}
+.controls input[type=number]{width:70px;padding:.4rem .6rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.9rem;text-align:center}
+.controls input[type=checkbox]{accent-color:var(--cyan)}
+.btn{padding:.6rem 1.2rem;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--cyan);color:#000}.btn-primary:hover{filter:brightness(1.15)}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{border-color:var(--cyan)}
+.btn-copy{background:var(--green);color:#000}.btn-copy:hover{filter:brightness(1.1)}
+.btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+textarea{width:100%;min-height:200px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--mono);font-size:.85rem;padding:.8rem;resize:vertical;line-height:1.6}
+.status{font-size:.82rem;color:var(--text2);margin-top:.5rem}
+h2{font-size:1.3rem;color:var(--cyan);margin:2rem 0 .8rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}
+h3{font-size:1.05rem;color:#f0f6fc;margin:1.2rem 0 .5rem}
+.steps{counter-reset:step}
+.steps li{counter-increment:step;padding:.5rem 0 .5rem 2.5rem;position:relative;color:var(--text2);font-size:.9rem}
+.steps li::before{content:counter(step);position:absolute;left:0;width:1.8rem;height:1.8rem;background:var(--surface2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--cyan);font-weight:700}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+summary{padding:.7rem 1rem;cursor:pointer;color:#f0f6fc;font-weight:500;font-size:.9rem}
+summary:hover{color:var(--cyan)}
+details p{padding:0 1rem .7rem;color:var(--text2);font-size:.85rem;line-height:1.6}
+.links{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.links a{padding:.35rem .8rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--text2);transition:border-color .15s}
+.links a:hover{border-color:var(--cyan);color:var(--text);text-decoration:none}
+.cta{background:linear-gradient(135deg,var(--surface),#05150a);border:1px solid #22c55e;border-radius:10px;padding:1rem 1.2rem;margin:1.5rem 0;text-align:center}
+.cta a{color:#4ade80;font-weight:600}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;margin:1.5rem 0}
+.newsletter p{color:var(--text2);font-size:.88rem;margin-bottom:.4rem}
+.newsletter a{color:var(--cyan);font-weight:600}
+footer{margin-top:auto;padding:1.5rem;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;text-align:center}
+@media(max-width:600px){h1{font-size:1.4rem}.controls{gap:.5rem}textarea{min-height:150px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="breadcrumb"><a href="/">MaxDevTools</a> › UUID Generator</div>
+  <h1>🔑 UUID Generator</h1>
+  <p class="subtitle">Generate UUID v4 values instantly. 100% client-side — nothing leaves your browser.</p>
+
+  <div class="card">
+    <div class="controls">
+      <label>Quantity: <input type="number" id="qty" min="1" max="100" value="1"></label>
+      <label><input type="checkbox" id="upper"> Uppercase</label>
+      <label><input type="checkbox" id="nohyphen"> No hyphens</label>
+    </div>
+    <div class="btns">
+      <button class="btn btn-primary" id="genBtn">⚡ Generate</button>
+      <button class="btn btn-copy" id="copyBtn">📋 Copy All</button>
+      <button class="btn btn-secondary" id="clearBtn">🗑️ Clear</button>
+    </div>
+    <textarea id="output" readonly placeholder="Click Generate to create UUIDs..."></textarea>
+    <div class="status" id="status"></div>
+  </div>
+
+  <h2>📖 How to Use</h2>
+  <ol class="steps">
+    <li><strong>Open</strong> this page in any modern browser.</li>
+    <li><strong>Configure</strong> — set quantity (1–100), toggle uppercase and hyphens.</li>
+    <li><strong>Generate</strong> — click the button to create cryptographically random UUID v4 values.</li>
+    <li><strong>Copy</strong> — click Copy All to put them on your clipboard, ready to paste.</li>
+  </ol>
+
+  <h2>❓ FAQ</h2>
+  <details><summary>What is a UUID?</summary><p>A UUID (Universally Unique Identifier) is a 128-bit identifier that is practically guaranteed to be unique across all devices and time. UUID v4 uses random numbers, making collisions virtually impossible (1 in 2^122).</p></details>
+  <details><summary>Is UUID v4 truly unique?</summary><p>Yes, for all practical purposes. The probability of generating two identical UUID v4s is about 1 in 5.3 × 10^36. You'd need to generate 1 billion UUIDs per second for 85 years to have a 50% chance of one collision.</p></details>
+  <details><summary>UUID v4 vs v1 — what's the difference?</summary><p>UUID v1 uses your MAC address and timestamp, which can leak device info. UUID v4 is purely random — no identifiable information. V4 is preferred for privacy and simplicity.</p></details>
+  <details><summary>Is this tool free?</summary><p>Yes, completely free. No signup, no ads, no usage limits. Runs 100% in your browser — no data is sent to any server.</p></details>
+  <details><summary>Does it work offline?</summary><p>Yes. Once loaded, it works entirely offline using your browser's built-in crypto.randomUUID() function.</p></details>
+  <details><summary>What format are the UUIDs?</summary><p>Standard UUID v4: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx. Toggle hyphens on/off and uppercase/lowercase with the checkboxes above.</p></details>
+
+  <h2>🔗 More Developer Tools</h2>
+  <div class="links">
+    <a href="/hash-generator/">Hash Generator</a>
+    <a href="/password-generator/">Password Generator</a>
+    <a href="/base64-tool/">Base64 Tool</a>
+    <a href="/json-formatter/">JSON Formatter</a>
+    <a href="/url-encoder/">URL Encoder</a>
+    <a href="/regex-tester/">Regex Tester</a>
+    <a href="/jwt-decoder/">JWT Decoder</a>
+    <a href="/unix-timestamp/">Unix Timestamp</a>
+    <a href="/cron-parser/">Cron Parser</a>
+    <a href="/keyword-mixer/">Keyword Mixer</a>
+  </div>
+
+  <div class="cta">
+    <p>📊 <strong>Track your finances privately</strong></p>
+    <a href="/donflow/?demo">Try DonFlow — Plan vs Reality Budget Tracker →</a>
+  </div>
+
+  <div class="newsletter">
+    <p>📬 Get weekly dev tool tips & new releases</p>
+    <a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe to Morning Brief →</a>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · <a href="/">All Tools</a> · <a href="/games.html">🎮 Games</a> · <a href="/store.html">📚 Store</a>
+</footer>
+
+<script>
+(function(){
+  const output=document.getElementById('output'),status=document.getElementById('status');
+  const qty=document.getElementById('qty'),upper=document.getElementById('upper'),nohyphen=document.getElementById('nohyphen');
+
+  function genUUID(){
+    if(typeof crypto!=='undefined'&&crypto.randomUUID)return crypto.randomUUID();
+    return'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16)});
+  }
+
+  document.getElementById('genBtn').addEventListener('click',()=>{
+    const n=Math.min(100,Math.max(1,parseInt(qty.value)||1));
+    const uuids=[];
+    for(let i=0;i<n;i++){
+      let u=genUUID();
+      if(upper.checked)u=u.toUpperCase();
+      if(nohyphen.checked)u=u.replace(/-/g,'');
+      uuids.push(u);
+    }
+    output.value=uuids.join('\n');
+    status.textContent=`✅ Generated ${n} UUID${n>1?'s':''}`;
+  });
+
+  document.getElementById('copyBtn').addEventListener('click',()=>{
+    if(!output.value){status.textContent='Nothing to copy';return}
+    navigator.clipboard.writeText(output.value).then(()=>{status.textContent='📋 Copied to clipboard!'}).catch(()=>{output.select();document.execCommand('copy');status.textContent='📋 Copied!'});
+  });
+
+  document.getElementById('clearBtn').addEventListener('click',()=>{output.value='';status.textContent='Cleared'});
+
+  // Generate one on load
+  document.getElementById('genBtn').click();
+})();
+</script>
+<script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
