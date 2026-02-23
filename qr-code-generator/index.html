@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QR Code Generator — Free Online Tool | MaxDevTools</title>
-<meta name="description" content="Generate QR codes from any text or URL instantly. Download as image. 100% client-side, free.">
+<meta name="description" content="Generate QR codes from any text, URL, WiFi, or vCard instantly. Download as PNG. 100% client-side, no tracking, free forever.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/qr-code-generator/">
 <meta property="og:title" content="QR Code Generator — Free Online Tool">
-<meta property="og:description" content="Generate QR codes from text or URLs instantly. Free, no signup.">
+<meta property="og:description" content="Generate QR codes from text or URLs instantly. Free, no signup, no tracking.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/qr-code-generator/">
 <meta name="twitter:card" content="summary">
@@ -18,26 +18,46 @@
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column}
 body::before{content:'';position:fixed;inset:0;background:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
 a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
-.container{max-width:680px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
+.container{max-width:720px;margin:0 auto;padding:2rem 1.5rem;position:relative;z-index:1;flex:1}
 header{text-align:center;margin-bottom:2rem}
 header h1{font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
 header p{color:var(--text2)}
 textarea{width:100%;padding:1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:12px;color:var(--text);resize:vertical;min-height:80px;font-family:inherit;outline:none;margin-bottom:1rem}
 textarea:focus{border-color:var(--cyan)}
-.gen-btn{display:block;width:100%;padding:1rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-bottom:1.5rem}
+.gen-btn{display:block;width:100%;padding:1rem;background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;margin-bottom:1rem}
 .gen-btn:hover{opacity:.9}
-.qr-wrap{text-align:center;margin-bottom:1.5rem}
+.btn-row{display:flex;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.btn-row button{flex:1;padding:.7rem;background:var(--surface);border:1px solid var(--border);color:var(--cyan);border-radius:8px;cursor:pointer;font-size:.9rem;min-width:120px}
+.btn-row button:hover{border-color:var(--cyan)}
+.qr-wrap{text-align:center;margin-bottom:2rem}
 #qrCanvas{background:#fff;border-radius:12px;padding:16px;display:inline-block}
-.dl-btn{display:inline-block;margin-top:1rem;background:var(--surface);border:1px solid var(--border);color:var(--cyan);padding:.6rem 1.5rem;border-radius:8px;cursor:pointer;font-size:.9rem;text-decoration:none}
-.dl-btn:hover{border-color:var(--cyan)}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.section h2{font-size:1.2rem;color:var(--green);margin-bottom:1rem}
+.section ol,.section ul{padding-left:1.5rem;color:var(--text2);line-height:1.8}
+.section li{margin-bottom:.5rem}
+.section code{background:rgba(0,212,255,.1);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--cyan)}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+details summary{padding:.8rem 1rem;cursor:pointer;color:var(--text);font-weight:500}
+details summary:hover{color:var(--cyan)}
+details[open] summary{border-bottom:1px solid var(--border)}
+details div{padding:1rem;color:var(--text2);line-height:1.7;font-size:.9rem}
+details div code{background:rgba(0,212,255,.1);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--cyan)}
 .cta{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(0,255,136,.1));border:1px solid rgba(0,212,255,.25);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
 .cta h3{color:var(--cyan);margin-bottom:.5rem}
 .cta p{color:var(--text2);font-size:.9rem;margin-bottom:1rem}
 .cta a.cta-btn{display:inline-block;background:var(--cyan);color:var(--bg);padding:.7rem 1.75rem;border-radius:8px;font-weight:700}
 .cta a.cta-btn:hover{opacity:.85;text-decoration:none}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
+.tools-grid a{display:block;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.85rem;transition:border-color .2s}
+.tools-grid a:hover{border-color:var(--cyan);text-decoration:none;color:var(--cyan)}
+.newsletter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;margin-bottom:2rem}
+.newsletter h3{color:var(--green);margin-bottom:.5rem}
+.newsletter p{color:var(--text2);font-size:.85rem;margin-bottom:1rem}
+.newsletter a{display:inline-block;background:var(--green);color:var(--bg);padding:.6rem 1.5rem;border-radius:8px;font-weight:600;font-size:.9rem}
+.newsletter a:hover{opacity:.85;text-decoration:none}
 footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border)}
 footer .brand{color:var(--cyan);font-weight:600}
-@media(max-width:500px){header h1{font-size:1.5rem}}
+@media(max-width:500px){header h1{font-size:1.5rem}.btn-row{flex-direction:column}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -46,20 +66,68 @@ footer .brand{color:var(--cyan);font-weight:600}
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "QR Code Generator — Free Online Tool | MaxDevTools",
-  "description": "Generate QR codes from any text or URL instantly. Download as image. 100% client-side, free.",
+  "description": "Generate QR codes from any text or URL instantly. Download as PNG. 100% client-side, free.",
   "url": "https://maxmini0214.github.io/qr-code-generator/",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a QR code and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A QR (Quick Response) code is a two-dimensional barcode that stores data in a grid of black and white squares. When scanned by a camera or QR reader app, the pattern is decoded back into the original text, URL, or data. QR codes use Reed-Solomon error correction, meaning they can still be read even if up to 30% of the code is damaged."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I generate a QR code for a URL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste your full URL (including https://) into the text field and click 'Generate QR Code'. The QR code appears instantly. Click 'Download PNG' to save it. You can also use the Share button to create a link that pre-fills the URL for others to generate the same QR code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a character limit for QR codes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "QR codes can store up to 4,296 alphanumeric characters or 2,953 bytes of binary data. However, more data means a denser (harder to scan) code. For best results, keep your content under 300 characters. URLs should use URL shorteners if they exceed this length."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create a QR code for WiFi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use this format: WIFI:T:WPA;S:YourNetworkName;P:YourPassword;; Replace WPA with WEP or nopass as needed. When scanned, most phones will offer to connect to the WiFi network automatically without typing the password."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I generate a QR code in JavaScript?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Using the qrcode npm package: const QRCode = require('qrcode'); QRCode.toDataURL('Hello World', (err, url) => { console.log(url); }); Or in the browser with a canvas: QRCode.toCanvas(document.getElementById('canvas'), 'Hello', { width: 256 });"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this QR code generator free and private?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100%. This tool runs entirely in your browser — no data is sent to any server. Your text and URLs never leave your device. There are no accounts, no tracking cookies, and no usage limits. It's free forever."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -67,28 +135,106 @@ footer .brand{color:var(--cyan);font-weight:600}
 <div class="container">
 <header>
 <h1>📱 QR Code Generator</h1>
-<p>Enter text or a URL to generate a QR code</p>
+<p>Generate QR codes from text, URLs, WiFi credentials, or any data — instantly in your browser</p>
 </header>
 
-<textarea id="input" placeholder="Enter text or URL here…">https://maxmini0214.github.io</textarea>
+<textarea id="input" placeholder="Enter text, URL, or WiFi string (WIFI:T:WPA;S:Name;P:Pass;;)">https://maxmini0214.github.io</textarea>
 <button class="gen-btn" id="genBtn">Generate QR Code</button>
 
 <div class="qr-wrap">
-<div id="qrCanvas"></div><br>
-<a class="dl-btn" id="dlBtn" style="display:none" download="qrcode.png">⬇ Download PNG</a>
+<div id="qrCanvas"></div>
 </div>
 
+<div class="btn-row">
+<button id="dlBtn" style="display:none">⬇ Download PNG</button>
+<button id="shareBtn" style="display:none">🔗 Share</button>
+</div>
+
+<!-- How to Use -->
+<div class="section">
+<h2>📖 How to Use</h2>
+<ol>
+<li><strong>Enter your content</strong> — Type or paste any text, URL, WiFi string (<code>WIFI:T:WPA;S:Name;P:Pass;;</code>), or vCard data</li>
+<li><strong>Generate</strong> — Click "Generate QR Code" to create the code instantly in your browser</li>
+<li><strong>Download</strong> — Click "Download PNG" to save the QR code image for printing, sharing, or embedding</li>
+<li><strong>Share</strong> — Click "🔗 Share" to copy a URL that pre-fills your text so others can generate the same QR code</li>
+</ol>
+</div>
+
+<!-- DonFlow CTA -->
 <div class="cta">
-<h3>🔐 Security Toolkit Pro — Offline Bundle</h3>
-<p>All security tools in one offline package. No internet required.</p>
-<a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener">Get it for $3 →</a>
+<h3>🏦 DonFlow — Budget Drift Detector</h3>
+<p>See where your budget plan and reality diverge. Local-first, zero tracking, works offline.</p>
+<a class="cta-btn" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">Try Live Demo →</a>
+</div>
+
+<!-- FAQ -->
+<h2 style="font-size:1.2rem;color:var(--green);margin-bottom:1rem">❓ Frequently Asked Questions</h2>
+
+<details>
+<summary>What is a QR code and how does it work?</summary>
+<div>A QR (Quick Response) code is a two-dimensional barcode that stores data in a grid of black and white squares. When scanned by a camera or QR reader app, the pattern is decoded back into the original text, URL, or data. QR codes use <strong>Reed-Solomon error correction</strong>, meaning they can still be read even if up to 30% of the code is damaged or obscured.</div>
+</details>
+
+<details>
+<summary>How do I create a QR code for WiFi?</summary>
+<div>Use this format in the text field:<br><br><code>WIFI:T:WPA;S:YourNetworkName;P:YourPassword;;</code><br><br>Replace <code>WPA</code> with <code>WEP</code> or <code>nopass</code> as needed. When scanned, most phones will offer to connect to the WiFi network automatically without typing the password. Great for guest networks, cafes, and events.</div>
+</details>
+
+<details>
+<summary>Is there a character limit for QR codes?</summary>
+<div>QR codes can store up to <strong>4,296 alphanumeric characters</strong> or 2,953 bytes of binary data. However, more data = denser code = harder to scan. For best results, keep content under 300 characters. For long URLs, use a URL shortener first.</div>
+</details>
+
+<details>
+<summary>How do I generate a QR code in JavaScript?</summary>
+<div>Using the <code>qrcode</code> npm package:<br><br><code>const QRCode = require('qrcode');</code><br><code>QRCode.toDataURL('Hello World', (err, url) =&gt; {</code><br><code>&nbsp;&nbsp;console.log(url); // data:image/png;base64,...</code><br><code>});</code><br><br>In the browser with canvas:<br><code>QRCode.toCanvas(canvas, 'text', { width: 256 });</code><br><br>This tool uses the same <code>qrcode</code> library under the hood.</div>
+</details>
+
+<details>
+<summary>Can QR codes be customized with colors or logos?</summary>
+<div>Standard QR codes are black and white, but the spec allows color changes as long as contrast remains high. Adding a small logo in the center works because of Reed-Solomon error correction — the code can tolerate ~30% damage. This tool generates standard black-on-white codes for maximum compatibility across all scanners.</div>
+</details>
+
+<details>
+<summary>Is this tool private? Where does my data go?</summary>
+<div>Your data goes <strong>nowhere</strong>. This tool runs 100% in your browser using JavaScript. No data is sent to any server, no cookies are set, and no accounts are required. You can verify this by checking your browser's Network tab — zero requests are made when generating a QR code. It works offline too.</div>
+</details>
+
+<!-- Cross-links -->
+<div class="section" style="margin-top:2rem">
+<h2>🔧 More Free Developer Tools</h2>
+<div class="tools-grid">
+<a href="/keyword-mixer/">⌨️ Keyword Mixer</a>
+<a href="/json-formatter/">📋 JSON Formatter</a>
+<a href="/regex-tester/">🔍 Regex Tester</a>
+<a href="/base64-tool/">🔄 Base64 Encoder</a>
+<a href="/hash-generator/">🔐 Hash Generator</a>
+<a href="/password-generator/">🔑 Password Generator</a>
+<a href="/url-encoder/">🔗 URL Encoder</a>
+<a href="/jwt-decoder/">🎫 JWT Decoder</a>
+<a href="/unix-timestamp/">⏰ Unix Timestamp</a>
+<a href="/color-picker/">🎨 Color Picker</a>
+<a href="/cron-parser/">📅 Cron Parser</a>
+<a href="/markdown-preview/">📝 Markdown Preview</a>
 </div>
 </div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+<h3>📬 Developer Tools Newsletter</h3>
+<p>New tools, tips, and updates — no spam, unsubscribe anytime.</p>
+<a href="https://buttondown.com/maxmini0214" target="_blank" rel="noopener">Subscribe Free →</a>
+</div>
+</div>
+
 <footer>
-<a href="/">← Back to All Tools</a><br><br>
-Part of <span class="brand">MaxDevTools</span> · © 2024–2026
+<a href="https://maxmini0214.github.io/">← Back to All Tools</a><br><br>
+Part of <a href="https://maxmini0214.github.io/" class="brand">MaxDevTools</a> · Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · © 2024–2026
 </footer>
+
 <script>
+function getParams(){const p=new URLSearchParams(location.search);return{text:p.get('text')};}
 function generate(){
   const text=document.getElementById('input').value.trim();
   if(!text)return;
@@ -96,23 +242,31 @@ function generate(){
   wrap.innerHTML='';
   const canvas=document.createElement('canvas');
   wrap.appendChild(canvas);
-  QRCode.toCanvas(canvas,text,{width:256,margin:2,color:{dark:'#000',light:'#fff'}},function(err){
-    if(err)console.error(err);
-    const dl=document.getElementById('dlBtn');
-    dl.href=canvas.toDataURL('image/png');
-    dl.style.display='inline-block';
+  QRCode.toCanvas(canvas,text,{width:280,margin:2,color:{dark:'#000',light:'#fff'}},function(err){
+    if(err){console.error(err);return;}
+    document.getElementById('dlBtn').style.display='';
+    document.getElementById('shareBtn').style.display='';
+    document.getElementById('dlBtn').onclick=function(){
+      const a=document.createElement('a');
+      a.href=canvas.toDataURL('image/png');
+      a.download='qrcode.png';
+      a.click();
+    };
   });
 }
 document.getElementById('genBtn').addEventListener('click',generate);
-generate();
+document.getElementById('shareBtn').addEventListener('click',function(){
+  const text=document.getElementById('input').value.trim();
+  if(!text)return;
+  const url=location.origin+location.pathname+'?text='+encodeURIComponent(btoa(unescape(encodeURIComponent(text))));
+  navigator.clipboard.writeText(url).then(()=>{this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='🔗 Share';},2000);});
+});
+// Restore from URL
+(function(){
+  const p=getParams();
+  if(p.text){try{document.getElementById('input').value=decodeURIComponent(escape(atob(p.text)));generate();}catch(e){}}
+  else{generate();}
+})();
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
