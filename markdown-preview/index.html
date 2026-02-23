@@ -16,10 +16,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 header{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 h1{font-size:1.4rem;color:#fff}
 .badge{background:rgba(255,255,255,.2);color:#fff;padding:4px 10px;border-radius:12px;font-size:.75rem}
-.toolbar{display:flex;gap:8px;padding:8px 16px;background:#1e293b;border-bottom:1px solid #334155}
+.toolbar{display:flex;gap:8px;padding:8px 16px;background:#1e293b;border-bottom:1px solid #334155;flex-wrap:wrap}
 .toolbar button{background:#334155;color:#e2e8f0;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:background .2s}
 .toolbar button:hover{background:#475569}
-.toolbar button.active{background:#6366f1;color:#fff}
 .main{display:flex;flex:1;overflow:hidden}
 .editor-pane,.preview-pane{flex:1;overflow:auto;padding:16px}
 .editor-pane{border-right:1px solid #334155}
@@ -45,9 +44,45 @@ textarea{width:100%;height:100%;background:transparent;color:#e2e8f0;border:none
 .preview-pane hr{border:none;border-top:2px solid #334155;margin:1.5em 0}
 .preview-pane img{max-width:100%;border-radius:8px}
 .preview-pane input[type="checkbox"]{margin-right:6px}
-.stats{padding:8px 16px;background:#1e293b;border-top:1px solid #334155;font-size:.75rem;color:#94a3b8;display:flex;gap:16px}
-.cta{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;text-decoration:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:.85rem;transition:transform .2s}
-.cta:hover{transform:scale(1.05)}
+.stats{padding:8px 16px;background:#1e293b;border-top:1px solid #334155;font-size:.75rem;color:#94a3b8;display:flex;gap:16px;flex-wrap:wrap}
+.share-btn{background:#10b981;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:background .2s}
+.share-btn:hover{background:#059669}
+/* How to Use */
+.how-to{max-width:800px;margin:2rem auto;padding:0 24px}
+.how-to h2{color:#f1f5f9;margin-bottom:1rem;font-size:1.3rem}
+.how-to ol{padding-left:1.5em;color:#cbd5e1;line-height:1.8}
+.how-to li{margin:.5em 0}
+.how-to strong{color:#818cf8}
+/* FAQ */
+.faq-section{max-width:800px;margin:2rem auto;padding:0 24px}
+.faq-section h2{color:#f1f5f9;margin-bottom:1rem;font-size:1.3rem}
+details{background:#1e293b;border:1px solid #334155;border-radius:8px;margin:.5rem 0;padding:12px 16px}
+summary{cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶ ';font-size:.8em;color:#818cf8}
+details[open] summary::before{content:'▼ '}
+details p,details pre,details ul{margin-top:8px;color:#94a3b8;line-height:1.6}
+details code{background:#334155;padding:2px 6px;border-radius:4px;font-size:.85em}
+/* CTA */
+.cta-box{max-width:600px;margin:2rem auto;padding:1.5rem;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid #334155;border-radius:12px;text-align:center}
+.cta-box h3{color:#f1f5f9;margin-bottom:.5rem}
+.cta-box p{color:#94a3b8;font-size:.9rem;margin-bottom:1rem}
+.cta-box a{display:inline-block;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;transition:transform .2s}
+.cta-box a:hover{transform:scale(1.05)}
+/* Newsletter */
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 .5rem;color:#e2e8f0}
+.newsletter .sub{color:#94a3b8;font-size:.85rem;margin-bottom:1rem}
+.newsletter form{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type="email"]{padding:.5rem 1rem;border:1px solid #475569;border-radius:8px;font-size:.9rem;width:200px;background:#0f172a;color:#e2e8f0}
+.newsletter input[type="submit"]{padding:.5rem 1rem;background:#6366f1;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600}
+/* Cross-links */
+.crosslinks{max-width:800px;margin:2rem auto;padding:0 24px}
+.crosslinks h3{color:#94a3b8;font-size:.9rem;margin-bottom:.5rem}
+.crosslinks a{color:#818cf8;text-decoration:none;margin-right:12px;font-size:.85rem;white-space:nowrap}
+.crosslinks a:hover{text-decoration:underline}
+footer{text-align:center;padding:16px;color:#64748b;font-size:.75rem}
+footer a{color:#818cf8;text-decoration:none}
 @media(max-width:768px){
   .main{flex-direction:column}
   .editor-pane{border-right:none;border-bottom:1px solid #334155;height:45vh}
@@ -58,22 +93,71 @@ textarea{width:100%;height:100%;background:transparent;color:#e2e8f0;border:none
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "Markdown Preview — Free Online Markdown Editor & Previewer",
-  "description": "Write and preview Markdown in real-time. Supports GitHub Flavored Markdown with tables, code blocks, task lists. 100% client-side, no data sent to servers.",
   "url": "https://maxmini0214.github.io/markdown-preview/",
+  "description": "Write and preview Markdown in real-time. Supports GitHub Flavored Markdown with tables, code blocks, task lists. 100% client-side, no data sent to servers.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Markdown and why should I use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Markdown is a lightweight markup language created by John Gruber in 2004. It lets you format text using simple symbols like # for headings, ** for bold, and - for lists. It's used everywhere: GitHub READMEs, documentation, blogs, and note-taking apps. Unlike HTML, Markdown is readable even in its raw form."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is GitHub Flavored Markdown (GFM)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GFM extends standard Markdown with features like tables (using | pipes), task lists (- [x] done), strikethrough (~~text~~), fenced code blocks with syntax highlighting (```js), and autolinked URLs. This editor supports all GFM features."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a table in Markdown?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use pipes and hyphens: | Header 1 | Header 2 | on the first line, |---|---| as separator, then | Cell 1 | Cell 2 | for data rows. Align columns with colons: |:---|:---:| for left and center alignment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert Markdown to HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In this editor, your Markdown is automatically converted to HTML in the preview pane. Click 'Copy HTML' to copy the rendered output. Programmatically, use libraries like marked.js (JavaScript), markdown-it (Node.js), or Python-Markdown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe in this Markdown editor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This editor runs 100% in your browser. No data is sent to any server. Your Markdown text stays on your machine. There's no account, no cloud sync, and no tracking of your content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I share my Markdown document with others?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Click the 🔗 Share button to generate a URL that encodes your Markdown content. Anyone who opens the link will see your exact document loaded and rendered. You can also download the .md file directly."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -83,7 +167,7 @@ textarea{width:100%;height:100%;background:transparent;color:#e2e8f0;border:none
     <h1>📝 Markdown Preview</h1>
     <span class="badge">GitHub Flavored</span>
   </div>
-  <a href="https://github.com/maxmini0214" target="_blank" class="cta">⭐ More Free Tools →</a>
+  <button class="share-btn" onclick="shareMd()" title="Share this document">🔗 Share</button>
 </header>
 <div class="toolbar">
   <button onclick="insert('**','**')" title="Bold"><b>B</b></button>
@@ -109,8 +193,94 @@ textarea{width:100%;height:100%;background:transparent;color:#e2e8f0;border:none
   <span id="stat-lines">0 lines</span>
   <span id="stat-reading">0 min read</span>
 </div>
-<!-- Ad slot reserved -->
-<div id="ad-slot" style="text-align:center;padding:8px;background:#1e293b;display:none"></div>
+
+<!-- How to Use -->
+<section class="how-to">
+  <h2>📖 How to Use This Markdown Editor</h2>
+  <ol>
+    <li><strong>Write Markdown</strong> in the left pane — headings (#), bold (**text**), lists (- item), code blocks (```), tables, and more.</li>
+    <li><strong>See live preview</strong> instantly in the right pane as you type. No need to click "render".</li>
+    <li><strong>Use the toolbar</strong> for quick formatting — bold, italic, strikethrough, code, links, tables, and task lists.</li>
+    <li><strong>Export or share</strong> — click "📋 Copy HTML" for the rendered output, "💾 Download" for the .md file, or "🔗 Share" to generate a shareable URL.</li>
+  </ol>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>❓ Frequently Asked Questions</h2>
+  <details>
+    <summary>What is Markdown and why should I use it?</summary>
+    <p>Markdown is a lightweight markup language created by John Gruber in 2004. It uses simple symbols like <code>#</code> for headings, <code>**</code> for bold, and <code>-</code> for lists. It's used across GitHub, documentation sites, blogs, and note-taking apps. Unlike HTML, Markdown is human-readable even in raw form.</p>
+  </details>
+  <details>
+    <summary>What is GitHub Flavored Markdown (GFM)?</summary>
+    <p>GFM extends standard Markdown with: tables (using <code>|</code> pipes), task lists (<code>- [x] done</code>), strikethrough (<code>~~text~~</code>), fenced code blocks with language hints (<code>```js</code>), and autolinked URLs. This editor supports all GFM features.</p>
+  </details>
+  <details>
+    <summary>How do I create a table in Markdown?</summary>
+    <p>Use pipes and hyphens:</p>
+    <pre><code>| Header 1 | Header 2 |
+|----------|----------|
+| Cell 1   | Cell 2   |</code></pre>
+    <p>Align columns with colons: <code>|:---|</code> left, <code>|:---:|</code> center, <code>|---:|</code> right.</p>
+  </details>
+  <details>
+    <summary>How do I convert Markdown to HTML programmatically?</summary>
+    <p>Popular libraries:</p>
+    <ul>
+      <li><strong>JavaScript:</strong> <code>marked.parse('# Hello')</code> (marked.js)</li>
+      <li><strong>Node.js:</strong> <code>markdown-it</code> or <code>remark</code></li>
+      <li><strong>Python:</strong> <code>import markdown; markdown.markdown('# Hello')</code></li>
+      <li><strong>CLI:</strong> <code>pandoc input.md -o output.html</code></li>
+    </ul>
+  </details>
+  <details>
+    <summary>Is my data safe in this editor?</summary>
+    <p>Yes. This editor runs 100% in your browser — no data is sent to any server. There's no account, no cloud sync, and no tracking of your content. Your Markdown stays on your machine. Check the network tab in DevTools to verify: zero requests.</p>
+  </details>
+  <details>
+    <summary>Can I share my Markdown document with someone?</summary>
+    <p>Click the 🔗 Share button in the header. It generates a URL with your Markdown content encoded in the URL parameter. Anyone who opens the link sees your exact document loaded and rendered instantly. You can also download the <code>.md</code> file directly.</p>
+  </details>
+</section>
+
+<!-- DonFlow CTA -->
+<div class="cta-box">
+  <h3>🏦 DonFlow — Budget Drift Detector</h3>
+  <p>See where your budget plan and reality diverge. Zero accounts, zero servers, zero AI — just your numbers in your browser.</p>
+  <a href="https://maxmini0214.github.io/donflow/?demo" target="_blank">Try the Live Demo →</a>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+  <p style="font-weight:600">📬 Get Dev Tools & Tips Weekly</p>
+  <p class="sub">Free tools, automation tricks, and developer insights. No spam.</p>
+  <form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+    <input type="email" name="email" placeholder="your@email.com" required>
+    <input type="submit" value="Subscribe">
+  </form>
+</div>
+
+<!-- Cross-links -->
+<nav class="crosslinks">
+  <h3>🔧 More Free Developer Tools</h3>
+  <a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
+  <a href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
+  <a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
+  <a href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
+  <a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
+  <a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
+  <a href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
+  <a href="https://maxmini0214.github.io/unix-timestamp/">Unix Timestamp</a>
+  <a href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
+  <a href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
+  <a href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+  <a href="https://maxmini0214.github.io/qr-code-generator/">QR Code Generator</a>
+</nav>
+
+<footer>
+  <p>Built by <a href="https://github.com/maxmini0214">maxmini0214</a> · 100% client-side · No data leaves your browser</p>
+</footer>
 
 <script>
 const editor=document.getElementById('editor');
@@ -126,6 +296,7 @@ A **free**, real-time Markdown editor with GitHub Flavored Markdown support.
 - ✅ Tables, task lists, code blocks
 - ✅ 100% client-side — your data never leaves the browser
 - ✅ Copy HTML or download .md
+- ✅ Share via URL
 
 ## Code Example
 
@@ -148,16 +319,27 @@ console.log(greeting);
 
 - [x] Build the editor
 - [x] Add live preview
+- [x] Add share via URL
 - [ ] Take over the world
 
 > 💡 **Tip:** Use the toolbar above or write raw Markdown!
 
 ---
 
-Made with ❤️ by [MaxMini](https://github.com/maxmini0214
+Made with ❤️ by [MaxMini](https://github.com/maxmini0214)
 `;
 
-editor.value=sample;
+// Load from URL param if present
+function loadFromUrl(){
+  try{
+    const p=new URLSearchParams(window.location.search);
+    const d=p.get('d');
+    if(d){editor.value=atob(d);return true;}
+  }catch(e){}
+  return false;
+}
+
+if(!loadFromUrl()){editor.value=sample;}
 
 function render(){
   const md=editor.value;
@@ -166,7 +348,6 @@ function render(){
 }
 
 function parseMd(t){
-  // Pre-process: collect code blocks
   let blocks=[];
   t=t.replace(/```(\w*)\n([\s\S]*?)```/g,(_,lang,code)=>{
     blocks.push('<pre><code'+(lang?' class="language-'+esc(lang)+'"':'')+'>'+esc(code.trimEnd())+'</code></pre>');
@@ -179,63 +360,37 @@ function parseMd(t){
 
   let lines=t.split('\n'),html=[],inList=0,inOl=0,inTable=false;
 
-  function closeList(){
-    if(inList){html.push('</ul>');inList=0}
-    if(inOl){html.push('</ol>');inOl=0}
-  }
+  function closeList(){if(inList){html.push('</ul>');inList=0}if(inOl){html.push('</ol>');inOl=0}}
   function closeTable(){if(inTable){html.push('</tbody></table>');inTable=false}}
 
   for(let i=0;i<lines.length;i++){
     let l=lines[i];
-
-    // Table
     if(/^\|(.+)\|$/.test(l)){
       if(!inTable){
         closeList();
         let cells=l.split('|').filter(c=>c.trim());
-        // check if next line is separator
         if(i+1<lines.length&&/^\|[\s\-:|]+\|$/.test(lines[i+1])){
           html.push('<table><thead><tr>'+cells.map(c=>'<th>'+inline(c.trim())+'</th>').join('')+'</tr></thead><tbody>');
           inTable=true;i++;continue;
         }
       }
-      if(inTable){
-        let cells=l.split('|').filter(c=>c.trim());
-        html.push('<tr>'+cells.map(c=>'<td>'+inline(c.trim())+'</td>').join('')+'</tr>');
-        continue;
-      }
-    } else { closeTable(); }
-
-    // Headings
+      if(inTable){let cells=l.split('|').filter(c=>c.trim());html.push('<tr>'+cells.map(c=>'<td>'+inline(c.trim())+'</td>').join('')+'</tr>');continue;}
+    } else {closeTable();}
     let hm=l.match(/^(#{1,6})\s+(.+)/);
     if(hm){closeList();let lv=hm[1].length;html.push('<h'+lv+'>'+inline(hm[2])+'</h'+lv+'>');continue}
-
-    // HR
     if(/^(-{3,}|\*{3,}|_{3,})$/.test(l.trim())){closeList();html.push('<hr>');continue}
-
-    // Blockquote
     if(/^>\s?(.*)/.test(l)){closeList();let q=l.replace(/^>\s?/,'');html.push('<blockquote><p>'+inline(q)+'</p></blockquote>');continue}
-
-    // Task list
     let tm=l.match(/^[-*]\s+\[([ xX])\]\s+(.*)/);
-    if(tm){if(!inList){html.push('<ul style="list-style:none;padding-left:1em">');inList=1}
-      let ck=tm[1]!=' '?'checked':'';html.push('<li><input type="checkbox" disabled '+ck+'>'+inline(tm[2])+'</li>');continue}
-
-    // UL
+    if(tm){if(!inList){html.push('<ul style="list-style:none;padding-left:1em">');inList=1}let ck=tm[1]!=' '?'checked':'';html.push('<li><input type="checkbox" disabled '+ck+'>'+inline(tm[2])+'</li>');continue}
     let um=l.match(/^[-*+]\s+(.*)/);
     if(um){if(!inList){closeList();html.push('<ul>');inList=1}html.push('<li>'+inline(um[1])+'</li>');continue}
-
-    // OL
     let om=l.match(/^\d+\.\s+(.*)/);
     if(om){if(!inOl){closeList();html.push('<ol>');inOl=1}html.push('<li>'+inline(om[1])+'</li>');continue}
-
     closeList();
-
     if(l.trim()===''){html.push('');continue}
     html.push('<p>'+inline(l)+'</p>');
   }
   closeList();closeTable();
-
   let out=html.join('\n');
   out=out.replace(/\x00BLOCK(\d+)\x00/g,(_,i)=>blocks[+i]);
   return out;
@@ -280,20 +435,17 @@ function downloadMd(){
   a.download='document.md';a.click();
 }
 
+function shareMd(){
+  const encoded=btoa(unescape(encodeURIComponent(editor.value)));
+  const url=window.location.origin+window.location.pathname+'?d='+encodeURIComponent(encoded);
+  navigator.clipboard.writeText(url).then(()=>alert('Share URL copied to clipboard!'));
+}
+
 editor.addEventListener('input',render);
 editor.addEventListener('keydown',e=>{
   if(e.key==='Tab'){e.preventDefault();insert('  ','');}
 });
 render();
 </script>
-<div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmaxmini0214.github.io%2Fmarkdown-preview&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true" alt="Hits" /></a></div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
 </body>
 </html>
