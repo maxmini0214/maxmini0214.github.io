@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CSS Box Shadow Generator — Free Online Tool</title>
-<meta name="description" content="Generate CSS box-shadow visually with real-time preview. Multiple layers, inset shadows, and one-click copy. 100% free, no signup.">
-<meta name="keywords" content="css box shadow generator, box-shadow, css shadow, shadow generator, css tool, web design">
+<meta name="description" content="Generate CSS box-shadow visually with real-time preview. Multiple layers, inset shadows, and one-click copy. 100% free, no signup, no data collected.">
+<meta name="keywords" content="css box shadow generator, box-shadow, css shadow, shadow generator, css tool, web design, box shadow css">
 <meta property="og:title" content="CSS Box Shadow Generator — Free Online Tool">
 <meta property="og:description" content="Generate beautiful CSS box-shadows visually. Multiple layers, inset, one-click copy.">
 <meta property="og:type" content="website">
@@ -36,36 +36,91 @@ h1{text-align:center;font-size:1.8rem;margin:20px 0 8px;background:linear-gradie
 .checkbox-row input{accent-color:#60a5fa}
 .output{margin-top:20px}
 .code-box{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:14px;font-family:'Fira Code',monospace;font-size:.85rem;color:#a78bfa;word-break:break-all;position:relative;min-height:50px}
-.copy-btn{position:absolute;top:8px;right:8px;background:#3b82f6;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.copy-btn,.share-btn{position:absolute;top:8px;background:#3b82f6;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem}
+.copy-btn{right:8px}
+.share-btn{right:80px;background:#8b5cf6}
 .copy-btn:hover{background:#2563eb}
+.share-btn:hover{background:#7c3aed}
 .presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .preset{padding:6px 12px;border-radius:6px;border:1px solid #475569;background:#1e293b;color:#e2e8f0;cursor:pointer;font-size:.78rem}
 .preset:hover{border-color:#60a5fa}
-.cta{display:block;text-align:center;margin:30px auto 10px;padding:14px 28px;background:linear-gradient(135deg,#f472b6,#a78bfa);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:1rem;max-width:400px}
-.cta:hover{opacity:.9}
+.guide{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;margin:30px 0}
+.guide h2{font-size:1.2rem;margin-bottom:16px;color:#60a5fa}
+.guide ol{padding-left:20px;line-height:1.8;color:#cbd5e1}
+.guide code{background:#0f172a;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#a78bfa}
+.faq-section{margin:30px 0}
+.faq-section h2{font-size:1.2rem;margin-bottom:16px;color:#60a5fa;text-align:center}
+details{background:#1e293b;border:1px solid #334155;border-radius:8px;margin-bottom:8px;padding:14px 18px}
+details summary{cursor:pointer;font-weight:600;color:#e2e8f0;font-size:.95rem}
+details summary:hover{color:#60a5fa}
+details p,details pre{margin-top:10px;color:#cbd5e1;line-height:1.7;font-size:.9rem}
+details code{background:#0f172a;padding:2px 6px;border-radius:4px;font-size:.85rem;color:#a78bfa}
+details pre{background:#0f172a;padding:12px;border-radius:6px;overflow-x:auto}
+.cta-donflow{display:block;text-align:center;margin:30px auto 10px;padding:16px 28px;background:linear-gradient(135deg,#10b981,#3b82f6);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:1rem;max-width:480px}
+.cta-donflow:hover{opacity:.9}
+.cta-donflow small{display:block;font-weight:400;font-size:.8rem;margin-top:4px;opacity:.85}
+.crosslinks{text-align:center;margin:20px 0;font-size:.85rem;color:#64748b}
+.crosslinks a{color:#60a5fa;text-decoration:none;margin:0 6px}
+.crosslinks a:hover{text-decoration:underline}
 footer{text-align:center;color:#64748b;font-size:.8rem;margin:30px 0 10px}
 footer a{color:#60a5fa;text-decoration:none}
-.ad-slot{text-align:center;padding:20px;color:#475569;font-size:.75rem;margin:20px 0}
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
+.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
+.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
+.newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": "CSS Box Shadow Generator — Free Online Tool",
-  "description": "Generate CSS box-shadow visually with real-time preview. Multiple layers, inset shadows, and one-click copy. 100% free, no signup.",
   "url": "https://maxmini0214.github.io/box-shadow-generator/",
+  "description": "Generate CSS box-shadow visually with real-time preview. Multiple layers, inset shadows, and one-click copy.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "browserRequirements": "Requires JavaScript",
+  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is CSS box-shadow?",
+      "acceptedAnswer": { "@type": "Answer", "text": "CSS box-shadow adds shadow effects around an element's frame. The syntax is: box-shadow: [inset] offset-x offset-y blur-radius spread-radius color. You can stack multiple shadows separated by commas for layered effects like Material Design elevation." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create multiple box-shadow layers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Separate each shadow with a comma: box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1); This technique is used in Material Design, Tailwind CSS, and modern UI frameworks to create realistic depth." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between box-shadow and drop-shadow?",
+      "acceptedAnswer": { "@type": "Answer", "text": "box-shadow applies to the element's rectangular box (including border-radius), while filter: drop-shadow() follows the actual shape of the content including transparent areas. box-shadow supports spread-radius and inset; drop-shadow does not." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create an inset shadow in CSS?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Add the 'inset' keyword: box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); Inset shadows appear inside the element, commonly used for pressed button states and input field depth effects." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does box-shadow affect layout or performance?",
+      "acceptedAnswer": { "@type": "Answer", "text": "box-shadow does not affect layout — it's purely visual and doesn't change element dimensions. For performance, large blur-radius values on many elements can trigger expensive repaints. Use will-change: transform on animated shadows." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I add box-shadow in JavaScript?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use element.style.boxShadow: document.querySelector('.card').style.boxShadow = '0 10px 30px rgba(0,0,0,0.25)'; For Tailwind CSS, use utility classes: shadow-sm, shadow-md, shadow-lg, shadow-xl, shadow-2xl." }
+    }
+  ]
 }
 </script>
 </head>
@@ -96,12 +151,123 @@ footer a{color:#60a5fa;text-decoration:none}
 </div>
 
 <div class="output">
-<div class="code-box" id="codeOutput"><button class="copy-btn" onclick="copyCSS()">Copy</button></div>
+<div class="code-box" id="codeOutput"><button class="share-btn" onclick="shareURL()">🔗 Share</button><button class="copy-btn" onclick="copyCSS()">Copy</button></div>
 </div>
 
-<div class="ad-slot"><!-- Ad Space Reserved --></div>
+<!-- How to Use Guide -->
+<div class="guide">
+<h2>How to Use This Box Shadow Generator</h2>
+<ol>
+<li><strong>Choose a preset</strong> — Click Soft, Hard, Neon, Layered, Inset, or Material to start with a base shadow style</li>
+<li><strong>Adjust the sliders</strong> — Fine-tune X/Y offset, blur radius, spread, color, and opacity. Toggle <code>inset</code> for inner shadows</li>
+<li><strong>Add layers</strong> — Click <code>+</code> to add up to 5 shadow layers for complex, realistic depth effects (like Material Design elevation)</li>
+<li><strong>Copy or share</strong> — Click <strong>Copy</strong> to get the CSS, or <strong>🔗 Share</strong> to generate a URL that restores your exact shadow configuration</li>
+</ol>
+</div>
 
-<a class="cta" href="https://github.com/maxmini0214" target="_blank" rel="noopener">⚡ Get 200+ Premium CSS Components — $9</a>
+<!-- DonFlow CTA -->
+<a class="cta-donflow" href="https://maxmini0214.github.io/donflow/?demo" target="_blank" rel="noopener">
+🏦 DonFlow — See Where Your Budget Drifts
+<small>Plan vs reality budget tracker. 100% browser-based, zero signup. Try the live demo →</small>
+</a>
+
+<!-- FAQ Section -->
+<div class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<details>
+<summary>What is CSS box-shadow and how does it work?</summary>
+<p>CSS <code>box-shadow</code> adds one or more shadow effects around an element's frame. The full syntax is:</p>
+<pre><code>box-shadow: [inset] offset-x offset-y blur-radius spread-radius color;</code></pre>
+<p><strong>offset-x/y</strong>: Position of the shadow. <strong>blur-radius</strong>: How soft the edge is (0 = sharp). <strong>spread-radius</strong>: Expands or shrinks the shadow. <strong>inset</strong>: Moves the shadow inside the element. You can stack multiple shadows with commas for layered depth.</p>
+</details>
+
+<details>
+<summary>How do I create Material Design elevation shadows?</summary>
+<p>Material Design uses multiple shadow layers at different opacities. Here's the classic 3-layer pattern:</p>
+<pre><code>/* Elevation 3 */
+box-shadow:
+  0 2px 4px -1px rgba(0,0,0,0.2),
+  0 4px 5px 0 rgba(0,0,0,0.14),
+  0 1px 10px 0 rgba(0,0,0,0.12);</code></pre>
+<p>Use the <strong>Layered</strong> or <strong>Material</strong> presets in this tool, then adjust to match your design system.</p>
+</details>
+
+<details>
+<summary>What's the difference between box-shadow and filter: drop-shadow()?</summary>
+<p><code>box-shadow</code> applies to the rectangular box of an element (respects border-radius). <code>filter: drop-shadow()</code> follows the actual rendered shape, including transparent PNG areas. Key differences:</p>
+<p>• <code>box-shadow</code> supports <strong>spread-radius</strong> and <strong>inset</strong> — drop-shadow does not<br>
+• <code>drop-shadow</code> works on images with transparency<br>
+• <code>box-shadow</code> is generally better for cards, buttons, and containers</p>
+</details>
+
+<details>
+<summary>How do I animate box-shadow performantly?</summary>
+<p>Animating <code>box-shadow</code> directly triggers repaints and can be slow. The performant pattern:</p>
+<pre><code>.card {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.card:hover { transform: translateY(-2px); }
+.card:hover::after { opacity: 1; }</code></pre>
+<p>This animates <code>opacity</code> (composited) instead of <code>box-shadow</code> (repaint). 60fps guaranteed.</p>
+</details>
+
+<details>
+<summary>How do I add box-shadow with JavaScript or Tailwind CSS?</summary>
+<p><strong>JavaScript:</strong></p>
+<pre><code>element.style.boxShadow = '0 10px 30px rgba(0,0,0,0.25)';</code></pre>
+<p><strong>Tailwind CSS:</strong> Use built-in utilities:</p>
+<pre><code>&lt;div class="shadow-lg"&gt;...&lt;/div&gt;
+/* shadow-sm | shadow | shadow-md | shadow-lg | shadow-xl | shadow-2xl */
+
+/* Custom in tailwind.config.js: */
+boxShadow: {
+  'neon': '0 0 20px 5px rgba(59,130,246,0.5)',
+}</code></pre>
+</details>
+
+<details>
+<summary>Is this tool private? Is my data collected?</summary>
+<p>100% private. This tool runs entirely in your browser — <strong>zero network requests</strong> for shadow generation. No accounts, no cookies, no tracking pixels. Your shadow configurations never leave your device unless you explicitly use the Share button to generate a URL.</p>
+</details>
+</div>
+
+<!-- Cross-links -->
+<div class="crosslinks">
+🔧 More free tools:
+<a href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a> ·
+<a href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a> ·
+<a href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a> ·
+<a href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a> ·
+<a href="https://maxmini0214.github.io/password-generator/">Password Generator</a> ·
+<a href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a> ·
+<a href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a> ·
+<a href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a> ·
+<a href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a> ·
+<a href="https://maxmini0214.github.io/unix-timestamp/">Unix Timestamp</a> ·
+<a href="https://maxmini0214.github.io/color-picker/">Color Picker</a> ·
+<a href="https://maxmini0214.github.io/markdown-preview/">Markdown Preview</a> ·
+<a href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get Dev Tools & Tips Weekly</p>
+<p class="nl-sub">Free tools, CSS tricks, and design insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+<input type="email" name="email" placeholder="your@email.com" required>
+<input type="submit" value="Subscribe">
+</form>
+</div>
 
 <footer>Built by <a href="https://github.com/maxmini0214">MaxMini</a> · 100% client-side · No data collected</footer>
 </div>
@@ -119,8 +285,14 @@ const PRESETS = [
 let layers=[{x:0,y:10,blur:30,spread:0,color:'#00000040',inset:false}];
 let activeLayer=0;
 
+// Restore from URL params
+(function(){
+  const p=new URLSearchParams(location.search);
+  const d=p.get('d');
+  if(d){try{const obj=JSON.parse(atob(d));if(Array.isArray(obj)&&obj.length>0){layers=obj;activeLayer=0;}}catch(e){}}
+})();
+
 function render(){
-  // layer buttons
   const lb=document.getElementById('layerBtns');
   lb.innerHTML='';
   layers.forEach((l,i)=>{
@@ -133,7 +305,6 @@ function render(){
   if(layers.length<5){const a=document.createElement('button');a.className='layer-btn add';a.textContent='+';a.onclick=()=>{layers.push({x:0,y:4,blur:10,spread:0,color:'#00000030',inset:false});activeLayer=layers.length-1;render()};lb.appendChild(a)}
   if(layers.length>1){const d=document.createElement('button');d.className='layer-btn del';d.textContent='✕';d.onclick=()=>{layers.splice(activeLayer,1);activeLayer=Math.min(activeLayer,layers.length-1);render()};lb.appendChild(d)}
 
-  // controls
   const l=layers[activeLayer];
   const c=document.getElementById('layerControls');
   c.innerHTML=`
@@ -153,16 +324,9 @@ function slider(label,prop,val,min,max){
 
 function upd(prop,val){
   const l=layers[activeLayer];
-  if(prop==='opacity'){
-    const hex=l.color.slice(0,7);
-    const a=Math.round(val/100*255).toString(16).padStart(2,'0');
-    l.color=hex+a;
-  }else if(prop==='color'){
-    const oldA=l.color.slice(7)||'ff';
-    l.color=val+oldA;
-  }else{
-    l[prop]=val;
-  }
+  if(prop==='opacity'){const hex=l.color.slice(0,7);const a=Math.round(val/100*255).toString(16).padStart(2,'0');l.color=hex+a;}
+  else if(prop==='color'){const oldA=l.color.slice(7)||'ff';l.color=val+oldA;}
+  else{l[prop]=val;}
   render();
 }
 
@@ -173,14 +337,18 @@ function shadowStr(){
 function updatePreview(){
   const s=layers.map(l=>`${l.inset?'inset ':''}${l.x}px ${l.y}px ${l.blur}px ${l.spread}px ${l.color}`).join(', ');
   document.getElementById('preview').style.boxShadow=s;
-  document.getElementById('codeOutput').innerHTML=`<button class="copy-btn" onclick="copyCSS()">Copy</button>box-shadow:\n    ${shadowStr()};`;
+  document.getElementById('codeOutput').innerHTML=`<button class="share-btn" onclick="shareURL()">🔗 Share</button><button class="copy-btn" onclick="copyCSS()">Copy</button>box-shadow:\n    ${shadowStr()};`;
 }
 
 function copyCSS(){
   const t=`box-shadow: ${shadowStr()};`;
-  navigator.clipboard.writeText(t).then(()=>{
-    const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);
-  });
+  navigator.clipboard.writeText(t).then(()=>{const b=document.querySelector('.copy-btn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',1500);});
+}
+
+function shareURL(){
+  const data=btoa(JSON.stringify(layers));
+  const url=location.origin+location.pathname+'?d='+encodeURIComponent(data);
+  navigator.clipboard.writeText(url).then(()=>{const b=document.querySelector('.share-btn');b.textContent='🔗 Copied!';setTimeout(()=>b.textContent='🔗 Share',1500);});
 }
 
 function applyPreset(i){
@@ -192,13 +360,5 @@ function applyPreset(i){
 render();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  🚀 Like this tool? Get all 25+ dev tools in one offline bundle — <a href="https://payhip.com/b/4FosR" target="_blank" style="color:#ffd700;font-weight:bold;text-decoration:underline">$5 one-time →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
 </body>
 </html>
