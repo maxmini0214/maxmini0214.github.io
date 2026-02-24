@@ -62,6 +62,13 @@ button:hover{background:var(--bg3)}
 .theme-toggle{position:fixed;top:14px;right:14px;z-index:99;background:var(--bg2);border:1px solid var(--border);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;box-shadow:var(--shadow)}
 footer{text-align:center;padding:30px 0 10px;font-size:.82rem;color:var(--text2)}
 @media(max-width:600px){.container{padding:12px 10px 40px}header{padding:24px 0 12px}.cat-header{padding:12px 14px;font-size:.95rem}.item{padding:10px 14px}}
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
+.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
+.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
+.newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
+
 </style>
 </head>
 <body>
@@ -92,6 +99,16 @@ footer{text-align:center;padding:30px 0 10px;font-size:.82rem;color:var(--text2)
 <h3 style="margin:0 0 8px">🤖 AI Security Audit Pro — $3</h3>
 <p style="margin:0 0 12px;opacity:0.9;font-size:14px">Generate detailed security audit reports for your AI workflows. Export PDF, track compliance over time.</p>
 <a href="https://github.com/maxmini0214" target="_blank" style="display:inline-block;background:white;color:#4361ee;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:bold">⭐ More Free Tools →</a>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get Dev Tools &amp; Tips Weekly</p>
+<p class="nl-sub">Free tools, coding tips, and developer insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+<input type="email" name="email" placeholder="your@email.com" required>
+<input type="submit" value="Subscribe">
+</form>
 </div>
 
 <footer>

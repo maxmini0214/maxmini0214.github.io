@@ -88,6 +88,13 @@ footer{text-align:center;padding:30px 0;border-top:1px solid var(--border);margi
   .score-panel{flex-direction:column;text-align:center}
   .controls{flex-direction:column}
 }
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
+.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
+.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
+.newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
+
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -155,6 +162,16 @@ footer{text-align:center;padding:30px 0;border-top:1px solid var(--border);margi
 <li><a href="https://maxmini0214.github.io/password-strength-analyzer/" target="_blank">🔑 Password Strength Analyzer</a></li>
 <li><a href="https://maxmini0214.github.io/dev-security-checklist/" target="_blank">🛡️ Security Checklist</a></li>
 </ul>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get Dev Tools &amp; Tips Weekly</p>
+<p class="nl-sub">Free tools, coding tips, and developer insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+<input type="email" name="email" placeholder="your@email.com" required>
+<input type="submit" value="Subscribe">
+</form>
 </div>
 
 <footer>
@@ -360,6 +377,7 @@ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=
 
 function exportPDF(){
 const w=window.open('','_blank');
+
 let html=`<html><head><title>Security Checklist</title><style>body{font-family:system-ui;max-width:800px;margin:20px auto;font-size:14px}h1{color:#0a0e17}h2{margin-top:20px;border-bottom:1px solid #ddd;padding-bottom:4px}.item{margin:6px 0}.cb{display:inline-block;width:14px;height:14px;border:1.5px solid #333;border-radius:2px;vertical-align:middle;margin-right:6px;text-align:center;font-size:11px;line-height:14px}.cb.checked{background:#00aa55;color:#fff;border-color:#00aa55}.sev{font-size:11px;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:6px}.critical{background:#fee;color:#c00}.high{background:#fff3cd;color:#856404}.medium{background:#cce5ff;color:#004085}.low{background:#d4edda;color:#155724}.desc{color:#666;font-size:12px;margin-left:22px}</style><script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head><body>`;
 html+=`<h1>🛡️ Developer Security Checklist</h1><p>Generated: ${new Date().toLocaleDateString()}</p>`;

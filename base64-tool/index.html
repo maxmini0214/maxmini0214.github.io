@@ -38,6 +38,13 @@ label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-
 .tool-link:hover{border-color:var(--accent)}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 @media(max-width:600px){h1{font-size:1.4rem}main{padding:.75rem}}
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
+.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
+.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
+.newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
+
 </style>
 <script type="application/ld+json">
 {
@@ -108,6 +115,16 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
 </div>
 </main>
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get Dev Tools &amp; Tips Weekly</p>
+<p class="nl-sub">Free tools, coding tips, and developer insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+<input type="email" name="email" placeholder="your@email.com" required>
+<input type="submit" value="Subscribe">
+</form>
+</div>
+
 <footer>
 <p>🔒 Privacy First — Nothing leaves your browser. Zero server calls.</p>
 <p style="margin-top:.5rem">© 2026 DevTools by maxseats</p>
