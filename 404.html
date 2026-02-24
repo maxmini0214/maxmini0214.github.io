@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — MaxMini Dev Tools & Games</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Explore 27+ free developer tools, 27 browser games, and DonFlow budget tracker.">
+  <meta name="robots" content="noindex">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; text-align: center; }
+    h1 { font-size: 4rem; margin-bottom: 0.5rem; }
+    h2 { color: #f0f6fc; font-size: 1.5rem; margin-bottom: 1rem; }
+    .subtitle { color: #8b949e; font-size: 1.1rem; margin-bottom: 2.5rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; text-align: left; }
+    .card { background: #161b22; border: 1px solid #21262d; border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: #58a6ff; transform: translateY(-2px); }
+    .card h3 { color: #f0f6fc; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .card p { color: #8b949e; font-size: 0.85rem; line-height: 1.5; }
+    .card .emoji { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+    .donflow-card { border-color: #4ade80; }
+    .donflow-card:hover { border-color: #22c55e; box-shadow: 0 0 20px rgba(74,222,128,0.1); }
+    .back-link { display: inline-block; margin-top: 2rem; padding: 0.7rem 1.5rem; background: #21262d; border-radius: 8px; color: #f0f6fc; font-weight: 600; transition: background 0.2s; }
+    .back-link:hover { background: #30363d; text-decoration: none; }
+    .hn-banner { display: none; background: linear-gradient(135deg, #ff6600, #ff8533); color: #fff; padding: 0.8rem 1.5rem; text-align: center; font-size: 0.9rem; font-weight: 600; }
+    .hn-banner a { color: #fff; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <!-- HN Welcome Banner -->
+  <div class="hn-banner" id="hnBanner">
+    👋 Welcome from Hacker News! Check out <a href="/donflow/?demo&ref=hn">DonFlow</a> — a budget tracker that shows plan vs reality drift.
+  </div>
+
+  <!-- Sticky Nav -->
+  <nav style="background:#161b22;border-bottom:1px solid #21262d;padding:0.5rem 0;position:sticky;top:0;z-index:100;">
+    <div style="max-width:960px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;gap:1.2rem;font-size:0.85rem;flex-wrap:wrap;">
+      <strong style="color:#f0f6fc;margin-right:0.3rem;">MaxMini</strong>
+      <a href="/" style="color:#8b949e;text-decoration:none;">🛠️ Tools</a>
+      <a href="/games.html" style="color:#8b949e;text-decoration:none;">🎮 Games</a>
+      <a href="/store.html" style="color:#8b949e;text-decoration:none;">📚 Store</a>
+      <a href="/articles.html" style="color:#8b949e;text-decoration:none;">📝 Articles</a>
+      <a href="/donflow/" style="color:#4ade80;text-decoration:none;margin-left:auto;font-weight:600;">💰 DonFlow</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🔍</h1>
+    <h2>Page Not Found</h2>
+    <p class="subtitle">The page you're looking for doesn't exist or has been moved.<br>Here's what you can explore instead:</p>
+
+    <div class="cards">
+      <a href="/donflow/?demo" class="card donflow-card" style="text-decoration:none;color:inherit;">
+        <span class="emoji">💰</span>
+        <h3 style="color:#4ade80;">DonFlow</h3>
+        <p>Plan vs Reality budget tracker. See your spending drift in real-time. Zero backend, 100% private.</p>
+      </a>
+      <a href="/" class="card" style="text-decoration:none;color:inherit;">
+        <span class="emoji">🛠️</span>
+        <h3>27+ Dev Tools</h3>
+        <p>JSON formatter, regex tester, JWT decoder, password analyzer, and more. All free, all browser-based.</p>
+      </a>
+      <a href="/games.html" class="card" style="text-decoration:none;color:inherit;">
+        <span class="emoji">🎮</span>
+        <h3>27 Browser Games</h3>
+        <p>Arcade, puzzle, strategy, and RPG games. Play instantly — no download, no signup required.</p>
+      </a>
+      <a href="/store.html" class="card" style="text-decoration:none;color:inherit;">
+        <span class="emoji">📚</span>
+        <h3>Dev Resources</h3>
+        <p>Cheatsheets and guides for DSA, system design, frontend, Docker, and more.</p>
+      </a>
+    </div>
+
+    <a href="/" class="back-link">← Back to Home</a>
+  </div>
+
+  <script>
+    // HN banner detection
+    (function() {
+      var ref = document.referrer || '';
+      var params = new URLSearchParams(window.location.search);
+      if (ref.includes('news.ycombinator.com') || params.get('ref') === 'hn') {
+        document.getElementById('hnBanner').style.display = 'block';
+        // Add ref=hn to DonFlow links
+        document.querySelectorAll('a[href*="/donflow/"]').forEach(function(a) {
+          if (!a.href.includes('ref=hn')) {
+            a.href = a.href + (a.href.includes('?') ? '&' : '?') + 'ref=hn';
+          }
+        });
+      }
+    })();
+  </script>
+  <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
