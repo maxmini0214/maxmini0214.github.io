@@ -285,6 +285,24 @@
       }
     })();
 
+    // Track product CTA clicks via GoatCounter
+    document.querySelectorAll('.card .cta').forEach(function(a) {
+      a.addEventListener('click', function() {
+        var slug = (a.href.match(/\/l\/([^?]+)/) || [])[1] || 'unknown';
+        var fromHN = new URLSearchParams(location.search).get('ref') === 'hn' || (document.referrer && document.referrer.indexOf('ycombinator') !== -1);
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({path: 'store-click/' + slug + (fromHN ? '/hn' : ''), event: true});
+        }
+      });
+    });
+    document.querySelectorAll('.card .preview-link').forEach(function(a) {
+      a.addEventListener('click', function() {
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({path: 'store-preview-click', event: true});
+        }
+      });
+    });
+
     // Category filter
     const btns = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.card');
