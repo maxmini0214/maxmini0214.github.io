@@ -299,6 +299,21 @@
   </div>
 
   <script>
+    // HN referral detection
+    (function() {
+      var params = new URLSearchParams(location.search);
+      var ref = params.get('ref') || '';
+      var fromHN = ref === 'hn' || (document.referrer && document.referrer.indexOf('news.ycombinator.com') !== -1);
+      if (fromHN) {
+        var banner = document.createElement('div');
+        banner.style.cssText = 'margin:0 0 20px;padding:16px 24px;background:linear-gradient(135deg,#1a1e2e,#1c2940);border:1px solid #f97316;border-radius:12px;text-align:center;';
+        banner.innerHTML = '<div style="font-size:1rem;color:#f97316;font-weight:700;margin-bottom:4px;">👋 Welcome from Hacker News!</div>' +
+          '<div style="font-size:0.9rem;color:#c9d1d9;">You found <a href="https://maxmini0214.github.io/donflow/?demo" style="color:#4ade80;font-weight:600;">DonFlow</a> — here are the dev cheat sheets behind the same maker. Every product has a <strong>free preview</strong> on Dev.to.</div>';
+        var grid = document.getElementById('product-grid');
+        if (grid) grid.parentNode.insertBefore(banner, grid);
+      }
+    })();
+
     // Category filter
     const btns = document.querySelectorAll('.cat-btn');
     const cards = document.querySelectorAll('.card');
