@@ -147,8 +147,8 @@
     .tag { display: inline-block; background: #21262d; color: var(--purple); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-right: 4px; }
     .play-btn { display: inline-block; background: var(--green); color: #000; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-top: 0.5rem; }
     .play-btn:hover { opacity: 0.9; }
-    .itch-link { display: inline-block; color: #8b949e; font-size: 0.8rem; margin-left: 8px; text-decoration: none; }
-    .itch-link:hover { color: var(--accent); }
+    .itch-link { display: inline-block; background: linear-gradient(135deg,#f97316,#ea580c); color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; margin-left: 8px; text-decoration: none; margin-top: 0.5rem; }
+    .itch-link:hover { opacity: 0.9; }
     .no-results { text-align: center; color: #8b949e; padding: 3rem 1rem; display: none; }
     .section { margin: 2.5rem 0; }
     .section h2 { font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
@@ -187,24 +187,33 @@
     <div style="margin-bottom:1.5rem;">
       <h2 style="font-size:1.1rem;color:#f0f6fc;margin-bottom:0.75rem;">⭐ Staff Picks</h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.75rem;">
-        <a href="/tower-defense/" style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#1c2940);border:1px solid #58a6ff;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
+        <div style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#1c2940);border:1px solid #58a6ff;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
           <div style="font-size:1.5rem;margin-bottom:0.3rem;">🏰</div>
           <div style="color:#f0f6fc;font-weight:700;font-size:1rem;">Tower Defense</div>
           <div style="color:#8b949e;font-size:0.85rem;margin-top:0.25rem;">Place towers, plan strategy, survive 50 waves</div>
-          <div style="color:#3fb950;font-size:0.8rem;font-weight:600;margin-top:0.5rem;">▶ Play Now</div>
-        </a>
-        <a href="/dungeon-descent/" style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#2d1a2e);border:1px solid #bc8cff;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;flex-wrap:wrap;">
+            <a href="/tower-defense/" style="color:#3fb950;font-size:0.8rem;font-weight:600;text-decoration:none;">▶ Play Now</a>
+            <a href="https://maxmini0214.itch.io/tower-defense" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;padding:3px 10px;border-radius:5px;font-size:0.75rem;font-weight:600;text-decoration:none;">☕ Support</a>
+          </div>
+        </div>
+        <div style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#2d1a2e);border:1px solid #bc8cff;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
           <div style="font-size:1.5rem;margin-bottom:0.3rem;">⚔️</div>
           <div style="color:#f0f6fc;font-weight:700;font-size:1rem;">Dungeon Descent</div>
           <div style="color:#8b949e;font-size:0.85rem;margin-top:0.25rem;">Roguelike dungeon crawler — loot, fight, descend</div>
-          <div style="color:#3fb950;font-size:0.8rem;font-weight:600;margin-top:0.5rem;">▶ Play Now</div>
-        </a>
-        <a href="/random-defense/" style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#2e2a1a);border:1px solid #f97316;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;flex-wrap:wrap;">
+            <a href="/dungeon-descent/" style="color:#3fb950;font-size:0.8rem;font-weight:600;text-decoration:none;">▶ Play Now</a>
+            <a href="https://maxmini0214.itch.io/dungeon-descent" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;padding:3px 10px;border-radius:5px;font-size:0.75rem;font-weight:600;text-decoration:none;">☕ Support</a>
+          </div>
+        </div>
+        <div style="text-decoration:none;display:block;background:linear-gradient(135deg,#1a2332,#2e2a1a);border:1px solid #f97316;border-radius:12px;padding:1.25rem;transition:transform 0.2s;">
           <div style="font-size:1.5rem;margin-bottom:0.3rem;">🎲</div>
           <div style="color:#f0f6fc;font-weight:700;font-size:1rem;">Random Defense</div>
           <div style="color:#8b949e;font-size:0.85rem;margin-top:0.25rem;">Summon random units, merge for power, defend waves</div>
-          <div style="color:#3fb950;font-size:0.8rem;font-weight:600;margin-top:0.5rem;">▶ Play Now</div>
-        </a>
+          <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem;flex-wrap:wrap;">
+            <a href="/random-defense/" style="color:#3fb950;font-size:0.8rem;font-weight:600;text-decoration:none;">▶ Play Now</a>
+            <a href="https://maxmini0214.itch.io/random-defense" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;padding:3px 10px;border-radius:5px;font-size:0.75rem;font-weight:600;text-decoration:none;">☕ Support</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -270,6 +279,7 @@
         <p>Summon random units to defend against waves. Merge for power.</p>
         <span class="tag">Strategy</span><span class="tag">TD</span><span class="tag">Merge</span>
         <br><a href="/random-defense/" class="play-btn">▶ Play Now</a>
+        <a href="https://maxmini0214.itch.io/random-defense" class="itch-link">☕ Support →</a>
       </div>
 
       <div class="game-card" data-genre="puzzle" data-keywords="bubble shooter aim match colorful pop">
