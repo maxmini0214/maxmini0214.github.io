@@ -176,6 +176,8 @@
 
     <div class="no-results" id="noResults">No tools match your search. Try different keywords.</div>
 
+    <div id="hn-banner"></div>
+
     <div class="category-section" data-cat="security">
       <h2>🔒 Security</h2>
       <div class="tools">
@@ -350,6 +352,23 @@
   });
 
   if (search.value) applyFilter();
+})();
+</script>
+<script>
+// HN referral detection
+(function() {
+  var params = new URLSearchParams(location.search);
+  var ref = params.get('ref') || '';
+  var fromHN = ref === 'hn' || (document.referrer && document.referrer.indexOf('news.ycombinator.com') !== -1);
+  if (fromHN) {
+    var banner = document.createElement('div');
+    banner.style.cssText = 'margin:0 0 20px;padding:16px 24px;background:linear-gradient(135deg,#1a1e2e,#1c2940);border:1px solid #f97316;border-radius:12px;text-align:center;position:relative;';
+    banner.innerHTML = '<div style="font-size:1rem;color:#f97316;font-weight:700;margin-bottom:4px;">👋 Welcome from Hacker News!</div>' +
+      '<div style="font-size:0.9rem;color:#c9d1d9;">You found our dev tools collection! Check out <a href="https://maxmini0214.github.io/donflow/?demo" style="color:#4ade80;font-weight:600;">DonFlow</a> — our budget tracker that started it all.</div>' +
+      '<button onclick="this.parentNode.remove()" style="position:absolute;top:8px;right:12px;background:none;border:none;color:#8b949e;cursor:pointer;font-size:1.2rem;" aria-label="Close">✕</button>';
+    var target = document.getElementById('hn-banner');
+    if (target) target.appendChild(banner);
+  }
 })();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
