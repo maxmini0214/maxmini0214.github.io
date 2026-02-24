@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://maxmini0214.github.io/sitemap.xml
+Sitemap: https://maxmini0214.github.io/tenant-navigator/sitemap.xml
