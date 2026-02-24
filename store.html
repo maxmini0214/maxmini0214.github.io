@@ -62,6 +62,13 @@
     .card .cta { display: inline-block; background: #238636; color: #fff; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: background 0.2s; }
     .card .cta:hover { background: #2ea043; }
     .card .details { color: #8b949e; font-size: 0.8rem; margin-top: 8px; }
+    .card.featured { border-color: #f97316; position: relative; }
+    .card.featured::before { content: '⭐ Best Value'; position: absolute; top: -10px; right: 16px; background: #f97316; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 10px; }
+    .card .orig-price { color: #484f58; text-decoration: line-through; font-size: 0.9rem; margin-right: 6px; }
+    .start-here { margin: 0 0 24px; padding: 18px 24px; background: #161b22; border: 1px solid #3fb950; border-radius: 12px; text-align: center; }
+    .start-here strong { color: #3fb950; }
+    .start-here a { color: #58a6ff; font-weight: 600; text-decoration: none; }
+    .start-here a:hover { text-decoration: underline; }
     .faq-section { margin: 40px 0; }
     .faq-section h2 { color: #f0f6fc; font-size: 1.3rem; margin-bottom: 16px; text-align: center; }
     details { background: #161b22; border: 1px solid #30363d; border-radius: 8px; margin-bottom: 8px; }
@@ -101,6 +108,7 @@
         <span class="badge">🔓 DRM-Free</span>
         <span class="badge">💰 30-Day Refund</span>
         <span class="badge">📖 Free Previews on Dev.to</span>
+        <span class="badge">✍️ 50+ Dev.to Articles Published</span>
       </div>
     </header>
 
@@ -124,6 +132,10 @@
       <a href="https://dev.to/maxxmini/i-built-a-finance-app-with-zero-backend-heres-what-i-learned-after-2-weeks-5dih" target="_blank" rel="noopener" style="background: #1f6feb; color: #fff; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600; white-space: nowrap;">Read the Story →</a>
     </div>
 
+    <div class="start-here">
+      💡 <strong>Not sure where to start?</strong> The <a href="https://maxmini.gumroad.com/l/rsgxr?ref=maxdevtools" target="_blank" rel="noopener">Developer Cheat Sheet Bundle ($7)</a> covers Git, Docker, SQL, CLI & more — best value for a single purchase. Every product has a <strong>free preview</strong> on Dev.to.
+    </div>
+
     <div class="grid" id="product-grid">
 
       <div class="card" data-cat="ai">
@@ -135,7 +147,7 @@
         </div>
         <a class="cta" href="https://maxmini.gumroad.com/l/xnvxh?ref=maxdevtools" target="_blank" rel="noopener">Get It →</a>
         <a class="preview-link" href="https://dev.to/maxxmini/50-chatgpt-prompts-that-actually-help-you-code-faster-440k" target="_blank" rel="noopener">📖 Free Preview</a>
-        <div class="details">Complete prompt library · Copy-paste ready · Works with ChatGPT & Claude</div>
+        <div class="details">200+ prompts · Full coverage · The complete collection</div>
       </div>
 
       <div class="card" data-cat="ai">
@@ -147,7 +159,7 @@
         </div>
         <a class="cta" href="https://maxmini.gumroad.com/l/ai-prompt-pack?ref=maxdevtools" target="_blank" rel="noopener">Get It →</a>
         <a class="preview-link" href="https://dev.to/maxxmini/50-chatgpt-prompts-that-actually-help-you-code-faster-440k" target="_blank" rel="noopener">📖 Free Preview</a>
-        <div class="details">Instant download · Multi-LLM compatible</div>
+        <div class="details">50 essential prompts · Quick-start pack · Budget-friendly</div>
       </div>
 
       <div class="card" data-cat="ai">
@@ -171,7 +183,7 @@
         </div>
         <a class="cta" href="https://maxmini.gumroad.com/l/xclhv?ref=maxdevtools" target="_blank" rel="noopener">Get It →</a>
         <a class="preview-link" href="https://dev.to/maxxmini/7-no-code-tools-that-can-replace-a-full-stack-developer-with-real-examples-1opp" target="_blank" rel="noopener">📖 Free Preview</a>
-        <div class="details">25 recipes · Step-by-step · No coding required</div>
+        <div class="details">25 copy-paste recipes · Quick wins · No coding required</div>
       </div>
 
       <div class="card" data-cat="automation">
@@ -183,7 +195,7 @@
         </div>
         <a class="cta" href="https://maxmini.gumroad.com/l/zmqrwp?ref=maxdevtools" target="_blank" rel="noopener">Get It →</a>
         <a class="preview-link" href="https://dev.to/maxxmini/7-no-code-tools-that-can-replace-a-full-stack-developer-with-real-examples-1opp" target="_blank" rel="noopener">📖 Free Preview</a>
-        <div class="details">In-depth guide · Real-world examples · Save 10+ hours/week</div>
+        <div class="details">Deep-dive guide · Build your own pipelines · Advanced</div>
       </div>
 
       <div class="card" data-cat="automation">
@@ -198,7 +210,7 @@
         <div class="details">Personal automations · No coding needed · Works with free tools</div>
       </div>
 
-      <div class="card" data-cat="coding">
+      <div class="card featured" data-cat="coding">
         <h3>📦 Developer Cheat Sheet Bundle</h3>
         <div class="price">$7</div>
         <div class="desc">Essential cheat sheets bundled together: Git, Docker, SQL, CLI, Regex, and more. Print-ready PDFs and searchable Markdown files.</div>
