@@ -388,6 +388,10 @@
           '</div>';
         var grid = document.getElementById('product-grid');
         if (grid) grid.parentNode.insertBefore(banner, grid);
+        // Rewrite Gumroad links to track HN conversions on Gumroad side
+        document.querySelectorAll('a[href*="gumroad.com"]').forEach(function(a) {
+          a.href = a.href.replace(/ref=maxdevtools[^&]*/g, 'ref=hn');
+        });
       }
     })();
 
