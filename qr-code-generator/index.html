@@ -4,18 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>QR Code Generator — Free Online Tool | MaxDevTools</title>
+<title>QR Code Generator — WiFi, vCard & URL | Free Online Tool | MaxDevTools</title>
     <meta property="og:image" content="https://maxmini0214.github.io/qr-code-generator/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-<meta name="description" content="Generate QR codes from any text, URL, WiFi, or vCard instantly. Download as PNG. 100% client-side, no tracking, free forever.">
+<meta name="description" content="Generate QR codes for WiFi passwords, contact cards (vCard), URLs, and text. Structured WiFi form — no manual string typing. Download PNG. 100% browser-based, free forever.">
+<meta name="keywords" content="qr code generator, wifi qr code, wifi qr code generator, vcard qr code, contact qr code, free qr code, qr code maker, qr code creator">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/qr-code-generator/">
-<meta property="og:title" content="QR Code Generator — Free Online Tool">
+<meta property="og:title" content="QR Code Generator — WiFi, vCard & URL | Free Online Tool">
 <meta property="og:description" content="Generate QR codes from text or URLs instantly. Free, no signup, no tracking.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/qr-code-generator/">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--green:#00ff88;--cyan:#00d4ff;--text:#e6edf3;--text2:#8b949e;--font:'Segoe UI',system-ui,sans-serif}
@@ -75,7 +76,7 @@ footer .brand{color:var(--cyan);font-weight:600}
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "QR Code Generator — Free Online Tool | MaxDevTools",
+  "name": "QR Code Generator — WiFi, vCard & URL | MaxDevTools",
   "description": "Generate QR codes from any text or URL instantly. Download as PNG. 100% client-side, free.",
   "url": "https://maxmini0214.github.io/qr-code-generator/",
   "applicationCategory": "DeveloperApplication",
@@ -115,10 +116,18 @@ footer .brand{color:var(--cyan);font-weight:600}
     },
     {
       "@type": "Question",
-      "name": "Can I create a QR code for WiFi?",
+      "name": "How do I create a WiFi QR code?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! Use this format: WIFI:T:WPA;S:YourNetworkName;P:YourPassword;; Replace WPA with WEP or nopass as needed. When scanned, most phones will offer to connect to the WiFi network automatically without typing the password."
+        "text": "Click the WiFi tab, enter your network name (SSID), select encryption type (WPA/WPA2, WEP, or none), enter the password, and click Generate. The QR code will auto-connect phones to your WiFi when scanned — no manual password typing needed. Great for guests, cafes, and events."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a vCard contact QR code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click the vCard tab, fill in the name, phone, email, company, and website fields, then click Generate. When scanned, the contact info is automatically added to the phone's address book. Perfect for business cards and networking events."
       }
     },
     {
@@ -151,7 +160,53 @@ footer .brand{color:var(--cyan);font-weight:600}
 <p>Generate QR codes from text, URLs, WiFi credentials, or any data — instantly in your browser</p>
 </header>
 
-<textarea id="input" placeholder="Enter text, URL, or WiFi string (WIFI:T:WPA;S:Name;P:Pass;;)">https://maxmini0214.github.io</textarea>
+<!-- Mode Tabs -->
+<div class="mode-tabs" style="display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:10px;overflow:hidden">
+<button class="mode-tab active" data-mode="text" style="flex:1;padding:.7rem;background:var(--cyan);color:var(--bg);border:none;cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s">📝 Text / URL</button>
+<button class="mode-tab" data-mode="wifi" style="flex:1;padding:.7rem;background:var(--surface);color:var(--text2);border:none;cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s">📶 WiFi</button>
+<button class="mode-tab" data-mode="vcard" style="flex:1;padding:.7rem;background:var(--surface);color:var(--text2);border:none;cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s">👤 vCard</button>
+</div>
+
+<!-- Text/URL Mode -->
+<div id="mode-text" class="mode-panel">
+<textarea id="input" placeholder="Enter text, URL, email, phone number, or any data...">https://maxmini0214.github.io</textarea>
+</div>
+
+<!-- WiFi Mode -->
+<div id="mode-wifi" class="mode-panel" style="display:none">
+<div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem">
+<div style="display:flex;gap:.75rem;flex-wrap:wrap">
+<input type="text" id="wifi-ssid" placeholder="Network Name (SSID)" style="flex:2;padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none;min-width:200px" />
+<select id="wifi-enc" style="flex:1;padding:.8rem;font-size:.9rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none;min-width:120px">
+<option value="WPA">WPA/WPA2</option>
+<option value="WEP">WEP</option>
+<option value="nopass">No Password</option>
+</select>
+</div>
+<div style="position:relative">
+<input type="password" id="wifi-pass" placeholder="WiFi Password" style="width:100%;padding:.8rem 3rem .8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none" />
+<button id="wifi-toggle-pass" type="button" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.1rem;padding:4px" title="Show/hide password">👁</button>
+</div>
+<div style="display:flex;align-items:center;gap:.5rem">
+<input type="checkbox" id="wifi-hidden" style="accent-color:var(--cyan)">
+<label for="wifi-hidden" style="color:var(--text2);font-size:.9rem">Hidden network</label>
+</div>
+</div>
+</div>
+
+<!-- vCard Mode -->
+<div id="mode-vcard" class="mode-panel" style="display:none">
+<div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem">
+<input type="text" id="vc-name" placeholder="Full Name *" style="padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none" />
+<div style="display:flex;gap:.75rem;flex-wrap:wrap">
+<input type="tel" id="vc-phone" placeholder="Phone" style="flex:1;padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none;min-width:150px" />
+<input type="email" id="vc-email" placeholder="Email" style="flex:1;padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none;min-width:150px" />
+</div>
+<input type="text" id="vc-org" placeholder="Company / Organization" style="padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none" />
+<input type="url" id="vc-url" placeholder="Website URL" style="padding:.8rem 1rem;font-size:1rem;background:var(--surface);border:2px solid var(--border);border-radius:10px;color:var(--text);outline:none" />
+</div>
+</div>
+
 <button class="gen-btn" id="genBtn">Generate QR Code</button>
 
 <div class="qr-wrap">
@@ -174,6 +229,12 @@ footer .brand{color:var(--cyan);font-weight:600}
 </ol>
 </div>
 
+<!-- QR History -->
+<div class="section">
+<h2>📋 Recent QR Codes</h2>
+<div id="qr-history-list" style="display:flex;flex-direction:column;gap:.5rem"></div>
+</div>
+
 <!-- DonFlow CTA -->
 <div class="cta">
 <h3>🏦 DonFlow — Budget Drift Detector</h3>
@@ -190,8 +251,13 @@ footer .brand{color:var(--cyan);font-weight:600}
 </details>
 
 <details>
-<summary>How do I create a QR code for WiFi?</summary>
-<div>Use this format in the text field:<br><br><code>WIFI:T:WPA;S:YourNetworkName;P:YourPassword;;</code><br><br>Replace <code>WPA</code> with <code>WEP</code> or <code>nopass</code> as needed. When scanned, most phones will offer to connect to the WiFi network automatically without typing the password. Great for guest networks, cafes, and events.</div>
+<summary>How do I create a WiFi QR code?</summary>
+<div>Click the <strong>📶 WiFi</strong> tab above, enter your network name (SSID), select encryption type (WPA/WPA2, WEP, or none), enter the password, and click Generate. The QR code will auto-connect phones to your WiFi when scanned — no manual password typing needed. Great for guests, cafes, Airbnbs, and events.</div>
+</details>
+
+<details>
+<summary>How do I create a vCard contact QR code?</summary>
+<div>Click the <strong>👤 vCard</strong> tab, fill in name, phone, email, company, and website. Click Generate. When scanned, the contact info is automatically saved to the phone's address book. Perfect for business cards, name badges, and networking events. The generated vCard follows the v3.0 standard supported by all major phones.</div>
 </details>
 
 <details>
@@ -296,38 +362,163 @@ Part of <a href="https://maxmini0214.github.io/" class="brand">MaxDevTools</a> �
 </footer>
 
 <script>
-function getParams(){const p=new URLSearchParams(location.search);return{text:p.get('text')};}
+var currentMode='text';
+
+// Mode tab switching
+document.querySelectorAll('.mode-tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    currentMode=this.dataset.mode;
+    document.querySelectorAll('.mode-tab').forEach(function(t){
+      t.style.background='var(--surface)';t.style.color='var(--text2)';t.classList.remove('active');
+    });
+    this.style.background='var(--cyan)';this.style.color='var(--bg)';this.classList.add('active');
+    document.querySelectorAll('.mode-panel').forEach(function(p){p.style.display='none';});
+    document.getElementById('mode-'+currentMode).style.display='';
+  });
+});
+
+// WiFi show/hide password
+document.getElementById('wifi-toggle-pass').addEventListener('click',function(){
+  var p=document.getElementById('wifi-pass');
+  if(p.type==='password'){p.type='text';this.textContent='🙈';}
+  else{p.type='password';this.textContent='👁';}
+});
+
+// Hide password field when "No Password" selected
+document.getElementById('wifi-enc').addEventListener('change',function(){
+  document.getElementById('wifi-pass').parentElement.style.display=this.value==='nopass'?'none':'';
+});
+
+function getQRText(){
+  if(currentMode==='text'){
+    return document.getElementById('input').value.trim();
+  }
+  if(currentMode==='wifi'){
+    var ssid=document.getElementById('wifi-ssid').value.trim();
+    if(!ssid){alert('Please enter a network name (SSID)');return '';}
+    var enc=document.getElementById('wifi-enc').value;
+    var pass=document.getElementById('wifi-pass').value;
+    var hidden=document.getElementById('wifi-hidden').checked;
+    var s='WIFI:T:'+enc+';S:'+ssid+';';
+    if(enc!=='nopass')s+='P:'+pass+';';
+    if(hidden)s+='H:true;';
+    return s+';';
+  }
+  if(currentMode==='vcard'){
+    var name=document.getElementById('vc-name').value.trim();
+    if(!name){alert('Please enter a name');return '';}
+    var phone=document.getElementById('vc-phone').value.trim();
+    var email=document.getElementById('vc-email').value.trim();
+    var org=document.getElementById('vc-org').value.trim();
+    var url=document.getElementById('vc-url').value.trim();
+    var parts=['BEGIN:VCARD','VERSION:3.0','FN:'+name];
+    if(org)parts.push('ORG:'+org);
+    if(phone)parts.push('TEL:'+phone);
+    if(email)parts.push('EMAIL:'+email);
+    if(url)parts.push('URL:'+url);
+    parts.push('END:VCARD');
+    return parts.join('\n');
+  }
+  return '';
+}
+
+function getParams(){const p=new URLSearchParams(location.search);return{text:p.get('text'),mode:p.get('mode')};}
+
 function generate(){
-  const text=document.getElementById('input').value.trim();
+  var text=getQRText();
   if(!text)return;
-  const wrap=document.getElementById('qrCanvas');
+  var wrap=document.getElementById('qrCanvas');
   wrap.innerHTML='';
-  const canvas=document.createElement('canvas');
+  var canvas=document.createElement('canvas');
   wrap.appendChild(canvas);
   QRCode.toCanvas(canvas,text,{width:280,margin:2,color:{dark:'#000',light:'#fff'}},function(err){
     if(err){console.error(err);return;}
     document.getElementById('dlBtn').style.display='';
     document.getElementById('shareBtn').style.display='';
     document.getElementById('dlBtn').onclick=function(){
-      const a=document.createElement('a');
+      var a=document.createElement('a');
       a.href=canvas.toDataURL('image/png');
-      a.download='qrcode.png';
+      var fname=currentMode==='wifi'?'wifi-qrcode.png':currentMode==='vcard'?'contact-qrcode.png':'qrcode.png';
+      a.download=fname;
       a.click();
     };
+    // Save to history
+    saveHistory(text);
   });
 }
+
+// localStorage history (last 8)
+function saveHistory(text){
+  try{
+    var key='qr-history';
+    var h=JSON.parse(localStorage.getItem(key)||'[]');
+    h=h.filter(function(i){return i.text!==text;});
+    h.unshift({text:text,mode:currentMode,time:Date.now()});
+    if(h.length>8)h=h.slice(0,8);
+    localStorage.setItem(key,JSON.stringify(h));
+    renderHistory();
+  }catch(e){}
+}
+function renderHistory(){
+  var el=document.getElementById('qr-history-list');
+  if(!el)return;
+  try{
+    var h=JSON.parse(localStorage.getItem('qr-history')||'[]');
+    if(!h.length){el.innerHTML='<p style="color:var(--text2);font-size:.85rem;text-align:center">No history yet. Generate a QR code to start.</p>';return;}
+    el.innerHTML=h.map(function(item,i){
+      var icon=item.mode==='wifi'?'📶':item.mode==='vcard'?'👤':'📝';
+      var preview=item.text.length>50?item.text.substring(0,50)+'…':item.text;
+      var ago=timeAgo(item.time);
+      return '<div class="hist-item" data-idx="'+i+'" style="display:flex;align-items:center;gap:.75rem;padding:.6rem .8rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor=\'var(--cyan)\'" onmouseout="this.style.borderColor=\'var(--border)\'">'
+        +'<span style="font-size:1.2rem">'+icon+'</span>'
+        +'<div style="flex:1;min-width:0"><div style="font-size:.85rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+preview.replace(/</g,'&lt;')+'</div>'
+        +'<div style="font-size:.75rem;color:var(--text2)">'+ago+'</div></div></div>';
+    }).join('');
+    el.querySelectorAll('.hist-item').forEach(function(item){
+      item.addEventListener('click',function(){
+        var idx=parseInt(this.dataset.idx);
+        var h=JSON.parse(localStorage.getItem('qr-history')||'[]');
+        if(h[idx]){
+          var entry=h[idx];
+          // Switch mode
+          document.querySelector('.mode-tab[data-mode="'+entry.mode+'"]').click();
+          if(entry.mode==='text'){
+            document.getElementById('input').value=entry.text;
+          }
+          // regenerate
+          setTimeout(function(){
+            if(entry.mode==='text')generate();
+            // For wifi/vcard we just set the text mode with raw text
+            else{document.querySelector('.mode-tab[data-mode="text"]').click();document.getElementById('input').value=entry.text;generate();}
+          },100);
+        }
+      });
+    });
+  }catch(e){}
+}
+function timeAgo(ts){
+  var s=Math.floor((Date.now()-ts)/1000);
+  if(s<60)return 'just now';
+  if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
+
 document.getElementById('genBtn').addEventListener('click',generate);
 document.getElementById('shareBtn').addEventListener('click',function(){
-  const text=document.getElementById('input').value.trim();
+  var text=getQRText();
   if(!text)return;
-  const url=location.origin+location.pathname+'?text='+encodeURIComponent(btoa(unescape(encodeURIComponent(text))));
+  var url=location.origin+location.pathname+'?text='+encodeURIComponent(btoa(unescape(encodeURIComponent(text))));
   navigator.clipboard.writeText(url).then(()=>{this.textContent='✅ Copied!';setTimeout(()=>{this.textContent='🔗 Share';},2000);});
 });
+
 // Restore from URL
 (function(){
-  const p=getParams();
+  var p=getParams();
   if(p.text){try{document.getElementById('input').value=decodeURIComponent(escape(atob(p.text)));generate();}catch(e){}}
   else{generate();}
+  // Render history on load
+  renderHistory();
 })();
 </script>
 <script>
