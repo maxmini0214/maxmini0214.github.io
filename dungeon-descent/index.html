@@ -285,5 +285,22 @@
 <p style="font-weight:600;margin-bottom:12px;">🎯 You might also like</p>
 <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"><a href="/the-last-floor/" style="text-decoration:none;padding:8px 16px;background:#1a1a2e;border:1px solid #333;border-radius:8px;color:#ccc;font-size:14px;white-space:nowrap;">🎮 The Last Floor</a> <a href="/whack-a-mole/" style="text-decoration:none;padding:8px 16px;background:#1a1a2e;border:1px solid #333;border-radius:8px;color:#ccc;font-size:14px;white-space:nowrap;">🎮 Whack A Mole</a> <a href="/brick-breaker/" style="text-decoration:none;padding:8px 16px;background:#1a1a2e;border:1px solid #333;border-radius:8px;color:#ccc;font-size:14px;white-space:nowrap;">🎮 Brick Breaker</a></div>
 <p style="margin-top:12px;"><a href="/games.html" style="color:#666;">Browse all 27 games →</a></p>
-</div></body>
+</div><script>
+(function(){
+  var k='_itch_cta_'+location.pathname;
+  if(sessionStorage.getItem(k))return;
+  setTimeout(function(){
+    if(sessionStorage.getItem(k))return;
+    var d=document.createElement('div');
+    d.id='itch-float-cta';
+    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#fa5c5c,#ff8a5c);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:itchSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">☕ Enjoying the game?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Support the dev — name your price on itch.io!</span><a href="https://maxmini0214.itch.io/dungeon-descent" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#fa5c5c;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Support ☕</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(''+k+'',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
+    var s=document.createElement('style');
+    s.textContent='@keyframes itchSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
+    document.head.appendChild(s);
+    document.body.appendChild(d);
+    sessionStorage.setItem(k,'1');
+  },60000);
+})();
+</script>
+</body>
 </html>
