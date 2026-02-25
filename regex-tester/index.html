@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>RegexLab — Free Online Regex Tester & Debugger</title>
+<title>RegexLab — Free Regex Tester, Debugger & 28+ Common Patterns</title>
     <meta property="og:image" content="https://maxmini0214.github.io/regex-tester/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-<meta name="description" content="Test, debug, and learn regular expressions in real-time. Highlights matches, captures groups, explains patterns. 100% client-side, no data sent to servers.">
-<meta name="keywords" content="regex tester, regular expression, regex debugger, regex online, pattern matching, regex validator">
-<meta property="og:title" content="RegexLab — Free Online Regex Tester & Debugger">
-<meta property="og:description" content="Real-time regex testing with match highlighting, group captures, and pattern explanation. 100% client-side.">
+<meta name="description" content="Test, debug, and learn regular expressions with 28+ common patterns (email, URL, phone, IP, date, password). Real-time match highlighting, group captures. 100% client-side.">
+<meta name="keywords" content="regex tester, regular expression, regex debugger, regex online, pattern matching, regex validator, common regex patterns, email regex, url regex, phone number regex, ip address regex, date regex, password regex, regex examples, regex cheat sheet, regex library">
+<meta property="og:title" content="RegexLab — Free Regex Tester & 28+ Common Patterns">
+<meta property="og:description" content="Real-time regex testing with 28+ common patterns, match highlighting, group captures. Email, URL, phone, IP, date patterns ready to use. 100% client-side.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/regex-tester/">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,6 +19,7 @@
 <meta name="twitter:description" content="Real-time regex testing with match highlighting, group captures, and pattern explanation. 100% client-side.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/regex-tester/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a regex tester?","acceptedAnswer":{"@type":"Answer","text":"A regex tester lets you write regular expressions and test them against sample text in real-time, showing matches, capture groups, and errors instantly — all in your browser with no server processing."}},{"@type":"Question","name":"What are common regex patterns?","acceptedAnswer":{"@type":"Answer","text":"Common regex patterns include: email validation (^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$), URL matching (https?://[\\w.-]+), phone numbers (\\(?\\d{3}\\)?[-.]?\\d{3}[-.]?\\d{4}), dates (\\d{4}-\\d{2}-\\d{2}), IP addresses, passwords, and more. RegexLab includes 28+ ready-to-use patterns."}},{"@type":"Question","name":"How do I validate an email with regex?","acceptedAnswer":{"@type":"Answer","text":"A common email regex is: ^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$. This checks for a username (letters, digits, dots, hyphens), an @ symbol, a domain, and a TLD of 2+ characters. For production use, also check with your language's built-in email validation."}},{"@type":"Question","name":"What regex matches a URL?","acceptedAnswer":{"@type":"Answer","text":"To match HTTP/HTTPS URLs, use: https?://[\\w.-]+(?:\\.[a-zA-Z]{2,})(?:/[^\\s]*)? — This handles protocols, domains, subdomains, and paths."}},{"@type":"Question","name":"How to check password strength with regex?","acceptedAnswer":{"@type":"Answer","text":"A strong password regex: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$ — Requires at least 8 characters with uppercase, lowercase, digit, and special character."}},{"@type":"Question","name":"Is this regex tester safe to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. RegexLab runs 100% in your browser using JavaScript's built-in RegExp engine. No data is ever sent to any server. Your patterns and test strings stay completely private."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"RegexLab — Online Regex Tester & Debugger","description":"Test, debug, and learn regular expressions in real-time. Highlights matches, captures groups, explains patterns. 100% client-side, no data sent to servers.","url":"https://maxmini0214.github.io/regex-tester/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -64,6 +65,25 @@ textarea:focus{border-color:var(--accent)}
 footer{text-align:center;padding:20px;color:var(--text2);font-size:.75rem}
 /* ad slot */
 .ad-slot{background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:20px;text-align:center;color:var(--text2);font-size:.75rem;margin:12px 0}
+/* Pattern Library */
+.pattern-lib{margin-top:12px}
+.pattern-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pattern-tab{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text2);cursor:pointer;font-size:.8rem;transition:all .2s}
+.pattern-tab.active,.pattern-tab:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pattern-search{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--text);font-size:.85rem;margin-bottom:10px;outline:none}
+.pattern-search:focus{border-color:var(--accent)}
+.pattern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.pattern-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;transition:all .2s}
+.pattern-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.pattern-card .p-name{font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:2px}
+.pattern-card .p-regex{font-family:monospace;font-size:.75rem;color:var(--accent);word-break:break-all;margin-bottom:4px;max-height:2.4em;overflow:hidden}
+.pattern-card .p-desc{font-size:.75rem;color:var(--text2)}
+.pattern-card .p-tag{display:inline-block;background:var(--bg);border-radius:3px;padding:1px 6px;font-size:.65rem;color:var(--accent2);margin-top:4px}
+.history-panel{margin-top:12px}
+.history-item{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin-bottom:4px;cursor:pointer;transition:border-color .2s}
+.history-item:hover{border-color:var(--accent)}
+.history-item code{color:var(--accent);font-size:.8rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-item .h-time{color:var(--text2);font-size:.7rem;white-space:nowrap}
 @media(max-width:600px){
 .regex-row{flex-direction:column}
 .regex-input{width:100%}
@@ -121,6 +141,25 @@ Visit https://regexlab.dev for more tools</textarea>
 <div class="panel">
 <div class="panel-title">Match Details</div>
 <div id="matchesList" class="matches-list"></div>
+</div>
+
+<div class="panel pattern-lib">
+<div class="panel-title">📚 Common Patterns Library <span style="font-size:.7rem;color:var(--green)">(click to load)</span></div>
+<input type="text" id="patternSearch" class="pattern-search" placeholder="🔍 Search patterns... (email, url, phone, date, ip...)">
+<div class="pattern-tabs">
+<button class="pattern-tab active" data-cat="all">All</button>
+<button class="pattern-tab" data-cat="web">🌐 Web</button>
+<button class="pattern-tab" data-cat="validation">✅ Validation</button>
+<button class="pattern-tab" data-cat="numbers">🔢 Numbers</button>
+<button class="pattern-tab" data-cat="text">📝 Text</button>
+<button class="pattern-tab" data-cat="security">🔒 Security</button>
+</div>
+<div id="patternGrid" class="pattern-grid"></div>
+</div>
+
+<div class="panel history-panel">
+<div class="panel-title">📋 Recent Patterns <span style="font-size:.7rem;color:var(--text2)">(auto-saved)</span></div>
+<div id="historyList"></div>
 </div>
 
 <div class="ad-slot">📢 Ad Space — Your ad here</div>
@@ -193,7 +232,7 @@ Visit https://regexlab.dev for more tools</textarea>
 </div>
 
     <footer>
-<p>RegexLab by <a href="https://github.com/maxseats" style="color:var(--accent);text-decoration:none">maxseats</a> — All processing happens in your browser. No data is ever sent to any server.</p>
+<p>RegexLab by <a href="https://maxmini0214.github.io/" style="color:var(--accent);text-decoration:none">MaxDevTools</a> — All processing happens in your browser. No data is ever sent to any server.</p>
 </footer>
 </div>
 
@@ -246,6 +285,122 @@ function run(){
     return`<div class="match-item"><span class="idx">Match ${i+1}</span> @ index ${m.index}: <span class="val">${escapeHtml(m.value)}</span>${g}</div>`
   }).join('');
 }
+run();
+
+// === Pattern Library ===
+const PATTERNS=[
+{name:'Email Address',regex:'^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$',test:'hello@example.com\ninvalid@.com\nuser.name+tag@domain.co.uk\n@missing.com\ntest@sub.domain.org',desc:'RFC-simplified email validation',cat:'web',tags:'email validate mail'},
+{name:'URL (HTTP/HTTPS)',regex:'https?:\\/\\/[\\w.-]+(?:\\.[a-zA-Z]{2,})(?:\\/[^\\s]*)?',test:'Visit https://example.com/page?q=1\nOr http://sub.domain.org/path/to/file.html\nNot a URL: ftp://other.com\nhttps://api.github.com/repos',desc:'Match HTTP and HTTPS URLs',cat:'web',tags:'url http https link'},
+{name:'IPv4 Address',regex:'\\b(?:(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\b',test:'192.168.1.1\n10.0.0.255\n999.999.999.999\n172.16.0.1\n0.0.0.0',desc:'Valid IPv4 with range check (0-255)',cat:'web',tags:'ip ipv4 network address'},
+{name:'IPv6 Address',regex:'(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}',test:'2001:0db8:85a3:0000:0000:8a2e:0370:7334\nfe80:0000:0000:0000:0000:0000:0000:0001\nnot-an-ip',desc:'Full IPv6 address format',cat:'web',tags:'ip ipv6 network'},
+{name:'HTML Tag',regex:'<([a-zA-Z][a-zA-Z0-9]*)\\b[^>]*>([\\s\\S]*?)<\\/\\1>',test:'<div class="test">Hello</div>\n<p>Paragraph</p>\n<img src="pic.jpg" />\n<span>Nested <b>bold</b></span>',desc:'Match opening + closing HTML tags with content',cat:'web',tags:'html tag xml parse'},
+{name:'Phone (US)',regex:'\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}',test:'(555) 123-4567\n555-123-4567\n555.123.4567\n5551234567\n123-45-6789',desc:'US phone: (xxx) xxx-xxxx and variants',cat:'validation',tags:'phone telephone us number'},
+{name:'Phone (International)',regex:'\\+?\\d{1,3}[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}',test:'+1-555-123-4567\n+44 20 7946 0958\n+82-2-1234-5678\n+81 3-1234-5678',desc:'International format with country code',cat:'validation',tags:'phone international global'},
+{name:'Date (YYYY-MM-DD)',regex:'\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])',test:'2026-02-26\n2025-12-31\n2026-13-01\n2026-02-30\n1999-01-01',desc:'ISO 8601 date format',cat:'validation',tags:'date iso yyyy-mm-dd'},
+{name:'Date (MM/DD/YYYY)',regex:'(0[1-9]|1[0-2])\\/(0[1-9]|[12]\\d|3[01])\\/\\d{4}',test:'02/26/2026\n12/31/2025\n13/01/2026\n01/01/1999',desc:'US date format',cat:'validation',tags:'date us american'},
+{name:'Time (HH:MM:SS)',regex:'([01]\\d|2[0-3]):[0-5]\\d(:[0-5]\\d)?',test:'14:30:00\n23:59:59\n08:00\n25:00:00\n00:00:00',desc:'24-hour time with optional seconds',cat:'validation',tags:'time clock 24h'},
+{name:'Password (Strong)',regex:'^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$',test:'MyP@ss1word\nweakpass\nNoSpecial1\nSHORT1!\nabcdefgh',desc:'Min 8 chars: upper + lower + digit + special',cat:'security',tags:'password strength validate strong'},
+{name:'Credit Card Number',regex:'\\b(?:4\\d{3}|5[1-5]\\d{2}|3[47]\\d{2}|6(?:011|5\\d{2}))[- ]?\\d{4}[- ]?\\d{4}[- ]?\\d{1,4}\\b',test:'4111 1111 1111 1111\n5500-0000-0000-0004\n378282246310005\n6011111111111117\n1234567890',desc:'Visa, MasterCard, Amex, Discover',cat:'security',tags:'credit card payment visa mastercard'},
+{name:'SSN (US)',regex:'\\b\\d{3}-\\d{2}-\\d{4}\\b',test:'123-45-6789\n000-00-0000\n999-99-9999\nnot-a-ssn',desc:'US Social Security Number format',cat:'security',tags:'ssn social security'},
+{name:'Hex Color',regex:'#(?:[0-9a-fA-F]{3}){1,2}\\b',test:'#ff5733\n#FFF\n#1a2b3c\n#xyz\n#00ff00\ncolor: #333;',desc:'3 or 6 digit hex color codes',cat:'web',tags:'hex color css rgb'},
+{name:'Slug (URL-friendly)',regex:'^[a-z0-9]+(?:-[a-z0-9]+)*$',test:'my-blog-post\nhello-world-2026\nInvalid Slug\nno--double--dash\nvalid-slug',desc:'Lowercase alphanumeric with hyphens',cat:'web',tags:'slug url seo friendly'},
+{name:'Integer',regex:'^-?\\d+$',test:'42\n-17\n0\n3.14\n1000000\nabc',desc:'Positive or negative whole numbers',cat:'numbers',tags:'integer number int whole'},
+{name:'Decimal / Float',regex:'^-?\\d+\\.\\d+$',test:'3.14\n-0.5\n100.00\n42\n.5\n1.23456',desc:'Numbers with decimal point',cat:'numbers',tags:'decimal float number dot'},
+{name:'Currency (USD)',regex:'\\$\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?',test:'$1,234.56\n$99.99\n$1,000,000.00\n$5\n€100',desc:'US dollar with commas and cents',cat:'numbers',tags:'currency dollar money usd price'},
+{name:'Percentage',regex:'\\b\\d+(?:\\.\\d+)?%',test:'100%\n3.14%\n50% off\n0.5%\nno percent here',desc:'Numbers followed by percent sign',cat:'numbers',tags:'percentage percent number'},
+{name:'Trim Whitespace',regex:'^\\s+|\\s+$',test:'   hello world   \n\ttab here\t\n  spaces  ',desc:'Leading and trailing whitespace',cat:'text',tags:'trim whitespace space strip'},
+{name:'Duplicate Words',regex:'\\b(\\w+)\\s+\\1\\b',test:'the the quick brown\nfox fox jumped over\nhello world world\nno duplicates here',desc:'Find repeated consecutive words',cat:'text',tags:'duplicate repeat word typo'},
+{name:'Sentence (Capitalize)',regex:'(?:^|[.!?]\\s+)([a-z])',test:'hello world. this is a test! another one? yes it is.',desc:'Find first letter after sentence boundary',cat:'text',tags:'sentence capitalize grammar'},
+{name:'Markdown Link',regex:'\\[([^\\]]+)\\]\\(([^)]+)\\)',test:'Check [Google](https://google.com) and [GitHub](https://github.com)\nNo link here\n[Empty]()',desc:'[text](url) markdown format',cat:'text',tags:'markdown link md'},
+{name:'JWT Token',regex:'eyJ[A-Za-z0-9_-]+\\.eyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+',test:'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U\nnot.a.jwt',desc:'JSON Web Token (header.payload.signature)',cat:'security',tags:'jwt token auth bearer'},
+{name:'UUID v4',regex:'[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}',test:'550e8400-e29b-41d4-a716-446655440000\n123e4567-e89b-42d3-a456-556642440000\nnot-a-uuid\n6ba7b810-9dad-41d1-80b4-00c04fd430c8',desc:'Version 4 UUID format',cat:'validation',tags:'uuid guid v4 identifier'},
+{name:'Korean (Hangul)',regex:'[가-힣]+',test:'안녕하세요 Hello 세계\n맥스미니 RegexLab\n12345 테스트',desc:'Match Korean Hangul characters',cat:'text',tags:'korean hangul 한국어 한글'},
+{name:'JSON String',regex:'"(?:[^"\\\\]|\\\\.)*"',test:'{"name": "John", "msg": "Hello \\"world\\"", "num": 42}',desc:'Double-quoted string with escape handling',cat:'text',tags:'json string parse quote'},
+{name:'Cron Expression',regex:'^(\\*|[0-5]?\\d)\\s+(\\*|[01]?\\d|2[0-3])\\s+(\\*|[12]?\\d|3[01])\\s+(\\*|[1-9]|1[0-2])\\s+(\\*|[0-6])$',test:'*/5 * * * *\n0 9 * * 1\n30 14 1 * *\n0 0 * * 0\ninvalid cron',desc:'Standard 5-field cron syntax',cat:'validation',tags:'cron schedule job timer'}
+];
+
+const patternGrid=document.getElementById('patternGrid'),patternSearch=document.getElementById('patternSearch'),historyListEl=document.getElementById('historyList');
+const patternTabs=document.querySelectorAll('.pattern-tab');
+let activeCategory='all';
+
+function renderPatterns(filter=''){
+  const f=filter.toLowerCase();
+  const filtered=PATTERNS.filter(p=>{
+    const catOk=activeCategory==='all'||p.cat===activeCategory;
+    const searchOk=!f||p.name.toLowerCase().includes(f)||p.tags.includes(f)||p.desc.toLowerCase().includes(f);
+    return catOk&&searchOk;
+  });
+  patternGrid.innerHTML=filtered.map((p,i)=>`<div class="pattern-card" data-idx="${PATTERNS.indexOf(p)}"><div class="p-name">${p.name}</div><div class="p-regex">${escapeHtml(p.regex)}</div><div class="p-desc">${p.desc}</div><div class="p-tag">${p.cat}</div></div>`).join('')||'<p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:20px">No patterns found. Try a different search.</p>';
+}
+
+patternGrid.addEventListener('click',e=>{
+  const card=e.target.closest('.pattern-card');
+  if(!card)return;
+  const p=PATTERNS[+card.dataset.idx];
+  regexInput.value=p.regex;
+  testString.value=p.test;
+  // set flags: g+i for most, remove g for anchored patterns
+  flagBtns.forEach(b=>{
+    if(b.dataset.flag==='g')b.classList.toggle('active',!p.regex.startsWith('^'));
+    if(b.dataset.flag==='i')b.classList.add('active');
+    if(b.dataset.flag==='m')b.classList.toggle('active',p.regex.startsWith('^')||p.regex.endsWith('$'));
+  });
+  run();
+  saveHistory(p.name,p.regex);
+  regexInput.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+patternTabs.forEach(t=>t.addEventListener('click',()=>{
+  patternTabs.forEach(b=>b.classList.remove('active'));
+  t.classList.add('active');
+  activeCategory=t.dataset.cat;
+  renderPatterns(patternSearch.value);
+}));
+
+patternSearch.addEventListener('input',()=>renderPatterns(patternSearch.value));
+renderPatterns();
+
+// === History ===
+const HISTORY_KEY='regex-history';
+function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[]}catch{return[]}}
+function saveHistory(name,regex){
+  let h=getHistory();
+  h=h.filter(x=>x.regex!==regex);
+  h.unshift({name,regex,time:Date.now()});
+  if(h.length>8)h=h.slice(0,8);
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+  renderHistory();
+}
+function timeAgo(ts){
+  const s=Math.floor((Date.now()-ts)/1000);
+  if(s<60)return 'just now';if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';
+}
+function renderHistory(){
+  const h=getHistory();
+  historyListEl.innerHTML=h.length?h.map(x=>`<div class="history-item" data-regex="${escapeHtml(x.regex)}"><code>${escapeHtml(x.name||x.regex)}</code><span class="h-time">${timeAgo(x.time)}</span></div>`).join(''):'<p style="color:var(--text2);font-size:.8rem;padding:8px">No recent patterns yet. Try one from the library above!</p>';
+}
+historyListEl.addEventListener('click',e=>{
+  const item=e.target.closest('.history-item');
+  if(!item)return;
+  const regex=item.dataset.regex;
+  const p=PATTERNS.find(x=>x.regex===regex);
+  if(p){regexInput.value=p.regex;testString.value=p.test}
+  else{regexInput.value=regex}
+  run();
+  regexInput.scrollIntoView({behavior:'smooth',block:'center'});
+});
+renderHistory();
+
+// Auto-save user patterns on blur
+regexInput.addEventListener('blur',()=>{
+  const v=regexInput.value.trim();
+  if(v&&v.length>2){
+    const known=PATTERNS.find(p=>p.regex===v);
+    saveHistory(known?known.name:'Custom: '+v.slice(0,30),v);
+  }
+});
+
 run();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
