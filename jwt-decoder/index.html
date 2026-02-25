@@ -72,6 +72,7 @@ footer a{color:#818cf8;text-decoration:none}
 .newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
 .newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
 
+.faq-section{margin:30px 0}.faq-section h2{font-size:1.2rem;margin-bottom:16px;color:#60a5fa;text-align:center}details{background:#1a1a2e;border:1px solid #333;border-radius:8px;margin-bottom:8px;overflow:hidden}summary{padding:12px 16px;cursor:pointer;font-weight:500;color:#e2e8f0;list-style:none;display:flex;align-items:center;justify-content:space-between}summary::after{content:'▸';transition:transform .2s;color:#64748b}details[open] summary::after{transform:rotate(90deg)}summary:hover{background:#16213e}details p,details pre{padding:0 16px 12px;color:#94a3b8;line-height:1.6;font-size:.9rem;margin:0}details pre{background:#0d1117;border-radius:4px;padding:8px 12px;overflow-x:auto;margin:0 16px 12px}details code{color:#7dd3fc;font-size:.85rem}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -148,6 +149,41 @@ footer a{color:#818cf8;text-decoration:none}
 <li><strong>Check expiration</strong> — The Decoded Claims section shows exp/iat/nbf timestamps with color-coded validity (green = valid, red = expired).</li>
 <li><strong>Share or copy</strong> — Click Copy on any panel or use the Share button to generate a URL your team can open to see the same decoded token.</li>
 </ol>
+
+
+<div class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<details>
+<summary>Is this JWT decoder safe to use with production tokens?</summary>
+<p>Yes. This decoder runs 100% in your browser. No data is ever sent to any server. Your tokens never leave your machine.</p>
+</details>
+
+<details>
+<summary>Can this tool verify JWT signatures?</summary>
+<p>This tool decodes and inspects JWT structure, header, payload, and claims. It does not verify cryptographic signatures since that requires the secret key or public key, which should never be shared with a web tool.</p>
+</details>
+
+<details>
+<summary>What JWT algorithms are supported?</summary>
+<p>The decoder works with any JWT regardless of algorithm (HS256, RS256, ES256, etc.) since it decodes the base64 structure without needing the signing key.</p>
+</details>
+
+<details>
+<summary>How do I check if a JWT is expired?</summary>
+<p>Paste your JWT and look at the Decoded Claims section. The <code>exp</code> (Expiration) claim will show the expiry date and whether it's currently expired (red) or valid (green).</p>
+</details>
+
+<details>
+<summary>Can I share a decoded JWT with my team?</summary>
+<p>Yes! Click the Share button to generate a URL with your JWT encoded. Anyone opening the link will see the same decoded result instantly.</p>
+</details>
+
+<details>
+<summary>What is the difference between JWT header and payload?</summary>
+<p>The header (JOSE) contains metadata like the signing algorithm (alg) and token type (typ). The payload contains the actual claims — user data, expiration, issuer, and custom fields.</p>
+</details>
+</div>
 
 <div class="cta">
 <h3>🏦 Track Your Budget Like You Track Your Tokens</h3>
