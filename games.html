@@ -559,6 +559,21 @@
     // Init
     filterGames();
 
+    // HN → itch.io ref tracking (like Gumroad ref=hn)
+    (function() {
+      var params = new URLSearchParams(location.search);
+      var ref = params.get('ref') || '';
+      var fromHN = ref === 'hn' || (document.referrer && document.referrer.indexOf('news.ycombinator.com') !== -1);
+      if (fromHN) {
+        document.querySelectorAll('a[href*="itch.io"]').forEach(function(a) {
+          try {
+            var u = new URL(a.href);
+            if (!u.searchParams.has('ref')) { u.searchParams.set('ref', 'hn'); a.href = u.toString(); }
+          } catch(e) {}
+        });
+      }
+    })();
+
     // HN referral detection
     (function() {
       var params = new URLSearchParams(location.search);
@@ -566,9 +581,13 @@
       var fromHN = ref === 'hn' || (document.referrer && document.referrer.indexOf('news.ycombinator.com') !== -1);
       if (fromHN) {
         var banner = document.createElement('div');
-        banner.style.cssText = 'margin:0 0 20px;padding:16px 24px;background:linear-gradient(135deg,#1a1e2e,#1c2940);border:1px solid #f97316;border-radius:12px;text-align:center;position:relative;';
+        banner.style.cssText = 'margin:0 0 20px;padding:16px 24px;background:linear-gradient(135deg,#1a1e2e,#2e2a1a);border:1px solid #f97316;border-radius:12px;text-align:center;position:relative;';
         banner.innerHTML = '<div style="font-size:1rem;color:#f97316;font-weight:700;margin-bottom:4px;">👋 Welcome from Hacker News!</div>' +
-          '<div style="font-size:0.9rem;color:#c9d1d9;">Welcome! We also built <a href="https://maxmini0214.github.io/donflow/?demo" style="color:#4ade80;font-weight:600;">DonFlow</a> — a zero-backend budget tracker. Check it out!</div>' +
+          '<div style="font-size:0.9rem;color:#c9d1d9;margin-bottom:8px;">All 27 games are <strong style="color:#4ade80;">vanilla JS, no frameworks, no ads, no tracking</strong> — built by the same dev behind DonFlow.</div>' +
+          '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">' +
+            '<a href="https://github.com/maxmini0214/maxmini0214.github.io" style="color:#58a6ff;font-size:0.85rem;font-weight:600;text-decoration:none;">⭐ Source on GitHub</a>' +
+            '<a href="https://maxmini0214.itch.io" style="display:inline-block;padding:4px 14px;background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;font-size:0.85rem;font-weight:600;border-radius:6px;text-decoration:none;">☕ Support on itch.io</a>' +
+          '</div>' +
           '<button onclick="this.parentNode.remove()" style="position:absolute;top:8px;right:12px;background:none;border:none;color:#8b949e;cursor:pointer;font-size:1.2rem;" aria-label="Close">✕</button>';
         var target = document.getElementById('hn-banner');
         if (target) target.appendChild(banner);
