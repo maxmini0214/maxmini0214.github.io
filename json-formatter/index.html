@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>JSON Formatter & Validator Online — Free Tool | JSONForge</title>
+<title>JSON Formatter, Validator & CSV Converter Online — Free Tool | JSONForge</title>
     <meta property="og:image" content="https://maxmini0214.github.io/json-formatter/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-<meta name="description" content="Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser. No data sent to servers.">
-<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json parser, online json tool, free json formatter">
+<meta name="description" content="Free online JSON formatter, validator, minifier, and JSON to CSV converter. Beautify, validate, compress, and export JSON to CSV instantly in your browser. No data sent to servers.">
+<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json parser, online json tool, free json formatter, json to csv, json to csv converter, json csv export, convert json to csv online, json tree view, json viewer">
 <meta name="author" content="JSONForge by MaxxMini">
-<meta property="og:title" content="JSON Formatter & Validator Online — Free Tool | JSONForge">
-<meta property="og:description" content="Beautify, validate, and minify JSON instantly. 100% client-side, no data leaves your browser.">
+<meta property="og:title" content="JSON Formatter, Validator & CSV Converter — Free Tool | JSONForge">
+<meta property="og:description" content="Beautify, validate, minify JSON and convert to CSV instantly. 100% client-side, no data leaves your browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/json-formatter/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="JSON Formatter & Validator Online — Free Tool | JSONForge">
-<meta name="twitter:description" content="Beautify, validate, and minify JSON instantly. 100% client-side, no data leaves your browser.">
+<meta name="twitter:title" content="JSON Formatter, Validator & CSV Converter — Free Tool | JSONForge">
+<meta name="twitter:description" content="Beautify, validate, minify JSON and convert to CSV. 100% client-side, no data leaves your browser.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/json-formatter/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSONForge","url":"https://maxmini0214.github.io/json-formatter/","description":"Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
@@ -30,7 +30,9 @@
     {"@type":"Question","name":"How do I validate JSON syntax?","acceptedAnswer":{"@type":"Answer","text":"Simply paste your JSON into the input area. JSONForge automatically validates the syntax and shows a green checkmark for valid JSON, or a red error message with the exact line and position of any syntax error."}},
     {"@type":"Question","name":"Can I minify JSON to reduce file size?","acceptedAnswer":{"@type":"Answer","text":"Yes. Click the Minify button to remove all whitespace and newlines from your JSON, producing the smallest possible output. This is useful for API payloads, config files, and reducing bandwidth."}},
     {"@type":"Question","name":"How do I sort JSON keys alphabetically?","acceptedAnswer":{"@type":"Answer","text":"Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files."}},
-    {"@type":"Question","name":"Can I share my formatted JSON with someone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed."}}
+    {"@type":"Question","name":"Can I share my formatted JSON with someone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed."}},
+    {"@type":"Question","name":"How do I convert JSON to CSV?","acceptedAnswer":{"@type":"Answer","text":"Paste an array of JSON objects into the input area, then click the 📊 CSV button. JSONForge automatically flattens nested objects using dot notation (e.g., address.city), detects all columns, and generates a downloadable CSV file. Supports any depth of nesting."}},
+    {"@type":"Question","name":"Can I view JSON as a tree?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the 🌳 Tree button to see a collapsible, color-coded tree visualization of your JSON. Click the arrows to expand or collapse any object or array. Keys, strings, numbers, booleans, and null values are all color-coded for easy reading."}}
   ]
 }</script>
 <style>
@@ -78,6 +80,14 @@ textarea::placeholder{color:#475569}
 .cta-donflow p{color:var(--muted);font-size:.9rem;margin-bottom:1rem}
 .cta-donflow a{display:inline-block;padding:.7rem 1.5rem;background:linear-gradient(135deg,var(--accent),#a78bfa);color:#fff;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95rem;transition:transform .15s}
 .cta-donflow a:hover{transform:translateY(-1px)}
+.tree-key{color:#a78bfa;font-weight:600}.tree-str{color:#22c55e}.tree-num{color:#f59e0b}.tree-bool{color:#3b82f6}.tree-null{color:#ef4444;font-style:italic}
+.tree-toggle{cursor:pointer;user-select:none;display:inline-block;width:1.2em;text-align:center;color:var(--muted)}
+.tree-toggle:hover{color:var(--accent)}
+.tree-children{margin-left:1.2rem;border-left:1px solid var(--border);padding-left:.5rem}
+.tree-children.collapsed{display:none}
+.tree-line{line-height:1.6}
+.csv-download{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.85rem;margin-top:.5rem;transition:transform .15s}
+.csv-download:hover{transform:translateY(-1px)}
 footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
 footer a{color:var(--accent);text-decoration:none}
 </style>
@@ -91,14 +101,16 @@ footer a{color:var(--accent);text-decoration:none}
 </head>
 <body>
 <header>
-<h1>JSON Formatter & Validator Online</h1>
-<p>Paste → Beautify → Copy. 100% in your browser, zero server calls.</p>
+<h1>JSON Formatter, Validator & CSV Converter</h1>
+<p>Format, validate, convert to CSV, and explore with tree view. 100% in your browser.</p>
 </header>
 <div class="container">
 <div class="toolbar">
 <button class="primary" onclick="formatJSON()">Beautify</button>
 <button onclick="minifyJSON()">Minify</button>
 <button onclick="sortKeys()">Sort Keys</button>
+<button onclick="jsonToCSV()">📊 CSV</button>
+<button onclick="toggleTreeView()">🌳 Tree</button>
 <button onclick="copyOutput()">📋 Copy</button>
 <button onclick="shareJSON()">🔗 Share</button>
 <button onclick="clearAll()">Clear</button>
@@ -118,6 +130,7 @@ footer a{color:var(--accent);text-decoration:none}
 <textarea id="output" readonly placeholder="Formatted output will appear here..."></textarea>
 </div>
 </div>
+<div id="tree-container" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:.75rem;max-height:60vh;overflow:auto;font-family:var(--mono);font-size:.85rem"></div>
 <div class="stats">
 <span id="charCount">Characters: 0</span>
 <span id="lineCount">Lines: 0</span>
@@ -128,6 +141,8 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="features">
 <div class="feature"><h4>🔒 Privacy First</h4><p>Nothing leaves your browser. Zero server calls.</p></div>
 <div class="feature"><h4>⚡ Instant</h4><p>Processes megabytes of JSON in milliseconds.</p></div>
+<div class="feature"><h4>📊 JSON → CSV</h4><p>Convert arrays of objects to CSV with auto-flattening and download.</p></div>
+<div class="feature"><h4>🌳 Tree View</h4><p>Collapsible, color-coded tree visualization of any JSON.</p></div>
 <div class="feature"><h4>🎯 Error Detection</h4><p>Pinpoints exact line & position of syntax errors.</p></div>
 <div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
 </div>
@@ -139,6 +154,8 @@ footer a{color:var(--accent);text-decoration:none}
 <li><strong>Paste your JSON</strong> into the Input area on the left. The tool instantly validates it and shows ✓ Valid or ✗ Invalid.</li>
 <li><strong>Click Beautify</strong> to format with proper indentation, or <strong>Minify</strong> to compress into a single line for API payloads.</li>
 <li><strong>Sort Keys</strong> alphabetically for consistent ordering — great for comparing configs or debugging diffs.</li>
+<li><strong>Convert to CSV</strong> — click 📊 CSV to transform arrays of objects into downloadable CSV. Nested objects are auto-flattened with dot notation.</li>
+<li><strong>Tree View</strong> — click 🌳 Tree for an interactive, collapsible tree. Expand/collapse nodes to explore deep JSON structures.</li>
 <li><strong>Copy or Share</strong> — use 📋 Copy to grab the output, or 🔗 Share to generate a URL with your JSON pre-loaded (no server storage).</li>
 </ol>
 </div>
@@ -159,6 +176,8 @@ footer a{color:var(--accent);text-decoration:none}
 <details><summary>Can I minify JSON to reduce file size?</summary><p>Yes. Click the Minify button to remove all whitespace and newlines from your JSON, producing the smallest possible output. This is useful for API payloads, config files, and reducing bandwidth.</p></details>
 <details><summary>How do I sort JSON keys alphabetically?</summary><p>Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files.</p></details>
 <details><summary>Can I share my formatted JSON with someone?</summary><p>Yes! Click the 🔗 Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed.</p></details>
+<details><summary>How do I convert JSON to CSV?</summary><p>Paste an array of JSON objects into the input area, then click the 📊 CSV button. JSONForge automatically flattens nested objects using dot notation (e.g., address.city), detects all columns, and generates a downloadable CSV file with a one-click download button.</p></details>
+<details><summary>Can I view JSON as a collapsible tree?</summary><p>Yes! Click the 🌳 Tree button to see a color-coded, collapsible tree visualization. Keys are purple, strings green, numbers amber, booleans blue, and null red. Click ▼/▶ arrows to expand or collapse any object or array node.</p></details>
 </div>
 
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
@@ -243,6 +262,73 @@ function updateStats(s){
   try{const d=getDepth(JSON.parse(s));document.getElementById('depth').textContent='Depth: '+d}catch(e){document.getElementById('depth').textContent='Depth: 0'}
 }
 function getDepth(o){if(typeof o!=='object'||o===null)return 0;const vals=Object.values(o);if(!vals.length)return 1;return 1+Math.max(...vals.map(getDepth))}
+
+// JSON to CSV
+function jsonToCSV(){
+  const p=validate();
+  if(p===null)return;
+  let arr=Array.isArray(p)?p:[p];
+  if(!arr.length||typeof arr[0]!=='object'){$s.textContent='⚠ Need array of objects for CSV';return}
+  // Flatten nested objects
+  function flatten(obj,prefix=''){
+    const r={};
+    for(const[k,v]of Object.entries(obj||{})){
+      const key=prefix?prefix+'.'+k:k;
+      if(v&&typeof v==='object'&&!Array.isArray(v))Object.assign(r,flatten(v,key));
+      else r[key]=v;
+    }return r;
+  }
+  const flat=arr.map(o=>flatten(o));
+  const cols=[...new Set(flat.flatMap(Object.keys))];
+  const esc=v=>{
+    if(v===null||v===undefined)return'';
+    const s=Array.isArray(v)?JSON.stringify(v):String(v);
+    return s.includes(',')||s.includes('"')||s.includes('\n')?'"'+s.replace(/"/g,'""')+'"':s;
+  };
+  const csv=[cols.join(','),...flat.map(r=>cols.map(c=>esc(r[c])).join(','))].join('\n');
+  $o.value=csv;
+  updateStats(csv);
+  $s.className='status valid';$s.textContent='📊 CSV ('+flat.length+' rows × '+cols.length+' cols)';
+  // Download button
+  if(!document.getElementById('csv-dl')){
+    const btn=document.createElement('button');btn.id='csv-dl';btn.className='csv-download';
+    btn.textContent='⬇ Download .csv';
+    btn.onclick=function(){
+      const blob=new Blob([$o.value],{type:'text/csv'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+      a.download='data.csv';a.click();URL.revokeObjectURL(a.href);
+    };
+    $o.parentElement.appendChild(btn);
+  }
+  if(typeof goatcounter!=='undefined')goatcounter.count({path:'/json-formatter/csv-convert',event:true});
+}
+
+// Tree View
+let treeVisible=false;
+function toggleTreeView(){
+  const tc=document.getElementById('tree-container');
+  if(treeVisible){tc.style.display='none';treeVisible=false;$s.textContent='Tree view hidden';return}
+  const p=validate();
+  if(p===null)return;
+  tc.innerHTML=buildTree(p,'root');
+  tc.style.display='block';treeVisible=true;
+  $s.textContent='🌳 Tree view';
+}
+function buildTree(val,key,isLast=true){
+  if(val===null)return'<div class="tree-line"><span class="tree-key">'+esc(key)+'</span>: <span class="tree-null">null</span>'+(isLast?'':',')+'</div>';
+  if(typeof val==='string')return'<div class="tree-line"><span class="tree-key">'+esc(key)+'</span>: <span class="tree-str">"'+esc(val)+'"</span>'+(isLast?'':',')+'</div>';
+  if(typeof val==='number')return'<div class="tree-line"><span class="tree-key">'+esc(key)+'</span>: <span class="tree-num">'+val+'</span>'+(isLast?'':',')+'</div>';
+  if(typeof val==='boolean')return'<div class="tree-line"><span class="tree-key">'+esc(key)+'</span>: <span class="tree-bool">'+val+'</span>'+(isLast?'':',')+'</div>';
+  const isArr=Array.isArray(val);
+  const entries=isArr?val.map((v,i)=>[i,v]):Object.entries(val);
+  const open=isArr?'[':'{', close=isArr?']':'}';
+  let h='<div class="tree-line"><span class="tree-toggle" onclick="this.textContent=this.textContent===\'▶\'?\'▼\':\'▶\';this.parentElement.querySelector(\'.tree-children\').classList.toggle(\'collapsed\')">'+(entries.length?'▼':'')+'</span> <span class="tree-key">'+esc(key)+'</span>: '+open+' <span style="color:var(--muted);font-size:.75rem">'+entries.length+(isArr?' items':' keys')+'</span></div>';
+  h+='<div class="tree-children">';
+  entries.forEach(([k,v],i)=>{h+=buildTree(v,String(k),i===entries.length-1)});
+  h+='</div><div class="tree-line">'+close+(isLast?'':',')+'</div>';
+  return h;
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 </script>
 <script>
 (function(){
