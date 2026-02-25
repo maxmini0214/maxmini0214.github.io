@@ -228,7 +228,7 @@
 
       <div class="cta-box" style="background: linear-gradient(135deg, #2a1a3e, #3a2744);">
         <p style="color:#e0e0e0;margin-bottom:0.75rem;">🎲 <strong>Enjoy this game?</strong> Support the developer on itch.io — pay what you want!</p>
-        <a href="https://maxmini0214.itch.io/random-defense" style="background:#fa5c5c;">☕ Support on itch.io</a>
+        <a href="https://maxmini0214.itch.io/dice-guardians-random-defense" style="background:#fa5c5c;">☕ Support on itch.io</a>
       </div>
 
       <div style="margin:1.5rem auto;max-width:480px;padding:1rem 1.2rem;border:2px solid #ff9040;border-radius:12px;background:linear-gradient(135deg,#1a1a2e,#16213e);text-align:center;">
@@ -280,7 +280,7 @@
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
         <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='✅ Copied!')">🔗 Copy Link</button>
         <a href="https://twitter.com/intent/tweet?text=Playing%20Dice%20Guardians%3A%20Random%20Defense%20%F0%9F%8E%B2%20Free%20in%20browser%2C%20no%20download!&url=https%3A%2F%2Fmaxmini0214.github.io%2Frandom-defense%2F" target="_blank" rel="noopener" style="text-decoration:none;padding:0.5rem 1rem;border:1px solid #1d9bf0;color:#1d9bf0;border-radius:6px;font-size:0.9rem;display:inline-block;">𝕏 Tweet</a>
-        <a href="https://maxmini0214.itch.io/random-defense" target="_blank" rel="noopener" style="text-decoration:none;padding:0.5rem 1rem;background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border-radius:6px;font-size:0.9rem;font-weight:600;display:inline-block;">☕ Support on itch.io</a>
+        <a href="https://maxmini0214.itch.io/dice-guardians-random-defense" target="_blank" rel="noopener" style="text-decoration:none;padding:0.5rem 1rem;background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border-radius:6px;font-size:0.9rem;font-weight:600;display:inline-block;">☕ Support on itch.io</a>
         <a href="/games.html" style="text-decoration:none;padding:0.5rem 1rem;border:1px solid #2a2a4e;color:#7c83ff;border-radius:6px;font-size:0.9rem;display:inline-block;">🎮 More Games</a>
       </div>
 
@@ -302,7 +302,7 @@
     if(sessionStorage.getItem(k))return;
     var d=document.createElement('div');
     d.id='itch-float-cta';
-    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#fa5c5c,#ff8a5c);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:itchSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">☕ Enjoying the game?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Support the dev — name your price on itch.io!</span><a href="https://maxmini0214.itch.io/random-defense" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#fa5c5c;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Support ☕</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(''+k+'',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
+    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#fa5c5c,#ff8a5c);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:itchSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">☕ Enjoying the game?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Support the dev — name your price on itch.io!</span><a href="https://maxmini0214.itch.io/dice-guardians-random-defense" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#fa5c5c;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Support ☕</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(''+k+'',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
     var s=document.createElement('style');
     s.textContent='@keyframes itchSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
     document.head.appendChild(s);
