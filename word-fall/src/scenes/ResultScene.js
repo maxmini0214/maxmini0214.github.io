@@ -7,6 +7,7 @@ export class ResultScene extends Phaser.Scene {
 
   init(data) {
     this.result = data;
+    this.challengeScore = data.challengeScore || 0;
   }
 
   create() {
@@ -31,19 +32,36 @@ export class ResultScene extends Phaser.Scene {
       this.letters.push(letter);
     }
 
-    // Title
+    // Title - challenge aware
+    let title, titleColor;
+    if (this.challengeScore > 0 && r.score > this.challengeScore) {
+      title = "🏆 CHALLENGE BEATEN!";
+      titleColor = "#44ff44";
+    } else {
+      title = "GAME OVER";
+      titleColor = "#ff6644";
+    }
     this.add
-      .text(width / 2, 80, "GAME OVER", {
-        fontSize: "44px",
+      .text(width / 2, 55, title, {
+        fontSize: "38px",
         fontFamily: "monospace",
-        color: "#ff6644",
+        color: titleColor,
         fontStyle: "bold",
       })
       .setOrigin(0.5);
 
+    // Challenge target miss message
+    if (this.challengeScore > 0 && r.score <= this.challengeScore) {
+      this.add
+        .text(width / 2, 90, `Target was ${this.challengeScore} — try again!`, {
+          fontSize: '16px', fontFamily: 'monospace', color: '#ff6644'
+        })
+        .setOrigin(0.5);
+    }
+
     if (r.isNewRecord) {
       this.add
-        .text(width / 2, 125, "NEW RECORD!", {
+        .text(width / 2, 100, "NEW RECORD!", {
           fontSize: "22px",
           fontFamily: "monospace",
           color: "#ffdd44",
@@ -54,8 +72,8 @@ export class ResultScene extends Phaser.Scene {
 
     // Score (big)
     this.add
-      .text(width / 2, 210, `${r.score}`, {
-        fontSize: "68px",
+      .text(width / 2, 170, `${r.score}`, {
+        fontSize: "60px",
         fontFamily: "monospace",
         color: "#44ddff",
         fontStyle: "bold",
@@ -63,7 +81,7 @@ export class ResultScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(width / 2, 260, "points", {
+      .text(width / 2, 215, "points", {
         fontSize: "18px",
         fontFamily: "monospace",
         color: "#667788",
@@ -79,8 +97,8 @@ export class ResultScene extends Phaser.Scene {
 
     stats.forEach((stat, i) => {
       this.add
-        .text(width / 2, 320 + i * 32, stat, {
-          fontSize: "18px",
+        .text(width / 2, 265 + i * 28, stat, {
+          fontSize: "16px",
           fontFamily: "monospace",
           color: "#aabbcc",
         })
@@ -110,8 +128,8 @@ export class ResultScene extends Phaser.Scene {
     }
 
     this.add
-      .text(width / 2, 440, rating, {
-        fontSize: "30px",
+      .text(width / 2, 380, rating, {
+        fontSize: "28px",
         fontFamily: "monospace",
         color: ratingColor,
         fontStyle: "bold",
@@ -121,17 +139,44 @@ export class ResultScene extends Phaser.Scene {
     // Best score
     const best = localStorage.getItem("wordfall-highscore") || "0";
     this.add
-      .text(width / 2, 490, `Best: ${best}`, {
+      .text(width / 2, 420, `Best: ${best}`, {
         fontSize: "16px",
         fontFamily: "monospace",
         color: "#555577",
       })
       .setOrigin(0.5);
 
+    // Challenge a Friend button
+    const challengeBtn = this.add
+      .text(width / 2, 480, "🏆 CHALLENGE A FRIEND", {
+        fontSize: "18px",
+        fontFamily: "monospace",
+        color: "#ffffff",
+        backgroundColor: "#ff8800",
+        padding: { x: 18, y: 8 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+
+    challengeBtn.on("pointerover", () => challengeBtn.setAlpha(0.7));
+    challengeBtn.on("pointerout", () => challengeBtn.setAlpha(1));
+    challengeBtn.on("pointerdown", () => {
+      const url = `${window.location.origin}${window.location.pathname}?c=${r.score}`;
+      const text = `I scored ${r.score} in Word Fall! 📝 Can you beat me? ${url}`;
+      if (navigator.share) {
+        navigator.share({ title: 'Word Fall Challenge', text }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          challengeBtn.setText('📋 LINK COPIED!');
+          this.time.delayedCall(2000, () => challengeBtn.setText('🏆 CHALLENGE A FRIEND'));
+        });
+      }
+    });
+
     // Buttons
     const retryBtn = this.add
-      .text(width / 2 - 90, 570, "RETRY", {
-        fontSize: "26px",
+      .text(width / 2 - 90, 550, "RETRY", {
+        fontSize: "24px",
         fontFamily: "monospace",
         color: "#44aaff",
         backgroundColor: "#112233",
@@ -147,8 +192,8 @@ export class ResultScene extends Phaser.Scene {
     });
 
     const menuBtn = this.add
-      .text(width / 2 + 90, 570, "MENU", {
-        fontSize: "26px",
+      .text(width / 2 + 90, 550, "MENU", {
+        fontSize: "24px",
         fontFamily: "monospace",
         color: "#aacc44",
         backgroundColor: "#112233",

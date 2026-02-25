@@ -8,6 +8,24 @@ export class MenuScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale;
 
+    // Challenge mode
+    const params = new URLSearchParams(window.location.search);
+    this.challengeScore = params.get('c') ? parseInt(params.get('c'), 10) : 0;
+
+    let titleOffset = 0;
+    if (this.challengeScore > 0) {
+      titleOffset = 40;
+      const bannerGfx = this.add.graphics();
+      bannerGfx.fillStyle(0xff8800, 0.9);
+      bannerGfx.fillRoundedRect(width / 2 - 180, 18, 360, 60, 12);
+      this.add.text(width / 2, 35, '🏆 CHALLENGE', {
+        fontSize: '22px', fontFamily: 'monospace', color: '#ffffff', fontStyle: 'bold'
+      }).setOrigin(0.5);
+      this.add.text(width / 2, 62, `Beat ${this.challengeScore} points!`, {
+        fontSize: '16px', fontFamily: 'monospace', color: '#fff8e0'
+      }).setOrigin(0.5);
+    }
+
     // Particle background
     this.particles = [];
     for (let i = 0; i < 40; i++) {

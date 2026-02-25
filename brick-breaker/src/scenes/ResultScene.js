@@ -7,6 +7,7 @@ export class ResultScene extends Phaser.Scene {
 
   init(data) {
     this.result = data;
+    this.challengeScore = data.challengeScore || 0;
   }
 
   create() {
@@ -27,19 +28,36 @@ export class ResultScene extends Phaser.Scene {
       this.particles.push(p);
     }
 
-    // Title
+    // Title - challenge aware
+    let title, titleColor;
+    if (this.challengeScore > 0 && r.score > this.challengeScore) {
+      title = "🏆 CHALLENGE BEATEN!";
+      titleColor = "#44ff44";
+    } else {
+      title = "GAME OVER";
+      titleColor = "#ff6644";
+    }
     this.add
-      .text(width / 2, 80, "GAME OVER", {
-        fontSize: "48px",
+      .text(width / 2, 60, title, {
+        fontSize: "40px",
         fontFamily: "monospace",
-        color: "#ff6644",
+        color: titleColor,
         fontStyle: "bold",
       })
       .setOrigin(0.5);
 
+    // Challenge target miss message
+    if (this.challengeScore > 0 && r.score <= this.challengeScore) {
+      this.add
+        .text(width / 2, 100, `Target was ${this.challengeScore} — try again!`, {
+          fontSize: '16px', fontFamily: 'monospace', color: '#ff6644'
+        })
+        .setOrigin(0.5);
+    }
+
     if (r.isNewRecord) {
       const newRecText = this.add
-        .text(width / 2, 130, "NEW HIGH SCORE!", {
+        .text(width / 2, 110, "NEW HIGH SCORE!", {
           fontSize: "22px",
           fontFamily: "monospace",
           color: "#ffdd44",
@@ -58,7 +76,7 @@ export class ResultScene extends Phaser.Scene {
 
     // Score
     this.add
-      .text(width / 2, 200, `${r.score}`, {
+      .text(width / 2, 170, `${r.score}`, {
         fontSize: "72px",
         fontFamily: "monospace",
         color: "#00ffcc",
@@ -67,7 +85,7 @@ export class ResultScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(width / 2, 250, "points", {
+      .text(width / 2, 220, "points", {
         fontSize: "18px",
         fontFamily: "monospace",
         color: "#667788",
@@ -76,7 +94,7 @@ export class ResultScene extends Phaser.Scene {
 
     // Level reached
     this.add
-      .text(width / 2, 300, `Level reached: ${r.level}`, {
+      .text(width / 2, 260, `Level reached: ${r.level}`, {
         fontSize: "20px",
         fontFamily: "monospace",
         color: "#aabbcc",
@@ -106,7 +124,7 @@ export class ResultScene extends Phaser.Scene {
     }
 
     this.add
-      .text(width / 2, 360, rating, {
+      .text(width / 2, 310, rating, {
         fontSize: "28px",
         fontFamily: "monospace",
         color: ratingColor,
@@ -117,12 +135,39 @@ export class ResultScene extends Phaser.Scene {
     // Best score
     const best = localStorage.getItem("brickbreaker-highscore") || "0";
     this.add
-      .text(width / 2, 410, `Best: ${best} pts`, {
+      .text(width / 2, 355, `Best: ${best} pts`, {
         fontSize: "16px",
         fontFamily: "monospace",
         color: "#555577",
       })
       .setOrigin(0.5);
+
+    // Challenge a Friend button
+    const challengeBtn = this.add
+      .text(width / 2, 415, "🏆 CHALLENGE A FRIEND", {
+        fontSize: "18px",
+        fontFamily: "monospace",
+        color: "#ffffff",
+        backgroundColor: "#ff8800",
+        padding: { x: 18, y: 8 },
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+
+    challengeBtn.on("pointerover", () => challengeBtn.setAlpha(0.7));
+    challengeBtn.on("pointerout", () => challengeBtn.setAlpha(1));
+    challengeBtn.on("pointerdown", () => {
+      const url = `${window.location.origin}${window.location.pathname}?c=${r.score}`;
+      const text = `I scored ${r.score} in Brick Breaker! 🧱 Can you beat me? ${url}`;
+      if (navigator.share) {
+        navigator.share({ title: 'Brick Breaker Challenge', text }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          challengeBtn.setText('📋 LINK COPIED!');
+          this.time.delayedCall(2000, () => challengeBtn.setText('🏆 CHALLENGE A FRIEND'));
+        });
+      }
+    });
 
     // Buttons
     const retryBtn = this.add

@@ -13,6 +13,7 @@ export class ResultScene extends Phaser.Scene {
     this.stockBonus = data.stockBonus || 0;
     this.nextStage = data.nextStage || 1;
     this.cardsLeft = data.cardsLeft || 0;
+    this.challengeScore = data.challengeScore || 0;
   }
 
   create() {
@@ -31,18 +32,36 @@ export class ResultScene extends Phaser.Scene {
   }
 
   createWinScreen(width, height) {
-    // Title
+    // Title - challenge aware
+    let title, titleColor;
+    if (this.challengeScore > 0 && this.score > this.challengeScore) {
+      title = "🏆 CHALLENGE BEATEN!";
+      titleColor = "#44ff44";
+    } else {
+      title = "Stage Clear!";
+      titleColor = "#4fc3f7";
+    }
+
     this.add
-      .text(width / 2, 100, "Stage Clear!", {
-        fontSize: "48px",
+      .text(width / 2, 70, title, {
+        fontSize: "40px",
         fontFamily: "Arial, sans-serif",
         fontStyle: "bold",
-        color: "#4fc3f7",
+        color: titleColor,
       })
       .setOrigin(0.5);
 
+    // Challenge target miss message
+    if (this.challengeScore > 0 && this.score <= this.challengeScore) {
+      this.add
+        .text(width / 2, 110, `Target was ${this.challengeScore} — try again!`, {
+          fontSize: '16px', fontFamily: 'Arial, sans-serif', color: '#ff6644'
+        })
+        .setOrigin(0.5);
+    }
+
     this.add
-      .text(width / 2, 155, `Stage ${this.stage} completed`, {
+      .text(width / 2, 120, `Stage ${this.stage} completed`, {
         fontSize: "20px",
         fontFamily: "Arial, sans-serif",
         color: "#c7d5e0",
@@ -60,7 +79,7 @@ export class ResultScene extends Phaser.Scene {
     lines.forEach((line, i) => {
       const isBold = i === lines.length - 1;
       this.add
-        .text(width / 2, 210 + i * 30, line, {
+        .text(width / 2, 170 + i * 30, line, {
           fontSize: isBold ? "22px" : "18px",
           fontFamily: "Arial, sans-serif",
           fontStyle: isBold ? "bold" : "normal",
@@ -71,6 +90,9 @@ export class ResultScene extends Phaser.Scene {
 
     // Animated cards celebration
     this.createCardParticles(width, height);
+
+    // Challenge a Friend button
+    const challengeBtn = this.createChallengeButton(width / 2, 310);
 
     // Next stage button
     this.createButton(width / 2, 380, "Next Stage", () => {
@@ -89,18 +111,36 @@ export class ResultScene extends Phaser.Scene {
   }
 
   createLoseScreen(width, height) {
-    // Title
+    // Title - challenge aware
+    let title, titleColor;
+    if (this.challengeScore > 0 && this.score > this.challengeScore) {
+      title = "🏆 CHALLENGE BEATEN!";
+      titleColor = "#44ff44";
+    } else {
+      title = "Game Over";
+      titleColor = "#e74c3c";
+    }
+
     this.add
-      .text(width / 2, 100, "Game Over", {
-        fontSize: "48px",
+      .text(width / 2, 70, title, {
+        fontSize: "42px",
         fontFamily: "Arial, sans-serif",
         fontStyle: "bold",
-        color: "#e74c3c",
+        color: titleColor,
       })
       .setOrigin(0.5);
 
+    // Challenge target miss message
+    if (this.challengeScore > 0 && this.score <= this.challengeScore) {
+      this.add
+        .text(width / 2, 110, `Target was ${this.challengeScore} — try again!`, {
+          fontSize: '16px', fontFamily: 'Arial, sans-serif', color: '#ff6644'
+        })
+        .setOrigin(0.5);
+    }
+
     this.add
-      .text(width / 2, 155, `Reached Stage ${this.stage}`, {
+      .text(width / 2, 120, `Reached Stage ${this.stage}`, {
         fontSize: "20px",
         fontFamily: "Arial, sans-serif",
         color: "#c7d5e0",
@@ -115,7 +155,7 @@ export class ResultScene extends Phaser.Scene {
 
     lines.forEach((line, i) => {
       this.add
-        .text(width / 2, 210 + i * 30, line, {
+        .text(width / 2, 170 + i * 30, line, {
           fontSize: "18px",
           fontFamily: "Arial, sans-serif",
           color: "#8b9bb0",
@@ -129,7 +169,7 @@ export class ResultScene extends Phaser.Scene {
     this.add
       .text(
         width / 2,
-        300,
+        250,
         `Best Stage: ${best}  |  High Score: ${highScore}`,
         {
           fontSize: "16px",
@@ -138,6 +178,9 @@ export class ResultScene extends Phaser.Scene {
         },
       )
       .setOrigin(0.5);
+
+    // Challenge a Friend button
+    const challengeBtn = this.createChallengeButton(width / 2, 310);
 
     // Retry button
     this.createButton(width / 2, 380, "Try Again", () => {
@@ -150,6 +193,55 @@ export class ResultScene extends Phaser.Scene {
       playSlide();
       this.scene.start("MenuScene");
     });
+  }
+
+  createChallengeButton(x, y) {
+    const w = 300;
+    const h = 45;
+    const gfx = this.add.graphics();
+
+    gfx.fillStyle(0xff8800, 1);
+    gfx.fillRoundedRect(x - w / 2, y - h / 2, w, h, 12);
+
+    const label = this.add
+      .text(x, y, "🏆 CHALLENGE A FRIEND", {
+        fontSize: "18px",
+        fontFamily: "Arial, sans-serif",
+        fontStyle: "bold",
+        color: "#ffffff",
+      })
+      .setOrigin(0.5);
+
+    const zone = this.add
+      .zone(x, y, w, h)
+      .setInteractive({ useHandCursor: true });
+
+    zone.on("pointerover", () => {
+      gfx.clear();
+      gfx.fillStyle(0xffaa33, 1);
+      gfx.fillRoundedRect(x - w / 2, y - h / 2, w, h, 12);
+    });
+
+    zone.on("pointerout", () => {
+      gfx.clear();
+      gfx.fillStyle(0xff8800, 1);
+      gfx.fillRoundedRect(x - w / 2, y - h / 2, w, h, 12);
+    });
+
+    zone.on("pointerdown", () => {
+      const url = `${window.location.origin}${window.location.pathname}?c=${this.score}`;
+      const text = `I scored ${this.score} in Solitaire Tower! 🃏 Can you beat me? ${url}`;
+      if (navigator.share) {
+        navigator.share({ title: 'Solitaire Tower Challenge', text }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          label.setText('📋 LINK COPIED!');
+          this.time.delayedCall(2000, () => label.setText('🏆 CHALLENGE A FRIEND'));
+        });
+      }
+    });
+
+    return zone;
   }
 
   createCardParticles(width, height) {

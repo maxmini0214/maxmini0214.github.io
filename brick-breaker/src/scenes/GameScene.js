@@ -742,10 +742,14 @@ export class GameScene extends Phaser.Scene {
       localStorage.setItem("brickbreaker-highscore", this.score);
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeScore = urlParams.get('c') ? parseInt(urlParams.get('c'), 10) : 0;
+
     this.scene.start("ResultScene", {
       score: this.score,
       level: this.level + 1,
       isNewRecord,
+      challengeScore,
     });
   }
 

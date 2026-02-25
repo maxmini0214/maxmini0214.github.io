@@ -760,6 +760,9 @@ export class GameScene extends Phaser.Scene {
       this.mobileInput = null;
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeScore = urlParams.get('c') ? parseInt(urlParams.get('c'), 10) : 0;
+
     this.time.delayedCall(800, () => {
       this.scene.start("ResultScene", {
         score: this.score,
@@ -767,6 +770,7 @@ export class GameScene extends Phaser.Scene {
         maxCombo: this.maxCombo,
         level: this.level,
         isNewRecord,
+        challengeScore,
       });
     });
   }

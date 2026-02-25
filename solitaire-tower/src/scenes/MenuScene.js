@@ -15,6 +15,23 @@ export class MenuScene extends Phaser.Scene {
   create() {
     const { width, height } = this.scale;
 
+    // Challenge mode
+    const params = new URLSearchParams(window.location.search);
+    this.challengeScore = params.get('c') ? parseInt(params.get('c'), 10) : 0;
+
+    if (this.challengeScore > 0) {
+      const bannerGfx = this.add.graphics();
+      bannerGfx.fillStyle(0xff8800, 0.9);
+      bannerGfx.fillRoundedRect(width / 2 - 180, 18, 360, 60, 12);
+      bannerGfx.setDepth(10);
+      this.add.text(width / 2, 35, '🏆 CHALLENGE', {
+        fontSize: '22px', fontFamily: 'Arial, sans-serif', color: '#ffffff', fontStyle: 'bold'
+      }).setOrigin(0.5).setDepth(11);
+      this.add.text(width / 2, 62, `Beat ${this.challengeScore} points!`, {
+        fontSize: '16px', fontFamily: 'Arial, sans-serif', color: '#fff8e0'
+      }).setOrigin(0.5).setDepth(11);
+    }
+
     // Background gradient
     const gfx = this.add.graphics();
     gfx.fillGradientStyle(0x1b2838, 0x1b2838, 0x2a475e, 0x2a475e, 1);

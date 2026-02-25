@@ -646,11 +646,15 @@ export class GameScene extends Phaser.Scene {
       localStorage.setItem("bubbleshooter-highscore", this.score.toString());
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeScore = urlParams.get('c') ? parseInt(urlParams.get('c'), 10) : 0;
+
     this.time.delayedCall(800, () => {
       this.scene.start("ResultScene", {
         score: this.score,
         cleared,
         isNewRecord,
+        challengeScore,
       });
     });
   }

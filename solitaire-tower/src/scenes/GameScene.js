@@ -607,12 +607,16 @@ export class GameScene extends Phaser.Scene {
 
     playBigMerge();
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const challengeScore = urlParams.get('c') ? parseInt(urlParams.get('c'), 10) : 0;
+
     this.scene.start("ResultScene", {
       win: true,
       stage: this.stage,
       score: this.score,
       stockBonus: stockBonus,
       nextStage: nextStage,
+      challengeScore,
     });
   }
 
@@ -636,11 +640,15 @@ export class GameScene extends Phaser.Scene {
 
     playGameOver();
 
+    const urlParams2 = new URLSearchParams(window.location.search);
+    const challengeScore2 = urlParams2.get('c') ? parseInt(urlParams2.get('c'), 10) : 0;
+
     this.scene.start("ResultScene", {
       win: false,
       stage: this.stage,
       score: this.score,
       cardsLeft: cardsLeft,
+      challengeScore: challengeScore2,
     });
   }
 
