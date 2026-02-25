@@ -414,5 +414,22 @@ function applyPreset(i){
 render();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var k='gumroad-float-cta-seen';
+  if(sessionStorage.getItem(k))return;
+  setTimeout(function(){
+    if(sessionStorage.getItem(k))return;
+    var d=document.createElement('div');
+    d.id='gumroad-float-cta';
+    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#ff6b35,#f7931e);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:gumSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">🛠️ Finding this useful?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Grab the Frontend Interview Cheat Sheet — $9</span><a href="https://maxxmini.gumroad.com/l/frontend-interview?ref=float-box-shadow-generator" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#ff6b35;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Get It →</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(\''+k+'\',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
+    var s=document.createElement('style');
+    s.textContent='@keyframes gumSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
+    document.head.appendChild(s);
+    document.body.appendChild(d);
+    sessionStorage.setItem(k,'1');
+  },60000);
+})();
+</script>
 </body>
 </html>
