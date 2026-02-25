@@ -72,6 +72,12 @@ footer{text-align:center;padding:2rem 1.5rem;color:var(--text2);font-size:.8rem;
 footer .brand{color:var(--cyan);font-weight:600}
 @media(max-width:500px){.timer-display{font-size:4rem}header h1{font-size:1.5rem}}
 
+.stats-bar{display:flex;gap:.75rem;justify-content:center;margin:1.25rem 0;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.stat{text-align:center;min-width:60px}
+.stat-num{display:block;font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--cyan)}
+.stat-lbl{display:block;font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+@media(max-width:500px){.stats-bar{gap:.5rem;padding:.6rem .5rem}.stat-num{font-size:1.1rem}.stat{min-width:50px}}
+
 .gumroad-cta{max-width:480px;margin:2rem auto;padding:1.2rem 1.5rem;background:linear-gradient(135deg,var(--surface),#0f172a);border:1px solid var(--border);border-radius:12px;text-align:center}
 .gumroad-cta h4{margin:0 0 .5rem;font-size:1rem;color:#fbbf24}
 .gumroad-cta p{margin:0 0 .8rem;color:var(--text2);font-size:.85rem;line-height:1.4}
@@ -134,7 +140,7 @@ footer .brand{color:var(--cyan);font-weight:600}
       "name": "Does this timer work offline?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, no internet connection is needed. Your session count is tracked in memory during the current browser session. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications."
+        "text": "Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, no internet connection is needed. Your lifetime stats (total sessions, streaks, daily count) are saved in localStorage — persistent across visits, no account needed. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications."
       }
     },
     {
@@ -184,6 +190,13 @@ footer .brand{color:var(--cyan);font-weight:600}
 
 <div class="sessions">Sessions completed: <span id="count">0</span></div>
 
+<div id="stats-bar" class="stats-bar">
+<div class="stat"><span class="stat-num" id="stat-total">0</span><span class="stat-lbl">All-Time</span></div>
+<div class="stat"><span class="stat-num" id="stat-today">0</span><span class="stat-lbl">Today</span></div>
+<div class="stat"><span class="stat-num" id="stat-streak">0</span><span class="stat-lbl">Day Streak</span></div>
+<div class="stat"><span class="stat-num" id="stat-best">0</span><span class="stat-lbl">Best Streak</span></div>
+</div>
+
 <button class="btn-share" id="shareBtn" title="Share timer settings via URL">🔗 Share Settings</button>
 </div>
 
@@ -208,7 +221,7 @@ footer .brand{color:var(--cyan);font-weight:600}
 <details><summary>What is the Pomodoro Technique?</summary><div class="answer">The Pomodoro Technique is a time management method created by Francesco Cirillo in the late 1980s. It uses a kitchen timer (pomodoro = tomato in Italian) to break work into <strong>25-minute focused intervals</strong> called "pomodoros", separated by 5-minute breaks. After 4 pomodoros, take a longer 15–30 minute break. Studies show this reduces mental fatigue and improves sustained concentration.</div></details>
 <details><summary>Why 25 minutes? Can I change the duration?</summary><div class="answer">25 minutes is the classic Pomodoro interval — long enough for meaningful work, short enough to maintain focus. Many people customize it: <strong>developers</strong> often use 50/10, <strong>students</strong> prefer 25/5, and <strong>writers</strong> sometimes use 45/15. This tool offers Work (25m), Short Break (5m), and Long Break (15m) modes.</div></details>
 <details><summary>How do I set a Pomodoro timer in code?</summary><div class="answer"><strong>JavaScript:</strong><br><code>setInterval(() =&gt; { if (--s &lt;= 0) { clearInterval(t); alert('Done!'); }}, 1000);</code><br><br><strong>Python:</strong><br><code>import time; time.sleep(25*60); print('Pomodoro done!')</code><br><br><strong>Terminal (macOS/Linux):</strong><br><code>sleep 1500 && echo "Done" && afplay /System/Library/Sounds/Glass.aiff</code><br><br><strong>Windows:</strong><br><code>timeout /t 1500 && echo Done</code></div></details>
-<details><summary>Does this timer work offline?</summary><div class="answer">Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, <strong>no internet connection is needed</strong>. Session count is tracked in memory during your browser session. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications.</div></details>
+<details><summary>Does this timer work offline?</summary><div class="answer">Yes! This Pomodoro timer runs entirely in your browser with JavaScript. Once the page loads, <strong>no internet connection is needed</strong>. Your lifetime stats (total sessions, streaks, daily count) are saved in localStorage — <strong>persistent across visits, no account needed</strong>. The timer uses the Web Audio API for sound alerts and the Notification API for desktop notifications.</div></details>
 <details><summary>How can I share my timer settings with a team?</summary><div class="answer">Click the <strong>🔗 Share Settings</strong> button to generate a URL that encodes your current timer mode. Send this link to teammates — they'll open the timer with the exact same configuration. The URL uses parameter encoding — <strong>no data is sent to any server</strong>.</div></details>
 <details><summary>What are the best Pomodoro apps and alternatives?</summary><div class="answer">Popular alternatives: <strong>Forest</strong> (gamified, $3.99), <strong>Focus Keeper</strong> (iOS), <strong>Toggl Track</strong> (with time logging), <strong>Be Focused</strong> (macOS), <strong>Pomofocus.io</strong> (web). This tool is unique: 100% free, no signup, runs entirely in the browser, and zero tracking — your data never leaves your device.</div></details>
 </section>
@@ -342,7 +355,7 @@ function tick(){
   if(timeLeft<=0){
     clearInterval(interval);running=false;
     startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
-    if(currentMode===25){sessions++;countEl.textContent=sessions;notify('Work session done! Take a break.');showSessionComplete(sessions);}
+    if(currentMode===25){sessions++;countEl.textContent=sessions;notify('Work session done! Take a break.');recordSession();showSessionComplete(sessions);}
     else notify('Break over! Time to focus.');
     return;
   }
@@ -366,6 +379,71 @@ tabs.forEach(btn=>btn.addEventListener('click',()=>{
   label.textContent=currentMode===25?'Work Session':currentMode===5?'Short Break':'Long Break';
   startBtn.textContent='▶ Start';startBtn.className='controls btn-start';
 }));
+
+// Persistent stats (localStorage)
+const POMO_STATS_KEY='pomo-stats';
+function getStats(){try{return JSON.parse(localStorage.getItem(POMO_STATS_KEY))||{}}catch(e){return {}}}
+function saveStats(s){try{localStorage.setItem(POMO_STATS_KEY,JSON.stringify(s))}catch(e){}}
+function todayStr(){return new Date().toISOString().slice(0,10)}
+function initStats(){
+  const s=getStats();
+  if(!s.total)s.total=0;
+  if(!s.bestStreak)s.bestStreak=0;
+  if(!s.lastDate)s.lastDate='';
+  if(!s.streak)s.streak=0;
+  if(!s.todayCount)s.todayCount=0;
+  if(!s.todayDate)s.todayDate='';
+  // Reset today if date changed
+  const today=todayStr();
+  if(s.todayDate!==today){
+    // Check streak continuity
+    const ld=s.lastDate;
+    if(ld){
+      const diff=Math.floor((new Date(today)-new Date(ld))/(86400000));
+      if(diff>1)s.streak=0; // streak broken
+    }
+    s.todayCount=0;s.todayDate=today;
+  }
+  saveStats(s);
+  renderStats(s);
+  return s;
+}
+function renderStats(s){
+  document.getElementById('stat-total').textContent=s.total||0;
+  document.getElementById('stat-today').textContent=s.todayCount||0;
+  document.getElementById('stat-streak').textContent=s.streak||0;
+  document.getElementById('stat-best').textContent=s.bestStreak||0;
+}
+function recordSession(){
+  const s=getStats();const today=todayStr();
+  s.total=(s.total||0)+1;
+  if(s.todayDate!==today){
+    const ld=s.lastDate||'';
+    if(ld){const diff=Math.floor((new Date(today)-new Date(ld))/(86400000));if(diff>1)s.streak=0;}
+    s.todayCount=0;s.todayDate=today;
+  }
+  if(s.todayCount===0){
+    // First session of the day = extend streak
+    s.streak=(s.streak||0)+1;
+    if(s.streak>(s.bestStreak||0))s.bestStreak=s.streak;
+  }
+  s.todayCount++;s.lastDate=today;
+  saveStats(s);renderStats(s);
+  // Milestones
+  const m=s.total;
+  if([10,25,50,100,250,500,1000].includes(m)){
+    showMilestoneToast(m);
+  }
+}
+function showMilestoneToast(n){
+  if(document.getElementById('milestone-toast'))return;
+  var t=document.createElement('div');t.id='milestone-toast';
+  var icons={10:'⭐',25:'🌟',50:'💫',100:'🏆',250:'👑',500:'🔥',1000:'💎'};
+  t.innerHTML='<div style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:10001;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;padding:14px 24px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;text-align:center;animation:toastIn .5s ease-out;white-space:nowrap"><span style="font-size:1.5rem">'+(icons[n]||'🎉')+'</span> <strong>'+n+' lifetime sessions!</strong> You\'re a focus machine.</div>';
+  document.body.appendChild(t);
+  setTimeout(function(){if(t.parentNode)t.remove()},5000);
+}
+initStats();
 
 // Share button
 document.getElementById('shareBtn').addEventListener('click',()=>{
