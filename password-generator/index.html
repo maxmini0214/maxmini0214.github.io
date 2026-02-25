@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <title>Password Generator — Free Secure Random Passwords | MaxDevTools</title>
-<meta name="description" content="Generate strong, random passwords with customizable length, character sets, and real-time entropy display. 100% client-side, no tracking.">
-<meta name="keywords" content="password generator, random password, secure password, entropy, strong password, online tool">
+<meta name="description" content="Generate strong, random passwords in bulk (1-10 at once) with customizable length, character sets, and real-time entropy display. 100% client-side, no tracking.">
+<meta name="keywords" content="password generator, random password, secure password, entropy, strong password, online tool, bulk password generator, multiple passwords, batch password">
 <meta name="author" content="MaxDevTools">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/password-generator/">
@@ -126,6 +126,10 @@ footer .brand{color:var(--cyan);font-weight:600}
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Password Generator","item":"https://maxmini0214.github.io/password-generator/"}]}
 </script>
 <script type="application/ld+json">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I generate multiple passwords at once?","acceptedAnswer":{"@type":"Answer","text":"Yes! Use the Generate Multiple selector to create 1, 3, 5, or 10 passwords in a single click. Each password is independently random and cryptographically secure. You can copy them individually or all at once."}},{"@type":"Question","name":"How secure are these passwords?","acceptedAnswer":{"@type":"Answer","text":"Passwords use the Web Crypto API (crypto.getRandomValues) for cryptographically secure randomness. A 16-character password with all character types has over 100 bits of entropy, which would take centuries to brute-force."}},{"@type":"Question","name":"Is my password stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser. No passwords are sent to any server. There is zero tracking, zero storage, zero network requests. You can verify this in your browser DevTools Network tab."}},{"@type":"Question","name":"What is a good password length?","acceptedAnswer":{"@type":"Answer","text":"16 characters is a strong default. For high-security accounts, use 20-32 characters. The entropy display shows you exactly how strong your password is in real-time."}}]}
+</script>
+<script type="application/ld+json">
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Password Generator","description":"Generate strong random passwords with customizable length, character types, and entropy display.","url":"https://maxmini0214.github.io/password-generator/","applicationCategory":"SecurityApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
   </script>
 </head>
@@ -199,15 +203,40 @@ footer .brand{color:var(--cyan);font-weight:600}
     </div>
   </div>
 
-  <!-- Generate Button -->
-  <button class="gen-btn" id="genBtn">⚡ Generate Password</button>
+  <!-- Batch Control -->
+  <div class="controls" style="margin-bottom:1rem;padding:1rem 1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <label style="font-size:.9rem;color:var(--text)">Generate Multiple</label>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <select id="batchCount" style="background:var(--surface2);border:1px solid var(--border);color:var(--cyan);padding:.4rem .8rem;border-radius:8px;font-family:var(--mono);font-size:.95rem;cursor:pointer">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+        </select>
+        <span style="font-size:.8rem;color:var(--text2)">passwords</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- CTA -->
-  <div class="cta" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #e94560;padding:24px;border-radius:12px;margin-bottom:16px;text-align:center">
-    <h3 style="color:#e94560;margin:0 0 8px">🔐 Security Toolkit Pro — Offline Bundle</h3>
-    <p style="color:#ccc;margin:0 0 12px;font-size:14px">All security tools in one offline HTML pack. No internet needed. Use on air-gapped systems, pentests, or offline audits.</p>
-    <a class="cta-btn" href="https://payhip.com/MaxDevTools" target="_blank" rel="noopener" style="background:#e94560;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:bold">Get Offline Bundle — $3</a>
-    <p style="color:#888;margin:8px 0 0;font-size:12px">One-time purchase · No subscription · Instant download</p>
+  <!-- Generate Button -->
+  <button class="gen-btn" id="genBtn">⚡ Generate Passwords</button>
+
+  <!-- Batch Results -->
+  <div id="batchResults" style="display:none;margin-bottom:1.5rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+      <span style="font-size:.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em">Generated Passwords</span>
+      <button id="copyAllBtn" style="background:var(--surface2);border:1px solid var(--border);color:var(--cyan);padding:.4rem .8rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;transition:border-color .2s">📋 Copy All</button>
+    </div>
+    <div id="batchList" style="display:flex;flex-direction:column;gap:.4rem"></div>
+  </div>
+
+  <!-- Gumroad CTA -->
+  <div class="cta" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #ff6b35;padding:24px;border-radius:12px;margin-bottom:16px;text-align:center">
+    <h3 style="color:#ff6b35;margin:0 0 8px">📦 Developer Cheat Sheet Bundle — $7</h3>
+    <p style="color:#ccc;margin:0 0 12px;font-size:14px">6 cheat sheets in one pack: Git, Docker, SQL, System Design, Frontend & more. 120+ pages of quick-reference material.</p>
+    <a class="cta-btn" href="https://maxxmini.gumroad.com/l/rsgxr?ref=password-generator" target="_blank" rel="noopener" style="background:#ff6b35;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;display:inline-block;font-weight:bold">Get the Bundle — $7</a>
+    <p style="color:#888;margin:8px 0 0;font-size:12px">One-time purchase · Instant PDF download · 30-day guarantee</p>
   </div>
 
   <div class="cta">
@@ -302,30 +331,7 @@ function getPool() {
   return pool;
 }
 
-function generate() {
-  const pool = getPool();
-  if (!pool) return;
-  const len = state.length;
-  const arr = new Uint32Array(len);
-  crypto.getRandomValues(arr);
-  let pw = '';
-  for (let i = 0; i < len; i++) pw += pool[arr[i] % pool.length];
-
-  // Ensure at least one char from each active set
-  const activeKeys = Object.keys(CHARSETS).filter(k => state[k]);
-  const fixArr = new Uint32Array(activeKeys.length);
-  crypto.getRandomValues(fixArr);
-  const chars = [...pw];
-  activeKeys.forEach((k, i) => {
-    const set = CHARSETS[k];
-    const hasChar = [...set].some(c => pw.includes(c));
-    if (!hasChar) chars[i] = set[fixArr[i] % set.length];
-  });
-  pw = chars.join('');
-
-  $('pwDisplay').textContent = pw;
-  updateStats(pw, pool.length);
-}
+function generate() { generateBatch(); }
 
 function updateStats(pw, charsetSize) {
   const len = pw.length;
@@ -371,6 +377,63 @@ function formatCombos(n) {
   return n.toLocaleString();
 }
 
+// Single password generation
+function generateOne() {
+  const pool = getPool();
+  if (!pool) return '';
+  const len = state.length;
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  let pw = '';
+  for (let i = 0; i < len; i++) pw += pool[arr[i] % pool.length];
+  const activeKeys = Object.keys(CHARSETS).filter(k => state[k]);
+  const fixArr = new Uint32Array(activeKeys.length);
+  crypto.getRandomValues(fixArr);
+  const chars = [...pw];
+  activeKeys.forEach((k, i) => {
+    const set = CHARSETS[k];
+    if (![...set].some(c => pw.includes(c))) chars[i] = set[fixArr[i] % set.length];
+  });
+  return chars.join('');
+}
+
+// Batch generation
+function generateBatch() {
+  const count = parseInt($('batchCount').value);
+  const pool = getPool();
+  if (!pool) return;
+
+  // Always generate primary password
+  const pw = generateOne();
+  $('pwDisplay').textContent = pw;
+  updateStats(pw, pool.length);
+
+  // Batch results
+  const batchDiv = $('batchResults');
+  const batchList = $('batchList');
+  if (count <= 1) {
+    batchDiv.style.display = 'none';
+    return;
+  }
+
+  batchDiv.style.display = 'block';
+  batchList.innerHTML = '';
+  const passwords = [pw];
+  for (let i = 1; i < count; i++) passwords.push(generateOne());
+
+  passwords.forEach((p, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem .85rem;';
+    row.innerHTML = '<span style="color:var(--text2);font-size:.75rem;min-width:1.5rem">' + (i+1) + '.</span>' +
+      '<span style="flex:1;font-family:var(--mono);font-size:.9rem;color:var(--green);word-break:break-all">' + p.replace(/[<>&"']/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c])) + '</span>' +
+      '<button onclick="navigator.clipboard.writeText(this.dataset.pw);this.textContent=\'✅\';setTimeout(()=>this.textContent=\'📋\',1000)" data-pw="' + p.replace(/"/g, '&quot;') + '" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:.3rem .5rem;border-radius:6px;cursor:pointer;font-size:.85rem">📋</button>';
+    batchList.appendChild(row);
+  });
+
+  // Store passwords for copy all
+  batchDiv.dataset.passwords = passwords.join('\n');
+}
+
 // Copy
 $('copyBtn').addEventListener('click', () => {
   const pw = $('pwDisplay').textContent;
@@ -382,14 +445,24 @@ $('copyBtn').addEventListener('click', () => {
   });
 });
 
+// Copy All
+$('copyAllBtn').addEventListener('click', () => {
+  const pws = $('batchResults').dataset.passwords;
+  if (!pws) return;
+  navigator.clipboard.writeText(pws).then(() => {
+    $('copyAllBtn').textContent = '✅ Copied All!';
+    setTimeout(() => $('copyAllBtn').textContent = '📋 Copy All', 1500);
+  });
+});
+
 // Refresh
-$('refreshBtn').addEventListener('click', generate);
+$('refreshBtn').addEventListener('click', generateBatch);
 
 // Generate button
-$('genBtn').addEventListener('click', generate);
+$('genBtn').addEventListener('click', generateBatch);
 
 // Generate on load
-generate();
+generateBatch();
 </script>
 <div style="text-align:center;margin:20px 0;opacity:0.6"><a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://maxmini0214.github.io/password-generator&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visits&edge_flat=true" alt="Hits" /></a></div>
 <div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
