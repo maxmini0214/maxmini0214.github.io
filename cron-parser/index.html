@@ -8,8 +8,8 @@
     <meta property="og:image" content="https://maxmini0214.github.io/cron-parser/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-<meta name="description" content="Parse and explain cron expressions in plain English. See next run times, validate syntax, and build cron schedules visually. 100% client-side, free forever.">
-<meta name="keywords" content="cron parser, cron expression, crontab, cron schedule, cron explainer, cron validator, cron generator">
+<meta name="description" content="Parse and explain cron expressions in plain English. See next run times in any timezone, validate syntax, and share expressions via URL. 100% client-side, free forever.">
+<meta name="keywords" content="cron parser, cron expression, crontab, cron schedule, cron explainer, cron validator, cron generator, cron timezone, cron time converter">
 <meta property="og:title" content="Cron Expression Parser — Free Online Tool">
 <meta property="og:description" content="Parse cron expressions into plain English. See next run times instantly.">
 <meta property="og:type" content="website">
@@ -132,6 +132,14 @@ footer a{color:#64748b;text-decoration:none}
         "@type": "Answer",
         "text": "Click the 🔗 Share button to generate a URL with your cron expression encoded. Send the link to your team — when they open it, the expression is automatically loaded and parsed. No account or sign-up needed."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see cron run times in a different timezone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the timezone dropdown to switch between UTC, US timezones (Eastern, Central, Mountain, Pacific), Europe (London, Berlin), Asia (Tokyo, Seoul, Shanghai, India), and Australia (Sydney). The next run times update instantly to show times in your selected timezone."
+      }
     }
   ]
 }
@@ -165,9 +173,33 @@ footer a{color:#64748b;text-decoration:none}
 </div>
 </div>
 
-<div style="display:flex;gap:8px;margin-bottom:16px">
+<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
 <button id="shareBtn" onclick="shareCron()" style="padding:8px 16px;background:#334155;border:1px solid #475569;border-radius:8px;color:#38bdf8;font-size:.9rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px">🔗 Share</button>
 <span id="shareMsg" style="color:#4ade80;font-size:.85rem;align-self:center;display:none">Copied!</span>
+<div style="margin-left:auto;display:flex;align-items:center;gap:6px">
+<label for="tzSelect" style="font-size:.8rem;color:#64748b">🌍 Timezone:</label>
+<select id="tzSelect" onchange="parse()" style="padding:6px 10px;background:#0f172a;border:1px solid #334155;border-radius:6px;color:#e2e8f0;font-size:.82rem;cursor:pointer">
+<option value="local">Local (auto)</option>
+<option value="UTC">UTC</option>
+<option value="America/New_York">US Eastern</option>
+<option value="America/Chicago">US Central</option>
+<option value="America/Denver">US Mountain</option>
+<option value="America/Los_Angeles">US Pacific</option>
+<option value="Europe/London">London</option>
+<option value="Europe/Berlin">Berlin</option>
+<option value="Asia/Tokyo">Tokyo</option>
+<option value="Asia/Seoul">Seoul</option>
+<option value="Asia/Shanghai">Shanghai</option>
+<option value="Asia/Kolkata">India</option>
+<option value="Australia/Sydney">Sydney</option>
+</select>
+</div>
+</div>
+
+<!-- Recent Expressions -->
+<div id="historyBar" style="display:none;margin-bottom:16px">
+<p style="font-size:.75rem;color:#64748b;margin-bottom:6px">📋 Recent:</p>
+<div id="historyList" style="display:flex;flex-wrap:wrap;gap:6px"></div>
 </div>
 <div id="output"></div>
 
@@ -210,42 +242,14 @@ footer a{color:#64748b;text-decoration:none}
 <summary style="color:#38bdf8;font-weight:600">Is this tool free?</summary>
 <p style="margin-top:8px;color:#94a3b8;line-height:1.6">100% free, forever. Runs entirely in your browser — no data is sent anywhere. No account, no tracking, no ads.</p>
 </details>
-</div>
-
-
-<div class="faq-section">
-<h2>Frequently Asked Questions</h2>
-
-<details>
-<summary>What is a cron expression?</summary>
-<p>A cron expression is a string of 5 fields (minute, hour, day of month, month, day of week) that defines a recurring schedule. For example, <code>0 9 * * 1-5</code> means "every weekday at 9:00 AM". Cron is used in Linux/Unix systems, CI/CD pipelines, and cloud schedulers like AWS CloudWatch and Google Cloud Scheduler.</p>
-</details>
-
-<details>
-<summary>What does */5 mean in a cron expression?</summary>
-<p>The <code>*/5</code> syntax means "every 5th unit". In the minute field, <code>*/5</code> means every 5 minutes (0, 5, 10, 15...). In the hour field, <code>*/5</code> means every 5 hours. The <code>*</code> represents "all values" and <code>/5</code> is the step value.</p>
-</details>
-
-<details>
-<summary>What is the difference between cron and crontab?</summary>
-<p>Cron is the scheduling daemon that runs in the background on Unix/Linux systems. Crontab (cron table) is the file where you define your scheduled tasks. You edit it with <code>crontab -e</code>. Each line in a crontab file contains a cron expression followed by the command to run.</p>
-</details>
-
-<details>
-<summary>How do I run a cron job every Monday at 9 AM?</summary>
-<p>Use the cron expression <code>0 9 * * 1</code>. Field breakdown: minute=0, hour=9, day=* (any), month=* (any), weekday=1 (Monday). In cron, 0=Sunday, 1=Monday, ..., 6=Saturday. Some systems also accept 7 for Sunday.</p>
-</details>
-
-<details>
-<summary>Is this cron parser free to use?</summary>
-<p>Yes, this cron expression parser is 100% free and runs entirely in your browser. No data is sent to any server, no account required, and no tracking. You can bookmark it or share a link with your cron expression pre-loaded.</p>
-</details>
-
-<details>
-<summary>How do I share a cron expression with my team?</summary>
-<p>Click the 🔗 Share button to generate a URL with your cron expression encoded. Send the link to your team — when they open it, the expression is automatically loaded and parsed. No account or sign-up needed.</p>
+<details style="margin:12px 0;padding:10px;background:#0f172a;border-radius:8px;cursor:pointer">
+<summary style="color:#38bdf8;font-weight:600">Can I see cron run times in a different timezone?</summary>
+<p style="margin-top:8px;color:#94a3b8;line-height:1.6">Yes! Use the 🌍 Timezone dropdown above the results to switch between UTC, US timezones, Europe, Asia, and more. The "Next Runs" list updates instantly to show times in your selected timezone — perfect for teams working across time zones or checking server schedules.</p>
 </details>
 </div>
+
+
+<!-- duplicate FAQ removed -->
 
 <!-- DonFlow CTA -->
 <div class="cta">
@@ -383,6 +387,37 @@ function getNextRuns(fields,count=8){
   return runs
 }
 
+function formatRunInTz(date,tz){
+  if(tz==='local')return{day:DAYS[date.getDay()].slice(0,3),str:date.toLocaleString()};
+  try{
+    const opts={timeZone:tz,weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false};
+    const formatted=date.toLocaleString('en-US',opts);
+    const dayOpts={timeZone:tz,weekday:'short'};
+    const dayStr=date.toLocaleString('en-US',dayOpts);
+    return{day:dayStr,str:formatted};
+  }catch(e){return{day:DAYS[date.getDay()].slice(0,3),str:date.toLocaleString()}}
+}
+
+function saveToHistory(expr){
+  const k='cron-history';
+  let h=[];try{h=JSON.parse(localStorage.getItem(k)||'[]')}catch(e){}
+  h=h.filter(e=>e!==expr);
+  h.unshift(expr);
+  if(h.length>8)h=h.slice(0,8);
+  localStorage.setItem(k,JSON.stringify(h));
+  renderHistory();
+}
+
+function renderHistory(){
+  const k='cron-history';
+  let h=[];try{h=JSON.parse(localStorage.getItem(k)||'[]')}catch(e){}
+  const bar=document.getElementById('historyBar');
+  const list=document.getElementById('historyList');
+  if(h.length===0){bar.style.display='none';return}
+  bar.style.display='block';
+  list.innerHTML=h.map(e=>`<button onclick="document.getElementById('cronInput').value='${e}';parse()" style="padding:4px 10px;background:#1e293b;border:1px solid #334155;border-radius:6px;color:#94a3b8;font-size:.78rem;font-family:monospace;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#38bdf8';this.style.color='#e2e8f0'" onmouseout="this.style.borderColor='#334155';this.style.color='#94a3b8'">${e}</button>`).join('');
+}
+
 function parse(){
   const input=document.getElementById('cronInput').value.trim();
   const out=document.getElementById('output');
@@ -391,7 +426,10 @@ function parse(){
   try{
     const human=humanize(fields);
     const runs=getNextRuns(fields);
+    const tz=document.getElementById('tzSelect').value;
+    const tzLabel=tz==='local'?Intl.DateTimeFormat().resolvedOptions().timeZone:tz;
     const descs=fields.map((f,i)=>{const v=parseField(f,i);return{raw:f,meaning:describeField(v,i),label:FIELD_NAMES[i]}});
+    saveToHistory(input);
     out.innerHTML=`
       <div class="result">
         <h2>📖 Plain English</h2>
@@ -400,8 +438,8 @@ function parse(){
         <div class="breakdown">${descs.map(d=>`<div class="field"><div class="label">${d.label}</div><div class="value">${d.raw}</div><div class="meaning">${d.meaning}</div></div>`).join('')}</div>
       </div>
       <div class="result">
-        <h2>📅 Next ${runs.length} Runs</h2>
-        <ul class="next-runs">${runs.map(r=>`<li><span class="day">${DAYS[r.getDay()].slice(0,3)}</span>${r.toLocaleString()}</li>`).join('')}</ul>
+        <h2>📅 Next ${runs.length} Runs <span style="font-size:.75rem;color:#64748b;font-weight:normal">(${tzLabel})</span></h2>
+        <ul class="next-runs">${runs.map(r=>{const f=formatRunInTz(r,tz);return`<li><span class="day">${f.day}</span>${f.str}</li>`}).join('')}</ul>
         ${runs.length===0?'<p style="color:#f87171;padding:8px">No runs found in the next year.</p>':''}
       </div>`;
   }catch(e){out.innerHTML=`<div class="result"><div class="error">⚠️ ${e.message}</div></div>`}
@@ -426,6 +464,7 @@ function shareCron(){
 })();
 
 document.getElementById('cronInput').addEventListener('input',parse);
+renderHistory();
 parse();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
