@@ -4,95 +4,153 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Base64 Encoder/Decoder Online — Free Tool</title>
-    <meta property="og:image" content="https://maxmini0214.github.io/base64-tool/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-<meta name="description" content="Encode and decode Base64 strings instantly. 100% client-side, no data sent to servers. Free online Base64 converter tool.">
-<meta property="og:title" content="Base64 Encoder/Decoder — Free Online Tool">
-<meta property="og:description" content="Encode and decode Base64 strings instantly in your browser. Zero tracking.">
+<title>Base64 Encoder/Decoder Online — Text, Image &amp; File Converter</title>
+<meta property="og:image" content="https://maxmini0214.github.io/base64-tool/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="description" content="Encode and decode Base64 instantly — text, images, and files. Convert image to Base64 data URI, preview Base64 images, URL-safe mode. 100% client-side, zero tracking.">
+<meta name="keywords" content="base64 encoder, base64 decoder, image to base64, file to base64, base64 converter, data uri generator, base64 image encoder, url safe base64, base64 to image preview, online base64 tool, base64 encode decode, convert image base64">
+<meta property="og:title" content="Base64 Encoder/Decoder — Text, Image &amp; File Converter">
+<meta property="og:description" content="Encode text, images, and files to Base64 instantly. Preview Base64 images. URL-safe mode. 100% browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/base64-tool/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://maxmini0214.github.io/base64-tool/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444;--warn:#f59e0b}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
 header{text-align:center;padding:2rem 1rem 1rem}
-h1{font-size:1.8rem;margin-bottom:.5rem}
+h1{font-size:1.7rem;margin-bottom:.5rem}
 .subtitle{color:var(--muted);font-size:.95rem}
-main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+main{max-width:860px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--border)}
+.tab{padding:.7rem 1.2rem;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.9rem;font-weight:600;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--text)}
+.tab-panel{display:none}.tab-panel.active{display:block}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .btn-group{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
 .btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
 .btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
-textarea{width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
+.btn-sm{padding:.4rem .8rem;font-size:.8rem}
+textarea{width:100%;min-height:140px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
 textarea:focus{outline:none;border-color:var(--accent)}
 label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-size:.85rem}
 .status{margin-top:.5rem;font-size:.85rem;color:var(--success)}
 .status.error{color:var(--error)}
 .stats{display:flex;gap:1rem;margin-top:.5rem;font-size:.8rem;color:var(--muted)}
-/* Ad placeholder */
-.ad-slot{text-align:center;padding:1rem;color:var(--muted);font-size:.8rem;border:1px dashed var(--border);border-radius:8px;margin:1rem 0}
-.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
-.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
+.toggle-row{display:flex;align-items:center;gap:.75rem;margin:.75rem 0;font-size:.85rem}
+.toggle-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+/* Drop zone */
+.dropzone{border:2px dashed var(--border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .3s;background:var(--surface)}
+.dropzone:hover,.dropzone.dragover{border-color:var(--accent);background:rgba(59,130,246,.08)}
+.dropzone input{display:none}
+.dropzone-icon{font-size:2.5rem;margin-bottom:.5rem}
+.dropzone-text{color:var(--muted);font-size:.9rem}
+.dropzone-text strong{color:var(--text)}
+/* Image preview */
+.preview-box{margin-top:1rem;text-align:center;display:none}
+.preview-box img{max-width:100%;max-height:300px;border-radius:8px;border:1px solid var(--border)}
+.preview-info{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+/* History */
+.history{margin-top:1rem}
+.history-item{display:flex;align-items:center;gap:.75rem;padding:.6rem .75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;cursor:pointer;transition:border-color .2s;font-size:.85rem}
+.history-item:hover{border-color:var(--accent)}
+.history-type{font-size:.7rem;padding:2px 6px;border-radius:4px;font-weight:600;text-transform:uppercase}
+.history-type.encode{background:rgba(59,130,246,.2);color:var(--accent)}
+.history-type.decode{background:rgba(16,185,129,.2);color:var(--success)}
+.history-type.file{background:rgba(245,158,11,.2);color:var(--warn)}
+.history-preview{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+.history-time{font-size:.75rem;color:var(--muted);min-width:50px;text-align:right}
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.feature-icon{font-size:1.5rem;margin-bottom:.4rem}
+.feature-title{font-weight:600;font-size:.9rem;margin-bottom:.3rem}
+.feature-desc{font-size:.78rem;color:var(--muted)}
+/* FAQ */
+.faq{margin:2rem 0}
+.faq h2{font-size:1.2rem;margin-bottom:1rem}
+.faq-item{border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;overflow:hidden}
+.faq-q{padding:1rem;cursor:pointer;font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center;background:var(--surface)}
+.faq-q:hover{background:#253047}
+.faq-a{display:none;padding:0 1rem 1rem;font-size:.85rem;color:var(--muted);line-height:1.6}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-arrow{transition:transform .2s;font-size:.8rem}
+/* Gumroad CTA */
+.gum-cta{background:linear-gradient(135deg,#ff6b35,#f7931e);border-radius:12px;padding:1.2rem 1.5rem;text-align:center;margin:1.5rem 0;color:#fff}
+.gum-cta a{color:#fff;font-weight:700;text-decoration:underline}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
 .tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
 .tool-link:hover{border-color:var(--accent)}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
-@media(max-width:600px){h1{font-size:1.4rem}main{padding:.75rem}}
 .newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
-.newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
-.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
-.newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
-.newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
-.newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
-
+.newsletter p{margin:0 0 .5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
+.newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:.9rem}
+.newsletter form{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:.9rem;width:200px}
+.newsletter input[type=submit]{padding:.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600}
+@media(max-width:600px){h1{font-size:1.3rem}main{padding:.75rem}.tabs{overflow-x:auto}.tab{white-space:nowrap;padding:.6rem .8rem;font-size:.82rem}}
+@media print{.gum-cta,.newsletter,.dropzone,nav,button,.btn,.tabs{display:none!important}body{background:#fff;color:#000}textarea{border:1px solid #ccc}}
 </style>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Base64 Encoder/Decoder Online — Free Tool",
-  "description": "Encode and decode Base64 strings instantly. 100% client-side, no data sent to servers. Free online Base64 converter tool.",
-  "url": "https://maxmini0214.github.io/base64-tool/",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "MaxDevTools",
-    "url": "https://maxmini0214.github.io"
-  }
-}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Base64 Encoder/Decoder — Text, Image & File Converter","description":"Encode and decode Base64 instantly — text, images, and files. Convert image to Base64 data URI, preview Base64 images, URL-safe mode.","url":"https://maxmini0214.github.io/base64-tool/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Base64 Encoder/Decoder Online","item":"https://maxmini0214.github.io/base64-tool/"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Base64 Encoder/Decoder","item":"https://maxmini0214.github.io/base64-tool/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert an image to Base64?","acceptedAnswer":{"@type":"Answer","text":"Go to the File → Base64 tab, drag and drop your image (or click to browse), and the tool instantly converts it to a Base64 data URI. You can copy the full data URI or just the Base64 string."}},
+{"@type":"Question","name":"What is URL-safe Base64 encoding?","acceptedAnswer":{"@type":"Answer","text":"URL-safe Base64 replaces + with -, / with _, and removes trailing = padding. This makes the encoded string safe for use in URLs, query parameters, and filenames without additional encoding."}},
+{"@type":"Question","name":"Can I preview a Base64 encoded image?","acceptedAnswer":{"@type":"Answer","text":"Yes! Paste your Base64 string in the Base64 → Preview tab and the tool will render the image instantly. It supports JPEG, PNG, GIF, WebP, SVG and other browser-supported formats."}},
+{"@type":"Question","name":"Is my data sent to any server?","acceptedAnswer":{"@type":"Answer","text":"No. All encoding and decoding happens 100% in your browser using JavaScript. No data ever leaves your device. You can verify this by using the tool offline."}},
+{"@type":"Question","name":"What is the maximum file size supported?","acceptedAnswer":{"@type":"Answer","text":"The tool handles files up to ~50MB depending on your browser's memory. For best performance, files under 10MB are recommended. Large files are processed using FileReader API locally."}},
+{"@type":"Question","name":"What is a Base64 Data URI?","acceptedAnswer":{"@type":"Answer","text":"A Data URI embeds file content directly in HTML/CSS using the format data:[mime];base64,[data]. This eliminates an HTTP request — useful for small images, icons, and fonts in web development."}},
+{"@type":"Question","name":"How do I decode Base64 back to a file?","acceptedAnswer":{"@type":"Answer","text":"Use the Text tab to decode the Base64 string, or use the Base64 → Preview tab for images. The tool auto-detects the MIME type from data URIs and renders the content."}},
+{"@type":"Question","name":"What is the difference between Base64 and URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 (RFC 4648 §5) replaces + with -, / with _, and optionally removes = padding, making it safe for URLs without percent-encoding."}}
+]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Convert an Image to Base64","step":[
+{"@type":"HowToStep","position":1,"name":"Open File Tab","text":"Click the '📁 File → Base64' tab at the top of the tool."},
+{"@type":"HowToStep","position":2,"name":"Upload Image","text":"Drag and drop your image into the drop zone, or click to browse files from your device."},
+{"@type":"HowToStep","position":3,"name":"Copy Result","text":"The Base64 output appears instantly. Toggle 'Include data: URI prefix' for HTML/CSS use. Click Copy to clipboard."},
+{"@type":"HowToStep","position":4,"name":"Use in Code","text":"Paste the Base64 string directly into your HTML img src, CSS background-image, or API payload."}
+]}
 </script>
 </head>
 <body>
 <header>
-<h1>JWT 토큰 디코딩, 이미지 인코딩 — 복붙 한번이면 끝</h1>
-<p class="subtitle">Base64 인코딩/디코딩 즉시 처리 — 브라우저에서 바로, 데이터 유출 없음</p>
+<h1>Base64 Encoder/Decoder — Text, Images &amp; Files</h1>
+<p class="subtitle">Encode text, convert images to Base64 data URIs, preview encoded images — 100% in your browser</p>
 </header>
 <main>
-<!-- AdSense slot reserved -->
-<!-- <ins class="adsbygoogle" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"></ins> -->
-<div class="ad-slot">📢 Ad Space</div>
 
+<!-- Tabs -->
+<div class="tabs">
+<button class="tab active" onclick="switchTab('text')">📝 Text</button>
+<button class="tab" onclick="switchTab('file')">📁 File → Base64</button>
+<button class="tab" onclick="switchTab('preview')">🖼️ Base64 → Preview</button>
+</div>
+
+<!-- Tab 1: Text Encode/Decode -->
+<div id="panel-text" class="tab-panel active">
 <div class="card">
 <label>Input</label>
 <textarea id="input" placeholder="Paste text or Base64 string here..."></textarea>
 <div class="stats"><span id="inputLen">0 chars</span></div>
 </div>
+<div class="toggle-row">
+<input type="checkbox" id="urlSafe"><label for="urlSafe" style="margin:0;color:var(--text);cursor:pointer">URL-safe Base64 (RFC 4648 §5: - instead of +, _ instead of /)</label>
+</div>
 <div class="btn-group">
 <button class="btn btn-primary" onclick="encode()">Encode →</button>
 <button class="btn btn-primary" onclick="decode()">← Decode</button>
+<button class="btn btn-secondary" onclick="autoDetect()">🔍 Auto-Detect</button>
 <button class="btn btn-secondary" onclick="swap()">⇄ Swap</button>
 <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy</button>
 <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
@@ -100,28 +158,118 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="card">
 <label>Output</label>
 <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
-<div class="stats"><span id="outputLen">0 chars</span></div>
+<div class="stats"><span id="outputLen">0 chars</span> · <span id="outputSize"></span></div>
 <div id="status" class="status"></div>
 </div>
-
-<div class="cta">
-<h3>🚀 DevTools Pro Bundle — $9</h3>
-<p>All tools offline + API access + priority updates</p>
-<a href="https://github.com/maxmini0214" target="_blank">⭐ More Free Tools →</a>
 </div>
 
-<div class="ad-slot">📢 Ad Space</div>
+<!-- Tab 2: File → Base64 -->
+<div id="panel-file" class="tab-panel">
+<div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+<input type="file" id="fileInput" onchange="handleFile(this.files[0])">
+<div class="dropzone-icon">📁</div>
+<div class="dropzone-text"><strong>Drop a file here</strong> or click to browse<br><span style="font-size:.8rem;color:var(--muted)">Images, documents, any file — up to 50MB</span></div>
+</div>
+<div class="toggle-row" style="margin-top:1rem">
+<input type="checkbox" id="includeDataUri" checked><label for="includeDataUri" style="margin:0;color:var(--text);cursor:pointer">Include <code>data:</code> URI prefix (for HTML/CSS)</label>
+</div>
+<div id="fileResult" style="display:none">
+<div class="card" style="margin-top:1rem">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
+<label style="margin:0" id="fileLabel">Output</label>
+<div class="btn-group" style="margin:0">
+<button class="btn btn-primary btn-sm" onclick="copyFileOutput()">📋 Copy</button>
+<button class="btn btn-secondary btn-sm" onclick="downloadAsText()">💾 Save .txt</button>
+</div>
+</div>
+<textarea id="fileOutput" readonly style="min-height:120px"></textarea>
+<div class="stats"><span id="fileStats"></span></div>
+<div id="fileStatus" class="status"></div>
+</div>
+<div class="preview-box" id="filePreview">
+<img id="filePreviewImg" alt="File preview">
+<p class="preview-info" id="filePreviewInfo"></p>
+</div>
+</div>
+</div>
 
+<!-- Tab 3: Base64 → Preview -->
+<div id="panel-preview" class="tab-panel">
+<div class="card">
+<label>Paste Base64 or Data URI</label>
+<textarea id="previewInput" placeholder="Paste a Base64 encoded image (with or without data: prefix)..."></textarea>
+<div class="btn-group" style="margin-top:.75rem">
+<button class="btn btn-primary" onclick="previewBase64()">🖼️ Preview</button>
+<button class="btn btn-secondary" onclick="downloadFromBase64()">💾 Download File</button>
+<button class="btn btn-secondary" onclick="document.getElementById('previewInput').value='';document.getElementById('previewResult').style.display='none'">Clear</button>
+</div>
+</div>
+<div class="preview-box" id="previewResult">
+<img id="previewImg" alt="Base64 image preview">
+<p class="preview-info" id="previewInfo"></p>
+</div>
+</div>
+
+<!-- History -->
+<div class="history" id="historySection" style="display:none">
+<h3 style="font-size:.95rem;margin-bottom:.5rem">📋 Recent (last 8)</h3>
+<div id="historyList"></div>
+</div>
+
+<!-- Features Grid -->
+<div class="features">
+<div class="feature"><div class="feature-icon">📁</div><div class="feature-title">File → Base64</div><div class="feature-desc">Drag & drop any file — images, PDFs, docs — instant conversion</div></div>
+<div class="feature"><div class="feature-icon">🖼️</div><div class="feature-title">Image Preview</div><div class="feature-desc">Paste Base64 and see the image rendered instantly</div></div>
+<div class="feature"><div class="feature-icon">🔗</div><div class="feature-title">Data URI</div><div class="feature-desc">Generate ready-to-use data: URIs for HTML &amp; CSS embedding</div></div>
+<div class="feature"><div class="feature-icon">🛡️</div><div class="feature-title">URL-Safe</div><div class="feature-desc">RFC 4648 §5 encoding — safe for URLs and filenames</div></div>
+<div class="feature"><div class="feature-icon">🔍</div><div class="feature-title">Auto-Detect</div><div class="feature-desc">Paste anything — auto-detects if it's Base64 or plain text</div></div>
+<div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Everything runs in your browser. Zero server calls.</div></div>
+</div>
+
+<!-- Gumroad CTA -->
+<div class="gum-cta">
+<strong>📦 Developer Cheat Sheet Bundle — 6 cheat sheets, $7</strong><br>
+<span style="font-size:.9rem;opacity:.9">Git + Python + JS + Docker + SQL + Linux — 120+ pages</span><br>
+<a href="https://maxxmini.gumroad.com/l/rsgxr?ref=base64-tool" target="_blank" rel="noopener">Get It →</a>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+<h2>❓ Frequently Asked Questions</h2>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I convert an image to Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Click the "📁 File → Base64" tab, then drag and drop your image. The tool instantly converts it to a Base64 string with a data: URI prefix ready for HTML/CSS use.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is URL-safe Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">URL-safe Base64 (RFC 4648 §5) replaces + with -, / with _, and removes trailing = padding. This makes encoded strings safe for URLs, query parameters, and filenames without additional percent-encoding.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I preview a Base64 image?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes! Use the "🖼️ Base64 → Preview" tab. Paste your Base64 string (with or without the data: prefix) and click Preview. Supports JPEG, PNG, GIF, WebP, SVG.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my data sent to any server?<span class="faq-arrow">▼</span></div><div class="faq-a">No. All processing happens 100% in your browser using the JavaScript btoa/atob and FileReader APIs. You can verify by using the tool with your network tab open — zero requests are made.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the max file size?<span class="faq-arrow">▼</span></div><div class="faq-a">The tool handles files up to ~50MB depending on your browser's memory. For best performance, keep files under 10MB. Large files are processed locally using the FileReader API.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is a Data URI?<span class="faq-arrow">▼</span></div><div class="faq-a">A Data URI (data:[mime];base64,[data]) embeds file content directly into HTML/CSS. It eliminates an HTTP request — ideal for small images, icons, and fonts in web development.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I decode Base64 back to a file?<span class="faq-arrow">▼</span></div><div class="faq-a">For images, use the "🖼️ Base64 → Preview" tab and click "💾 Download File". For text, use the Text tab's Decode button. The tool auto-detects MIME types from data: URIs.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the difference between standard and URL-safe Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 replaces + with -, / with _, and optionally strips = padding — making it safe for URLs without percent-encoding. Use it for JWTs, API tokens, and URL query params.</div></div>
+</div>
+
+<!-- More Tools -->
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
 <div class="tools-grid">
-<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
-<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
-<a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
-<a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
-<a class="tool-link" href="https://maxmini0214.github.io/color-picker/">Color Picker</a>
-<a class="tool-link" href="https://maxmini0214.github.io/lorem-ipsum/">Lorem Ipsum</a>
+<a class="tool-link" href="/jwt-decoder/">JWT Decoder</a>
+<a class="tool-link" href="/hash-generator/">Hash Generator</a>
+<a class="tool-link" href="/url-encoder/">URL Encoder</a>
+<a class="tool-link" href="/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="/password-generator/">Password Generator</a>
+<a class="tool-link" href="/color-picker/">Color Picker</a>
+<a class="tool-link" href="/lorem-ipsum/">Lorem Ipsum</a>
+<a class="tool-link" href="/qr-code-generator/">QR Code Generator</a>
+<a class="tool-link" href="/cron-parser/">Cron Parser</a>
+</div>
+
+<!-- You Might Also Like -->
+<h2 style="margin-top:2rem">🛠️ You Might Also Like</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;">
+<a href="/url-encoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🔗 URL Encoder</div><div style="font-size:.82rem;color:#8899aa">Encoding/Data • Free</div></a>
+<a href="/jwt-decoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🔑 JWT Decoder</div><div style="font-size:.82rem;color:#8899aa">Encoding/Data • Free</div></a>
+<a href="/hash-generator/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🔐 Hash Generator</div><div style="font-size:.82rem;color:#8899aa">Encoding/Data • Free</div></a>
 </div>
 </main>
+
 <!-- Newsletter -->
 <div class="newsletter">
 <p>📬 Get Dev Tools &amp; Tips Weekly</p>
@@ -133,59 +281,166 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </div>
 
 <!-- Social Share -->
-<div style="margin:1rem auto;max-width:480px;text-align:center;">
-<p style="margin:0 0 0.5rem;color:#8b949e;font-size:0.85rem;">Share this tool</p>
-<div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
-<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20Base64%20Encoder/Decoder%20🛠️%20Free%2C%20no%20signup%2C%20runs%20in%20browser%21&url=https://maxmini0214.github.io/base64-tool/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
-<button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/base64-tool/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:#94a3b8;background:transparent;cursor:pointer;font-size:0.85rem;font-weight:600;transition:all .2s">🔗 Copy Link</button>
+<div style="margin:1rem auto;max-width:480px;text-align:center">
+<p style="margin:0 0 .5rem;color:#8b949e;font-size:.85rem">Share this tool</p>
+<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20Base64%20Encoder%2FDecoder%20%F0%9F%9B%A0%EF%B8%8F%20Text%2C%20images%2C%20files%20%E2%80%94%20free%2C%20no%20signup!&url=https://maxmini0214.github.io/base64-tool/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
+<button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/base64-tool/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:#94a3b8;background:transparent;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s">🔗 Copy Link</button>
 </div>
 </div>
 
-
-    <h2>🛠️ You Might Also Like</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;">
-  <a href="/url-encoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔗 URL Encoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
-  <a href="/jwt-decoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔑 JWT Decoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
-  <a href="/json-formatter/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">📋 JSON Formatter</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
+<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px">
+<p style="margin:0 0 8px;font-size:15px;color:#475569">🛠️ Like this tool?</p>
+<a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none">Explore 25+ Free Developer Tools →</a>
+<p style="margin:8px 0 0;font-size:13px;color:#94a3b8">No signup · No tracking · 100% browser-based</p>
 </div>
 
-    <footer>
+<footer>
 <p>🔒 Privacy First — Nothing leaves your browser. Zero server calls.</p>
-<p style="margin-top:.5rem">© 2026 DevTools by maxseats</p>
+<p style="margin-top:.5rem">© 2026 <a href="https://maxmini0214.github.io/" style="color:var(--muted)">MaxDevTools</a></p>
 </footer>
+
 <script>
+// --- Tab switching ---
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['text','file','preview'][i]===name)});
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+// --- Text encode/decode ---
 const inp=document.getElementById('input'),out=document.getElementById('output'),st=document.getElementById('status');
-function updateStats(){document.getElementById('inputLen').textContent=inp.value.length+' chars';document.getElementById('outputLen').textContent=out.value.length+' chars'}
+function updateStats(){
+  document.getElementById('inputLen').textContent=inp.value.length+' chars';
+  const ol=out.value.length;
+  document.getElementById('outputLen').textContent=ol+' chars';
+  document.getElementById('outputSize').textContent=ol>1024?(ol/1024).toFixed(1)+' KB':'';
+}
 inp.addEventListener('input',updateStats);
-function encode(){try{out.value=btoa(unescape(encodeURIComponent(inp.value)));st.textContent='✓ Encoded successfully';st.className='status';updateStats()}catch(e){st.textContent='✗ '+e.message;st.className='status error'}}
-function decode(){try{out.value=decodeURIComponent(escape(atob(inp.value.trim())));st.textContent='✓ Decoded successfully';st.className='status';updateStats()}catch(e){st.textContent='✗ Invalid Base64 string';st.className='status error'}}
+
+function toUrlSafe(s){return s.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function fromUrlSafe(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return s}
+
+function encode(){
+  try{
+    let r=btoa(unescape(encodeURIComponent(inp.value)));
+    if(document.getElementById('urlSafe').checked)r=toUrlSafe(r);
+    out.value=r;st.textContent='✓ Encoded successfully';st.className='status';updateStats();
+    addHistory('encode',inp.value.slice(0,60),r.slice(0,60));
+  }catch(e){st.textContent='✗ '+e.message;st.className='status error'}
+}
+function decode(){
+  try{
+    let v=inp.value.trim();
+    if(document.getElementById('urlSafe').checked||/[-_]/.test(v)&&!/[+/]/.test(v))v=fromUrlSafe(v);
+    out.value=decodeURIComponent(escape(atob(v)));st.textContent='✓ Decoded successfully';st.className='status';updateStats();
+    addHistory('decode',inp.value.slice(0,60),out.value.slice(0,60));
+  }catch(e){st.textContent='✗ Invalid Base64 string';st.className='status error'}
+}
+function autoDetect(){
+  const v=inp.value.trim();if(!v)return;
+  try{const d=decodeURIComponent(escape(atob(v.length%4===2?v+'==':v.length%4===3?v+'=':v)));out.value=d;st.textContent='🔍 Detected Base64 → decoded';st.className='status';updateStats();addHistory('decode',v.slice(0,60),d.slice(0,60))}
+  catch(e){let r=btoa(unescape(encodeURIComponent(v)));if(document.getElementById('urlSafe').checked)r=toUrlSafe(r);out.value=r;st.textContent='🔍 Detected plain text → encoded';st.className='status';updateStats();addHistory('encode',v.slice(0,60),r.slice(0,60))}
+}
 function swap(){const t=inp.value;inp.value=out.value;out.value=t;updateStats()}
 function copyOutput(){navigator.clipboard.writeText(out.value);st.textContent='✓ Copied!';st.className='status'}
 function clearAll(){inp.value='';out.value='';st.textContent='';updateStats()}
+
+// --- File → Base64 ---
+const dz=document.getElementById('dropzone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');if(e.dataTransfer.files.length)handleFile(e.dataTransfer.files[0])});
+
+function handleFile(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(){
+    const b64=reader.result;
+    const raw=b64.split(',')[1]||b64;
+    const includeUri=document.getElementById('includeDataUri').checked;
+    const output=includeUri?b64:raw;
+    document.getElementById('fileOutput').value=output;
+    document.getElementById('fileResult').style.display='block';
+    document.getElementById('fileLabel').textContent=file.name+' ('+formatBytes(file.size)+')';
+    document.getElementById('fileStats').textContent=output.length+' chars'+(output.length>1024?' · '+(output.length/1024).toFixed(1)+' KB':'');
+    document.getElementById('fileStatus').textContent='✓ Converted successfully';
+    // Preview if image
+    const prev=document.getElementById('filePreview'),img=document.getElementById('filePreviewImg');
+    if(file.type.startsWith('image/')){prev.style.display='block';img.src=b64;document.getElementById('filePreviewInfo').textContent=file.type+' · '+file.name+' · '+formatBytes(file.size)}
+    else{prev.style.display='none'}
+    addHistory('file',file.name,output.slice(0,60));
+  };
+  reader.readAsDataURL(file);
+}
+document.getElementById('includeDataUri').addEventListener('change',function(){
+  const fo=document.getElementById('fileOutput');if(!fo.value)return;
+  if(this.checked&&!fo.value.startsWith('data:')){/* can't reconstruct, ignore */}
+  else if(!this.checked&&fo.value.startsWith('data:')){fo.value=fo.value.split(',')[1]||fo.value}
+});
+
+function copyFileOutput(){navigator.clipboard.writeText(document.getElementById('fileOutput').value);document.getElementById('fileStatus').textContent='✓ Copied!'}
+function downloadAsText(){
+  const blob=new Blob([document.getElementById('fileOutput').value],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='base64-output.txt';a.click();URL.revokeObjectURL(a.href);
+}
+function formatBytes(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB'}
+
+// --- Base64 → Preview ---
+function previewBase64(){
+  let v=document.getElementById('previewInput').value.trim();if(!v)return;
+  if(!v.startsWith('data:')){v='data:image/png;base64,'+v}
+  const img=document.getElementById('previewImg'),box=document.getElementById('previewResult');
+  img.onload=function(){box.style.display='block';document.getElementById('previewInfo').textContent=img.naturalWidth+'×'+img.naturalHeight+' pixels'};
+  img.onerror=function(){box.style.display='block';document.getElementById('previewInfo').textContent='⚠️ Could not render — check the Base64 data or try adding the correct MIME type prefix'};
+  img.src=v;
+}
+function downloadFromBase64(){
+  let v=document.getElementById('previewInput').value.trim();if(!v)return;
+  if(!v.startsWith('data:'))v='data:application/octet-stream;base64,'+v;
+  const a=document.createElement('a');a.href=v;
+  const mime=v.match(/data:([^;]+)/);const ext=mime?mime[1].split('/')[1]||'bin':'bin';
+  a.download='decoded-file.'+ext;a.click();
+}
+
+// --- History ---
+const HISTORY_KEY='b64-history';
+function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[]}catch(e){return[]}}
+function addHistory(type,input,output){
+  const h=getHistory();
+  h.unshift({type,input,output,time:Date.now()});
+  if(h.length>8)h.length=8;
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+  renderHistory();
+}
+function renderHistory(){
+  const h=getHistory(),sec=document.getElementById('historySection'),list=document.getElementById('historyList');
+  if(!h.length){sec.style.display='none';return}
+  sec.style.display='block';
+  list.innerHTML=h.map((item,i)=>{
+    const ago=timeAgo(item.time);
+    return `<div class="history-item" onclick="loadHistory(${i})"><span class="history-type ${item.type}">${item.type}</span><span class="history-preview">${escHtml(item.input)}</span><span class="history-time">${ago}</span></div>`;
+  }).join('');
+}
+function loadHistory(i){
+  const h=getHistory()[i];if(!h)return;
+  switchTab('text');inp.value=h.input;out.value=h.output;updateStats();
+}
+function timeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return 'now';if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d'}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+renderHistory();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div style="position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#ff6b35,#f7931e);color:white;padding:12px 20px;text-align:center;font-family:system-ui;font-size:14px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,0.2)">
-  📦 Developer Cheat Sheet Bundle — 6 cheat sheets, 120+ pages, $7 one-time — <a href="https://maxxmini.gumroad.com/l/rsgxr?ref=base64-tool" target="_blank" rel="noopener" style="color:#fff;font-weight:bold;text-decoration:underline">Get It →</a>
-</div>
-<div style="text-align:center;padding:24px 16px;margin-top:40px;background:#f0f4ff;border-radius:12px;">
-  <p style="margin:0 0 8px;font-size:15px;color:#475569;">🛠️ Like this tool?</p>
-  <a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none;">Explore 25+ Free Developer Tools →</a>
-  <p style="margin:8px 0 0;font-size:13px;color:#94a3b8;">No signup · No tracking · 100% browser-based</p>
-</div>
+<!-- Floating Gumroad CTA (60s engagement) -->
 <script>
 (function(){
-  var k='gumroad-float-cta-seen';
-  if(sessionStorage.getItem(k))return;
+  var k='gumroad-float-cta-seen';if(sessionStorage.getItem(k))return;
   setTimeout(function(){
     if(sessionStorage.getItem(k))return;
     var d=document.createElement('div');
-    d.id='gumroad-float-cta';
-    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#ff6b35,#f7931e);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:gumSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">🛠️ Finding this useful?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Grab the Developer Cheat Sheet Bundle — $7</span><a href="https://maxxmini.gumroad.com/l/rsgxr?ref=float-base64-tool" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#ff6b35;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Get It →</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(\''+k+'\',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
-    var s=document.createElement('style');
-    s.textContent='@keyframes gumSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
-    document.head.appendChild(s);
-    document.body.appendChild(d);
-    sessionStorage.setItem(k,'1');
+    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#ff6b35,#f7931e);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui;font-size:15px;max-width:280px;animation:gumSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">🛠️ Finding this useful?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Grab the Developer Cheat Sheet Bundle — $7</span><a href="https://maxxmini.gumroad.com/l/rsgxr?ref=float-base64-tool" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#ff6b35;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Get It →</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(\''+k+'\',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
+    var s=document.createElement('style');s.textContent='@keyframes gumSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
+    document.head.appendChild(s);document.body.appendChild(d);sessionStorage.setItem(k,'1');
   },60000);
 })();
 </script>
