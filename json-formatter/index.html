@@ -4,23 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>JSON Formatter, Validator & CSV Converter Online — Free Tool | JSONForge</title>
+<title>JSON Formatter, Validator, CSV & YAML Converter Online — Free Tool | JSONForge</title>
     <meta property="og:image" content="https://maxmini0214.github.io/json-formatter/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-<meta name="description" content="Free online JSON formatter, validator, minifier, and JSON to CSV converter. Beautify, validate, compress, and export JSON to CSV instantly in your browser. No data sent to servers.">
-<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json parser, online json tool, free json formatter, json to csv, json to csv converter, json csv export, convert json to csv online, json tree view, json viewer">
+<meta name="description" content="Free online JSON formatter, validator, minifier, JSON to CSV converter, and JSON to YAML converter. Drag & drop JSON files. Beautify, validate, compress, and convert instantly in your browser. No data sent to servers.">
+<meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json parser, online json tool, free json formatter, json to csv, json to csv converter, json csv export, convert json to csv online, json tree view, json viewer, json to yaml, json to yaml converter, yaml to json, convert json to yaml online, json file formatter, drag drop json, json file upload, json history, json path query">
 <meta name="author" content="JSONForge by MaxxMini">
-<meta property="og:title" content="JSON Formatter, Validator & CSV Converter — Free Tool | JSONForge">
-<meta property="og:description" content="Beautify, validate, minify JSON and convert to CSV instantly. 100% client-side, no data leaves your browser.">
+<meta property="og:title" content="JSON Formatter, Validator, CSV & YAML Converter — Free Tool | JSONForge">
+<meta property="og:description" content="Beautify, validate, minify JSON and convert to CSV or YAML instantly. Drag & drop files. 100% client-side, no data leaves your browser.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/json-formatter/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="JSON Formatter, Validator & CSV Converter — Free Tool | JSONForge">
-<meta name="twitter:description" content="Beautify, validate, minify JSON and convert to CSV. 100% client-side, no data leaves your browser.">
+<meta name="twitter:title" content="JSON Formatter, Validator, CSV & YAML Converter — Free Tool | JSONForge">
+<meta name="twitter:description" content="Beautify, validate, minify JSON, convert to CSV or YAML. Drag & drop files. 100% client-side.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://maxmini0214.github.io/json-formatter/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSONForge","url":"https://maxmini0214.github.io/json-formatter/","description":"Free online JSON formatter, validator, and minifier. Beautify, validate, and compress JSON instantly in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSONForge","url":"https://maxmini0214.github.io/json-formatter/","description":"Free online JSON formatter, validator, CSV converter, and YAML converter. Beautify, validate, and transform JSON instantly in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{
   "@context":"https://schema.org",
   "@type":"FAQPage",
@@ -32,9 +32,20 @@
     {"@type":"Question","name":"How do I sort JSON keys alphabetically?","acceptedAnswer":{"@type":"Answer","text":"Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files."}},
     {"@type":"Question","name":"Can I share my formatted JSON with someone?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed."}},
     {"@type":"Question","name":"How do I convert JSON to CSV?","acceptedAnswer":{"@type":"Answer","text":"Paste an array of JSON objects into the input area, then click the 📊 CSV button. JSONForge automatically flattens nested objects using dot notation (e.g., address.city), detects all columns, and generates a downloadable CSV file. Supports any depth of nesting."}},
-    {"@type":"Question","name":"Can I view JSON as a tree?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the 🌳 Tree button to see a collapsible, color-coded tree visualization of your JSON. Click the arrows to expand or collapse any object or array. Keys, strings, numbers, booleans, and null values are all color-coded for easy reading."}}
+    {"@type":"Question","name":"Can I view JSON as a tree?","acceptedAnswer":{"@type":"Answer","text":"Yes! Click the 🌳 Tree button to see a collapsible, color-coded tree visualization of your JSON. Click the arrows to expand or collapse any object or array. Keys, strings, numbers, booleans, and null values are all color-coded for easy reading."}},
+    {"@type":"Question","name":"How do I convert JSON to YAML?","acceptedAnswer":{"@type":"Answer","text":"Click the YAML button in the toolbar. JSONForge converts your JSON to clean, properly indented YAML format. Arrays use dash notation, nested objects are indented, and special characters are automatically quoted. No external libraries needed — runs entirely in your browser."}},
+    {"@type":"Question","name":"Can I drag and drop a JSON file?","acceptedAnswer":{"@type":"Answer","text":"Yes! Simply drag any .json file from your computer and drop it onto the input area. JSONForge will read the file contents, validate the JSON, and display it instantly. You can also click the 📂 button to open a file picker. Files are read locally — nothing is uploaded."}},
+    {"@type":"Question","name":"Does JSONForge save my formatting history?","acceptedAnswer":{"@type":"Answer","text":"Yes. JSONForge automatically saves your last 8 formatted JSONs in your browser's localStorage. Click the 📜 History button to see recent entries with timestamps, preview the first line, and restore any previous JSON with one click. History never leaves your browser."}}
   ]
 }</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Format and Convert JSON Online","step":[
+{"@type":"HowToStep","position":1,"name":"Load JSON","text":"Paste JSON into the input area or drag & drop a .json file. The tool instantly validates syntax."},
+{"@type":"HowToStep","position":2,"name":"Format or Convert","text":"Click Beautify to indent, Minify to compress, CSV to export as spreadsheet, or YAML to convert format."},
+{"@type":"HowToStep","position":3,"name":"Explore","text":"Use Tree View to navigate complex structures. Sort Keys for consistent ordering."},
+{"@type":"HowToStep","position":4,"name":"Export","text":"Copy the output, download CSV, or Share via URL. All processing happens in your browser."}
+]}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--accent:#3b82f6;--accent-hover:#2563eb;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--font:'Segoe UI',system-ui,-apple-system,sans-serif;--mono:'SF Mono','Fira Code','Cascadia Code',monospace}
@@ -54,13 +65,13 @@ header p{color:var(--muted);margin-top:.4rem;font-size:.95rem}
 .status.idle{color:var(--muted)}
 .editor-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;min-height:60vh}
 @media(max-width:768px){.editor-wrap{grid-template-columns:1fr;min-height:auto}.pane{min-height:40vh}}
-.pane{display:flex;flex-direction:column}
+.pane{display:flex;flex-direction:column;position:relative}
 .pane label{font-size:.8rem;color:var(--muted);margin-bottom:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 textarea{flex:1;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:.875rem;line-height:1.6;resize:vertical;outline:none;transition:border-color .15s}
 textarea:focus{border-color:var(--accent)}
 textarea::placeholder{color:#475569}
 .stats{display:flex;gap:1.5rem;margin-top:.75rem;font-size:.8rem;color:var(--muted)}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.5rem 0}
 .feature{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem}
 .feature h4{font-size:.9rem;margin-bottom:.3rem}
 .feature p{font-size:.8rem;color:var(--muted)}
@@ -90,19 +101,32 @@ textarea::placeholder{color:#475569}
 .csv-download:hover{transform:translateY(-1px)}
 footer{text-align:center;padding:1.5rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
 footer a{color:var(--accent);text-decoration:none}
+/* Drop zone */
+.drop-overlay{display:none;position:absolute;inset:0;background:rgba(59,130,246,0.15);border:3px dashed var(--accent);border-radius:8px;z-index:10;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:var(--accent);pointer-events:none}
+.pane.drag-over .drop-overlay{display:flex}
+/* History panel */
+.history-panel{display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:.75rem;max-height:300px;overflow-y:auto}
+.history-panel.visible{display:block}
+.history-item{display:flex;align-items:center;gap:.75rem;padding:.6rem;border-radius:6px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--border)}
+.history-item:last-child{border-bottom:none}
+.history-item:hover{background:#253352}
+.history-item .preview{flex:1;font-family:var(--mono);font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item .time{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.history-item .del-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:.9rem;opacity:.5;padding:2px 6px}
+.history-item .del-btn:hover{opacity:1}
 </style>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"JSON Formatter & Validator Online","item":"https://maxmini0214.github.io/json-formatter/"}]}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"JSON Formatter, Validator & YAML Converter","item":"https://maxmini0214.github.io/json-formatter/"}]}
 </script>
 <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter & Validator","description":"Format, validate, and beautify JSON data. Syntax highlighting, tree view, and error detection.","url":"https://maxmini0214.github.io/json-formatter/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter, Validator & YAML Converter","description":"Format, validate, beautify JSON data. Convert to CSV or YAML. Tree view, drag & drop files, formatting history.","url":"https://maxmini0214.github.io/json-formatter/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
   </script>
 </head>
 <body>
 <header>
-<h1>JSON Formatter, Validator & CSV Converter</h1>
-<p>Format, validate, convert to CSV, and explore with tree view. 100% in your browser.</p>
+<h1>JSON Formatter, Validator & YAML Converter</h1>
+<p>Format, validate, convert to CSV or YAML, and explore with tree view. Drag & drop files. 100% in your browser.</p>
 </header>
 <div class="container">
 <div class="toolbar">
@@ -110,20 +134,25 @@ footer a{color:var(--accent);text-decoration:none}
 <button onclick="minifyJSON()">Minify</button>
 <button onclick="sortKeys()">Sort Keys</button>
 <button onclick="jsonToCSV()">📊 CSV</button>
+<button onclick="jsonToYAML()">📄 YAML</button>
 <button onclick="toggleTreeView()">🌳 Tree</button>
+<button onclick="openFilePicker()">📂 File</button>
+<button onclick="toggleHistory()">📜 History</button>
 <button onclick="copyOutput()">📋 Copy</button>
 <button onclick="shareJSON()">🔗 Share</button>
 <button onclick="clearAll()">Clear</button>
 <button onclick="loadSample()">Sample</button>
-<span class="status idle" id="status">Paste JSON to start</span>
+<span class="status idle" id="status">Paste JSON or drop a file</span>
 </div>
 <div class="editor-wrap">
-<div class="pane">
+<div class="pane" id="input-pane">
 <label>Input</label>
-<textarea id="input" placeholder='Paste your JSON here...
+<textarea id="input" placeholder='Paste your JSON here or drag & drop a .json file...
 
 {"name": "example", "value": 42}'></textarea>
+<div class="drop-overlay">📂 Drop JSON file here</div>
 <div class="error-line" id="error"></div>
+<input type="file" id="file-input" accept=".json,application/json" style="display:none">
 </div>
 <div class="pane">
 <label>Output</label>
@@ -131,6 +160,7 @@ footer a{color:var(--accent);text-decoration:none}
 </div>
 </div>
 <div id="tree-container" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:.75rem;max-height:60vh;overflow:auto;font-family:var(--mono);font-size:.85rem"></div>
+<div id="history-container" class="history-panel"></div>
 <div class="stats">
 <span id="charCount">Characters: 0</span>
 <span id="lineCount">Lines: 0</span>
@@ -142,8 +172,11 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="feature"><h4>🔒 Privacy First</h4><p>Nothing leaves your browser. Zero server calls.</p></div>
 <div class="feature"><h4>⚡ Instant</h4><p>Processes megabytes of JSON in milliseconds.</p></div>
 <div class="feature"><h4>📊 JSON → CSV</h4><p>Convert arrays of objects to CSV with auto-flattening and download.</p></div>
+<div class="feature"><h4>📄 JSON → YAML</h4><p>Convert JSON to clean, properly indented YAML format.</p></div>
 <div class="feature"><h4>🌳 Tree View</h4><p>Collapsible, color-coded tree visualization of any JSON.</p></div>
+<div class="feature"><h4>📂 Drag & Drop</h4><p>Drop .json files directly. No upload needed.</p></div>
 <div class="feature"><h4>🎯 Error Detection</h4><p>Pinpoints exact line & position of syntax errors.</p></div>
+<div class="feature"><h4>📜 History</h4><p>Last 8 formatted JSONs saved locally. One-click restore.</p></div>
 <div class="feature"><h4>📱 Mobile Ready</h4><p>Works perfectly on any device.</p></div>
 </div>
 
@@ -151,11 +184,13 @@ footer a{color:var(--accent);text-decoration:none}
 <div class="guide">
 <h2>📖 How to Use This JSON Formatter</h2>
 <ol>
-<li><strong>Paste your JSON</strong> into the Input area on the left. The tool instantly validates it and shows ✓ Valid or ✗ Invalid.</li>
+<li><strong>Paste your JSON</strong> into the Input area or <strong>drag & drop a .json file</strong>. The tool instantly validates it and shows ✓ Valid or ✗ Invalid.</li>
 <li><strong>Click Beautify</strong> to format with proper indentation, or <strong>Minify</strong> to compress into a single line for API payloads.</li>
 <li><strong>Sort Keys</strong> alphabetically for consistent ordering — great for comparing configs or debugging diffs.</li>
 <li><strong>Convert to CSV</strong> — click 📊 CSV to transform arrays of objects into downloadable CSV. Nested objects are auto-flattened with dot notation.</li>
+<li><strong>Convert to YAML</strong> — click 📄 YAML to get clean, indented YAML output. Perfect for Kubernetes configs, Docker Compose, or CI/CD files.</li>
 <li><strong>Tree View</strong> — click 🌳 Tree for an interactive, collapsible tree. Expand/collapse nodes to explore deep JSON structures.</li>
+<li><strong>History</strong> — click 📜 History to see your last 8 formatted JSONs. One-click restore any previous entry.</li>
 <li><strong>Copy or Share</strong> — use 📋 Copy to grab the output, or 🔗 Share to generate a URL with your JSON pre-loaded (no server storage).</li>
 </ol>
 </div>
@@ -174,10 +209,13 @@ footer a{color:var(--accent);text-decoration:none}
 <details><summary>What is the maximum JSON file size I can format?</summary><p>JSONForge can handle JSON files up to several megabytes directly in your browser. Performance depends on your device, but typical API responses and config files are processed instantly.</p></details>
 <details><summary>How do I validate JSON syntax?</summary><p>Simply paste your JSON into the input area. JSONForge automatically validates the syntax and shows a green checkmark for valid JSON, or a red error message with the exact line and position of any syntax error.</p></details>
 <details><summary>Can I minify JSON to reduce file size?</summary><p>Yes. Click the Minify button to remove all whitespace and newlines from your JSON, producing the smallest possible output. This is useful for API payloads, config files, and reducing bandwidth.</p></details>
+<details><summary>How do I convert JSON to YAML?</summary><p>Click the 📄 YAML button in the toolbar. JSONForge converts your JSON to clean, properly indented YAML format. Arrays use dash notation, nested objects are indented, and special characters are automatically quoted. Perfect for Kubernetes, Docker Compose, and CI/CD configs. No external libraries needed.</p></details>
+<details><summary>Can I drag and drop a JSON file?</summary><p>Yes! Simply drag any .json file from your computer and drop it onto the input area. JSONForge reads the file locally — nothing is uploaded to any server. You can also click the 📂 File button to open a file picker.</p></details>
+<details><summary>Does it save my formatting history?</summary><p>Yes. JSONForge saves your last 8 formatted JSONs in your browser's localStorage. Click 📜 History to see recent entries with timestamps, preview the first line, and restore any previous JSON with one click. History never leaves your device.</p></details>
 <details><summary>How do I sort JSON keys alphabetically?</summary><p>Click the Sort Keys button. JSONForge recursively sorts all object keys in alphabetical order, making it easy to compare JSON objects or maintain consistent key ordering in config files.</p></details>
 <details><summary>Can I share my formatted JSON with someone?</summary><p>Yes! Click the 🔗 Share button to generate a URL that contains your JSON data. Send this link to anyone — they'll see your exact JSON pre-loaded and formatted. No server storage needed.</p></details>
-<details><summary>How do I convert JSON to CSV?</summary><p>Paste an array of JSON objects into the input area, then click the 📊 CSV button. JSONForge automatically flattens nested objects using dot notation (e.g., address.city), detects all columns, and generates a downloadable CSV file with a one-click download button.</p></details>
-<details><summary>Can I view JSON as a collapsible tree?</summary><p>Yes! Click the 🌳 Tree button to see a color-coded, collapsible tree visualization. Keys are purple, strings green, numbers amber, booleans blue, and null red. Click ▼/▶ arrows to expand or collapse any object or array node.</p></details>
+<details><summary>How do I convert JSON to CSV?</summary><p>Paste an array of JSON objects into the input area, then click the 📊 CSV button. JSONForge automatically flattens nested objects using dot notation (e.g., address.city), detects all columns, and generates a downloadable CSV file.</p></details>
+<details><summary>Can I view JSON as a collapsible tree?</summary><p>Yes! Click the 🌳 Tree button to see a color-coded, collapsible tree visualization. Keys are purple, strings green, numbers amber, booleans blue, and null red. Click ▼/▶ arrows to expand or collapse any node.</p></details>
 </div>
 
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
@@ -205,25 +243,27 @@ footer a{color:var(--accent);text-decoration:none}
 <div style="margin:1rem auto;max-width:480px;text-align:center;">
 <p style="margin:0 0 0.5rem;color:#8b949e;font-size:0.85rem;">Share this tool</p>
 <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
-<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20JSON%20Formatter%20🛠️%20Free%2C%20no%20signup%2C%20runs%20in%20browser%21&url=https://maxmini0214.github.io/json-formatter/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
+<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20JSON%20Formatter%20%2B%20YAML%20Converter%20🛠️%20Free%2C%20no%20signup%2C%20runs%20in%20browser%21&url=https://maxmini0214.github.io/json-formatter/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
 <button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/json-formatter/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:#94a3b8;background:transparent;cursor:pointer;font-size:0.85rem;font-weight:600;transition:all .2s">🔗 Copy Link</button>
 </div>
 </div>
 
-
-    <h2>🛠️ You Might Also Like</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;">
+<h2 style="margin:2rem auto 0;max-width:1200px;padding:0 1rem;">🛠️ You Might Also Like</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem auto;max-width:1200px;padding:0 1rem;">
   <a href="/base64-tool/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔄 Base64 Encoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
   <a href="/url-encoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔗 URL Encoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
   <a href="/jwt-decoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔑 JWT Decoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
 </div>
 
-    <footer>
-<p>Built by <a href="https://github.com/maxmini0214" target="_blank">MaxxMini</a> · Open source · No tracking</p>
+<footer>
+<p>Built by <a href="https://github.com/maxmini0214" target="_blank">MaxDevTools</a> · Open source · No tracking</p>
 </footer>
 
 <script>
 const $i=document.getElementById('input'),$o=document.getElementById('output'),$s=document.getElementById('status'),$e=document.getElementById('error');
+const HISTORY_KEY='jsonforge-history';
+const MAX_HISTORY=8;
+
 $i.addEventListener('input',validate);
 
 // Load shared JSON from URL
@@ -233,15 +273,51 @@ $i.addEventListener('input',validate);
   if(d){try{$i.value=atob(d);validate();formatJSON()}catch(e){}}
 })();
 
+// ===== Drag & Drop =====
+const inputPane=document.getElementById('input-pane');
+const fileInput=document.getElementById('file-input');
+
+['dragenter','dragover'].forEach(evt=>{
+  inputPane.addEventListener(evt,e=>{e.preventDefault();e.stopPropagation();inputPane.classList.add('drag-over')});
+});
+['dragleave','drop'].forEach(evt=>{
+  inputPane.addEventListener(evt,e=>{e.preventDefault();e.stopPropagation();inputPane.classList.remove('drag-over')});
+});
+inputPane.addEventListener('drop',e=>{
+  const file=e.dataTransfer.files[0];
+  if(file)readFile(file);
+});
+fileInput.addEventListener('change',e=>{
+  const file=e.target.files[0];
+  if(file)readFile(file);
+  fileInput.value='';
+});
+
+function openFilePicker(){fileInput.click()}
+
+function readFile(file){
+  if(file.size>10*1024*1024){$s.className='status invalid';$s.textContent='⚠ File too large (>10MB)';return}
+  const reader=new FileReader();
+  reader.onload=e=>{
+    $i.value=e.target.result;
+    validate();
+    formatJSON();
+    $s.textContent='📂 Loaded: '+file.name;
+    if(typeof goatcounter!=='undefined')goatcounter.count({path:'/json-formatter/file-drop',event:true});
+  };
+  reader.readAsText(file);
+}
+
+// ===== Core Functions =====
 function validate(){
   const v=$i.value.trim();
-  if(!v){$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('');return null}
+  if(!v){$s.className='status idle';$s.textContent='Paste JSON or drop a file';$e.textContent='';updateStats('');return null}
   try{const p=JSON.parse(v);$s.className='status valid';$s.textContent='✓ Valid JSON';$e.textContent='';return p}
   catch(e){$s.className='status invalid';$s.textContent='✗ Invalid';$e.textContent=e.message;return null}
 }
-function formatJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p,null,2);$o.value=o;updateStats(o)}}
-function minifyJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p);$o.value=o;updateStats(o)}}
-function sortKeys(){const p=validate();if(p!==null){const o=JSON.stringify(sortObj(p),null,2);$o.value=o;updateStats(o)}}
+function formatJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p,null,2);$o.value=o;updateStats(o);saveToHistory(o)}}
+function minifyJSON(){const p=validate();if(p!==null){const o=JSON.stringify(p);$o.value=o;updateStats(o);saveToHistory(o)}}
+function sortKeys(){const p=validate();if(p!==null){const o=JSON.stringify(sortObj(p),null,2);$o.value=o;updateStats(o);saveToHistory(o)}}
 function sortObj(o){if(Array.isArray(o))return o.map(sortObj);if(o&&typeof o==='object'){const s={};Object.keys(o).sort().forEach(k=>s[k]=sortObj(o[k]));return s}return o}
 function copyOutput(){if($o.value){navigator.clipboard.writeText($o.value);const t=$s.textContent;$s.textContent='📋 Copied!';setTimeout(()=>$s.textContent=t,1500)}}
 function shareJSON(){
@@ -252,8 +328,8 @@ function shareJSON(){
   $s.textContent='🔗 Link copied!';
   setTimeout(()=>validate(),2000);
 }
-function clearAll(){$i.value='';$o.value='';$s.className='status idle';$s.textContent='Paste JSON to start';$e.textContent='';updateStats('')}
-function loadSample(){$i.value=JSON.stringify({name:"JSONForge",version:"1.0",features:["format","validate","minify","sort"],config:{theme:"dark",indent:2,maxDepth:10},tags:["json","tool","free"],stats:{users:12500,rating:4.8}},null,2);validate();formatJSON()}
+function clearAll(){$i.value='';$o.value='';$s.className='status idle';$s.textContent='Paste JSON or drop a file';$e.textContent='';updateStats('')}
+function loadSample(){$i.value=JSON.stringify({name:"JSONForge",version:"2.0",features:["format","validate","minify","sort","csv","yaml","tree","history","drag-drop"],config:{theme:"dark",indent:2,maxDepth:10},server:{host:"localhost",port:8080,ssl:true,cors:["https://example.com","https://api.example.com"]},database:{engine:"postgresql",pool:{min:5,max:20},migrations:{auto:true}},tags:["json","yaml","csv","tool","free"],stats:{users:12500,rating:4.8,uptime:"99.9%"}},null,2);validate();formatJSON()}
 function updateStats(s){
   document.getElementById('charCount').textContent='Characters: '+s.length;
   document.getElementById('lineCount').textContent='Lines: '+(s?s.split('\n').length:0);
@@ -263,13 +339,74 @@ function updateStats(s){
 }
 function getDepth(o){if(typeof o!=='object'||o===null)return 0;const vals=Object.values(o);if(!vals.length)return 1;return 1+Math.max(...vals.map(getDepth))}
 
-// JSON to CSV
+// ===== JSON to YAML =====
+function jsonToYAML(){
+  const p=validate();
+  if(p===null)return;
+  const yaml=toYAML(p,0);
+  $o.value=yaml;
+  updateStats(yaml);
+  saveToHistory(yaml,'yaml');
+  $s.className='status valid';
+  $s.textContent='📄 YAML output';
+  if(typeof goatcounter!=='undefined')goatcounter.count({path:'/json-formatter/yaml-convert',event:true});
+}
+
+function toYAML(val,indent){
+  if(val===null)return'null';
+  if(typeof val==='boolean')return val?'true':'false';
+  if(typeof val==='number')return String(val);
+  if(typeof val==='string')return yamlStr(val);
+  const pad='  '.repeat(indent);
+  if(Array.isArray(val)){
+    if(!val.length)return'[]';
+    return'\n'+val.map(item=>{
+      const v=toYAML(item,indent+1);
+      if(typeof item==='object'&&item!==null&&!Array.isArray(item)){
+        // Object items: first key on same line as dash
+        const lines=v.trim().split('\n');
+        return pad+'- '+lines[0]+'\n'+lines.slice(1).map(l=>pad+'  '+l).join('\n');
+      }
+      if(Array.isArray(item)){
+        return pad+'- '+v.trim();
+      }
+      return pad+'- '+v;
+    }).join('\n');
+  }
+  if(typeof val==='object'){
+    const keys=Object.keys(val);
+    if(!keys.length)return'{}';
+    const lines=keys.map(k=>{
+      const v=toYAML(val[k],indent+1);
+      const safeKey=/^[a-zA-Z0-9_.-]+$/.test(k)?k:'"'+k.replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';
+      if(typeof val[k]==='object'&&val[k]!==null){
+        return pad+safeKey+':'+v;
+      }
+      return pad+safeKey+': '+v;
+    });
+    return(indent===0?'':'\n')+lines.join('\n');
+  }
+  return String(val);
+}
+
+function yamlStr(s){
+  if(s==='')return"''";
+  if(s==='true'||s==='false'||s==='null'||s==='~'||!isNaN(Number(s)))return'"'+s+'"';
+  if(/[:{}\[\],&*?|>!%#`@\\]/.test(s)||s.includes('\n')||/^\s/.test(s)||/\s$/.test(s)){
+    if(s.includes('\n')){
+      return'|\n'+s.split('\n').map(l=>'  '+l).join('\n');
+    }
+    return'"'+s.replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';
+  }
+  return s;
+}
+
+// ===== JSON to CSV =====
 function jsonToCSV(){
   const p=validate();
   if(p===null)return;
   let arr=Array.isArray(p)?p:[p];
   if(!arr.length||typeof arr[0]!=='object'){$s.textContent='⚠ Need array of objects for CSV';return}
-  // Flatten nested objects
   function flatten(obj,prefix=''){
     const r={};
     for(const[k,v]of Object.entries(obj||{})){
@@ -289,7 +426,6 @@ function jsonToCSV(){
   $o.value=csv;
   updateStats(csv);
   $s.className='status valid';$s.textContent='📊 CSV ('+flat.length+' rows × '+cols.length+' cols)';
-  // Download button
   if(!document.getElementById('csv-dl')){
     const btn=document.createElement('button');btn.id='csv-dl';btn.className='csv-download';
     btn.textContent='⬇ Download .csv';
@@ -303,7 +439,7 @@ function jsonToCSV(){
   if(typeof goatcounter!=='undefined')goatcounter.count({path:'/json-formatter/csv-convert',event:true});
 }
 
-// Tree View
+// ===== Tree View =====
 let treeVisible=false;
 function toggleTreeView(){
   const tc=document.getElementById('tree-container');
@@ -329,6 +465,67 @@ function buildTree(val,key,isLast=true){
   return h;
 }
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// ===== History =====
+function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]')}catch(e){return[]}}
+function saveToHistory(output,type='json'){
+  const history=getHistory();
+  const entry={output:output.substring(0,500),type:type,time:Date.now(),preview:output.split('\n')[0].substring(0,60)};
+  // Deduplicate
+  const idx=history.findIndex(h=>h.output===entry.output);
+  if(idx>=0)history.splice(idx,1);
+  history.unshift(entry);
+  if(history.length>MAX_HISTORY)history.length=MAX_HISTORY;
+  try{localStorage.setItem(HISTORY_KEY,JSON.stringify(history))}catch(e){}
+}
+
+let historyVisible=false;
+function toggleHistory(){
+  const hc=document.getElementById('history-container');
+  if(historyVisible){hc.classList.remove('visible');historyVisible=false;return}
+  const history=getHistory();
+  if(!history.length){$s.textContent='No history yet';return}
+  hc.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem"><strong style="font-size:.9rem">📜 Recent ('+history.length+')</strong><button onclick="clearHistory()" style="background:none;border:1px solid var(--red);color:var(--red);padding:3px 10px;border-radius:6px;cursor:pointer;font-size:.75rem">Clear All</button></div>'+
+    history.map((h,i)=>{
+      const ago=timeAgo(h.time);
+      const badge=h.type==='yaml'?'<span style="background:#f59e0b;color:#000;padding:1px 5px;border-radius:3px;font-size:.7rem;font-weight:700">YAML</span> ':'';
+      return'<div class="history-item" onclick="restoreHistory('+i+')">'+badge+'<span class="preview">'+esc(h.preview)+'</span><span class="time">'+ago+'</span><button class="del-btn" onclick="event.stopPropagation();deleteHistory('+i+')" title="Delete">✕</button></div>';
+    }).join('');
+  hc.classList.add('visible');
+  historyVisible=true;
+}
+
+function restoreHistory(idx){
+  const history=getHistory();
+  if(history[idx]){
+    $o.value=history[idx].output;
+    updateStats(history[idx].output);
+    $s.className='status valid';
+    $s.textContent='📜 Restored from history';
+  }
+}
+
+function deleteHistory(idx){
+  const history=getHistory();
+  history.splice(idx,1);
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(history));
+  toggleHistory();toggleHistory();// refresh
+}
+
+function clearHistory(){
+  localStorage.removeItem(HISTORY_KEY);
+  document.getElementById('history-container').classList.remove('visible');
+  historyVisible=false;
+  $s.textContent='History cleared';
+}
+
+function timeAgo(ts){
+  const s=Math.floor((Date.now()-ts)/1000);
+  if(s<60)return'just now';
+  if(s<3600)return Math.floor(s/60)+'m ago';
+  if(s<86400)return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
 </script>
 <script>
 (function(){
