@@ -4,130 +4,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Color Picker & Converter — HEX RGB HSL — Free Online Tool</title>
-    <meta property="og:image" content="https://maxmini0214.github.io/color-picker/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-<meta name="description" content="Pick colors and convert between HEX, RGB, and HSL formats instantly. Free online color picker with CSS variable output, share via URL, and one-click copy.">
-<meta property="og:title" content="Color Picker & Converter — HEX RGB HSL">
-<meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly. Share colors via URL.">
+<title>Color Picker, Contrast Checker &amp; Palette Generator — Free Online Tool</title>
+<meta property="og:image" content="https://maxmini0214.github.io/color-picker/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="description" content="Pick colors, check WCAG contrast ratios (AA/AAA), generate color palettes (complementary, analogous, triadic). Convert HEX, RGB, HSL. 100% browser-based, zero tracking.">
+<meta name="keywords" content="color picker, color contrast checker, wcag contrast ratio, color palette generator, hex to rgb, rgb to hsl, accessibility color checker, wcag 2.1 aa aaa, complementary colors, analogous colors, triadic colors, color converter, css color tool, contrast ratio calculator, color accessibility, color scheme generator">
+<meta property="og:title" content="Color Picker, Contrast Checker &amp; Palette Generator">
+<meta property="og:description" content="Pick colors, check WCAG contrast (AA/AAA), generate palettes. Convert HEX/RGB/HSL. Free, browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/color-picker/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://maxmini0214.github.io/color-picker/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--success:#10b981}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444;--warn:#f59e0b}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
 header{text-align:center;padding:2rem 1rem 1rem}
-h1{font-size:1.8rem;margin-bottom:.5rem}
+h1{font-size:1.6rem;margin-bottom:.5rem}
 .subtitle{color:var(--muted);font-size:.95rem}
-main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+main{max-width:860px;width:100%;margin:0 auto;padding:1rem;flex:1}
+.tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--border)}
+.tab{padding:.7rem 1.2rem;border:none;background:none;color:var(--muted);cursor:pointer;font-size:.9rem;font-weight:600;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--text)}
+.tab-panel{display:none}.tab-panel.active{display:block}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.btn{padding:.5rem 1rem;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
+.btn-sm{padding:.35rem .7rem;font-size:.78rem}
+label{display:block;font-weight:600;margin-bottom:.3rem;color:var(--muted);font-size:.82rem}
+input[type="text"]{width:100%;padding:.5rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem}
+input[type="text"]:focus{outline:none;border-color:var(--accent)}
 .color-main{display:flex;gap:1.5rem;align-items:stretch;flex-wrap:wrap}
-.preview{width:160px;min-height:160px;border-radius:12px;border:2px solid var(--border);flex-shrink:0}
+.preview{width:140px;min-height:140px;border-radius:12px;border:2px solid var(--border);flex-shrink:0}
 .inputs{flex:1;min-width:200px}
-.field{margin-bottom:.75rem}
-.field label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:.25rem;font-weight:600}
-.field input[type="text"]{width:100%;padding:.5rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem}
-.field input:focus{outline:none;border-color:var(--accent)}
-input[type="color"]{width:100%;height:50px;border:none;border-radius:8px;cursor:pointer;background:none}
-.copy-btn{background:var(--border);border:none;color:var(--text);padding:.25rem .5rem;border-radius:4px;cursor:pointer;font-size:.75rem;float:right;margin-top:-1.5rem}
+.field{margin-bottom:.6rem;position:relative}
+.copy-btn{background:var(--border);border:none;color:var(--text);padding:.2rem .5rem;border-radius:4px;cursor:pointer;font-size:.72rem;position:absolute;right:4px;top:0}
 .copy-btn:hover{background:#475569}
-.share-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;border:none;padding:.5rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;margin-top:.75rem}
-.share-btn:hover{opacity:.9}
-.palette{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
-.swatch{width:40px;height:40px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.share-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:#fff;border:none;padding:.5rem 1rem;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;margin-top:.5rem}
+.palette{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.swatch{width:38px;height:38px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
 .swatch:hover{border-color:var(--text)}
-.guide{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1.5rem 0}
-.guide h2{font-size:1.2rem;margin-bottom:1rem}
-.guide ol{padding-left:1.5rem;line-height:1.8;color:var(--muted)}
-.guide ol li{margin-bottom:.5rem}
-.guide ol li strong{color:var(--text)}
-.cta{background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:12px;padding:1.5rem;text-align:center;margin:1.5rem 0}
-.cta h3{margin-bottom:.5rem}.cta a{color:#fff;font-weight:700;text-decoration:underline}
-.faq-section{margin:2rem 0}
-.faq-section h2{font-size:1.3rem;margin-bottom:1rem}
-details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
-details summary{padding:1rem;cursor:pointer;font-weight:600;font-size:.95rem}
+/* Contrast Checker */
+.contrast-inputs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.contrast-color{display:flex;align-items:center;gap:.75rem}
+.contrast-color input[type="color"]{width:50px;height:40px;border:none;border-radius:6px;cursor:pointer;background:none;padding:0}
+.contrast-preview{border-radius:12px;padding:2rem;text-align:center;margin:1rem 0;border:1px solid var(--border)}
+.contrast-ratio{font-size:2.5rem;font-weight:800;margin:.5rem 0}
+.badge{display:inline-block;padding:.25rem .6rem;border-radius:6px;font-size:.8rem;font-weight:700;margin:.25rem}
+.badge-pass{background:rgba(16,185,129,.2);color:var(--success)}
+.badge-fail{background:rgba(239,68,68,.2);color:var(--error)}
+.wcag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:1rem}
+.wcag-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;text-align:center}
+.wcag-card .level{font-weight:700;font-size:.9rem;margin-bottom:.25rem}
+.wcag-card .size{font-size:.75rem;color:var(--muted);margin-bottom:.4rem}
+/* Palette */
+.palette-row{margin-bottom:1.5rem}
+.palette-row h3{font-size:.95rem;margin-bottom:.5rem;color:var(--muted)}
+.palette-colors{display:flex;gap:0;border-radius:12px;overflow:hidden;height:80px}
+.palette-swatch{flex:1;cursor:pointer;position:relative;transition:flex .3s}
+.palette-swatch:hover{flex:1.5}
+.palette-swatch .hex-label{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:.65rem;font-weight:600;opacity:0;transition:opacity .2s;text-shadow:0 1px 3px rgba(0,0,0,.6);white-space:nowrap}
+.palette-swatch:hover .hex-label{opacity:1}
+/* History */
+.history{margin-top:1rem}
+.history-item{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.4rem;cursor:pointer;transition:border-color .2s;font-size:.82rem}
+.history-item:hover{border-color:var(--accent)}
+.history-dot{width:24px;height:24px;border-radius:6px;flex-shrink:0;border:1px solid var(--border)}
+.history-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-time{font-size:.72rem;color:var(--muted)}
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.75rem;margin:1.5rem 0}
+.feature{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.75rem;text-align:center}
+.feature-icon{font-size:1.3rem;margin-bottom:.3rem}
+.feature-title{font-weight:600;font-size:.85rem;margin-bottom:.2rem}
+.feature-desc{font-size:.75rem;color:var(--muted)}
+/* FAQ */
+.faq{margin:1.5rem 0}.faq h2{font-size:1.15rem;margin-bottom:.75rem}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.4rem}
+details summary{padding:.75rem 1rem;cursor:pointer;font-weight:600;font-size:.9rem}
 details summary:hover{color:var(--accent)}
-details .answer{padding:0 1rem 1rem;color:var(--muted);line-height:1.7}
-details .answer code{background:var(--bg);padding:.15rem .4rem;border-radius:4px;font-size:.85rem;color:var(--accent)}
+details .answer{padding:0 1rem 1rem;color:var(--muted);line-height:1.6;font-size:.85rem}
+details .answer code{background:var(--bg);padding:.12rem .35rem;border-radius:4px;font-size:.82rem;color:var(--accent)}
+.gum-cta{background:linear-gradient(135deg,#ff6b35,#f7931e);border-radius:12px;padding:1.2rem 1.5rem;text-align:center;margin:1.5rem 0;color:#fff}
+.gum-cta a{color:#fff;font-weight:700;text-decoration:underline}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:1rem}
 .tool-link{display:block;padding:.75rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--accent);text-decoration:none;text-align:center;font-weight:600;transition:border-color .2s}
 .tool-link:hover{border-color:var(--accent)}
+.newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;text-align:center}
+.newsletter p{margin:0 0 .5rem;font-size:1.1rem;font-weight:600}
+.newsletter .nl-sub{margin:0 0 1rem;color:var(--muted);font-size:.9rem}
+.newsletter form{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.newsletter input[type=email]{padding:.5rem 1rem;border:1px solid #475569;background:var(--bg);color:var(--text);border-radius:8px;font-size:.9rem;width:200px}
+.newsletter input[type=submit]{padding:.5rem 1rem;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
-@media(max-width:600px){h1{font-size:1.4rem}.preview{width:100%;min-height:100px}}
+@media(max-width:600px){h1{font-size:1.25rem}.preview{width:100%;min-height:80px}.contrast-inputs{grid-template-columns:1fr}.tabs{overflow-x:auto}.tab{white-space:nowrap;padding:.6rem .7rem;font-size:.8rem}}
+@media print{.gum-cta,.newsletter,nav,.btn,.tabs,.share-btn{display:none!important}body{background:#fff;color:#000}}
 </style>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Color Picker & Converter — HEX RGB HSL",
-  "url": "https://maxmini0214.github.io/color-picker/",
-  "description": "Pick colors and convert between HEX, RGB, and HSL formats instantly.",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "browserRequirements": "Requires JavaScript",
-  "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
-}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Color Picker, Contrast Checker & Palette Generator","description":"Pick colors, check WCAG 2.1 contrast ratios (AA/AAA), generate color palettes. Convert HEX, RGB, HSL.","url":"https://maxmini0214.github.io/color-picker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
 </script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How do I convert HEX to RGB?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Enter a HEX color code like #3b82f6 and the RGB value appears instantly. Each pair of hex digits represents Red (3b=59), Green (82=130), and Blue (f6=246). In JavaScript: parseInt('3b', 16) gives 59." }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between HEX, RGB, and HSL?",
-      "acceptedAnswer": { "@type": "Answer", "text": "HEX uses base-16 notation (#RRGGBB), RGB uses decimal values 0-255 for each channel, and HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is often more intuitive for designers since you can adjust brightness and saturation independently." }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I share a color with my team?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Click the 🔗 Share button to copy a URL with the color encoded. When your teammate opens the link, the color is automatically loaded and converted to all formats." }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use this color picker for CSS variables?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes! The CSS Variable field shows the ready-to-paste syntax like --color: #3b82f6; Just click the copy button and paste it into your stylesheet." }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my color data sent to any server?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs 100% in your browser. No data is sent anywhere, no cookies are set, and no account is needed. Even the Share URL encodes the color in the URL itself — no server involved." }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I convert RGB to HEX in code?",
-      "acceptedAnswer": { "@type": "Answer", "text": "In JavaScript: `'#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')`. In Python: `f'#{r:02x}{g:02x}{b:02x}'`. In CSS, you can use rgb() or hex interchangeably." }
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Color Picker & Contrast Checker","item":"https://maxmini0214.github.io/color-picker/"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Color Picker & Converter","item":"https://maxmini0214.github.io/color-picker/"}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I check WCAG color contrast?","acceptedAnswer":{"@type":"Answer","text":"Use the Contrast Checker tab: enter a foreground and background color. The tool calculates the contrast ratio and shows pass/fail for WCAG 2.1 AA (4.5:1 normal, 3:1 large text) and AAA (7:1 normal, 4.5:1 large text) compliance levels."}},
+{"@type":"Question","name":"What is WCAG 2.1 contrast ratio?","acceptedAnswer":{"@type":"Answer","text":"WCAG 2.1 requires minimum contrast ratios between text and background colors for accessibility. Level AA requires 4.5:1 for normal text and 3:1 for large text (18pt+). Level AAA requires 7:1 for normal text and 4.5:1 for large text."}},
+{"@type":"Question","name":"How do I generate a color palette?","acceptedAnswer":{"@type":"Answer","text":"Use the Palette tab: pick a base color and the tool generates Complementary (opposite on color wheel), Analogous (adjacent hues), Triadic (three evenly spaced), Split-Complementary, and Monochromatic (same hue, varied lightness) palettes."}},
+{"@type":"Question","name":"How do I convert HEX to RGB?","acceptedAnswer":{"@type":"Answer","text":"Enter a HEX color code like #3b82f6 in the Picker tab and the RGB value appears instantly. Each pair of hex digits represents Red (3b=59), Green (82=130), Blue (f6=246)."}},
+{"@type":"Question","name":"What is the difference between HEX, RGB, and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX uses base-16 notation (#RRGGBB), RGB uses decimal 0-255 per channel, HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is more intuitive for adjusting brightness and saturation independently."}},
+{"@type":"Question","name":"Is my data sent to any server?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations run 100% in your browser. No data is sent anywhere, no cookies set, no account needed. Even the Share URL encodes colors in the URL itself."}},
+{"@type":"Question","name":"What contrast ratio is accessible?","acceptedAnswer":{"@type":"Answer","text":"For WCAG 2.1 Level AA: 4.5:1 for normal text, 3:1 for large text (18pt/24px or 14pt/18.66px bold). Level AAA: 7:1 for normal text, 4.5:1 for large text. Higher ratios mean better readability."}},
+{"@type":"Question","name":"How do complementary colors work?","acceptedAnswer":{"@type":"Answer","text":"Complementary colors sit opposite each other on the color wheel (180° apart). They create maximum contrast and visual vibrance. Example: blue (#3b82f6) and orange. Use them for CTAs and highlights against a base color."}}
+]}
 </script>
 <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Color Picker & Converter","description":"Pick colors and convert between HEX, RGB, HSL formats. Copy CSS color values instantly.","url":"https://maxmini0214.github.io/color-picker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
-  </script>
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Check Color Contrast for WCAG Compliance","step":[
+{"@type":"HowToStep","position":1,"name":"Open Contrast Tab","text":"Click the '♿ Contrast Checker' tab at the top of the tool."},
+{"@type":"HowToStep","position":2,"name":"Set Colors","text":"Enter or pick your text (foreground) color and background color using the color pickers or HEX inputs."},
+{"@type":"HowToStep","position":3,"name":"Read Results","text":"The contrast ratio appears immediately with WCAG 2.1 AA and AAA pass/fail badges for both normal and large text."},
+{"@type":"HowToStep","position":4,"name":"Adjust if Needed","text":"If a level fails, adjust the lightness of either color until you achieve the required ratio. The live preview updates as you type."}
+]}
+</script>
 </head>
 <body>
 <header>
-<h1>Color Picker & Converter — HEX RGB HSL</h1>
-<p class="subtitle">Pick any color · Convert between HEX, RGB, HSL · Copy CSS · Share via URL</p>
+<h1>Color Picker, Contrast Checker &amp; Palette Generator</h1>
+<p class="subtitle">Pick colors · Check WCAG contrast · Generate palettes · Convert HEX/RGB/HSL — 100% in your browser</p>
 </header>
 <main>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('picker')">🎨 Picker</button>
+<button class="tab" onclick="switchTab('contrast')">♿ Contrast Checker</button>
+<button class="tab" onclick="switchTab('palette')">🎭 Palette Generator</button>
+</div>
+
+<!-- Tab 1: Picker -->
+<div id="panel-picker" class="tab-panel active">
 <div class="card">
 <div class="color-main">
 <div>
 <div class="preview" id="preview" style="background:#3b82f6"></div>
-<input type="color" id="picker" value="#3b82f6" style="margin-top:.5rem">
+<input type="color" id="picker" value="#3b82f6" style="margin-top:.5rem;width:100%;height:40px;border:none;border-radius:8px;cursor:pointer;background:none">
 </div>
 <div class="inputs">
 <div class="field"><label>HEX</label><input type="text" id="hex" value="#3b82f6"><button class="copy-btn" onclick="copy('hex')">📋</button></div>
@@ -137,146 +159,391 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="share-btn" onclick="shareColor()">🔗 Share Color</button>
 </div>
 </div>
-<h4 style="margin-top:1rem;font-size:.85rem;color:var(--muted)">Popular Colors</h4>
-<div class="palette" id="palette"></div>
+<h4 style="margin-top:.75rem;font-size:.82rem;color:var(--muted)">Popular Colors</h4>
+<div class="palette" id="popularPalette"></div>
 </div>
 
-<!-- How to Use -->
-<div class="guide">
-<h2>📖 How to Use This Color Picker</h2>
-<ol>
-<li><strong>Pick a color</strong> — Use the color wheel or enter a HEX/RGB value in the input fields</li>
-<li><strong>See all formats</strong> — HEX, RGB, HSL, and CSS variable update instantly as you pick</li>
-<li><strong>Copy</strong> — Click 📋 next to any format to copy it to your clipboard</li>
-<li><strong>Share</strong> — Click 🔗 Share to get a URL that loads this exact color for your team</li>
-</ol>
+<!-- History -->
+<div class="history" id="historySection" style="display:none">
+<h3 style="font-size:.9rem;margin-bottom:.5rem">📋 Recent Colors</h3>
+<div id="historyList"></div>
+</div>
 </div>
 
-<!-- DonFlow CTA -->
-<div class="cta">
-<h3>🏦 DonFlow — Budget Drift Detector</h3>
-<p>See where your budget plan and reality diverge. Zero accounts, zero cloud — runs in your browser.</p>
-<a href="https://maxmini0214.github.io/donflow/?demo" target="_blank">Try the Live Demo →</a>
+<!-- Tab 2: Contrast Checker -->
+<div id="panel-contrast" class="tab-panel">
+<div class="card">
+<div class="contrast-inputs">
+<div>
+<label>Foreground (Text)</label>
+<div class="contrast-color">
+<input type="color" id="fgPicker" value="#ffffff" oninput="document.getElementById('fgHex').value=this.value;updateContrast()">
+<input type="text" id="fgHex" value="#ffffff" style="flex:1" oninput="syncContrastPicker('fg')">
+</div>
+</div>
+<div>
+<label>Background</label>
+<div class="contrast-color">
+<input type="color" id="bgPicker" value="#1e293b" oninput="document.getElementById('bgHex').value=this.value;updateContrast()">
+<input type="text" id="bgHex" value="#1e293b" style="flex:1" oninput="syncContrastPicker('bg')">
+</div>
+</div>
+</div>
+<div style="text-align:center;margin-bottom:.75rem">
+<button class="btn btn-secondary btn-sm" onclick="swapContrast()">⇄ Swap Colors</button>
+<button class="btn btn-secondary btn-sm" onclick="setContrast('#000000','#ffffff')">⬛⬜ B/W</button>
+<button class="btn btn-secondary btn-sm" onclick="setContrast('#ffffff','#3b82f6')">🔵 Blue</button>
+</div>
+</div>
+
+<!-- Live Preview -->
+<div class="contrast-preview" id="contrastPreview" style="background:#1e293b">
+<div style="font-size:.85rem;margin-bottom:.5rem;opacity:.7" id="contrastSmall">The quick brown fox jumps over the lazy dog. (Normal text, 16px)</div>
+<div style="font-size:1.4rem;font-weight:700;margin-bottom:.75rem" id="contrastLarge">Large Text Preview (24px bold)</div>
+<div class="contrast-ratio" id="contrastRatio">12.63:1</div>
+</div>
+
+<!-- WCAG Results -->
+<div class="wcag-grid" id="wcagGrid">
+<div class="wcag-card"><div class="level">AA Normal</div><div class="size">≥ 4.5:1</div><span class="badge badge-pass" id="aa-normal">✓ Pass</span></div>
+<div class="wcag-card"><div class="level">AA Large</div><div class="size">≥ 3:1</div><span class="badge badge-pass" id="aa-large">✓ Pass</span></div>
+<div class="wcag-card"><div class="level">AAA Normal</div><div class="size">≥ 7:1</div><span class="badge badge-pass" id="aaa-normal">✓ Pass</span></div>
+<div class="wcag-card"><div class="level">AAA Large</div><div class="size">≥ 4.5:1</div><span class="badge badge-pass" id="aaa-large">✓ Pass</span></div>
+</div>
+
+<div class="card" style="margin-top:1rem">
+<h4 style="font-size:.9rem;margin-bottom:.5rem">💡 Suggested Fixes</h4>
+<div id="suggestedFixes" style="font-size:.85rem;color:var(--muted)">All WCAG levels pass — your colors are accessible!</div>
+</div>
+</div>
+
+<!-- Tab 3: Palette Generator -->
+<div id="panel-palette" class="tab-panel">
+<div class="card">
+<label>Base Color</label>
+<div style="display:flex;gap:.75rem;align-items:center">
+<input type="color" id="palettePicker" value="#3b82f6" style="width:60px;height:40px;border:none;border-radius:8px;cursor:pointer;background:none" oninput="document.getElementById('paletteHex').value=this.value;generatePalettes()">
+<input type="text" id="paletteHex" value="#3b82f6" style="flex:1;max-width:200px" oninput="syncPalettePicker()">
+<button class="btn btn-primary btn-sm" onclick="randomColor()">🎲 Random</button>
+</div>
+</div>
+
+<div id="paletteResults">
+<div class="palette-row"><h3>🔄 Complementary</h3><div class="palette-colors" id="pal-complementary"></div></div>
+<div class="palette-row"><h3>🌈 Analogous</h3><div class="palette-colors" id="pal-analogous"></div></div>
+<div class="palette-row"><h3>🔺 Triadic</h3><div class="palette-colors" id="pal-triadic"></div></div>
+<div class="palette-row"><h3>✂️ Split-Complementary</h3><div class="palette-colors" id="pal-split"></div></div>
+<div class="palette-row"><h3>🎚️ Monochromatic</h3><div class="palette-colors" id="pal-mono"></div></div>
+</div>
+
+<div class="card" style="margin-top:1rem">
+<h4 style="font-size:.9rem;margin-bottom:.5rem">📋 Export CSS Variables</h4>
+<textarea id="paletteCSS" readonly style="width:100%;min-height:80px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.8rem;resize:vertical"></textarea>
+<button class="btn btn-primary btn-sm" style="margin-top:.5rem" onclick="navigator.clipboard.writeText(document.getElementById('paletteCSS').value);this.textContent='✅ Copied!';setTimeout(()=>this.textContent='📋 Copy CSS',2000)">📋 Copy CSS</button>
+</div>
+</div>
+
+<!-- Features -->
+<div class="features">
+<div class="feature"><div class="feature-icon">♿</div><div class="feature-title">WCAG Checker</div><div class="feature-desc">AA &amp; AAA compliance for normal &amp; large text</div></div>
+<div class="feature"><div class="feature-icon">🎨</div><div class="feature-title">5 Palette Types</div><div class="feature-desc">Complementary, analogous, triadic, split, mono</div></div>
+<div class="feature"><div class="feature-icon">🔄</div><div class="feature-title">Live Convert</div><div class="feature-desc">HEX ↔ RGB ↔ HSL instant conversion</div></div>
+<div class="feature"><div class="feature-icon">📋</div><div class="feature-title">CSS Export</div><div class="feature-desc">Copy CSS variables for your design system</div></div>
+<div class="feature"><div class="feature-icon">🔗</div><div class="feature-title">Share via URL</div><div class="feature-desc">Encode colors in the URL, no server needed</div></div>
+<div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Browser-only — zero tracking, zero data sent</div></div>
+</div>
+
+<!-- Gumroad CTA -->
+<div class="gum-cta">
+<strong>📦 Frontend Interview Cheat Sheet — $9</strong><br>
+<span style="font-size:.9rem;opacity:.9">HTML/CSS/JS patterns, system design, accessibility — ace the interview</span><br>
+<a href="https://maxxmini.gumroad.com/l/frontend-interview?ref=color-picker" target="_blank" rel="noopener">Get It →</a>
 </div>
 
 <!-- FAQ -->
-<div class="faq-section">
+<div class="faq">
 <h2>❓ Frequently Asked Questions</h2>
-<details><summary>How do I convert HEX to RGB?</summary><div class="answer">Enter a HEX color code like <code>#3b82f6</code> and the RGB value appears instantly. Each pair of hex digits represents Red (3b=59), Green (82=130), and Blue (f6=246). In JavaScript: <code>parseInt('3b', 16)</code> gives 59.</div></details>
-<details><summary>What is the difference between HEX, RGB, and HSL?</summary><div class="answer">HEX uses base-16 notation (#RRGGBB), RGB uses decimal 0-255 per channel, and HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is often more intuitive for designers — you can adjust brightness without changing the hue.</div></details>
-<details><summary>How do I share a color with my team?</summary><div class="answer">Click the 🔗 Share button to copy a URL with the color encoded. When your teammate opens the link, the color loads automatically in all formats. No account needed.</div></details>
-<details><summary>Can I use this for CSS variables?</summary><div class="answer">Yes! The CSS Variable field shows ready-to-paste syntax: <code>--color: #3b82f6;</code> Just click 📋 and paste into your stylesheet. Works with any CSS preprocessor too.</div></details>
-<details><summary>Is my data sent to any server?</summary><div class="answer">No. Everything runs 100% in your browser. No data is sent anywhere, no cookies, no tracking, no account needed. The Share URL encodes the color in the URL itself — no server involved.</div></details>
-<details><summary>How do I convert RGB to HEX in code?</summary><div class="answer"><strong>JavaScript:</strong> <code>'#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('')</code><br><strong>Python:</strong> <code>f'#{r:02x}{g:02x}{b:02x}'</code><br><strong>CSS:</strong> <code>rgb()</code> and hex are interchangeable in all modern browsers.</div></details>
+<details><summary>How do I check WCAG color contrast?</summary><div class="answer">Use the ♿ Contrast Checker tab. Enter foreground and background colors. The tool calculates the contrast ratio and shows pass/fail for WCAG 2.1 AA (4.5:1 normal, 3:1 large) and AAA (7:1 normal, 4.5:1 large).</div></details>
+<details><summary>What contrast ratio is accessible?</summary><div class="answer">WCAG 2.1 Level AA requires <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text (18pt+ or 14pt bold). Level AAA requires <strong>7:1</strong> for normal text and <strong>4.5:1</strong> for large text. Higher = better readability.</div></details>
+<details><summary>How do I generate a color palette?</summary><div class="answer">Click the 🎭 Palette tab, pick a base color, and get 5 harmony types: Complementary (opposite), Analogous (adjacent), Triadic (3 evenly spaced), Split-Complementary, and Monochromatic (varied lightness). Click any swatch to copy its HEX.</div></details>
+<details><summary>How do I convert HEX to RGB?</summary><div class="answer">Enter a HEX code like <code>#3b82f6</code> in the Picker tab. RGB appears instantly. Each hex pair = one channel: <code>3b</code>=59 Red, <code>82</code>=130 Green, <code>f6</code>=246 Blue.</div></details>
+<details><summary>What are complementary colors?</summary><div class="answer">Complementary colors sit <strong>opposite</strong> on the color wheel (180° apart). They create maximum contrast. Example: blue ↔ orange. Great for CTAs and accent colors against a base.</div></details>
+<details><summary>What is HSL?</summary><div class="answer">HSL = <strong>Hue</strong> (0–360° on the color wheel), <strong>Saturation</strong> (0–100% from gray to vivid), <strong>Lightness</strong> (0–100% from black to white). More intuitive than RGB for adjusting shades — change lightness without shifting hue.</div></details>
+<details><summary>Is my data private?</summary><div class="answer">100%. All color math runs in your browser via JavaScript. No server calls, no cookies, no tracking. Even the Share URL encodes colors in the query string — no backend involved.</div></details>
+<details><summary>Can I export palettes as CSS?</summary><div class="answer">Yes! The Palette tab has an "Export CSS Variables" section. Click Copy to get all palette colors as <code>:root { --primary: #xxx; ... }</code> ready for your stylesheet.</div></details>
 </div>
 
+<!-- More Tools -->
 <h3 style="margin-top:2rem;margin-bottom:.5rem">🛠 More Developer Tools</h3>
 <div class="tools-grid">
-<a class="tool-link" href="https://maxmini0214.github.io/json-formatter/">JSON Formatter</a>
-<a class="tool-link" href="https://maxmini0214.github.io/regex-tester/">Regex Tester</a>
-<a class="tool-link" href="https://maxmini0214.github.io/base64-tool/">Base64 Encoder</a>
-<a class="tool-link" href="https://maxmini0214.github.io/url-encoder/">URL Encoder</a>
-<a class="tool-link" href="https://maxmini0214.github.io/hash-generator/">Hash Generator</a>
-<a class="tool-link" href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
-<a class="tool-link" href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
-<a class="tool-link" href="https://maxmini0214.github.io/unix-timestamp/">Unix Timestamp</a>
-<a class="tool-link" href="https://maxmini0214.github.io/cron-parser/">Cron Parser</a>
-<a class="tool-link" href="https://maxmini0214.github.io/keyword-mixer/">Keyword Mixer</a>
+<a class="tool-link" href="/css-gradient-generator/">CSS Gradient</a>
+<a class="tool-link" href="/box-shadow-generator/">Box Shadow</a>
+<a class="tool-link" href="/json-formatter/">JSON Formatter</a>
+<a class="tool-link" href="/regex-tester/">Regex Tester</a>
+<a class="tool-link" href="/base64-tool/">Base64 Encoder</a>
+<a class="tool-link" href="/hash-generator/">Hash Generator</a>
+<a class="tool-link" href="/password-generator/">Password Gen</a>
+<a class="tool-link" href="/jwt-decoder/">JWT Decoder</a>
+<a class="tool-link" href="/cron-parser/">Cron Parser</a>
+<a class="tool-link" href="/qr-code-generator/">QR Code</a>
+</div>
+
+<!-- You Might Also Like -->
+<h2 style="margin-top:2rem">🛠️ You Might Also Like</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0">
+<a href="/box-shadow-generator/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🖼️ Box Shadow</div><div style="font-size:.82rem;color:#8899aa">CSS / Design • Free</div></a>
+<a href="/css-gradient-generator/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🌈 CSS Gradient</div><div style="font-size:.82rem;color:#8899aa">CSS / Design • Free</div></a>
+<a href="/url-encoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem">🔗 URL Encoder</div><div style="font-size:.82rem;color:#8899aa">Encoding/Data • Free</div></a>
+</div>
+
+<!-- Take a Break -->
+<div style="margin:1.5rem 0;padding:1rem;background:#1a1a2e;border:1px solid #16213e;border-radius:12px;text-align:center">
+<p style="margin:0 0 .5rem;font-size:.9rem;color:#e0e0e0">🎮 Take a Break</p>
+<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+<a href="/block-puzzle/" style="color:#64b5f6;font-size:.85rem">Block Puzzle</a>
+<a href="/color-switch/" style="color:#64b5f6;font-size:.85rem">Color Switch</a>
+<a href="/memory-cards/" style="color:#64b5f6;font-size:.85rem">Memory Cards</a>
+</div>
 </div>
 </main>
+
 <!-- Social Share -->
-<div style="margin:1rem auto;max-width:480px;text-align:center;">
-<p style="margin:0 0 0.5rem;color:#8b949e;font-size:0.85rem;">Share this tool</p>
-<div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
-<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20Color%20Picker%20🛠️%20Free%2C%20no%20signup%2C%20runs%20in%20browser%21&url=https://maxmini0214.github.io/color-picker/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
-<button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/color-picker/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:#94a3b8;background:transparent;cursor:pointer;font-size:0.85rem;font-weight:600;transition:all .2s">🔗 Copy Link</button>
+<div style="margin:1rem auto;max-width:480px;text-align:center">
+<p style="margin:0 0 .5rem;color:var(--muted);font-size:.85rem">Share this tool</p>
+<div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+<a href="https://twitter.com/intent/tweet?text=Color%20Picker%20%2B%20WCAG%20Contrast%20Checker%20%2B%20Palette%20Generator%20%F0%9F%8E%A8%20Free%2C%20no%20signup!&url=https://maxmini0214.github.io/color-picker/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
+<button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/color-picker/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:var(--muted);background:transparent;cursor:pointer;font-size:.85rem;font-weight:600">🔗 Copy Link</button>
 </div>
 </div>
 
-
-    <h2>🛠️ You Might Also Like</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;">
-  <a href="/cron-parser/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">⏰ Cron Parser</div><div style="font-size:.82rem;color:#8899aa;">Dev Utils • Free</div></a>
-  <a href="/uuid-generator/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🆔 UUID Generator</div><div style="font-size:.82rem;color:#8899aa;">Dev Utils • Free</div></a>
-  <a href="/regex-tester/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔍 Regex Tester</div><div style="font-size:.82rem;color:#8899aa;">Dev Utils • Free</div></a>
+<div style="text-align:center;padding:20px 16px;margin-top:30px;background:#f0f4ff;border-radius:12px">
+<p style="margin:0 0 8px;font-size:15px;color:#475569">🛠️ Like this tool?</p>
+<a href="https://maxmini0214.github.io/" style="font-size:17px;font-weight:600;color:#4f46e5;text-decoration:none">Explore 25+ Free Developer Tools →</a>
+<p style="margin:8px 0 0;font-size:13px;color:#94a3b8">No signup · No tracking · 100% browser-based</p>
 </div>
 
-    <footer>
-<p>🔒 Privacy First — Nothing leaves your browser.</p>
-<p style="margin-top:.5rem">© 2026 <a href="https://github.com/maxmini0214" style="color:var(--muted)">MaxDevTools</a></p>
+<!-- Newsletter -->
+<div class="newsletter">
+<p>📬 Get Dev Tools &amp; Tips Weekly</p>
+<p class="nl-sub">Free tools, coding tips, and developer insights. No spam.</p>
+<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')">
+<input type="email" name="email" placeholder="your@email.com" required>
+<input type="submit" value="Subscribe">
+</form>
+</div>
+
+<footer>
+<p>🔒 Privacy First — Nothing leaves your browser. Zero server calls.</p>
+<p style="margin-top:.5rem">© 2026 <a href="https://maxmini0214.github.io/" style="color:var(--muted)">MaxDevTools</a></p>
 </footer>
+
 <script>
+// ===== Color Utility Functions =====
+function hexToRgb(h){h=h.replace('#','');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);return[r,g,b]}
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('')}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b),l=(max+min)/2;let h=0,s=0;if(max!==min){const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6}}return[Math.round(h*360),Math.round(s*100),Math.round(l*100)]}
+function hslToRgb(h,s,l){h/=360;s/=100;l/=100;let r,g,b;if(s===0){r=g=b=l}else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p};const q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3)}return[Math.round(r*255),Math.round(g*255),Math.round(b*255)]}
+
+// ===== Tab Switching =====
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['picker','contrast','palette'][i]===name));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+}
+
+// ===== Tab 1: Picker =====
 const popular=['#ef4444','#f97316','#eab308','#22c55e','#10b981','#06b6d4','#3b82f6','#8b5cf6','#ec4899','#f43f5e','#ffffff','#000000'];
-const pal=document.getElementById('palette');
-popular.forEach(c=>{const d=document.createElement('div');d.className='swatch';d.style.background=c;d.onclick=()=>{document.getElementById('picker').value=c;fromHex(c)};pal.appendChild(d)});
+const palEl=document.getElementById('popularPalette');
+popular.forEach(c=>{const d=document.createElement('div');d.className='swatch';d.style.background=c;d.onclick=()=>{document.getElementById('picker').value=c;fromHex(c)};palEl.appendChild(d)});
 
-const picker=document.getElementById('picker'),hexI=document.getElementById('hex'),rgbI=document.getElementById('rgb'),hslI=document.getElementById('hsl'),cssI=document.getElementById('css'),prev=document.getElementById('preview');
+const pickerEl=document.getElementById('picker'),hexI=document.getElementById('hex'),rgbI=document.getElementById('rgb'),hslI=document.getElementById('hsl'),cssI=document.getElementById('css'),prevEl=document.getElementById('preview');
 
-picker.addEventListener('input',e=>fromHex(e.target.value));
+pickerEl.addEventListener('input',e=>fromHex(e.target.value));
 hexI.addEventListener('input',e=>{let v=e.target.value;if(/^#?[0-9a-f]{6}$/i.test(v)){if(!v.startsWith('#'))v='#'+v;fromHex(v)}});
 rgbI.addEventListener('input',e=>{const m=e.target.value.match(/(\d+)/g);if(m&&m.length>=3)fromRGB(+m[0],+m[1],+m[2])});
 
-function fromHex(h){
-h=h.charAt(0)==='#'?h:'#'+h;
-const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);
-update(r,g,b,h);
-}
-function fromRGB(r,g,b){update(r,g,b,'#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join(''))}
+function fromHex(h){h=h.charAt(0)==='#'?h:'#'+h;const[r,g,b]=hexToRgb(h);update(r,g,b,h)}
+function fromRGB(r,g,b){update(r,g,b,rgbToHex(r,g,b))}
 function update(r,g,b,hex){
-prev.style.background=hex;picker.value=hex;
-hexI.value=hex;rgbI.value=`rgb(${r}, ${g}, ${b})`;
-const[h,s,l]=rgbToHsl(r,g,b);
-hslI.value=`hsl(${h}, ${s}%, ${l}%)`;
-cssI.value=`--color: ${hex};`;
+  prevEl.style.background=hex;pickerEl.value=hex;hexI.value=hex;
+  rgbI.value=`rgb(${r}, ${g}, ${b})`;
+  const[h,s,l]=rgbToHsl(r,g,b);
+  hslI.value=`hsl(${h}, ${s}%, ${l}%)`;
+  cssI.value=`--color: ${hex};`;
+  addHistory(hex);
 }
-function rgbToHsl(r,g,b){
-r/=255;g/=255;b/=255;
-const max=Math.max(r,g,b),min=Math.min(r,g,b),l=(max+min)/2;
-let h=0,s=0;
-if(max!==min){const d=max-min;s=l>.5?d/(2-max-min):d/(max+min);
-switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break}}
-return[Math.round(h*360),Math.round(s*100),Math.round(l*100)];
-}
-function copy(id){navigator.clipboard.writeText(document.getElementById(id).value)}
+function copy(id){const v=document.getElementById(id).value;navigator.clipboard.writeText(v)}
 function shareColor(){
-const hex=hexI.value.replace('#','');
-const url=location.origin+location.pathname+'?c='+hex;
-navigator.clipboard.writeText(url).then(()=>{
-const btn=document.querySelector('.share-btn');
-btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='🔗 Share Color',2000);
-});
+  const hex=hexI.value.replace('#','');
+  const url=location.origin+location.pathname+'?c='+hex;
+  navigator.clipboard.writeText(url).then(()=>{const b=document.querySelector('.share-btn');b.textContent='✅ Copied!';setTimeout(()=>b.textContent='🔗 Share Color',2000)});
 }
-// Restore from URL
+
+// History
+const HKEY='color-history';
+function getHist(){try{return JSON.parse(localStorage.getItem(HKEY))||[]}catch(e){return[]}}
+function addHistory(hex){const h=getHist();if(h[0]===hex)return;h.unshift(hex);if(h.length>8)h.length=8;localStorage.setItem(HKEY,JSON.stringify(h));renderHistory()}
+function renderHistory(){
+  const h=getHist(),sec=document.getElementById('historySection'),list=document.getElementById('historyList');
+  if(!h.length){sec.style.display='none';return}
+  sec.style.display='block';
+  list.innerHTML=h.map(c=>`<div class="history-item" onclick="fromHex('${c}')"><div class="history-dot" style="background:${c}"></div><span class="history-text">${c}</span></div>`).join('');
+}
+renderHistory();
+
+// ===== Tab 2: Contrast Checker =====
+function relativeLuminance(r,g,b){
+  const[rs,gs,bs]=[r,g,b].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});
+  return 0.2126*rs+0.7152*gs+0.0722*bs;
+}
+function contrastRatio(l1,l2){const lighter=Math.max(l1,l2),darker=Math.min(l1,l2);return(lighter+0.05)/(darker+0.05)}
+
+function syncContrastPicker(which){
+  const hex=document.getElementById(which+'Hex').value;
+  if(/^#[0-9a-f]{6}$/i.test(hex))document.getElementById(which+'Picker').value=hex;
+  updateContrast();
+}
+function setContrast(fg,bg){
+  document.getElementById('fgHex').value=fg;document.getElementById('fgPicker').value=fg;
+  document.getElementById('bgHex').value=bg;document.getElementById('bgPicker').value=bg;
+  updateContrast();
+}
+function swapContrast(){
+  const fg=document.getElementById('fgHex').value,bg=document.getElementById('bgHex').value;
+  setContrast(bg,fg);
+}
+
+function updateContrast(){
+  const fgH=document.getElementById('fgHex').value,bgH=document.getElementById('bgHex').value;
+  if(!/^#[0-9a-f]{6}$/i.test(fgH)||!/^#[0-9a-f]{6}$/i.test(bgH))return;
+  const[fr,fg2,fb]=hexToRgb(fgH),[br,bg2,bb]=hexToRgb(bgH);
+  const l1=relativeLuminance(fr,fg2,fb),l2=relativeLuminance(br,bg2,bb);
+  const ratio=contrastRatio(l1,l2);
+  const r=ratio.toFixed(2);
+
+  document.getElementById('contrastRatio').textContent=r+':1';
+  const prev=document.getElementById('contrastPreview');
+  prev.style.background=bgH;prev.style.color=fgH;
+  document.getElementById('contrastSmall').style.color=fgH;
+  document.getElementById('contrastLarge').style.color=fgH;
+  document.getElementById('contrastRatio').style.color=fgH;
+
+  const checks=[
+    {id:'aa-normal',min:4.5},{id:'aa-large',min:3},
+    {id:'aaa-normal',min:7},{id:'aaa-large',min:4.5}
+  ];
+  let allPass=true;
+  checks.forEach(c=>{
+    const pass=ratio>=c.min;
+    if(!pass)allPass=false;
+    const el=document.getElementById(c.id);
+    el.className='badge '+(pass?'badge-pass':'badge-fail');
+    el.textContent=pass?'✓ Pass':'✗ Fail';
+  });
+
+  // Suggested fixes
+  const fixEl=document.getElementById('suggestedFixes');
+  if(allPass){fixEl.innerHTML='✅ All WCAG levels pass — your colors are accessible!'}
+  else{
+    let suggestions=[];
+    if(ratio<4.5)suggestions.push('Try darkening the background or lightening the text to reach 4.5:1 for AA normal text.');
+    if(ratio<3)suggestions.push('Even large text fails — significant adjustment needed.');
+    if(ratio>=4.5&&ratio<7)suggestions.push('AA passes but AAA fails for normal text. Increase contrast to 7:1 for AAA compliance.');
+    fixEl.innerHTML=suggestions.map(s=>'⚠️ '+s).join('<br>');
+  }
+}
+updateContrast();
+
+// ===== Tab 3: Palette Generator =====
+function syncPalettePicker(){
+  const hex=document.getElementById('paletteHex').value;
+  if(/^#[0-9a-f]{6}$/i.test(hex)){document.getElementById('palettePicker').value=hex;generatePalettes()}
+}
+function randomColor(){
+  const hex='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+  document.getElementById('paletteHex').value=hex;document.getElementById('palettePicker').value=hex;
+  generatePalettes();
+}
+
+function hslShift(h,s,l,hDelta){return[((h+hDelta)%360+360)%360,s,l]}
+
+function generatePalettes(){
+  const hex=document.getElementById('paletteHex').value;
+  if(!/^#[0-9a-f]{6}$/i.test(hex))return;
+  const[r,g,b]=hexToRgb(hex);
+  const[h,s,l]=rgbToHsl(r,g,b);
+
+  const palettes={
+    complementary:[
+      [h,s,l],
+      hslShift(h,s,l,180)
+    ],
+    analogous:[
+      hslShift(h,s,l,-30),
+      hslShift(h,s,l,-15),
+      [h,s,l],
+      hslShift(h,s,l,15),
+      hslShift(h,s,l,30)
+    ],
+    triadic:[
+      [h,s,l],
+      hslShift(h,s,l,120),
+      hslShift(h,s,l,240)
+    ],
+    split:[
+      [h,s,l],
+      hslShift(h,s,l,150),
+      hslShift(h,s,l,210)
+    ],
+    mono:[
+      [h,s,Math.max(10,l-30)],
+      [h,s,Math.max(10,l-15)],
+      [h,s,l],
+      [h,s,Math.min(90,l+15)],
+      [h,s,Math.min(90,l+30)]
+    ]
+  };
+
+  let cssVars=':root {\n';
+  Object.entries(palettes).forEach(([name,colors])=>{
+    const container=document.getElementById('pal-'+name);
+    container.innerHTML='';
+    colors.forEach((hsl,i)=>{
+      const[cr,cg,cb]=hslToRgb(hsl[0],hsl[1],hsl[2]);
+      const ch=rgbToHex(cr,cg,cb);
+      const textColor=hsl[2]>55?'#000':'#fff';
+      const sw=document.createElement('div');
+      sw.className='palette-swatch';
+      sw.style.background=ch;
+      sw.innerHTML=`<span class="hex-label" style="color:${textColor}">${ch}</span>`;
+      sw.onclick=()=>{navigator.clipboard.writeText(ch);sw.querySelector('.hex-label').textContent='✅ Copied!';setTimeout(()=>sw.querySelector('.hex-label').textContent=ch,1500)};
+      container.appendChild(sw);
+      cssVars+=`  --${name}-${i+1}: ${ch};\n`;
+    });
+  });
+  cssVars+='}';
+  document.getElementById('paletteCSS').value=cssVars;
+}
+generatePalettes();
+
+// ===== URL restore =====
 (function(){
-const p=new URLSearchParams(location.search);
-const c=p.get('c');
-if(c&&/^[0-9a-f]{6}$/i.test(c)){fromHex('#'+c)}
+  const p=new URLSearchParams(location.search);
+  const c=p.get('c');
+  if(c&&/^[0-9a-f]{6}$/i.test(c)){fromHex('#'+c)}
 })();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<!-- Newsletter CTA -->
-<div style="max-width:480px;margin:2rem auto;padding:1.5rem;background:var(--surface,#1e293b);border:1px solid var(--border,#334155);border-radius:12px;text-align:center;font-family:system-ui,sans-serif;color:var(--text,#e2e8f0)">
-<p style="margin:0 0 0.5rem;font-size:1.1rem;font-weight:600">📬 Get Dev Tools & Tips Weekly</p>
-<p style="margin:0 0 1rem;color:var(--muted,#94a3b8);font-size:0.9rem">Free tools, automation tricks, and AI insights. No spam.</p>
-<form action="https://buttondown.com/api/emails/embed-subscribe/maxmini0214" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/maxmini0214','popupwindow')" style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap">
-<input type="email" name="email" placeholder="your@email.com" required style="padding:0.5rem 1rem;border:1px solid var(--border,#334155);border-radius:8px;font-size:0.9rem;width:200px;background:var(--bg,#0f172a);color:var(--text,#e2e8f0)">
-<input type="submit" value="Subscribe" style="padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600">
-</form>
-</div>
+<!-- Floating Gumroad CTA (60s) -->
 <script>
 (function(){
-  var k='gumroad-float-cta-seen';
-  if(sessionStorage.getItem(k))return;
+  var k='gumroad-float-cta-seen';if(sessionStorage.getItem(k))return;
   setTimeout(function(){
     if(sessionStorage.getItem(k))return;
     var d=document.createElement('div');
-    d.id='gumroad-float-cta';
-    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#ff6b35,#f7931e);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui,sans-serif;font-size:15px;max-width:280px;animation:gumSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">🛠️ Finding this useful?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Grab the Frontend Interview Cheat Sheet — $9</span><a href="https://maxxmini.gumroad.com/l/frontend-interview?ref=float-color-picker" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#ff6b35;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Get It →</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(\''+k+'\',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
-    var s=document.createElement('style');
-    s.textContent='@keyframes gumSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
-    document.head.appendChild(s);
-    document.body.appendChild(d);
-    sessionStorage.setItem(k,'1');
+    d.innerHTML='<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:linear-gradient(135deg,#ff6b35,#f7931e);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.4);font-family:system-ui;font-size:15px;max-width:280px;animation:gumSlide .4s ease-out"><span style="display:block;font-weight:700;margin-bottom:6px">🎨 Building a design system?</span><span style="display:block;font-size:13px;opacity:0.9;margin-bottom:10px">Frontend Interview Cheat Sheet — $9</span><a href="https://maxxmini.gumroad.com/l/frontend-interview?ref=float-color-picker" target="_blank" rel="noopener" style="display:inline-block;background:#fff;color:#ff6b35;padding:8px 18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-right:8px">Get It →</a><button onclick="this.parentElement.parentElement.remove();sessionStorage.setItem(\''+k+'\',1)" style="background:none;border:1px solid rgba(255,255,255,0.5);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px">Maybe later</button></div>';
+    var s=document.createElement('style');s.textContent='@keyframes gumSlide{from{transform:translateY(100px);opacity:0}to{transform:translateY(0);opacity:1}}';
+    document.head.appendChild(s);document.body.appendChild(d);sessionStorage.setItem(k,'1');
   },60000);
 })();
 </script>
