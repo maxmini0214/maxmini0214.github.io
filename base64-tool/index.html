@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Base64 Encoder/Decoder Online — Text, Image &amp; File Converter</title>
+<title>Base64 Encoder/Decoder Online — Text, Image, File, Hex &amp; Batch Converter</title>
 <meta property="og:image" content="https://maxmini0214.github.io/base64-tool/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="description" content="Encode and decode Base64 instantly — text, images, and files. Convert image to Base64 data URI, preview Base64 images, URL-safe mode. 100% client-side, zero tracking.">
-<meta name="keywords" content="base64 encoder, base64 decoder, image to base64, file to base64, base64 converter, data uri generator, base64 image encoder, url safe base64, base64 to image preview, online base64 tool, base64 encode decode, convert image base64">
-<meta property="og:title" content="Base64 Encoder/Decoder — Text, Image &amp; File Converter">
-<meta property="og:description" content="Encode text, images, and files to Base64 instantly. Preview Base64 images. URL-safe mode. 100% browser-based.">
+<meta name="description" content="Encode and decode Base64 instantly — text, images, files, hex strings. Batch encode/decode multiple lines. Convert image to Base64 data URI, hex to Base64. URL-safe mode. 100% client-side.">
+<meta name="keywords" content="base64 encoder, base64 decoder, image to base64, file to base64, base64 converter, data uri generator, base64 image encoder, url safe base64, base64 to image preview, online base64 tool, base64 encode decode, convert image base64, hex to base64, base64 to hex, batch base64 encode, batch base64 decode, hex string converter, base64 bulk encoder, multiple base64 encode, base64 hex converter">
+<meta property="og:title" content="Base64 Encoder/Decoder — Text, Image, Hex &amp; Batch Converter">
+<meta property="og:description" content="Encode text, images, files, hex strings to Base64. Batch multi-line encode/decode. URL-safe mode. 100% browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/base64-tool/">
 <meta name="twitter:card" content="summary_large_image">
@@ -97,7 +97,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 @media print{.gum-cta,.newsletter,.dropzone,nav,button,.btn,.tabs{display:none!important}body{background:#fff;color:#000}textarea{border:1px solid #ccc}}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Base64 Encoder/Decoder — Text, Image & File Converter","description":"Encode and decode Base64 instantly — text, images, and files. Convert image to Base64 data URI, preview Base64 images, URL-safe mode.","url":"https://maxmini0214.github.io/base64-tool/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Base64 Encoder/Decoder — Text, Image & File Converter","description":"Encode and decode Base64 instantly — text, images, files, hex strings, batch multi-line. Convert image to Base64 data URI, hex to Base64. URL-safe mode.","url":"https://maxmini0214.github.io/base64-tool/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Base64 Encoder/Decoder","item":"https://maxmini0214.github.io/base64-tool/"}]}
@@ -111,7 +111,9 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 {"@type":"Question","name":"What is the maximum file size supported?","acceptedAnswer":{"@type":"Answer","text":"The tool handles files up to ~50MB depending on your browser's memory. For best performance, files under 10MB are recommended. Large files are processed using FileReader API locally."}},
 {"@type":"Question","name":"What is a Base64 Data URI?","acceptedAnswer":{"@type":"Answer","text":"A Data URI embeds file content directly in HTML/CSS using the format data:[mime];base64,[data]. This eliminates an HTTP request — useful for small images, icons, and fonts in web development."}},
 {"@type":"Question","name":"How do I decode Base64 back to a file?","acceptedAnswer":{"@type":"Answer","text":"Use the Text tab to decode the Base64 string, or use the Base64 → Preview tab for images. The tool auto-detects the MIME type from data URIs and renders the content."}},
-{"@type":"Question","name":"What is the difference between Base64 and URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 (RFC 4648 §5) replaces + with -, / with _, and optionally removes = padding, making it safe for URLs without percent-encoding."}}
+{"@type":"Question","name":"What is the difference between Base64 and URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 (RFC 4648 §5) replaces + with -, / with _, and optionally removes = padding, making it safe for URLs without percent-encoding."}},
+{"@type":"Question","name":"How do I convert hex to Base64?","acceptedAnswer":{"@type":"Answer","text":"Use the Hex ↔ Base64 tab. Paste your hex string (with or without spaces, e.g. '48656c6c6f' or '48 65 6c 6c 6f'), and click 'Hex → Base64'. The tool parses each hex byte pair and converts to Base64. Supports uppercase/lowercase and 0x prefix."}},
+{"@type":"Question","name":"Can I encode multiple strings at once?","acceptedAnswer":{"@type":"Answer","text":"Yes! Use the Batch tab. Paste multiple strings (one per line) and click 'Encode All' or 'Decode All'. Each line is processed independently. Failed lines show [ERROR] so you can identify issues. Supports URL-safe mode and empty line skipping."}}
 ]}
 </script>
 <script type="application/ld+json">
@@ -125,8 +127,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </head>
 <body>
 <header>
-<h1>Base64 Encoder/Decoder — Text, Images &amp; Files</h1>
-<p class="subtitle">Encode text, convert images to Base64 data URIs, preview encoded images — 100% in your browser</p>
+<h1>Base64 Encoder/Decoder — Text, Images, Hex &amp; Batch</h1>
+<p class="subtitle">Encode text, images, files, hex strings — batch multi-line mode — 100% in your browser</p>
 </header>
 <main>
 
@@ -135,6 +137,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="tab active" onclick="switchTab('text')">📝 Text</button>
 <button class="tab" onclick="switchTab('file')">📁 File → Base64</button>
 <button class="tab" onclick="switchTab('preview')">🖼️ Base64 → Preview</button>
+<button class="tab" onclick="switchTab('hex')">🔢 Hex ↔ Base64</button>
+<button class="tab" onclick="switchTab('batch')">📋 Batch</button>
 </div>
 
 <!-- Tab 1: Text Encode/Decode -->
@@ -210,6 +214,60 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </div>
 </div>
 
+<!-- Tab 4: Hex ↔ Base64 -->
+<div id="panel-hex" class="tab-panel">
+<div class="card">
+<label>Hex String</label>
+<textarea id="hexInput" placeholder="Paste hex string (e.g. 48656c6c6f or 48 65 6c 6c 6f)..."></textarea>
+<div class="stats"><span id="hexInputLen">0 chars</span></div>
+</div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="hexToBase64()">Hex → Base64 ↓</button>
+<button class="btn btn-primary" onclick="base64ToHex()">Base64 → Hex ↑</button>
+<button class="btn btn-secondary" onclick="copyHexOutput()">📋 Copy</button>
+<button class="btn btn-secondary" onclick="document.getElementById('hexInput').value='';document.getElementById('hexOutput').value='';document.getElementById('hexStatus').textContent=''">Clear</button>
+</div>
+<div class="toggle-row">
+<input type="checkbox" id="hexSpaces"><label for="hexSpaces" style="margin:0;color:var(--text);cursor:pointer">Space-separated hex output (48 65 6c vs 48656c)</label>
+</div>
+<div class="toggle-row">
+<input type="checkbox" id="hexUpper"><label for="hexUpper" style="margin:0;color:var(--text);cursor:pointer">Uppercase hex (4F vs 4f)</label>
+</div>
+<div class="card">
+<label>Base64 String</label>
+<textarea id="hexOutput" placeholder="Result will appear here..." readonly></textarea>
+<div class="stats"><span id="hexOutputLen">0 chars</span></div>
+<div id="hexStatus" class="status"></div>
+</div>
+</div>
+
+<!-- Tab 5: Batch Encode/Decode -->
+<div id="panel-batch" class="tab-panel">
+<div class="card">
+<label>Input (one item per line)</label>
+<textarea id="batchInput" placeholder="Line 1&#10;Line 2&#10;Line 3&#10;...paste multiple strings, each on its own line" style="min-height:180px"></textarea>
+<div class="stats"><span id="batchInputCount">0 lines</span></div>
+</div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="batchEncode()">Encode All →</button>
+<button class="btn btn-primary" onclick="batchDecode()">← Decode All</button>
+<button class="btn btn-secondary" onclick="copyBatchOutput()">📋 Copy All</button>
+<button class="btn btn-secondary" onclick="document.getElementById('batchInput').value='';document.getElementById('batchOutput').value='';document.getElementById('batchStatus').textContent='';updateBatchStats()">Clear</button>
+</div>
+<div class="toggle-row">
+<input type="checkbox" id="batchUrlSafe"><label for="batchUrlSafe" style="margin:0;color:var(--text);cursor:pointer">URL-safe Base64</label>
+</div>
+<div class="toggle-row">
+<input type="checkbox" id="batchSkipEmpty" checked><label for="batchSkipEmpty" style="margin:0;color:var(--text);cursor:pointer">Skip empty lines</label>
+</div>
+<div class="card">
+<label>Output (one result per line)</label>
+<textarea id="batchOutput" placeholder="Results appear here, one per line..." readonly style="min-height:180px"></textarea>
+<div class="stats"><span id="batchOutputCount">0 lines</span> · <span id="batchErrors"></span></div>
+<div id="batchStatus" class="status"></div>
+</div>
+</div>
+
 <!-- History -->
 <div class="history" id="historySection" style="display:none">
 <h3 style="font-size:.95rem;margin-bottom:.5rem">📋 Recent (last 8)</h3>
@@ -222,6 +280,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="feature"><div class="feature-icon">🖼️</div><div class="feature-title">Image Preview</div><div class="feature-desc">Paste Base64 and see the image rendered instantly</div></div>
 <div class="feature"><div class="feature-icon">🔗</div><div class="feature-title">Data URI</div><div class="feature-desc">Generate ready-to-use data: URIs for HTML &amp; CSS embedding</div></div>
 <div class="feature"><div class="feature-icon">🛡️</div><div class="feature-title">URL-Safe</div><div class="feature-desc">RFC 4648 §5 encoding — safe for URLs and filenames</div></div>
+<div class="feature"><div class="feature-icon">🔢</div><div class="feature-title">Hex ↔ Base64</div><div class="feature-desc">Convert hex strings to Base64 and back — keys, hashes, binary data</div></div>
+<div class="feature"><div class="feature-icon">📋</div><div class="feature-title">Batch Mode</div><div class="feature-desc">Encode/decode multiple strings at once — one per line, instant results</div></div>
 <div class="feature"><div class="feature-icon">🔍</div><div class="feature-title">Auto-Detect</div><div class="feature-desc">Paste anything — auto-detects if it's Base64 or plain text</div></div>
 <div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Everything runs in your browser. Zero server calls.</div></div>
 </div>
@@ -244,6 +304,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is a Data URI?<span class="faq-arrow">▼</span></div><div class="faq-a">A Data URI (data:[mime];base64,[data]) embeds file content directly into HTML/CSS. It eliminates an HTTP request — ideal for small images, icons, and fonts in web development.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I decode Base64 back to a file?<span class="faq-arrow">▼</span></div><div class="faq-a">For images, use the "🖼️ Base64 → Preview" tab and click "💾 Download File". For text, use the Text tab's Decode button. The tool auto-detects MIME types from data: URIs.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the difference between standard and URL-safe Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 replaces + with -, / with _, and optionally strips = padding — making it safe for URLs without percent-encoding. Use it for JWTs, API tokens, and URL query params.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I convert hex to Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Use the "🔢 Hex ↔ Base64" tab. Paste your hex string (e.g. <code>48656c6c6f</code> or <code>48 65 6c 6c 6f</code>), click "Hex → Base64". Supports space-separated, uppercase/lowercase, and 0x prefix. Useful for converting binary data, encryption keys, and hash digests.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I encode multiple strings at once?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes! The "📋 Batch" tab lets you paste multiple strings (one per line) and encode/decode them all at once. Failed lines show [ERROR] for easy debugging. Great for processing API keys, tokens, or data migration tasks.</div></div>
 </div>
 
 <!-- More Tools -->
@@ -303,7 +365,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <script>
 // --- Tab switching ---
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['text','file','preview'][i]===name)});
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['text','file','preview','hex','batch'][i]===name)});
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
 }
@@ -429,6 +491,110 @@ function loadHistory(i){
 function timeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return 'now';if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d'}
 function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 renderHistory();
+
+// --- Hex ↔ Base64 ---
+document.getElementById('hexInput').addEventListener('input',function(){
+  document.getElementById('hexInputLen').textContent=this.value.length+' chars';
+});
+function hexToBase64(){
+  try{
+    let hex=document.getElementById('hexInput').value.trim().replace(/\s+/g,'').replace(/^0x/i,'');
+    if(!/^[0-9a-fA-F]*$/.test(hex)){throw new Error('Invalid hex characters')}
+    if(hex.length%2!==0){throw new Error('Hex string must have even length')}
+    let bytes=[];
+    for(let i=0;i<hex.length;i+=2)bytes.push(parseInt(hex.substr(i,2),16));
+    let bin=String.fromCharCode.apply(null,bytes);
+    let b64=btoa(bin);
+    document.getElementById('hexOutput').value=b64;
+    document.getElementById('hexStatus').textContent='✓ Hex → Base64 converted ('+bytes.length+' bytes)';
+    document.getElementById('hexStatus').className='status';
+    document.getElementById('hexOutputLen').textContent=b64.length+' chars';
+    addHistory('encode','hex:'+hex.slice(0,40),b64.slice(0,60));
+  }catch(e){
+    document.getElementById('hexStatus').textContent='✗ '+e.message;
+    document.getElementById('hexStatus').className='status error';
+  }
+}
+function base64ToHex(){
+  try{
+    let b64=document.getElementById('hexOutput').value.trim()||document.getElementById('hexInput').value.trim();
+    let bin=atob(b64);
+    let hex='';
+    let useSpaces=document.getElementById('hexSpaces').checked;
+    let useUpper=document.getElementById('hexUpper').checked;
+    for(let i=0;i<bin.length;i++){
+      let h=bin.charCodeAt(i).toString(16).padStart(2,'0');
+      if(useUpper)h=h.toUpperCase();
+      hex+=h+(useSpaces&&i<bin.length-1?' ':'');
+    }
+    document.getElementById('hexInput').value=hex;
+    document.getElementById('hexStatus').textContent='✓ Base64 → Hex converted ('+bin.length+' bytes)';
+    document.getElementById('hexStatus').className='status';
+    document.getElementById('hexInputLen').textContent=hex.length+' chars';
+    addHistory('decode','b64:'+b64.slice(0,40),hex.slice(0,60));
+  }catch(e){
+    document.getElementById('hexStatus').textContent='✗ Invalid Base64 string';
+    document.getElementById('hexStatus').className='status error';
+  }
+}
+function copyHexOutput(){
+  let v=document.getElementById('hexOutput').value||document.getElementById('hexInput').value;
+  navigator.clipboard.writeText(v);
+  document.getElementById('hexStatus').textContent='✓ Copied!';
+  document.getElementById('hexStatus').className='status';
+}
+
+// --- Batch Encode/Decode ---
+function updateBatchStats(){
+  let lines=document.getElementById('batchInput').value.split('\n').filter(l=>l.trim()).length;
+  document.getElementById('batchInputCount').textContent=lines+' lines';
+  let outLines=document.getElementById('batchOutput').value.split('\n').filter(l=>l.trim()).length;
+  document.getElementById('batchOutputCount').textContent=outLines+' lines';
+}
+document.getElementById('batchInput').addEventListener('input',updateBatchStats);
+
+function batchEncode(){
+  let lines=document.getElementById('batchInput').value.split('\n');
+  let skipEmpty=document.getElementById('batchSkipEmpty').checked;
+  let urlSafe=document.getElementById('batchUrlSafe').checked;
+  let results=[],errors=0;
+  lines.forEach(function(line){
+    if(skipEmpty&&!line.trim()){return}
+    try{
+      let r=btoa(unescape(encodeURIComponent(line)));
+      if(urlSafe)r=toUrlSafe(r);
+      results.push(r);
+    }catch(e){results.push('[ERROR]');errors++}
+  });
+  document.getElementById('batchOutput').value=results.join('\n');
+  document.getElementById('batchStatus').textContent='✓ Encoded '+results.length+' lines'+(errors?' ('+errors+' errors)':'');
+  document.getElementById('batchStatus').className=errors?'status error':'status';
+  document.getElementById('batchErrors').textContent=errors?errors+' errors':'';
+  updateBatchStats();
+}
+function batchDecode(){
+  let lines=document.getElementById('batchInput').value.split('\n');
+  let skipEmpty=document.getElementById('batchSkipEmpty').checked;
+  let results=[],errors=0;
+  lines.forEach(function(line){
+    if(skipEmpty&&!line.trim()){return}
+    try{
+      let v=line.trim();
+      if(/[-_]/.test(v)&&!/[+/]/.test(v))v=fromUrlSafe(v);
+      results.push(decodeURIComponent(escape(atob(v))));
+    }catch(e){results.push('[ERROR: invalid Base64]');errors++}
+  });
+  document.getElementById('batchOutput').value=results.join('\n');
+  document.getElementById('batchStatus').textContent='✓ Decoded '+results.length+' lines'+(errors?' ('+errors+' errors)':'');
+  document.getElementById('batchStatus').className=errors?'status error':'status';
+  document.getElementById('batchErrors').textContent=errors?errors+' errors':'';
+  updateBatchStats();
+}
+function copyBatchOutput(){
+  navigator.clipboard.writeText(document.getElementById('batchOutput').value);
+  document.getElementById('batchStatus').textContent='✓ Copied!';
+  document.getElementById('batchStatus').className='status';
+}
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- Floating Gumroad CTA (60s engagement) -->
