@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Lorem Ipsum Generator — Paragraphs, Sentences, Words, JSON &amp; Themed Text</title>
+<title>Lorem Ipsum Generator &amp; Fake Data Generator — Placeholder Text, Names, Emails, Addresses</title>
 <meta property="og:image" content="https://maxmini0214.github.io/lorem-ipsum/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="description" content="Generate lorem ipsum placeholder text — paragraphs, sentences, words, or exact character count. Themed modes: Classic, Hipster, Tech, Office, Korean. Copy as plain text, HTML, Markdown, or JSON. 100% browser-based.">
-<meta name="keywords" content="lorem ipsum generator, dummy text generator, placeholder text, random text generator, hipster ipsum, tech ipsum, office ipsum, lorem ipsum paragraphs, generate placeholder text, lorem ipsum html, lorem ipsum json, lorem ipsum markdown, custom placeholder text, 500 words lorem ipsum, character count text generator, korean placeholder text, 더미 텍스트 생성기">
-<meta property="og:title" content="Lorem Ipsum Generator — Paragraphs, Words, JSON &amp; Themed Text">
-<meta property="og:description" content="Generate placeholder text instantly — Classic, Hipster, Tech, Office, Korean themes. Copy as text, HTML, Markdown, or JSON. 100% browser-based.">
+<meta name="description" content="Generate lorem ipsum placeholder text and fake test data — names, emails, addresses, phone numbers, UUIDs. 5 themes. Export as JSON, CSV, or SQL INSERT. 100% browser-based.">
+<meta name="keywords" content="lorem ipsum generator, fake data generator, random name generator, test data generator, mock data, dummy text generator, placeholder text, random email generator, random address generator, random phone number, uuid generator, sql insert generator, csv test data, hipster ipsum, tech ipsum, office ipsum, korean placeholder text, 더미 텍스트 생성기, fake name generator, bulk test data, random user generator">
+<meta property="og:title" content="Lorem Ipsum &amp; Fake Data Generator — Text, Names, Emails, Addresses">
+<meta property="og:description" content="Generate placeholder text and fake test data instantly. Names, emails, addresses, phone numbers, UUIDs. Export as JSON, CSV, SQL. 100% browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/lorem-ipsum/">
 <meta name="twitter:card" content="summary_large_image">
@@ -105,7 +105,10 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 {"@type":"Question","name":"Is my generated text sent to any server?","acceptedAnswer":{"@type":"Answer","text":"No. All text generation happens 100% in your browser using JavaScript. Nothing is sent to any server. The tool works offline after the initial page load."}},
 {"@type":"Question","name":"What is Hipster Ipsum?","acceptedAnswer":{"@type":"Answer","text":"Hipster Ipsum uses trendy, artisan vocabulary instead of Latin. Words like 'cold-pressed', 'sustainable', 'artisanal', 'craft beer' make the placeholder text more fun and modern. Great for mockups of lifestyle, food, or design projects."}},
 {"@type":"Question","name":"How do I generate JSON placeholder data?","acceptedAnswer":{"@type":"Answer","text":"Use the JSON Output tab, or click 'Copy as JSON' from any tab. The output is a valid JSON array where each element is a paragraph string. You can also get a JSON object with metadata (theme, count, word count) for API testing."}},
-{"@type":"Question","name":"Can I generate placeholder text in Korean?","acceptedAnswer":{"@type":"Answer","text":"Yes! Select the '🇰🇷 Korean' theme pill. The generator produces natural Korean dummy text using common vocabulary. Perfect for Korean website mockups and app prototyping."}}
+{"@type":"Question","name":"Can I generate placeholder text in Korean?","acceptedAnswer":{"@type":"Answer","text":"Yes! Select the '🇰🇷 Korean' theme pill. The generator produces natural Korean dummy text using common vocabulary. Perfect for Korean website mockups and app prototyping."}},
+{"@type":"Question","name":"How do I generate fake test data?","acceptedAnswer":{"@type":"Answer","text":"Click the 'Fake Data' tab. Select fields like name, email, phone, address, UUID, company, and job title. Choose 1-100 rows and export as JSON, CSV, TSV, or SQL INSERT. Perfect for database seeding, API mocking, and UI prototyping."}},
+{"@type":"Question","name":"Can I export fake data as SQL INSERT statements?","acceptedAnswer":{"@type":"Answer","text":"Yes! In the Fake Data tab, select 'SQL INSERT' as the export format and customize the table name. Each row becomes a valid INSERT statement ready for your database."}},
+{"@type":"Question","name":"Is the generated fake data realistic?","acceptedAnswer":{"@type":"Answer","text":"Yes. The generator uses pools of real-world names, cities, companies, and job titles for English (US) and Korean locales. Emails are derived from generated names with realistic domains. All data is randomly generated in-browser — no real personal data is used."}}
 ]}
 </script>
 <script type="application/ld+json">
@@ -119,8 +122,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </head>
 <body>
 <header>
-<h1>Lorem Ipsum Generator — Themed Placeholder Text</h1>
-<p class="subtitle">Classic, Hipster, Tech, Office &amp; Korean — paragraphs, sentences, words, or exact character count</p>
+<h1>Lorem Ipsum &amp; Fake Data Generator</h1>
+<p class="subtitle">Placeholder text (5 themes) + fake names, emails, addresses, phones, UUIDs — export as JSON, CSV, or SQL</p>
 </header>
 <main>
 
@@ -129,6 +132,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="tab active" onclick="switchTab('generate')">📝 Generate</button>
 <button class="tab" onclick="switchTab('charlimit')">🎯 Character Limit</button>
 <button class="tab" onclick="switchTab('json')">📦 JSON Output</button>
+<button class="tab" onclick="switchTab('fakedata')">🎭 Fake Data</button>
 </div>
 
 <!-- Theme Pills -->
@@ -204,6 +208,56 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </div>
 </div>
 
+<!-- Tab 4: Fake Data Generator -->
+<div id="panel-fakedata" class="tab-panel">
+<div class="card">
+<p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">Generate realistic fake test data — names, emails, addresses, phone numbers, dates, and UUIDs. Perfect for database seeding, API mocking, and UI prototyping.</p>
+<div class="controls">
+<div class="field"><label>Rows</label><input type="number" id="fakeRows" value="10" min="1" max="100"></div>
+<div class="field"><label>Locale</label><select id="fakeLocale"><option value="en">🇺🇸 English</option><option value="kr">🇰🇷 Korean</option></select></div>
+<div class="field"><label>Export Format</label><select id="fakeFormat"><option value="json">JSON</option><option value="csv">CSV</option><option value="sql">SQL INSERT</option><option value="tsv">TSV (Tab)</option></select></div>
+</div>
+<p style="font-size:.8rem;color:var(--muted);margin-bottom:.75rem;font-weight:600">Select fields:</p>
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem" id="fakeFields">
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" checked data-field="id"> ID</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" checked data-field="firstName"> First Name</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" checked data-field="lastName"> Last Name</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" checked data-field="email"> Email</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="phone"> Phone</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="address"> Address</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="city"> City</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="country"> Country</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="company"> Company</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="jobTitle"> Job Title</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="date"> Date</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="uuid"> UUID</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="ip"> IP Address</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="avatar"> Avatar URL</label>
+<label class="check" style="background:var(--bg);padding:4px 10px;border-radius:6px;border:1px solid var(--border)"><input type="checkbox" data-field="bio"> Bio</label>
+</div>
+<!-- Quick presets -->
+<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
+<button class="btn btn-sm btn-secondary" onclick="setFakePreset('user')">👤 User Profile</button>
+<button class="btn btn-sm btn-secondary" onclick="setFakePreset('contact')">📇 Contact List</button>
+<button class="btn btn-sm btn-secondary" onclick="setFakePreset('employee')">🏢 Employee DB</button>
+<button class="btn btn-sm btn-secondary" onclick="setFakePreset('minimal')">⚡ Minimal</button>
+</div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="generateFakeData()">Generate Fake Data</button>
+<button class="btn btn-secondary" onclick="copyFakeData()">📋 Copy</button>
+<button class="btn btn-secondary" onclick="downloadFakeData()">💾 Download</button>
+</div>
+<textarea id="fakeOutput" readonly style="font-family:'SF Mono',monospace;font-size:.82rem;min-height:300px"></textarea>
+<div class="stats" id="fakeStats"></div>
+<div class="status" id="fakeStatus"></div>
+</div>
+<!-- SQL Table Name -->
+<div style="display:flex;gap:1rem;align-items:center;margin-top:.5rem">
+<label style="font-size:.8rem;color:var(--muted);font-weight:600">SQL Table Name:</label>
+<input type="text" id="sqlTable" value="users" style="padding:.4rem .6rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.85rem;width:120px">
+</div>
+</div>
+
 <!-- History -->
 <div class="history" id="historySection" style="display:none">
 <h3 style="font-size:.95rem;margin-bottom:.5rem">📋 Recent (last 8)</h3>
@@ -216,7 +270,9 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="feature"><div class="feature-icon">🎯</div><div class="feature-title">Character Limit</div><div class="feature-desc">Generate exact character count — 140 (Tweet) to 50K</div></div>
 <div class="feature"><div class="feature-icon">📦</div><div class="feature-title">JSON Output</div><div class="feature-desc">Array, object, or API mock — ready for dev testing</div></div>
 <div class="feature"><div class="feature-icon">📄</div><div class="feature-title">Multi-Format Copy</div><div class="feature-desc">Plain text, HTML &lt;p&gt; tags, Markdown, or JSON array</div></div>
-<div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Quick Presets</div><div class="feature-desc">Tweet (140), SMS (160), VARCHAR (255) — one click</div></div>
+<div class="feature"><div class="feature-icon">🎭</div><div class="feature-title">Fake Data</div><div class="feature-desc">Names, emails, phones, addresses, UUIDs — realistic test data</div></div>
+<div class="feature"><div class="feature-icon">💾</div><div class="feature-title">Export Formats</div><div class="feature-desc">JSON, CSV, TSV, SQL INSERT — ready for your database</div></div>
+<div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Quick Presets</div><div class="feature-desc">User Profile, Contact List, Employee DB — one click</div></div>
 <div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Everything runs in your browser. Zero server calls.</div></div>
 </div>
 
@@ -248,6 +304,9 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is Hipster Ipsum?<span class="faq-arrow">▼</span></div><div class="faq-a">Hipster Ipsum uses trendy, artisan vocabulary instead of Latin — words like "cold-pressed", "sustainable", "artisanal", "craft beer". Great for lifestyle, food, and design mockups that need a modern feel.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I generate JSON placeholder data?<span class="faq-arrow">▼</span></div><div class="faq-a">Use the "📦 JSON Output" tab. Choose format: simple array, object with metadata (theme, word count), or API mock response (with id, title, body, timestamps). Perfect for frontend testing and API mocking.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I generate Korean placeholder text?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes! Select the "🇰🇷 Korean" theme. It produces natural Korean dummy text using common vocabulary — perfect for Korean website mockups and app prototyping.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I generate fake test data?<span class="faq-arrow">▼</span></div><div class="faq-a">Click the "🎭 Fake Data" tab. Select fields (name, email, phone, address, UUID, etc.), choose how many rows, and click Generate. Export as JSON, CSV, TSV, or SQL INSERT statements. Great for database seeding and API mocking.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I export fake data as SQL INSERT statements?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes! In the Fake Data tab, select "SQL INSERT" as the export format and set your table name. Each row becomes a valid INSERT statement ready to paste into your database console or migration file.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is the fake data realistic?<span class="faq-arrow">▼</span></div><div class="faq-a">The generator uses pools of real-world names, cities, companies, and job titles for both English (US) and Korean locales. Emails are generated from names with realistic domains. All data is randomly generated in your browser — no real personal information is used.</div></div>
 </div>
 
 <!-- More Tools -->
@@ -330,7 +389,7 @@ function setTheme(theme, el) {
 
 // --- Tab switching ---
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',['generate','charlimit','json'][i]===name)});
+  document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',['generate','charlimit','json','fakedata'][i]===name)});
   document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
   document.getElementById('panel-'+name).classList.add('active');
 }
@@ -504,6 +563,169 @@ function loadHistory(i) {
 function timeAgo(ts) { var s=Math.floor((Date.now()-ts)/1000); if(s<60)return 'now'; if(s<3600)return Math.floor(s/60)+'m'; if(s<86400)return Math.floor(s/3600)+'h'; return Math.floor(s/86400)+'d'; }
 function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 renderHistory();
+
+// --- Fake Data Generator ---
+var FAKE_DATA = {
+  en: {
+    firstNames: ['James','Mary','Robert','Patricia','John','Jennifer','Michael','Linda','David','Elizabeth','William','Barbara','Richard','Susan','Joseph','Jessica','Thomas','Sarah','Christopher','Karen','Charles','Lisa','Daniel','Nancy','Matthew','Betty','Anthony','Margaret','Mark','Sandra','Steven','Ashley','Andrew','Kimberly','Emily','Joshua','Amanda','Kevin','Dorothy','Brian','Melissa','Ryan','Deborah','Nathan','Stephanie','Jason','Rebecca','Justin','Laura','Brandon'],
+    lastNames: ['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson','White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson','Walker','Young','Allen','King','Wright','Scott','Torres','Nguyen','Hill','Flores','Green','Adams','Nelson','Baker','Hall','Rivera','Campbell','Mitchell','Carter','Roberts'],
+    cities: ['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','Austin','Portland','Seattle','Denver','Boston','Nashville','Atlanta','Miami','Minneapolis','Detroit','San Francisco'],
+    streets: ['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine Rd','Elm St','Washington Blvd','Park Ave','Lake Dr','Hill Rd','River St','Forest Ave','Valley Rd','Sunset Blvd','Broadway','Market St','Spring St','Highland Ave','Meadow Ln','Willow Way'],
+    companies: ['Acme Corp','TechVibe','CloudNine','DataPulse','InnoSpark','NexGen','BlueSky','GreenLeaf','IronWorks','VeloCity','PixelForge','CodeBrew','SkyBridge','NovaLabs','Quantum','Zenith','Apex Digital','Lunar Tech','Prism AI','Vertex'],
+    jobTitles: ['Software Engineer','Product Manager','Designer','Data Analyst','Marketing Manager','DevOps Engineer','QA Engineer','Frontend Developer','Backend Developer','Full Stack Developer','CTO','VP Engineering','Team Lead','Scrum Master','UX Researcher','Data Scientist','Security Engineer','Mobile Developer','Cloud Architect','Site Reliability Engineer'],
+    domains: ['gmail.com','yahoo.com','outlook.com','hotmail.com','proton.me','icloud.com','mail.com','fastmail.com'],
+    countries: ['United States','Canada','United Kingdom','Australia','Germany','France','Japan','South Korea','Brazil','India'],
+    bios: ['Passionate developer who loves building things.','Coffee enthusiast and code writer.','Open source contributor and tech blogger.','Startup founder working on the next big thing.','Full-stack developer with 5+ years experience.','UX/UI designer turned developer.','Always learning, always building.','Making the web a better place, one commit at a time.','Remote worker, digital nomad, lifelong learner.','Problem solver with a love for clean code.']
+  },
+  kr: {
+    firstNames: ['민수','지은','준혁','수진','성호','미영','태현','은지','현우','소연','동현','하나','재원','유진','승현','지혜','우진','서연','시우','다은','정민','예은','현준','아름','도윤','혜진','서준','나연','예준','보라','지호','수빈','건우','민지','하준','은서','윤서','소희','주원','채은'],
+    lastNames: ['김','이','박','최','정','강','조','윤','장','임','한','오','서','신','권','황','안','송','류','전','홍','고','문','양','손','배','백','허','남','심'],
+    cities: ['서울','부산','인천','대구','대전','광주','울산','수원','성남','고양','용인','창원','청주','전주','천안','포항','제주','춘천','원주','평택'],
+    streets: ['대학로','세종대로','강남대로','테헤란로','을지로','종로','마포대로','여의대방로','봉은사로','선릉로','삼성로','도산대로','압구정로','학동로','논현로','역삼로','신사동길','방배로','서초대로','반포대로'],
+    companies: ['네이버','카카오','삼성전자','LG전자','현대자동차','SK텔레콤','쿠팡','배달의민족','토스','당근마켓','라인','넥슨','엔씨소프트','크래프톤','하이브','마켓컬리','야놀자','직방','리디','왓챠'],
+    jobTitles: ['소프트웨어 엔지니어','프로덕트 매니저','디자이너','데이터 분석가','마케팅 매니저','프론트엔드 개발자','백엔드 개발자','풀스택 개발자','DevOps 엔지니어','QA 엔지니어','팀 리더','CTO','모바일 개발자','AI 연구원','클라우드 아키텍트','보안 엔지니어','데이터 사이언티스트','UX 리서처','프로젝트 매니저','기술 이사'],
+    domains: ['naver.com','daum.net','gmail.com','kakao.com','hanmail.net','nate.com'],
+    countries: ['대한민국','미국','일본','중국','영국','독일','프랑스','호주','캐나다','싱가포르'],
+    bios: ['열정적인 개발자입니다.','커피와 코드를 사랑합니다.','오픈소스 기여자이자 기술 블로거.','스타트업에서 일하고 있습니다.','5년차 풀스택 개발자.','매일 성장하는 개발자.','깔끔한 코드를 추구합니다.','사용자 경험을 최우선으로 생각합니다.','기술로 세상을 바꾸고 싶습니다.','끊임없이 배우고 만듭니다.']
+  }
+};
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function fakeUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+function fakeIP() { return randInt(1,255)+'.'+randInt(0,255)+'.'+randInt(0,255)+'.'+randInt(1,254); }
+function fakeDate() {
+  var d = new Date(Date.now() - randInt(0, 365*3) * 86400000);
+  return d.toISOString().split('T')[0];
+}
+function fakeEmail(first, last, locale) {
+  var d = FAKE_DATA[locale].domains;
+  var sep = pick(['.','_','']);
+  return (first + sep + last).toLowerCase().replace(/[^a-z0-9._]/g, '') + randInt(1,999) + '@' + pick(d);
+}
+function fakePhone(locale) {
+  if (locale === 'kr') return '010-' + randInt(1000,9999) + '-' + randInt(1000,9999);
+  return '(' + randInt(200,999) + ') ' + randInt(200,999) + '-' + randInt(1000,9999);
+}
+function fakeAddress(locale) {
+  var d = FAKE_DATA[locale];
+  if (locale === 'kr') return pick(d.cities) + ' ' + pick(d.streets) + ' ' + randInt(1,500) + '번지';
+  return randInt(100,9999) + ' ' + pick(d.streets) + ', ' + pick(d.cities);
+}
+
+function getSelectedFields() {
+  var fields = [];
+  document.querySelectorAll('#fakeFields input[type=checkbox]').forEach(function(cb) {
+    if (cb.checked) fields.push(cb.dataset.field);
+  });
+  return fields;
+}
+
+function setFakePreset(preset) {
+  var map = {
+    user: ['id','firstName','lastName','email','avatar','bio'],
+    contact: ['id','firstName','lastName','email','phone','city','country'],
+    employee: ['id','firstName','lastName','email','company','jobTitle','phone'],
+    minimal: ['id','firstName','email']
+  };
+  var selected = map[preset] || [];
+  document.querySelectorAll('#fakeFields input[type=checkbox]').forEach(function(cb) {
+    cb.checked = selected.indexOf(cb.dataset.field) >= 0;
+  });
+}
+
+function generateFakeRow(id, fields, locale) {
+  var d = FAKE_DATA[locale];
+  var first = pick(d.firstNames);
+  var last = pick(d.lastNames);
+  var row = {};
+  fields.forEach(function(f) {
+    switch(f) {
+      case 'id': row.id = id; break;
+      case 'firstName': row.firstName = first; break;
+      case 'lastName': row.lastName = last; break;
+      case 'email': row.email = fakeEmail(first, last, locale); break;
+      case 'phone': row.phone = fakePhone(locale); break;
+      case 'address': row.address = fakeAddress(locale); break;
+      case 'city': row.city = pick(d.cities); break;
+      case 'country': row.country = pick(d.countries); break;
+      case 'company': row.company = pick(d.companies); break;
+      case 'jobTitle': row.jobTitle = pick(d.jobTitles); break;
+      case 'date': row.date = fakeDate(); break;
+      case 'uuid': row.uuid = fakeUUID(); break;
+      case 'ip': row.ip = fakeIP(); break;
+      case 'avatar': row.avatar = 'https://i.pravatar.cc/150?u=' + id; break;
+      case 'bio': row.bio = pick(d.bios); break;
+    }
+  });
+  return row;
+}
+
+function generateFakeData() {
+  var rows = Math.min(+document.getElementById('fakeRows').value || 10, 100);
+  var locale = document.getElementById('fakeLocale').value;
+  var format = document.getElementById('fakeFormat').value;
+  var fields = getSelectedFields();
+  if (!fields.length) { document.getElementById('fakeStatus').textContent = '⚠️ Select at least one field'; return; }
+
+  var data = [];
+  for (var i = 1; i <= rows; i++) data.push(generateFakeRow(i, fields, locale));
+
+  var output = '';
+  if (format === 'json') {
+    output = JSON.stringify(data, null, 2);
+  } else if (format === 'csv' || format === 'tsv') {
+    var sep = format === 'csv' ? ',' : '\t';
+    var header = fields.join(sep);
+    var lines = data.map(function(r) {
+      return fields.map(function(f) {
+        var v = String(r[f] || '');
+        return (format === 'csv' && (v.indexOf(',') >= 0 || v.indexOf('"') >= 0)) ? '"' + v.replace(/"/g,'""') + '"' : v;
+      }).join(sep);
+    });
+    output = header + '\n' + lines.join('\n');
+  } else if (format === 'sql') {
+    var table = document.getElementById('sqlTable').value || 'users';
+    var cols = fields.join(', ');
+    output = data.map(function(r) {
+      var vals = fields.map(function(f) {
+        var v = r[f];
+        return typeof v === 'number' ? v : "'" + String(v).replace(/'/g,"''") + "'";
+      });
+      return 'INSERT INTO ' + table + ' (' + cols + ') VALUES (' + vals.join(', ') + ');';
+    }).join('\n');
+  }
+
+  document.getElementById('fakeOutput').value = output;
+  document.getElementById('fakeStats').textContent = rows + ' rows × ' + fields.length + ' fields · ' + output.length + ' characters · ' + format.toUpperCase();
+  document.getElementById('fakeStatus').textContent = '✓ Generated ' + rows + ' fake records (' + locale + ')';
+  addHistory('fake-' + locale, rows + ' rows ' + format, output.slice(0, 80));
+}
+
+function copyFakeData() {
+  var v = document.getElementById('fakeOutput').value;
+  if (v) { navigator.clipboard.writeText(v); document.getElementById('fakeStatus').textContent = '✓ Copied!'; }
+}
+
+function downloadFakeData() {
+  var v = document.getElementById('fakeOutput').value;
+  if (!v) return;
+  var format = document.getElementById('fakeFormat').value;
+  var ext = {json:'.json', csv:'.csv', tsv:'.tsv', sql:'.sql'}[format] || '.txt';
+  var mime = {json:'application/json', csv:'text/csv', tsv:'text/tab-separated-values', sql:'text/sql'}[format] || 'text/plain';
+  var blob = new Blob([v], {type: mime});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fake-data' + ext;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  document.getElementById('fakeStatus').textContent = '✓ Downloaded fake-data' + ext;
+}
 
 // --- Initial generation ---
 generate();
