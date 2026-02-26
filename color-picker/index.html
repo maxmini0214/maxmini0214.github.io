@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Color Picker, Contrast Checker &amp; Palette Generator — Free Online Tool</title>
+<title>Color Picker, Contrast Checker, Palette Generator &amp; Tailwind Color Finder — Free Online Tool</title>
 <meta property="og:image" content="https://maxmini0214.github.io/color-picker/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="description" content="Pick colors, check WCAG contrast ratios (AA/AAA), generate color palettes (complementary, analogous, triadic). Convert HEX, RGB, HSL. 100% browser-based, zero tracking.">
-<meta name="keywords" content="color picker, color contrast checker, wcag contrast ratio, color palette generator, hex to rgb, rgb to hsl, accessibility color checker, wcag 2.1 aa aaa, complementary colors, analogous colors, triadic colors, color converter, css color tool, contrast ratio calculator, color accessibility, color scheme generator">
-<meta property="og:title" content="Color Picker, Contrast Checker &amp; Palette Generator">
-<meta property="og:description" content="Pick colors, check WCAG contrast (AA/AAA), generate palettes. Convert HEX/RGB/HSL. Free, browser-based.">
+<meta name="description" content="Pick colors, check WCAG contrast ratios (AA/AAA), generate palettes, find closest Tailwind CSS color. Convert HEX, RGB, HSL. Tailwind color finder with 220 shades. 100% browser-based.">
+<meta name="keywords" content="color picker, color contrast checker, wcag contrast ratio, color palette generator, hex to rgb, rgb to hsl, tailwind colors, tailwind color finder, tailwind css colors, closest tailwind color, tailwind color palette, find tailwind class, accessibility color checker, wcag 2.1 aa aaa, complementary colors, analogous colors, triadic colors, color converter, css color tool, contrast ratio calculator, tailwind color name, tailwind shade finder, color scheme generator">
+<meta property="og:title" content="Color Picker, Contrast Checker, Palette Generator &amp; Tailwind Color Finder">
+<meta property="og:description" content="Pick colors, check WCAG contrast (AA/AAA), generate palettes, find closest Tailwind CSS color. Convert HEX/RGB/HSL. 220 Tailwind shades. Free, browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/color-picker/">
 <meta name="twitter:card" content="summary_large_image">
@@ -101,10 +101,24 @@ details .answer code{background:var(--bg);padding:.12rem .35rem;border-radius:4p
 .newsletter input[type=submit]{padding:.5rem 1rem;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 @media(max-width:600px){h1{font-size:1.25rem}.preview{width:100%;min-height:80px}.contrast-inputs{grid-template-columns:1fr}.tabs{overflow-x:auto}.tab{white-space:nowrap;padding:.6rem .7rem;font-size:.8rem}}
+/* Tailwind Finder */
+.tw-match{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.75rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:border-color .2s}
+.tw-match:hover{border-color:var(--accent)}
+.tw-match.best{border-color:var(--success);box-shadow:0 0 0 1px var(--success)}
+.tw-swatch{width:60px;height:60px;border-radius:10px;flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+.tw-info{flex:1}
+.tw-name{font-weight:700;font-size:1rem;margin-bottom:.2rem}
+.tw-class{font-size:.85rem;color:var(--accent);font-family:'SF Mono',monospace;margin-bottom:.2rem}
+.tw-hex{font-size:.8rem;color:var(--muted)}
+.tw-dist{font-size:.75rem;color:var(--muted);padding:2px 8px;border-radius:12px;background:rgba(59,130,246,.15)}
+.tw-row{display:flex;gap:2px;margin-bottom:4px;align-items:center}
+.tw-row-label{font-size:.72rem;color:var(--muted);width:60px;flex-shrink:0;font-weight:600}
+.tw-cell{width:28px;height:28px;border-radius:4px;cursor:pointer;transition:transform .15s;border:1px solid rgba(255,255,255,.05);position:relative}
+.tw-cell:hover{transform:scale(1.4);z-index:10;border-color:var(--accent)}
 @media print{.gum-cta,.newsletter,nav,.btn,.tabs,.share-btn{display:none!important}body{background:#fff;color:#000}}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Color Picker, Contrast Checker & Palette Generator","description":"Pick colors, check WCAG 2.1 contrast ratios (AA/AAA), generate color palettes. Convert HEX, RGB, HSL.","url":"https://maxmini0214.github.io/color-picker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Color Picker, Contrast Checker, Palette Generator & Tailwind Color Finder","description":"Pick colors, check WCAG 2.1 contrast ratios (AA/AAA), generate color palettes, find closest Tailwind CSS color from 220+ shades. Convert HEX, RGB, HSL.","url":"https://maxmini0214.github.io/color-picker/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"Color Picker & Contrast Checker","item":"https://maxmini0214.github.io/color-picker/"}]}
@@ -118,7 +132,9 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 {"@type":"Question","name":"What is the difference between HEX, RGB, and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX uses base-16 notation (#RRGGBB), RGB uses decimal 0-255 per channel, HSL uses Hue (0-360°), Saturation (0-100%), Lightness (0-100%). HSL is more intuitive for adjusting brightness and saturation independently."}},
 {"@type":"Question","name":"Is my data sent to any server?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations run 100% in your browser. No data is sent anywhere, no cookies set, no account needed. Even the Share URL encodes colors in the URL itself."}},
 {"@type":"Question","name":"What contrast ratio is accessible?","acceptedAnswer":{"@type":"Answer","text":"For WCAG 2.1 Level AA: 4.5:1 for normal text, 3:1 for large text (18pt/24px or 14pt/18.66px bold). Level AAA: 7:1 for normal text, 4.5:1 for large text. Higher ratios mean better readability."}},
-{"@type":"Question","name":"How do complementary colors work?","acceptedAnswer":{"@type":"Answer","text":"Complementary colors sit opposite each other on the color wheel (180° apart). They create maximum contrast and visual vibrance. Example: blue (#3b82f6) and orange. Use them for CTAs and highlights against a base color."}}
+{"@type":"Question","name":"How do complementary colors work?","acceptedAnswer":{"@type":"Answer","text":"Complementary colors sit opposite each other on the color wheel (180° apart). They create maximum contrast and visual vibrance. Example: blue (#3b82f6) and orange. Use them for CTAs and highlights against a base color."}},
+{"@type":"Question","name":"How do I find the closest Tailwind CSS color?","acceptedAnswer":{"@type":"Answer","text":"Use the Tailwind Finder tab. Enter any HEX color and the tool shows the top 5 closest Tailwind CSS v3 colors with class names (bg-blue-500, text-blue-500), match percentage, and color distance. Click any result to copy the class name."}},
+{"@type":"Question","name":"Does it include all Tailwind CSS v3 colors?","acceptedAnswer":{"@type":"Answer","text":"Yes. All 22 color families (slate through rose) with 11 shades each (50-950) = 242 Tailwind colors. Browse them all in the color grid or search by name."}}
 ]}
 </script>
 <script type="application/ld+json">
@@ -133,7 +149,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <body>
 <header>
 <h1>Color Picker, Contrast Checker &amp; Palette Generator</h1>
-<p class="subtitle">Pick colors · Check WCAG contrast · Generate palettes · Convert HEX/RGB/HSL — 100% in your browser</p>
+<p class="subtitle">Pick colors · Check WCAG contrast · Generate palettes · Find Tailwind CSS colors · Convert HEX/RGB/HSL — 100% in your browser</p>
 </header>
 <main>
 
@@ -141,6 +157,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="tab active" onclick="switchTab('picker')">🎨 Picker</button>
 <button class="tab" onclick="switchTab('contrast')">♿ Contrast Checker</button>
 <button class="tab" onclick="switchTab('palette')">🎭 Palette Generator</button>
+<button class="tab" onclick="switchTab('tailwind')">🎯 Tailwind Finder</button>
 </div>
 
 <!-- Tab 1: Picker -->
@@ -243,12 +260,37 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </div>
 </div>
 
+<!-- Tab 4: Tailwind Color Finder -->
+<div id="panel-tailwind" class="tab-panel">
+<div class="card">
+<label style="font-size:.9rem;font-weight:600">Enter any color to find the closest Tailwind CSS match</label>
+<div style="display:flex;gap:.75rem;align-items:center;margin-top:.5rem">
+<input type="color" id="twPicker" value="#3b82f6" style="width:60px;height:40px;border:none;border-radius:8px;cursor:pointer;background:none" oninput="document.getElementById('twHex').value=this.value;findTailwind()">
+<input type="text" id="twHex" value="#3b82f6" style="flex:1;max-width:200px;padding:.5rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.9rem" oninput="syncTwPicker()">
+<button class="btn btn-primary btn-sm" onclick="findTailwind()">🔍 Find</button>
+</div>
+</div>
+
+<!-- Results -->
+<div id="twResults" style="margin-top:1rem"></div>
+
+<!-- Browse All Tailwind Colors -->
+<div class="card" style="margin-top:1rem">
+<h4 style="font-size:.9rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between">
+<span>📋 Browse All Tailwind Colors</span>
+<input type="text" id="twSearch" placeholder="Search colors..." oninput="filterTwColors()" style="padding:.35rem .6rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.8rem;width:160px">
+</h4>
+<div id="twPaletteBrowser" style="max-height:400px;overflow-y:auto"></div>
+</div>
+</div>
+
 <!-- Features -->
 <div class="features">
 <div class="feature"><div class="feature-icon">♿</div><div class="feature-title">WCAG Checker</div><div class="feature-desc">AA &amp; AAA compliance for normal &amp; large text</div></div>
 <div class="feature"><div class="feature-icon">🎨</div><div class="feature-title">5 Palette Types</div><div class="feature-desc">Complementary, analogous, triadic, split, mono</div></div>
 <div class="feature"><div class="feature-icon">🔄</div><div class="feature-title">Live Convert</div><div class="feature-desc">HEX ↔ RGB ↔ HSL instant conversion</div></div>
 <div class="feature"><div class="feature-icon">📋</div><div class="feature-title">CSS Export</div><div class="feature-desc">Copy CSS variables for your design system</div></div>
+<div class="feature"><div class="feature-icon">🎯</div><div class="feature-title">Tailwind Finder</div><div class="feature-desc">Find closest Tailwind CSS class for any color</div></div>
 <div class="feature"><div class="feature-icon">🔗</div><div class="feature-title">Share via URL</div><div class="feature-desc">Encode colors in the URL, no server needed</div></div>
 <div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Browser-only — zero tracking, zero data sent</div></div>
 </div>
@@ -271,6 +313,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <details><summary>What is HSL?</summary><div class="answer">HSL = <strong>Hue</strong> (0–360° on the color wheel), <strong>Saturation</strong> (0–100% from gray to vivid), <strong>Lightness</strong> (0–100% from black to white). More intuitive than RGB for adjusting shades — change lightness without shifting hue.</div></details>
 <details><summary>Is my data private?</summary><div class="answer">100%. All color math runs in your browser via JavaScript. No server calls, no cookies, no tracking. Even the Share URL encodes colors in the query string — no backend involved.</div></details>
 <details><summary>Can I export palettes as CSS?</summary><div class="answer">Yes! The Palette tab has an "Export CSS Variables" section. Click Copy to get all palette colors as <code>:root { --primary: #xxx; ... }</code> ready for your stylesheet.</div></details>
+<details><summary>How do I find the closest Tailwind CSS color?</summary><div class="answer">Use the 🎯 Tailwind Finder tab. Enter any HEX color and the tool instantly shows the top 5 closest Tailwind CSS colors with class names (<code>bg-blue-500</code>, <code>text-blue-500</code>) and match percentage. Uses weighted perceptual color distance for accurate results.</div></details>
+<details><summary>Does it include all Tailwind CSS v3 colors?</summary><div class="answer">Yes! All 22 color families × 11 shades = 242 colors from Tailwind CSS v3.x: slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose. Each with shades 50–950.</div></details>
 </div>
 
 <!-- More Tools -->
@@ -346,7 +390,7 @@ function hslToRgb(h,s,l){h/=360;s/=100;l/=100;let r,g,b;if(s===0){r=g=b=l}else{c
 
 // ===== Tab Switching =====
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['picker','contrast','palette'][i]===name));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['picker','contrast','palette','tailwind'][i]===name));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
 }
@@ -525,6 +569,99 @@ function generatePalettes(){
   document.getElementById('paletteCSS').value=cssVars;
 }
 generatePalettes();
+
+// ===== Tab 4: Tailwind Color Finder =====
+const TW_COLORS={
+slate:{50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',500:'#64748b',600:'#475569',700:'#334155',800:'#1e293b',900:'#0f172a',950:'#020617'},
+gray:{50:'#f9fafb',100:'#f3f4f6',200:'#e5e7eb',300:'#d1d5db',400:'#9ca3af',500:'#6b7280',600:'#4b5563',700:'#374151',800:'#1f2937',900:'#111827',950:'#030712'},
+zinc:{50:'#fafafa',100:'#f4f4f5',200:'#e4e4e7',300:'#d4d4d8',400:'#a1a1aa',500:'#71717a',600:'#52525b',700:'#3f3f46',800:'#27272a',900:'#18181b',950:'#09090b'},
+neutral:{50:'#fafafa',100:'#f5f5f5',200:'#e5e5e5',300:'#d4d4d4',400:'#a3a3a3',500:'#737373',600:'#525252',700:'#404040',800:'#262626',900:'#171717',950:'#0a0a0a'},
+stone:{50:'#fafaf9',100:'#f5f5f4',200:'#e7e5e4',300:'#d6d3d1',400:'#a8a29e',500:'#78716c',600:'#57534e',700:'#44403c',800:'#292524',900:'#1c1917',950:'#0c0a09'},
+red:{50:'#fef2f2',100:'#fee2e2',200:'#fecaca',300:'#fca5a5',400:'#f87171',500:'#ef4444',600:'#dc2626',700:'#b91c1c',800:'#991b1b',900:'#7f1d1d',950:'#450a0a'},
+orange:{50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#f97316',600:'#ea580c',700:'#c2410c',800:'#9a3412',900:'#7c2d12',950:'#431407'},
+amber:{50:'#fffbeb',100:'#fef3c7',200:'#fde68a',300:'#fcd34d',400:'#fbbf24',500:'#f59e0b',600:'#d97706',700:'#b45309',800:'#92400e',900:'#78350f',950:'#451a03'},
+yellow:{50:'#fefce8',100:'#fef9c3',200:'#fef08a',300:'#fde047',400:'#facc15',500:'#eab308',600:'#ca8a04',700:'#a16207',800:'#854d0e',900:'#713f12',950:'#422006'},
+lime:{50:'#f7fee7',100:'#ecfccb',200:'#d9f99d',300:'#bef264',400:'#a3e635',500:'#84cc16',600:'#65a30d',700:'#4d7c0f',800:'#3f6212',900:'#365314',950:'#1a2e05'},
+green:{50:'#f0fdf4',100:'#dcfce7',200:'#bbf7d0',300:'#86efac',400:'#4ade80',500:'#22c55e',600:'#16a34a',700:'#15803d',800:'#166534',900:'#14532d',950:'#052e16'},
+emerald:{50:'#ecfdf5',100:'#d1fae5',200:'#a7f3d0',300:'#6ee7b7',400:'#34d399',500:'#10b981',600:'#059669',700:'#047857',800:'#065f46',900:'#064e3b',950:'#022c22'},
+teal:{50:'#f0fdfa',100:'#ccfbf1',200:'#99f6e4',300:'#5eead4',400:'#2dd4bf',500:'#14b8a6',600:'#0d9488',700:'#0f766e',800:'#115e59',900:'#134e4a',950:'#042f2e'},
+cyan:{50:'#ecfeff',100:'#cffafe',200:'#a5f3fc',300:'#67e8f9',400:'#22d3ee',500:'#06b6d4',600:'#0891b2',700:'#0e7490',800:'#155e75',900:'#164e63',950:'#083344'},
+sky:{50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e',950:'#082f49'},
+blue:{50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a',950:'#172554'},
+indigo:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81',950:'#1e1b4b'},
+violet:{50:'#f5f3ff',100:'#ede9fe',200:'#ddd6fe',300:'#c4b5fd',400:'#a78bfa',500:'#8b5cf6',600:'#7c3aed',700:'#6d28d9',800:'#5b21b6',900:'#4c1d95',950:'#2e1065'},
+purple:{50:'#faf5ff',100:'#f3e8ff',200:'#e9d5ff',300:'#d8b4fe',400:'#c084fc',500:'#a855f7',600:'#9333ea',700:'#7e22ce',800:'#6b21a8',900:'#581c87',950:'#3b0764'},
+fuchsia:{50:'#fdf4ff',100:'#fae8ff',200:'#f5d0fe',300:'#f0abfc',400:'#e879f9',500:'#d946ef',600:'#c026d3',700:'#a21caf',800:'#86198f',900:'#701a75',950:'#4a044e'},
+pink:{50:'#fdf2f8',100:'#fce7f3',200:'#fbcfe8',300:'#f9a8d4',400:'#f472b6',500:'#ec4899',600:'#db2777',700:'#be185d',800:'#9d174d',900:'#831843',950:'#500724'},
+rose:{50:'#fff1f2',100:'#ffe4e6',200:'#fecdd3',300:'#fda4af',400:'#fb7185',500:'#f43f5e',600:'#e11d48',700:'#be123c',800:'#9f1239',900:'#881337',950:'#4c0519'}
+};
+
+function colorDistance(hex1,hex2){
+  const[r1,g1,b1]=hexToRgb(hex1),[r2,g2,b2]=hexToRgb(hex2);
+  // Weighted Euclidean (human perception)
+  const rmean=(r1+r2)/2;
+  const dr=r1-r2,dg=g1-g2,db=b1-b2;
+  return Math.sqrt((2+rmean/256)*dr*dr+4*dg*dg+(2+(255-rmean)/256)*db*db);
+}
+
+function findTailwind(){
+  const hex=document.getElementById('twHex').value;
+  if(!/^#[0-9a-f]{6}$/i.test(hex))return;
+  document.getElementById('twPicker').value=hex;
+  
+  let matches=[];
+  Object.entries(TW_COLORS).forEach(([name,shades])=>{
+    Object.entries(shades).forEach(([shade,shadeHex])=>{
+      matches.push({name,shade,hex:shadeHex,dist:colorDistance(hex,shadeHex)});
+    });
+  });
+  matches.sort((a,b)=>a.dist-b.dist);
+  const top5=matches.slice(0,5);
+  
+  const resEl=document.getElementById('twResults');
+  resEl.innerHTML=top5.map((m,i)=>{
+    const pct=Math.max(0,100-m.dist/7.65).toFixed(1);
+    return `<div class="tw-match${i===0?' best':''}" onclick="navigator.clipboard.writeText('${m.name}-${m.shade}');this.querySelector('.tw-class').textContent='✅ Copied!';setTimeout(()=>this.querySelector('.tw-class').textContent='bg-${m.name}-${m.shade}  text-${m.name}-${m.shade}',1500)">
+      <div class="tw-swatch" style="background:${m.hex}"></div>
+      <div class="tw-info">
+        <div class="tw-name">${i===0?'🏆 ':''}${m.name}-${m.shade}</div>
+        <div class="tw-class">bg-${m.name}-${m.shade}  text-${m.name}-${m.shade}</div>
+        <div class="tw-hex">${m.hex} · ${pct}% match</div>
+      </div>
+      <div class="tw-dist">${m.dist<1?'Exact!':'Δ '+m.dist.toFixed(1)}</div>
+    </div>`;
+  }).join('');
+}
+
+function syncTwPicker(){
+  const hex=document.getElementById('twHex').value;
+  if(/^#[0-9a-f]{6}$/i.test(hex)){document.getElementById('twPicker').value=hex;findTailwind();}
+}
+
+// Browse all Tailwind colors
+function renderTwBrowser(){
+  const container=document.getElementById('twPaletteBrowser');
+  const shadeLabels=['50','100','200','300','400','500','600','700','800','900','950'];
+  let html='<div style="display:flex;gap:2px;margin-bottom:6px;align-items:center"><div style="width:60px"></div>'+shadeLabels.map(s=>`<div style="width:28px;text-align:center;font-size:.6rem;color:var(--muted)">${s}</div>`).join('')+'</div>';
+  Object.entries(TW_COLORS).forEach(([name,shades])=>{
+    html+=`<div class="tw-row" data-name="${name}"><div class="tw-row-label">${name}</div>`;
+    shadeLabels.forEach(s=>{
+      const c=shades[s];
+      html+=`<div class="tw-cell" style="background:${c}" title="${name}-${s}: ${c}" onclick="navigator.clipboard.writeText('${c}');document.getElementById('twHex').value='${c}';document.getElementById('twPicker').value='${c}';findTailwind()"></div>`;
+    });
+    html+='</div>';
+  });
+  container.innerHTML=html;
+}
+renderTwBrowser();
+findTailwind();
+
+function filterTwColors(){
+  const q=document.getElementById('twSearch').value.toLowerCase();
+  document.querySelectorAll('#twPaletteBrowser .tw-row').forEach(row=>{
+    row.style.display=row.dataset.name.includes(q)?'flex':'none';
+  });
+}
 
 // ===== URL restore =====
 (function(){
