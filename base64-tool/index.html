@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>Base64 Encoder/Decoder Online — Text, Image, File, Hex &amp; Batch Converter</title>
+<title>Base64 Encoder/Decoder Online — Text, Image, File, Hex, Decode Chain &amp; Batch</title>
 <meta property="og:image" content="https://maxmini0214.github.io/base64-tool/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="description" content="Encode and decode Base64 instantly — text, images, files, hex strings. Batch encode/decode multiple lines. Convert image to Base64 data URI, hex to Base64. URL-safe mode. 100% client-side.">
-<meta name="keywords" content="base64 encoder, base64 decoder, image to base64, file to base64, base64 converter, data uri generator, base64 image encoder, url safe base64, base64 to image preview, online base64 tool, base64 encode decode, convert image base64, hex to base64, base64 to hex, batch base64 encode, batch base64 decode, hex string converter, base64 bulk encoder, multiple base64 encode, base64 hex converter">
+<meta name="description" content="Encode and decode Base64 instantly — text, images, files, hex strings. Auto-decode nested/double-encoded strings step by step. Batch mode, hex converter, URL-safe. 100% client-side.">
+<meta name="keywords" content="base64 encoder, base64 decoder, image to base64, file to base64, base64 converter, data uri generator, base64 image encoder, url safe base64, base64 to image preview, online base64 tool, base64 encode decode, convert image base64, hex to base64, base64 to hex, batch base64 encode, batch base64 decode, hex string converter, base64 bulk encoder, multiple base64 encode, base64 hex converter, double base64 decode, nested base64, decode chain, multi layer decode, base64 url decode, nested encoding decoder, base64 double encoded, decode nested encoding online">
 <meta property="og:title" content="Base64 Encoder/Decoder — Text, Image, Hex &amp; Batch Converter">
 <meta property="og:description" content="Encode text, images, files, hex strings to Base64. Batch multi-line encode/decode. URL-safe mode. 100% browser-based.">
 <meta property="og:type" content="website">
@@ -94,6 +94,13 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 .newsletter input[type=email]{padding:.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:.9rem;width:200px}
 .newsletter input[type=submit]{padding:.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600}
 @media(max-width:600px){h1{font-size:1.3rem}main{padding:.75rem}.tabs{overflow-x:auto}.tab{white-space:nowrap;padding:.6rem .8rem;font-size:.82rem}}
+/* Chain decode steps */
+.chain-step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:.75rem;position:relative}
+.chain-step-num{position:absolute;top:-8px;left:12px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:10px}
+.chain-step-type{font-weight:700;font-size:.85rem;margin-bottom:.4rem;color:var(--accent)}
+.chain-step-preview{font-family:'SF Mono',monospace;font-size:.8rem;color:var(--muted);background:var(--bg);padding:.5rem;border-radius:6px;word-break:break-all;max-height:80px;overflow:hidden}
+.chain-step-arrow{text-align:center;color:var(--muted);font-size:1rem;margin:.3rem 0}
+.chain-step.json .chain-step-preview{white-space:pre;max-height:200px;overflow:auto}
 @media print{.gum-cta,.newsletter,.dropzone,nav,button,.btn,.tabs{display:none!important}body{background:#fff;color:#000}textarea{border:1px solid #ccc}}
 </style>
 <script type="application/ld+json">
@@ -113,6 +120,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 {"@type":"Question","name":"How do I decode Base64 back to a file?","acceptedAnswer":{"@type":"Answer","text":"Use the Text tab to decode the Base64 string, or use the Base64 → Preview tab for images. The tool auto-detects the MIME type from data URIs and renders the content."}},
 {"@type":"Question","name":"What is the difference between Base64 and URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 (RFC 4648 §5) replaces + with -, / with _, and optionally removes = padding, making it safe for URLs without percent-encoding."}},
 {"@type":"Question","name":"How do I convert hex to Base64?","acceptedAnswer":{"@type":"Answer","text":"Use the Hex ↔ Base64 tab. Paste your hex string (with or without spaces, e.g. '48656c6c6f' or '48 65 6c 6c 6f'), and click 'Hex → Base64'. The tool parses each hex byte pair and converts to Base64. Supports uppercase/lowercase and 0x prefix."}},
+{"@type":"Question","name":"How do I decode double-encoded or nested Base64?","acceptedAnswer":{"@type":"Answer","text":"Use the Decode Chain tab. Paste your multi-encoded string and click Auto-Decode. The tool auto-detects each encoding layer (URL-encoding, Base64, hex) and decodes step by step, showing every intermediate result. Works with AWS tokens, JWT-in-URLs, and double Base64 encoded payloads."}},
 {"@type":"Question","name":"Can I encode multiple strings at once?","acceptedAnswer":{"@type":"Answer","text":"Yes! Use the Batch tab. Paste multiple strings (one per line) and click 'Encode All' or 'Decode All'. Each line is processed independently. Failed lines show [ERROR] so you can identify issues. Supports URL-safe mode and empty line skipping."}}
 ]}
 </script>
@@ -138,6 +146,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <button class="tab" onclick="switchTab('file')">📁 File → Base64</button>
 <button class="tab" onclick="switchTab('preview')">🖼️ Base64 → Preview</button>
 <button class="tab" onclick="switchTab('hex')">🔢 Hex ↔ Base64</button>
+<button class="tab" onclick="switchTab('chain')">🔄 Decode Chain</button>
 <button class="tab" onclick="switchTab('batch')">📋 Batch</button>
 </div>
 
@@ -241,7 +250,32 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </div>
 </div>
 
-<!-- Tab 5: Batch Encode/Decode -->
+<!-- Tab 5: Decode Chain -->
+<div id="panel-chain" class="tab-panel">
+<div class="card">
+<label>Paste any encoded string (Base64, URL-encoded, hex, nested — we'll figure it out)</label>
+<textarea id="chainInput" placeholder="e.g. SGVsbG8gV29ybGQ%3D (URL-encoded Base64)&#10;or aGVsbG8%3D → base64 inside URL encoding&#10;or double-encoded JWT tokens..."></textarea>
+<div class="btn-group" style="margin-top:.75rem">
+<button class="btn btn-primary" onclick="runDecodeChain()">🔄 Auto-Decode</button>
+<button class="btn btn-secondary" onclick="copyChainResult()">📋 Copy Final</button>
+<button class="btn btn-secondary" onclick="clearChain()">Clear</button>
+</div>
+<div class="toggle-row">
+<input type="checkbox" id="chainMaxDepth" checked><label for="chainMaxDepth" style="margin:0;color:var(--text);cursor:pointer">Limit to 10 decode steps (prevent infinite loops)</label>
+</div>
+</div>
+<div id="chainSteps" style="display:none">
+<h3 style="font-size:.95rem;margin-bottom:.75rem">🔗 Decode Steps</h3>
+<div id="chainStepsList"></div>
+<div class="card" style="margin-top:1rem;border-color:var(--success)">
+<label style="color:var(--success)">✅ Final Decoded Result</label>
+<textarea id="chainFinal" readonly style="min-height:100px"></textarea>
+<div class="stats"><span id="chainStats"></span></div>
+</div>
+</div>
+</div>
+
+<!-- Tab 6: Batch Encode/Decode -->
 <div id="panel-batch" class="tab-panel">
 <div class="card">
 <label>Input (one item per line)</label>
@@ -282,6 +316,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="feature"><div class="feature-icon">🛡️</div><div class="feature-title">URL-Safe</div><div class="feature-desc">RFC 4648 §5 encoding — safe for URLs and filenames</div></div>
 <div class="feature"><div class="feature-icon">🔢</div><div class="feature-title">Hex ↔ Base64</div><div class="feature-desc">Convert hex strings to Base64 and back — keys, hashes, binary data</div></div>
 <div class="feature"><div class="feature-icon">📋</div><div class="feature-title">Batch Mode</div><div class="feature-desc">Encode/decode multiple strings at once — one per line, instant results</div></div>
+<div class="feature"><div class="feature-icon">🔄</div><div class="feature-title">Decode Chain</div><div class="feature-desc">Auto-detect nested encoding — URL + Base64 + hex decoded step by step</div></div>
 <div class="feature"><div class="feature-icon">🔍</div><div class="feature-title">Auto-Detect</div><div class="feature-desc">Paste anything — auto-detects if it's Base64 or plain text</div></div>
 <div class="feature"><div class="feature-icon">🔒</div><div class="feature-title">100% Private</div><div class="feature-desc">Everything runs in your browser. Zero server calls.</div></div>
 </div>
@@ -305,6 +340,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I decode Base64 back to a file?<span class="faq-arrow">▼</span></div><div class="faq-a">For images, use the "🖼️ Base64 → Preview" tab and click "💾 Download File". For text, use the Text tab's Decode button. The tool auto-detects MIME types from data: URIs.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the difference between standard and URL-safe Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Standard Base64 uses A-Z, a-z, 0-9, +, / and = padding. URL-safe Base64 replaces + with -, / with _, and optionally strips = padding — making it safe for URLs without percent-encoding. Use it for JWTs, API tokens, and URL query params.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I convert hex to Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Use the "🔢 Hex ↔ Base64" tab. Paste your hex string (e.g. <code>48656c6c6f</code> or <code>48 65 6c 6c 6f</code>), click "Hex → Base64". Supports space-separated, uppercase/lowercase, and 0x prefix. Useful for converting binary data, encryption keys, and hash digests.</div></div>
+<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I decode double-encoded or nested Base64?<span class="faq-arrow">▼</span></div><div class="faq-a">Use the "🔄 Decode Chain" tab. Paste your multi-encoded string and click Auto-Decode. The tool detects each encoding layer (URL-encode, Base64, hex) and decodes step by step, showing every intermediate result. Common with AWS tokens, JWT-in-URLs, and API payloads that are URL-encoded then Base64-encoded.</div></div>
 <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I encode multiple strings at once?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes! The "📋 Batch" tab lets you paste multiple strings (one per line) and encode/decode them all at once. Failed lines show [ERROR] for easy debugging. Great for processing API keys, tokens, or data migration tasks.</div></div>
 </div>
 
@@ -365,7 +401,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <script>
 // --- Tab switching ---
 function switchTab(name){
-  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['text','file','preview','hex','batch'][i]===name)});
+  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',['text','file','preview','hex','chain','batch'][i]===name)});
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
 }
@@ -594,6 +630,98 @@ function copyBatchOutput(){
   navigator.clipboard.writeText(document.getElementById('batchOutput').value);
   document.getElementById('batchStatus').textContent='✓ Copied!';
   document.getElementById('batchStatus').className='status';
+}
+
+// --- Decode Chain ---
+function detectEncoding(s){
+  s=s.trim();
+  // Check URL-encoding (contains %XX patterns)
+  if(/%[0-9A-Fa-f]{2}/.test(s)){return 'url'}
+  // Check hex (only hex chars, even length, >= 6 chars)
+  if(/^(0x)?[0-9a-fA-F\s]+$/.test(s)){
+    var clean=s.replace(/\s+/g,'').replace(/^0x/i,'');
+    if(clean.length>=6&&clean.length%2===0)return 'hex';
+  }
+  // Check URL-safe Base64 (has - or _ but no + or /)
+  if(/^[A-Za-z0-9\-_]+={0,2}$/.test(s)&&/[-_]/.test(s)&&s.length>=4)return 'base64url';
+  // Check standard Base64
+  if(/^[A-Za-z0-9+/]+=*$/.test(s)&&s.length>=4){
+    try{atob(s);return 'base64'}catch(e){}
+  }
+  // Check if it's valid JSON (decoded state)
+  try{JSON.parse(s);return 'json'}catch(e){}
+  return null;
+}
+
+function tryDecode(s,type){
+  try{
+    if(type==='url')return{result:decodeURIComponent(s),label:'URL Decode (%XX → text)'};
+    if(type==='base64'){var d=decodeURIComponent(escape(atob(s)));return{result:d,label:'Base64 Decode (standard)'};}
+    if(type==='base64url'){var safe=s.replace(/-/g,'+').replace(/_/g,'/');while(safe.length%4)safe+='=';var d2=decodeURIComponent(escape(atob(safe)));return{result:d2,label:'Base64 Decode (URL-safe RFC 4648)'};}
+    if(type==='hex'){var clean=s.replace(/\s+/g,'').replace(/^0x/i,'');var bytes=[];for(var i=0;i<clean.length;i+=2)bytes.push(parseInt(clean.substr(i,2),16));var r=String.fromCharCode.apply(null,bytes);return{result:r,label:'Hex Decode (hex → ASCII)'};}
+    if(type==='json'){return{result:JSON.stringify(JSON.parse(s),null,2),label:'JSON Pretty Print',isJson:true};}
+  }catch(e){}
+  return null;
+}
+
+function runDecodeChain(){
+  var input=document.getElementById('chainInput').value.trim();
+  if(!input){return}
+  var maxSteps=document.getElementById('chainMaxDepth').checked?10:50;
+  var steps=[{value:input,label:'Input',type:'raw'}];
+  var current=input;
+  var seen=new Set([current]);
+
+  for(var i=0;i<maxSteps;i++){
+    var type=detectEncoding(current);
+    if(!type)break;
+    var decoded=tryDecode(current,type);
+    if(!decoded)break;
+    if(seen.has(decoded.result))break; // prevent loops
+    seen.add(decoded.result);
+    steps.push({value:decoded.result,label:decoded.label,type:type,isJson:decoded.isJson});
+    if(decoded.isJson)break; // JSON is terminal (fully decoded)
+    current=decoded.result;
+  }
+
+  var container=document.getElementById('chainStepsList');
+  var stepsDiv=document.getElementById('chainSteps');
+
+  if(steps.length<=1){
+    container.innerHTML='<div class="card"><p style="color:var(--warn)">⚠️ No encoding detected. The input appears to be plain text.</p></div>';
+    stepsDiv.style.display='block';
+    document.getElementById('chainFinal').value=input;
+    document.getElementById('chainStats').textContent=input.length+' chars · 0 decode steps';
+    addHistory('decode','chain:'+input.slice(0,40),input.slice(0,60));
+    return;
+  }
+
+  var html='';
+  for(var j=0;j<steps.length;j++){
+    var s=steps[j];
+    var preview=s.value.length>300?s.value.slice(0,300)+'…':s.value;
+    html+='<div class="chain-step'+(s.isJson?' json':'')+'"><span class="chain-step-num">Step '+(j+1)+'</span>';
+    html+='<div class="chain-step-type">'+(j===0?'📥 Original Input':'🔓 '+s.label)+'</div>';
+    html+='<div class="chain-step-preview">'+escHtml(preview)+'</div></div>';
+    if(j<steps.length-1)html+='<div class="chain-step-arrow">↓</div>';
+  }
+  container.innerHTML=html;
+  stepsDiv.style.display='block';
+
+  var final=steps[steps.length-1].value;
+  document.getElementById('chainFinal').value=final;
+  document.getElementById('chainStats').textContent=final.length+' chars · '+(steps.length-1)+' decode step'+(steps.length>2?'s':'');
+  addHistory('decode','chain:'+input.slice(0,40),final.slice(0,60));
+}
+
+function copyChainResult(){
+  var v=document.getElementById('chainFinal').value;
+  if(v)navigator.clipboard.writeText(v);
+}
+function clearChain(){
+  document.getElementById('chainInput').value='';
+  document.getElementById('chainSteps').style.display='none';
+  document.getElementById('chainFinal').value='';
 }
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
