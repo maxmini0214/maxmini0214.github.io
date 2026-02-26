@@ -4,32 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<title>URL Encoder/Decoder Online — Free Tool</title>
-    <meta property="og:image" content="https://maxmini0214.github.io/url-encoder/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-<meta name="description" content="Encode and decode URLs instantly. Supports encodeURIComponent and encodeURI modes. 100% client-side, free online URL encoding tool.">
-<meta property="og:title" content="URL Encoder/Decoder — Free Online Tool">
-<meta property="og:description" content="Encode and decode URLs instantly in your browser.">
+<title>URL Encoder/Decoder Online — Query String Builder, Batch Mode | Free Tool</title>
+<meta property="og:image" content="https://maxmini0214.github.io/url-encoder/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="description" content="Encode and decode URLs, build query strings, batch process multiple URLs, and explore the full encoding reference. encodeURIComponent &amp; encodeURI modes. 100% client-side, free.">
+<meta name="keywords" content="url encoder, url decoder, url encode online, query string builder, batch url encoder, url encoding table, percent encoding, encodeURIComponent, encodeURI, html entity encoder, url encoding reference, url decode online, free url tool">
+<meta property="og:title" content="URL Encoder/Decoder — Query String Builder, Batch Mode | Free">
+<meta property="og:description" content="Encode/decode URLs, build query strings from key-value pairs, batch process, and explore the full encoding table. 100% browser-based.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maxmini0214.github.io/url-encoder/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="URL Encoder/Decoder — Query String Builder &amp; Batch Mode">
+<meta name="twitter:description" content="Encode/decode URLs, build query strings, batch process. Free, no signup.">
+<meta name="twitter:image" content="https://maxmini0214.github.io/url-encoder/og-image.png">
 <link rel="canonical" href="https://maxmini0214.github.io/url-encoder/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444}
+:root{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#3b82f6;--accent-hover:#2563eb;--success:#10b981;--error:#ef4444;--warn:#f59e0b}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
 header{text-align:center;padding:2rem 1rem 1rem}
 h1{font-size:1.8rem;margin-bottom:.5rem}
 .subtitle{color:var(--muted);font-size:.95rem}
-main{max-width:800px;width:100%;margin:0 auto;padding:1rem;flex:1}
+main{max-width:860px;width:100%;margin:0 auto;padding:1rem;flex:1}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
 .btn-group{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
 .btn{padding:.6rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
 .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
 .btn-secondary{background:var(--border);color:var(--text)}.btn-secondary:hover{background:#475569}
-textarea{width:100%;min-height:150px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#059669}
+textarea{width:100%;min-height:140px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem;resize:vertical}
 textarea:focus{outline:none;border-color:var(--accent)}
+input[type=text]{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;color:var(--text);font-family:'SF Mono',monospace;font-size:.9rem}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
 label{display:block;font-weight:600;margin-bottom:.5rem;color:var(--muted);font-size:.85rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:.5rem 1rem;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s}
+.tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tab:hover:not(.active){border-color:var(--accent);color:var(--text)}
+.tab-content{display:none}.tab-content.active{display:block}
 .mode-toggle{display:flex;gap:.5rem;margin-bottom:1rem}
 .mode-btn{padding:.4rem .8rem;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;font-size:.8rem}
 .mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -49,26 +62,55 @@ details{background:var(--surface);border:1px solid var(--border);border-radius:8
 details summary{cursor:pointer;font-weight:600;color:var(--text)}
 details p{margin-top:.75rem;color:var(--muted);line-height:1.6}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
-@media(max-width:600px){h1{font-size:1.4rem}}
+@media(max-width:600px){h1{font-size:1.4rem}.tabs{gap:.3rem}.tab{padding:.4rem .7rem;font-size:.78rem}}
 .newsletter{max-width:480px;margin:2rem auto;padding:1.5rem;background:#1e293b;border:1px solid #334155;border-radius:12px;text-align:center}
 .newsletter p{margin:0 0 0.5rem;font-size:1.1rem;font-weight:600;color:#e2e8f0}
 .newsletter .nl-sub{margin:0 0 1rem;color:#94a3b8;font-size:0.9rem}
 .newsletter form{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap}
 .newsletter input[type=email]{padding:0.5rem 1rem;border:1px solid #475569;background:#0f172a;color:#e2e8f0;border-radius:8px;font-size:0.9rem;width:200px}
 .newsletter input[type=submit]{padding:0.5rem 1rem;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600}
-
+/* Query String Builder */
+.qs-row{display:flex;gap:.5rem;margin-bottom:.5rem;align-items:center}
+.qs-row input{flex:1}
+.qs-remove{background:var(--error);color:#fff;border:none;border-radius:6px;padding:.4rem .7rem;cursor:pointer;font-size:.8rem}
+.qs-remove:hover{opacity:.8}
+/* Encoding Table */
+.enc-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.enc-table th,.enc-table td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}
+.enc-table th{background:var(--bg);color:var(--accent);font-weight:700;position:sticky;top:0}
+.enc-table td code{background:var(--bg);padding:2px 6px;border-radius:4px;font-size:.82rem}
+.enc-table tr:hover td{background:rgba(59,130,246,.06)}
+/* History */
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:.5rem .75rem;border-bottom:1px solid var(--border);font-size:.82rem;cursor:pointer;transition:background .15s}
+.hist-item:hover{background:rgba(59,130,246,.08)}
+.hist-item:last-child{border:none}
+.hist-label{color:var(--muted);font-size:.72rem;margin-left:.5rem}
+.hist-time{color:var(--muted);font-size:.72rem;white-space:nowrap}
+.hist-text{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:.5rem}
+.badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:.7rem;font-weight:700}
+.badge-encode{background:rgba(59,130,246,.15);color:var(--accent)}
+.badge-decode{background:rgba(16,185,129,.15);color:var(--success)}
+.badge-qs{background:rgba(245,158,11,.15);color:var(--warn)}
+/* Features grid */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center}
+.feature-card .icon{font-size:1.8rem;margin-bottom:.5rem}
+.feature-card h4{font-size:.95rem;margin-bottom:.3rem}
+.feature-card p{font-size:.82rem;color:var(--muted)}
+.privacy-badge{text-align:center;padding:.75rem;color:var(--muted);font-size:.85rem;margin-bottom:1rem}
 </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "URL Encoder/Decoder Online — Free Tool",
+  "name": "URL Encoder/Decoder Online — Query String Builder & Batch Mode",
   "url": "https://maxmini0214.github.io/url-encoder/",
-  "description": "Encode and decode URLs instantly. Supports encodeURIComponent and encodeURI modes. 100% client-side, free online URL encoding tool.",
+  "description": "Encode and decode URLs, build query strings from key-value pairs, batch process multiple URLs. encodeURIComponent and encodeURI modes. 100% client-side.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "browserRequirements": "Requires JavaScript",
+  "featureList": ["URL Encode/Decode", "Query String Builder", "Batch Processing", "Encoding Reference Table", "History", "Share Links"],
   "author": { "@type": "Organization", "name": "MaxDevTools", "url": "https://maxmini0214.github.io" }
 }
 </script>
@@ -77,59 +119,51 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the difference between encodeURI and encodeURIComponent?",
-      "acceptedAnswer": { "@type": "Answer", "text": "encodeURI encodes a full URI but preserves special characters like :, /, ?, and #. encodeURIComponent encodes everything except letters, digits, and - _ . ~ making it ideal for encoding query parameter values." }
-    },
-    {
-      "@type": "Question",
-      "name": "When should I use URL encoding?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Use URL encoding when passing special characters in query parameters, form data, or API requests. Characters like &, =, ?, and spaces must be encoded to avoid breaking the URL structure." }
-    },
-    {
-      "@type": "Question",
-      "name": "Is this URL encoder safe to use with sensitive data?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. This tool runs 100% in your browser using JavaScript's built-in encodeURIComponent and encodeURI functions. No data is sent to any server." }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I encode a URL with spaces?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Spaces are encoded as %20 with encodeURIComponent. Simply paste your text into the input field and click Encode. The tool handles all special characters automatically." }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I decode a URL that was encoded multiple times?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. If a URL was double-encoded (e.g., %2520 instead of %20), click Decode multiple times until the output looks correct. Each click decodes one layer." }
-    },
-    {
-      "@type": "Question",
-      "name": "What characters does encodeURIComponent not encode?",
-      "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent preserves A-Z, a-z, 0-9, and the characters - _ . ~ (tilde). Everything else is percent-encoded." }
-    }
+    { "@type": "Question", "name": "What is the difference between encodeURI and encodeURIComponent?", "acceptedAnswer": { "@type": "Answer", "text": "encodeURI encodes a full URI but preserves special characters like :, /, ?, and #. encodeURIComponent encodes everything except letters, digits, and - _ . ~ making it ideal for encoding query parameter values." } },
+    { "@type": "Question", "name": "How do I build a query string from key-value pairs?", "acceptedAnswer": { "@type": "Answer", "text": "Use the Query String Builder tab. Add key-value pairs, and the tool automatically generates a properly encoded query string like ?key1=value1&key2=value2. Each value is encoded with encodeURIComponent." } },
+    { "@type": "Question", "name": "Can I encode multiple URLs at once?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Use the Batch tab. Paste multiple URLs or strings, one per line. Click Encode All or Decode All to process every line simultaneously. Results maintain the same order." } },
+    { "@type": "Question", "name": "Is this URL encoder safe to use with sensitive data?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. This tool runs 100% in your browser using JavaScript's built-in functions. No data is sent to any server. You can verify by checking your browser's Network tab — zero requests." } },
+    { "@type": "Question", "name": "How do I encode a URL with spaces?", "acceptedAnswer": { "@type": "Answer", "text": "Spaces are encoded as %20 with encodeURIComponent and as %20 with encodeURI. Paste your text and click Encode — the tool handles all special characters automatically." } },
+    { "@type": "Question", "name": "What characters does encodeURIComponent NOT encode?", "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent preserves A-Z, a-z, 0-9, and the characters - _ . ~ (tilde). Everything else is percent-encoded. See the full Encoding Reference tab for all 30+ character mappings." } },
+    { "@type": "Question", "name": "Can I decode a URL that was encoded multiple times?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Click Decode multiple times, or use the Batch tab and process repeatedly. Each click decodes one layer of encoding." } },
+    { "@type": "Question", "name": "What is percent encoding?", "acceptedAnswer": { "@type": "Answer", "text": "Percent encoding (URL encoding) replaces unsafe characters with a % followed by two hex digits. For example, a space becomes %20, an ampersand becomes %26. This ensures special characters don't break URL structure." } }
   ]
 }
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"URL Encoder/Decoder Online","item":"https://maxmini0214.github.io/url-encoder/"}]}
+{"@context":"https://schema.org","@type":"HowTo","name":"How to Encode a URL","step":[{"@type":"HowToStep","position":1,"name":"Choose your encoding mode","text":"Select encodeURIComponent for query parameter values, or encodeURI for full URLs."},{"@type":"HowToStep","position":2,"name":"Enter your text","text":"Paste the URL or text you want to encode into the Input textarea."},{"@type":"HowToStep","position":3,"name":"Click Encode or Decode","text":"Click Encode to percent-encode your text, or Decode to convert percent-encoded text back to readable form."},{"@type":"HowToStep","position":4,"name":"Copy or share the result","text":"Use the Copy button to copy to clipboard, or Share to create a link with your input pre-filled."}]}
 </script>
 <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"URL Encoder/Decoder","description":"Encode and decode URLs and URI components. Handle special characters for safe URL transmission.","url":"https://maxmini0214.github.io/url-encoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
-  </script>
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maxmini0214.github.io/"},{"@type":"ListItem","position":2,"name":"DevTools","item":"https://maxmini0214.github.io/devtools/"},{"@type":"ListItem","position":3,"name":"URL Encoder/Decoder","item":"https://maxmini0214.github.io/url-encoder/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"URL Encoder/Decoder","description":"Encode and decode URLs with query string builder, batch processing, and full encoding reference.","url":"https://maxmini0214.github.io/url-encoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"MaxDevTools","url":"https://maxmini0214.github.io"}}
+</script>
 </head>
 <body>
 <header>
 <h1>URL Encoder / Decoder Online</h1>
-<p class="subtitle">Encode and decode URLs instantly — encodeURI vs encodeURIComponent, 100% in your browser</p>
+<p class="subtitle">Encode, decode, build query strings &amp; batch process — encodeURI vs encodeURIComponent, 100% in your browser</p>
 </header>
 <main>
+<!-- Tabs -->
+<div class="tabs">
+<button class="tab active" onclick="switchTab('encode')">📝 Encode/Decode</button>
+<button class="tab" onclick="switchTab('querystring')">🔗 Query String Builder</button>
+<button class="tab" onclick="switchTab('batch')">📦 Batch</button>
+<button class="tab" onclick="switchTab('reference')">📖 Encoding Reference</button>
+<button class="tab" onclick="switchTab('history')">📋 History</button>
+</div>
+
+<!-- Tab 1: Encode/Decode -->
+<div id="tab-encode" class="tab-content active">
 <div class="mode-toggle">
 <button class="mode-btn active" onclick="setMode('component')" id="mComponent">encodeURIComponent</button>
 <button class="mode-btn" onclick="setMode('uri')" id="mUri">encodeURI</button>
 </div>
 <div class="card">
 <label>Input</label>
-<textarea id="input" placeholder="Paste URL or encoded string here..."></textarea>
+<textarea id="input" placeholder="Paste URL or text here..."></textarea>
 </div>
 <div class="btn-group">
 <button class="btn btn-primary" onclick="encode()">Encode →</button>
@@ -144,14 +178,88 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <textarea id="output" readonly></textarea>
 <div id="status" class="status"></div>
 </div>
+</div>
 
+<!-- Tab 2: Query String Builder -->
+<div id="tab-querystring" class="tab-content">
 <div class="card">
-<h3 style="margin-bottom:.75rem">📖 URL Encoding Reference</h3>
-<table style="width:100%;font-size:.85rem;color:var(--muted)">
-<tr><td>Space</td><td><code>%20</code></td><td>&amp;</td><td><code>%26</code></td></tr>
-<tr><td>=</td><td><code>%3D</code></td><td>?</td><td><code>%3F</code></td></tr>
-<tr><td>/</td><td><code>%2F</code></td><td>#</td><td><code>%23</code></td></tr>
+<label>Base URL (optional)</label>
+<input type="text" id="qsBase" placeholder="https://example.com/api" style="margin-bottom:1rem">
+<label>Parameters</label>
+<div id="qsRows"></div>
+<div class="btn-group" style="margin-top:.75rem">
+<button class="btn btn-secondary" onclick="addQsRow()">+ Add Parameter</button>
+<button class="btn btn-primary" onclick="buildQueryString()">Build Query String →</button>
+<button class="btn btn-secondary" onclick="parseQueryString()">← Parse from URL</button>
+<button class="btn btn-secondary" onclick="copyQs()">📋 Copy</button>
+</div>
+</div>
+<div class="card">
+<label>Generated URL / Query String</label>
+<textarea id="qsOutput" readonly style="min-height:80px"></textarea>
+<div id="qsStatus" class="status"></div>
+</div>
+<div class="card" style="margin-top:1rem">
+<label>Paste URL to Parse</label>
+<input type="text" id="qsParseInput" placeholder="https://example.com?foo=bar&baz=hello%20world">
+<button class="btn btn-primary" onclick="parseFromInput()" style="margin-top:.5rem">Parse →</button>
+</div>
+</div>
+
+<!-- Tab 3: Batch -->
+<div id="tab-batch" class="tab-content">
+<div class="mode-toggle">
+<button class="mode-btn active" onclick="setBatchMode('component')" id="bComponent">encodeURIComponent</button>
+<button class="mode-btn" onclick="setBatchMode('uri')" id="bUri">encodeURI</button>
+</div>
+<div class="card">
+<label>Input (one URL or string per line)</label>
+<textarea id="batchInput" placeholder="Line 1&#10;Line 2 with spaces&#10;?query=test&foo=bar" style="min-height:180px"></textarea>
+</div>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="batchEncode()">Encode All →</button>
+<button class="btn btn-primary" onclick="batchDecode()">← Decode All</button>
+<button class="btn btn-secondary" onclick="batchCopy()">📋 Copy All</button>
+<button class="btn btn-secondary" onclick="batchClear()">Clear</button>
+</div>
+<div class="card">
+<label>Output</label>
+<textarea id="batchOutput" readonly style="min-height:180px"></textarea>
+<div id="batchStatus" class="status"></div>
+</div>
+</div>
+
+<!-- Tab 4: Encoding Reference -->
+<div id="tab-reference" class="tab-content">
+<div class="card" style="overflow-x:auto">
+<h3 style="margin-bottom:1rem">📖 Complete URL Encoding Reference</h3>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">All common characters and their percent-encoded equivalents. Click any row to copy the encoded value.</p>
+<table class="enc-table" id="encTable">
+<thead><tr><th>Character</th><th>Description</th><th>Encoded</th><th>encodeURI?</th><th>encodeURIComponent?</th></tr></thead>
+<tbody></tbody>
 </table>
+</div>
+</div>
+
+<!-- Tab 5: History -->
+<div id="tab-history" class="tab-content">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+<h3>📋 Recent Operations</h3>
+<button class="btn btn-secondary" onclick="clearHistory()" style="padding:.3rem .8rem;font-size:.8rem">Clear All</button>
+</div>
+<div id="historyList"><p style="color:var(--muted);font-size:.85rem;text-align:center;padding:2rem 0">No history yet. Encode or decode something to see it here.</p></div>
+</div>
+</div>
+
+<!-- Features -->
+<div class="features">
+<div class="feature-card"><div class="icon">📝</div><h4>Encode / Decode</h4><p>encodeURIComponent or encodeURI mode. Instant results.</p></div>
+<div class="feature-card"><div class="icon">🔗</div><h4>Query String Builder</h4><p>Key-value pairs → properly encoded URL. Parse existing URLs.</p></div>
+<div class="feature-card"><div class="icon">📦</div><h4>Batch Processing</h4><p>Encode or decode multiple lines at once. Process 100+ URLs instantly.</p></div>
+<div class="feature-card"><div class="icon">📖</div><h4>Encoding Reference</h4><p>30+ characters with percent-encoded values. Click to copy.</p></div>
+<div class="feature-card"><div class="icon">📋</div><h4>History</h4><p>Recent 8 operations saved locally. One-click restore.</p></div>
+<div class="feature-card"><div class="icon">🔒</div><h4>100% Private</h4><p>Nothing leaves your browser. Verify in Network tab.</p></div>
 </div>
 
 <div class="guide">
@@ -160,7 +268,9 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <li><strong>Choose your mode</strong> — <code>encodeURIComponent</code> for query parameter values, <code>encodeURI</code> for full URLs</li>
 <li><strong>Paste your text</strong> — Enter the URL or string you want to encode/decode</li>
 <li><strong>Click Encode or Decode</strong> — Results appear instantly in the output box</li>
-<li><strong>Copy or Share</strong> — Use 📋 Copy to clipboard or 🔗 Share to create a shareable link with your input pre-filled</li>
+<li><strong>Build query strings</strong> — Use the 🔗 tab to create encoded URLs from key-value pairs</li>
+<li><strong>Batch process</strong> — Use the 📦 tab to encode/decode multiple lines at once</li>
+<li><strong>Copy or Share</strong> — 📋 Copy to clipboard or 🔗 Share a pre-filled link</li>
 </ol>
 </div>
 
@@ -177,24 +287,32 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <p><code>encodeURI</code> encodes a full URI but preserves special characters like <code>:</code>, <code>/</code>, <code>?</code>, and <code>#</code>. <code>encodeURIComponent</code> encodes everything except letters, digits, and <code>- _ . ~</code>, making it ideal for encoding individual query parameter values.</p>
 </details>
 <details>
-<summary>When should I use URL encoding?</summary>
-<p>Use URL encoding when passing special characters in query parameters, form data, or API requests. Characters like <code>&amp;</code>, <code>=</code>, <code>?</code>, and spaces must be encoded to avoid breaking the URL structure.</p>
+<summary>How do I build a query string from parameters?</summary>
+<p>Click the "🔗 Query String Builder" tab. Enter key-value pairs and optionally a base URL. The tool generates a properly encoded query string. You can also paste an existing URL and click "Parse" to extract its parameters.</p>
+</details>
+<details>
+<summary>Can I encode multiple URLs at once?</summary>
+<p>Yes! Click the "📦 Batch" tab. Paste multiple URLs or strings, one per line, then click "Encode All" or "Decode All". Each line is processed independently, maintaining the same order.</p>
 </details>
 <details>
 <summary>Is this tool safe for sensitive data?</summary>
-<p>Yes. This tool runs 100% in your browser using JavaScript's built-in functions. No data is sent to any server — you can verify in your browser's Network tab. See also: <a href="https://maxmini0214.github.io/base64-tool/" style="color:var(--accent)">Base64 Encoder</a> and <a href="https://maxmini0214.github.io/hash-generator/" style="color:var(--accent)">Hash Generator</a> for more client-side security tools.</p>
+<p>Absolutely. This tool runs 100% in your browser — no data is sent to any server. Verify by checking the Network tab in DevTools: zero outgoing requests. See also: <a href="https://maxmini0214.github.io/base64-tool/" style="color:var(--accent)">Base64 Encoder</a> and <a href="https://maxmini0214.github.io/hash-generator/" style="color:var(--accent)">Hash Generator</a>.</p>
 </details>
 <details>
 <summary>How do I encode a URL with spaces?</summary>
-<p>Spaces are encoded as <code>%20</code> with <code>encodeURIComponent</code>. Simply paste your text and click Encode — the tool handles all special characters automatically.</p>
+<p>Spaces are encoded as <code>%20</code> with both <code>encodeURIComponent</code> and <code>encodeURI</code>. Simply paste your text and click Encode — the tool handles all special characters automatically.</p>
 </details>
 <details>
-<summary>Can I decode a URL that was encoded multiple times?</summary>
-<p>Yes! If a URL was double-encoded (e.g., <code>%2520</code> instead of <code>%20</code>), click Decode multiple times until the output looks correct. Each click decodes one layer.</p>
+<summary>Can I decode a double-encoded URL?</summary>
+<p>Yes! If a URL was double-encoded (e.g., <code>%2520</code> instead of <code>%20</code>), click Decode multiple times. Each click removes one layer of encoding until the text is fully readable.</p>
+</details>
+<details>
+<summary>What is percent encoding?</summary>
+<p>Percent encoding (URL encoding) replaces unsafe characters with a <code>%</code> followed by two hexadecimal digits. For example: space → <code>%20</code>, ampersand → <code>%26</code>. Check the "📖 Encoding Reference" tab for the complete table.</p>
 </details>
 <details>
 <summary>What characters does encodeURIComponent NOT encode?</summary>
-<p><code>encodeURIComponent</code> preserves <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the characters <code>- _ . ~</code>. Everything else gets percent-encoded. Use <a href="https://maxmini0214.github.io/jwt-decoder/" style="color:var(--accent)">JWT Decoder</a> if you need to inspect encoded JWT tokens.</p>
+<p><code>encodeURIComponent</code> preserves <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, and the characters <code>- _ . ~</code>. Everything else gets percent-encoded. Use <a href="https://maxmini0214.github.io/jwt-decoder/" style="color:var(--accent)">JWT Decoder</a> to inspect encoded JWT tokens.</p>
 </details>
 </div>
 
@@ -209,8 +327,19 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 <a class="tool-link" href="https://maxmini0214.github.io/password-generator/">Password Generator</a>
 <a class="tool-link" href="https://maxmini0214.github.io/jwt-decoder/">JWT Decoder</a>
 </div>
+
+<div style="margin-top:1.5rem">
+<h3 style="margin-bottom:.5rem">🎮 Take a Break</h3>
+<div class="tools-grid">
+<a class="tool-link" href="https://maxmini0214.github.io/snake-arena/">🐍 Snake Arena</a>
+<a class="tool-link" href="https://maxmini0214.github.io/word-fall/">📝 Word Fall</a>
+<a class="tool-link" href="https://maxmini0214.github.io/math-dash/">🧮 Math Dash</a>
+</div>
+</div>
 </main>
-<!-- Newsletter -->
+
+<div class="privacy-badge">🔒 100% local — your data never leaves this browser</div>
+
 <div class="newsletter">
 <p>📬 Get Dev Tools &amp; Tips Weekly</p>
 <p class="nl-sub">Free tools, coding tips, and developer insights. No spam.</p>
@@ -220,38 +349,297 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem}
 </form>
 </div>
 
-<!-- Social Share -->
 <div style="margin:1rem auto;max-width:480px;text-align:center;">
 <p style="margin:0 0 0.5rem;color:#8b949e;font-size:0.85rem;">Share this tool</p>
 <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
-<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20URL%20Encoder/Decoder%20🛠️%20Free%2C%20no%20signup%2C%20runs%20in%20browser%21&url=https://maxmini0214.github.io/url-encoder/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
+<a href="https://twitter.com/intent/tweet?text=Found%20this%20useful%3A%20URL%20Encoder/Decoder%20with%20Query%20String%20Builder%20🛠️%20Free%2C%20no%20signup%21&url=https://maxmini0214.github.io/url-encoder/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #1d9bf0;border-radius:8px;color:#1d9bf0;text-decoration:none;font-size:0.85rem;font-weight:600;transition:all .2s" onmouseover="this.style.background='#1d9bf0';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1d9bf0'">𝕏 Tweet</a>
 <button onclick="navigator.clipboard.writeText('https://maxmini0214.github.io/url-encoder/');this.textContent='✅ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)" style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border:1px solid #475569;border-radius:8px;color:#94a3b8;background:transparent;cursor:pointer;font-size:0.85rem;font-weight:600;transition:all .2s">🔗 Copy Link</button>
 </div>
 </div>
 
-
-    <h2>🛠️ You Might Also Like</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;">
-  <a href="/base64-tool/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔄 Base64 Encoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
-  <a href="/jwt-decoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔑 JWT Decoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
-  <a href="/json-formatter/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">📋 JSON Formatter</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
+<h2 style="text-align:center;margin:1rem 0 .5rem">🛠️ You Might Also Like</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:0 auto 1.5rem;max-width:860px;padding:0 1rem;">
+<a href="/base64-tool/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔄 Base64 Encoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
+<a href="/jwt-decoder/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">🔑 JWT Decoder</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
+<a href="/json-formatter/" style="display:block;padding:1rem;background:#16213e;border:1px solid #2a3a5e;border-radius:10px;text-decoration:none;color:#e0e0e0;transition:transform .2s,border-color .2s;" onmouseover="this.style.borderColor='#ff9040';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a3a5e';this.style.transform='none'"><div style="font-size:1.3rem;margin-bottom:.3rem;">📋 JSON Formatter</div><div style="font-size:.82rem;color:#8899aa;">Encoding/Data • Free</div></a>
 </div>
 
-    <footer>
+<footer>
 <p>🔒 Privacy First — Nothing leaves your browser.</p>
-<p style="margin-top:.5rem">© 2026 <a href="https://github.com/maxmini0214" style="color:var(--muted)">maxmini0214</a></p>
+<p style="margin-top:.5rem">© 2026 <a href="https://maxmini0214.github.io" style="color:var(--muted)">MaxDevTools</a></p>
 </footer>
+
 <script>
-let mode='component';
-const inp=document.getElementById('input'),out=document.getElementById('output'),st=document.getElementById('status');
-function setMode(m){mode=m;document.getElementById('mComponent').className='mode-btn'+(m==='component'?' active':'');document.getElementById('mUri').className='mode-btn'+(m==='uri'?' active':'')}
-function encode(){try{out.value=mode==='component'?encodeURIComponent(inp.value):encodeURI(inp.value);st.textContent='✓ Encoded';st.className='status'}catch(e){st.textContent='✗ '+e.message;st.className='status error'}}
-function decode(){try{out.value=mode==='component'?decodeURIComponent(inp.value):decodeURI(inp.value);st.textContent='✓ Decoded';st.className='status'}catch(e){st.textContent='✗ Invalid encoded string';st.className='status error'}}
-function swap(){const t=inp.value;inp.value=out.value;out.value=t}
-function copyOutput(){navigator.clipboard.writeText(out.value);st.textContent='✓ Copied!'}
-function clearAll(){inp.value='';out.value='';st.textContent=''}
-function shareUrl(){try{const data={i:inp.value,m:mode};const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(data))));const url=location.origin+location.pathname+'?d='+encoded;navigator.clipboard.writeText(url);st.textContent='✓ Share link copied!';st.className='status'}catch(e){st.textContent='✗ Could not create share link';st.className='status error'}}
-(function(){const params=new URLSearchParams(location.search);const d=params.get('d');if(d){try{const data=JSON.parse(decodeURIComponent(escape(atob(d))));if(data.i)inp.value=data.i;if(data.m)setMode(data.m)}catch(e){}}})();
+// === State ===
+let mode = 'component';
+let batchMode = 'component';
+const HISTORY_KEY = 'url-encoder-history';
+const MAX_HISTORY = 8;
+
+// === Tab Switching ===
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'history') renderHistory();
+  if (name === 'reference') buildRefTable();
+}
+
+// === Mode ===
+function setMode(m) {
+  mode = m;
+  document.getElementById('mComponent').className = 'mode-btn' + (m === 'component' ? ' active' : '');
+  document.getElementById('mUri').className = 'mode-btn' + (m === 'uri' ? ' active' : '');
+}
+function setBatchMode(m) {
+  batchMode = m;
+  document.getElementById('bComponent').className = 'mode-btn' + (m === 'component' ? ' active' : '');
+  document.getElementById('bUri').className = 'mode-btn' + (m === 'uri' ? ' active' : '');
+}
+
+// === Encode/Decode ===
+const inp = document.getElementById('input'), out = document.getElementById('output'), st = document.getElementById('status');
+
+function encode() {
+  try {
+    const result = mode === 'component' ? encodeURIComponent(inp.value) : encodeURI(inp.value);
+    out.value = result;
+    st.textContent = '✓ Encoded (' + result.length + ' chars)';
+    st.className = 'status';
+    addHistory('encode', inp.value, result);
+  } catch (e) { st.textContent = '✗ ' + e.message; st.className = 'status error'; }
+}
+
+function decode() {
+  try {
+    const result = mode === 'component' ? decodeURIComponent(inp.value) : decodeURI(inp.value);
+    out.value = result;
+    st.textContent = '✓ Decoded (' + result.length + ' chars)';
+    st.className = 'status';
+    addHistory('decode', inp.value, result);
+  } catch (e) { st.textContent = '✗ Invalid encoded string'; st.className = 'status error'; }
+}
+
+function swap() { const t = inp.value; inp.value = out.value; out.value = t; }
+function copyOutput() { navigator.clipboard.writeText(out.value); st.textContent = '✓ Copied!'; }
+function clearAll() { inp.value = ''; out.value = ''; st.textContent = ''; }
+function shareUrl() {
+  try {
+    const data = { i: inp.value, m: mode };
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    const url = location.origin + location.pathname + '?d=' + encoded;
+    navigator.clipboard.writeText(url);
+    st.textContent = '✓ Share link copied!'; st.className = 'status';
+  } catch (e) { st.textContent = '✗ Could not create share link'; st.className = 'status error'; }
+}
+
+// === Query String Builder ===
+let qsCounter = 0;
+function addQsRow(key, value) {
+  const id = qsCounter++;
+  const div = document.createElement('div');
+  div.className = 'qs-row'; div.id = 'qs-' + id;
+  div.innerHTML = '<input type="text" placeholder="key" value="' + (key || '') + '" class="qs-key">' +
+    '<input type="text" placeholder="value" value="' + (value || '').replace(/"/g, '&quot;') + '" class="qs-val">' +
+    '<button class="qs-remove" onclick="removeQsRow(' + id + ')">✕</button>';
+  document.getElementById('qsRows').appendChild(div);
+}
+function removeQsRow(id) { document.getElementById('qs-' + id)?.remove(); }
+
+function buildQueryString() {
+  const rows = document.querySelectorAll('#qsRows .qs-row');
+  const params = [];
+  rows.forEach(row => {
+    const k = row.querySelector('.qs-key').value.trim();
+    const v = row.querySelector('.qs-val').value;
+    if (k) params.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
+  });
+  const qs = params.join('&');
+  const base = document.getElementById('qsBase').value.trim();
+  const result = base ? base + (base.includes('?') ? '&' : '?') + qs : '?' + qs;
+  document.getElementById('qsOutput').value = result;
+  document.getElementById('qsStatus').textContent = '✓ Built ' + params.length + ' parameters';
+  document.getElementById('qsStatus').className = 'status';
+  addHistory('qs', params.length + ' params', result);
+}
+
+function parseQueryString() {
+  const url = document.getElementById('qsParseInput').value.trim() || document.getElementById('qsOutput').value.trim();
+  parseFromUrl(url);
+}
+function parseFromInput() {
+  parseFromUrl(document.getElementById('qsParseInput').value.trim());
+}
+function parseFromUrl(url) {
+  try {
+    const qIdx = url.indexOf('?');
+    if (qIdx === -1) { document.getElementById('qsStatus').textContent = '✗ No query string found'; document.getElementById('qsStatus').className = 'status error'; return; }
+    const base = url.substring(0, qIdx);
+    const qs = url.substring(qIdx + 1);
+    document.getElementById('qsBase').value = base;
+    document.getElementById('qsRows').innerHTML = '';
+    qsCounter = 0;
+    const params = new URLSearchParams(qs);
+    params.forEach((v, k) => addQsRow(k, v));
+    document.getElementById('qsOutput').value = url;
+    document.getElementById('qsStatus').textContent = '✓ Parsed ' + [...params].length + ' parameters';
+    document.getElementById('qsStatus').className = 'status';
+  } catch (e) { document.getElementById('qsStatus').textContent = '✗ ' + e.message; document.getElementById('qsStatus').className = 'status error'; }
+}
+function copyQs() {
+  navigator.clipboard.writeText(document.getElementById('qsOutput').value);
+  document.getElementById('qsStatus').textContent = '✓ Copied!';
+}
+
+// Init 3 empty rows
+addQsRow(); addQsRow(); addQsRow();
+
+// === Batch ===
+function batchEncode() {
+  const lines = document.getElementById('batchInput').value.split('\n');
+  const fn = batchMode === 'component' ? encodeURIComponent : encodeURI;
+  const results = lines.map(line => { try { return fn(line); } catch { return '⚠ ERROR: ' + line; } });
+  document.getElementById('batchOutput').value = results.join('\n');
+  document.getElementById('batchStatus').textContent = '✓ Encoded ' + lines.length + ' lines';
+  document.getElementById('batchStatus').className = 'status';
+  addHistory('encode', lines.length + ' lines (batch)', '(batch result)');
+}
+function batchDecode() {
+  const lines = document.getElementById('batchInput').value.split('\n');
+  const fn = batchMode === 'component' ? decodeURIComponent : decodeURI;
+  const results = lines.map(line => { try { return fn(line); } catch { return '⚠ ERROR: ' + line; } });
+  document.getElementById('batchOutput').value = results.join('\n');
+  document.getElementById('batchStatus').textContent = '✓ Decoded ' + lines.length + ' lines';
+  document.getElementById('batchStatus').className = 'status';
+  addHistory('decode', lines.length + ' lines (batch)', '(batch result)');
+}
+function batchCopy() {
+  navigator.clipboard.writeText(document.getElementById('batchOutput').value);
+  document.getElementById('batchStatus').textContent = '✓ Copied!';
+}
+function batchClear() { document.getElementById('batchInput').value = ''; document.getElementById('batchOutput').value = ''; document.getElementById('batchStatus').textContent = ''; }
+
+// === Encoding Reference Table ===
+const ENC_DATA = [
+  [' ', 'Space', '%20', '✓', '✓'],
+  ['!', 'Exclamation', '%21', '✗', '✓'],
+  ['"', 'Double Quote', '%22', '✗', '✓'],
+  ['#', 'Hash/Fragment', '%23', '✗', '✓'],
+  ['$', 'Dollar', '%24', '✗', '✓'],
+  ['%', 'Percent', '%25', '✓', '✓'],
+  ['&', 'Ampersand', '%26', '✗', '✓'],
+  ["'", 'Apostrophe', '%27', '✗', '✓'],
+  ['(', 'Left Paren', '%28', '✗', '✓'],
+  [')', 'Right Paren', '%29', '✗', '✓'],
+  ['*', 'Asterisk', '%2A', '✗', '✓'],
+  ['+', 'Plus', '%2B', '✗', '✓'],
+  [',', 'Comma', '%2C', '✗', '✓'],
+  ['/', 'Slash', '%2F', '✗', '✓'],
+  [':', 'Colon', '%3A', '✗', '✓'],
+  [';', 'Semicolon', '%3B', '✗', '✓'],
+  ['=', 'Equals', '%3D', '✗', '✓'],
+  ['?', 'Question', '%3F', '✗', '✓'],
+  ['@', 'At Sign', '%40', '✗', '✓'],
+  ['[', 'Left Bracket', '%5B', '✓', '✓'],
+  [']', 'Right Bracket', '%5D', '✓', '✓'],
+  ['{', 'Left Brace', '%7B', '✓', '✓'],
+  ['}', 'Right Brace', '%7D', '✓', '✓'],
+  ['|', 'Pipe', '%7C', '✓', '✓'],
+  ['\\', 'Backslash', '%5C', '✓', '✓'],
+  ['^', 'Caret', '%5E', '✓', '✓'],
+  ['`', 'Backtick', '%60', '✓', '✓'],
+  ['<', 'Less Than', '%3C', '✓', '✓'],
+  ['>', 'Greater Than', '%3E', '✓', '✓'],
+  ['~', 'Tilde', '%7E', '✗ (safe)', '✗ (safe)'],
+  ['-', 'Hyphen', '%2D', '✗ (safe)', '✗ (safe)'],
+  ['_', 'Underscore', '%5F', '✗ (safe)', '✗ (safe)'],
+  ['.', 'Period', '%2E', '✗ (safe)', '✗ (safe)'],
+];
+let refBuilt = false;
+function buildRefTable() {
+  if (refBuilt) return;
+  refBuilt = true;
+  const tbody = document.querySelector('#encTable tbody');
+  ENC_DATA.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.title = 'Click to copy ' + row[2];
+    tr.onclick = () => { navigator.clipboard.writeText(row[2]); tr.style.background = 'rgba(16,185,129,.12)'; setTimeout(() => tr.style.background = '', 500); };
+    tr.innerHTML = '<td><code>' + (row[0] === ' ' ? '␣' : row[0].replace(/</g,'&lt;').replace(/>/g,'&gt;')) + '</code></td><td>' + row[1] + '</td><td><code>' + row[2] + '</code></td><td>' + row[3] + '</td><td>' + row[4] + '</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+// === History ===
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; }
+}
+function addHistory(type, input, output) {
+  const hist = getHistory();
+  hist.unshift({ type, input: (input || '').substring(0, 120), output: (output || '').substring(0, 200), time: Date.now() });
+  if (hist.length > MAX_HISTORY) hist.length = MAX_HISTORY;
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(hist));
+}
+function clearHistory() {
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+}
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s / 60) + 'm ago';
+  if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+  return Math.floor(s / 86400) + 'd ago';
+}
+function renderHistory() {
+  const hist = getHistory();
+  const container = document.getElementById('historyList');
+  if (!hist.length) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:.85rem;text-align:center;padding:2rem 0">No history yet.</p>';
+    return;
+  }
+  container.innerHTML = hist.map((h, i) => {
+    const badge = h.type === 'encode' ? 'badge-encode' : h.type === 'decode' ? 'badge-decode' : 'badge-qs';
+    const label = h.type === 'qs' ? 'Query' : h.type.charAt(0).toUpperCase() + h.type.slice(1);
+    return '<div class="hist-item" onclick="restoreHistory(' + i + ')" title="Click to restore">' +
+      '<span class="badge ' + badge + '">' + label + '</span>' +
+      '<span class="hist-text">' + h.input.replace(/</g, '&lt;') + '</span>' +
+      '<span class="hist-time">' + timeAgo(h.time) + '</span></div>';
+  }).join('');
+}
+function restoreHistory(idx) {
+  const hist = getHistory();
+  const h = hist[idx];
+  if (!h) return;
+  if (h.type === 'qs') {
+    switchTabDirect('querystring');
+    document.getElementById('qsOutput').value = h.output || '';
+  } else {
+    switchTabDirect('encode');
+    document.getElementById('input').value = h.input || '';
+    document.getElementById('output').value = h.output || '';
+  }
+}
+function switchTabDirect(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.tab').forEach(el => { if (el.textContent.toLowerCase().includes(name === 'encode' ? 'encode' : name === 'querystring' ? 'query' : name === 'batch' ? 'batch' : name === 'reference' ? 'reference' : 'history')) el.classList.add('active'); });
+}
+
+// === URL Pre-fill ===
+(function () {
+  const params = new URLSearchParams(location.search);
+  const d = params.get('d');
+  if (d) {
+    try {
+      const data = JSON.parse(decodeURIComponent(escape(atob(d))));
+      if (data.i) document.getElementById('input').value = data.i;
+      if (data.m) setMode(data.m);
+    } catch (e) {}
+  }
+})();
 </script>
 <script data-goatcounter="https://maxdevtools.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
